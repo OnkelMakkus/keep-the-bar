@@ -1,0 +1,24 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bpmyesc0tqm4h"]
+
+[ext_resource type="Texture2D" uid="uid://e0nxgqhkq8pr" path="res://Assets/mats/bert_wood_01_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bgrbxus3d15oq" path="res://Assets/mats/bert_wood_01_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://8l16phwi1www" path="res://Assets/mats/bert_wood_01_normal.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bap68nsg58wl1" path="res://Assets/mats/bert_wood_01_emission.png" id="5"]
+
+[resource]
+albedo_color = Color(0.679688, 0.511487, 0.273468, 1)
+albedo_texture = ExtResource("1")
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_texture = ExtResource("5")
+normal_enabled = true
+normal_texture = ExtResource("3")
+ao_enabled = true
+ao_texture = ExtResource("2")
+heightmap_enabled = true
+heightmap_scale = 16.0
+subsurf_scatter_strength = 0.75
+refraction_scale = 0.75
+uv2_scale = Vector3(0.5, 0.5, 0.5)
+grow_amount = 0.421

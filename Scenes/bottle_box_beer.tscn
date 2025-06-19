@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddq5uc76gpwdy"]
+
+[ext_resource type="PackedScene" uid="uid://b35kvtwxvd5lw" path="res://Assets/models/bottle_box.glb" id="1_od5jx"]
+[ext_resource type="Script" uid="uid://c0qurnj6i2trr" path="res://Scripts/bottle_box.gd" id="2_l2a0v"]
+[ext_resource type="PackedScene" uid="uid://cnsoeipqhy0x6" path="res://Scenes/beer_bottle.tscn" id="2_non3l"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_non3l"]
+data = PackedVector3Array(0.1718, 0.0059, 0.4249, 0.1718, 0.2881, -0.4329, 0.1718, 0.2881, 0.4249, 0.1718, 0.0059, 0.4249, 0.1718, 0.0059, -0.4329, 0.1718, 0.2881, -0.4329, 0.1718, 0.0059, -0.4329, 0.2201, 0.2881, -0.4329, 0.1718, 0.2881, -0.4329, 0.1718, 0.0059, -0.4329, 0.2201, 0.0059, -0.4329, 0.2201, 0.2881, -0.4329, 0.2201, 0.0059, -0.4329, 0.2201, 0.2881, 0.4249, 0.2201, 0.2881, -0.4329, 0.2201, 0.0059, -0.4329, 0.2201, 0.0059, 0.4249, 0.2201, 0.2881, 0.4249, 0.2201, 0.0059, 0.4249, 0.1718, 0.2881, 0.4249, 0.2201, 0.2881, 0.4249, 0.2201, 0.0059, 0.4249, 0.1718, 0.0059, 0.4249, 0.1718, 0.2881, 0.4249, 0.1718, 0.0059, -0.4329, 0.2201, 0.0059, 0.4249, 0.2201, 0.0059, -0.4329, 0.1718, 0.0059, -0.4329, 0.1718, 0.0059, 0.4249, 0.2201, 0.0059, 0.4249, 0.2201, 0.2881, -0.4329, 0.1718, 0.2881, 0.4249, 0.1718, 0.2881, -0.4329, 0.2201, 0.2881, -0.4329, 0.2201, 0.2881, 0.4249, 0.1718, 0.2881, 0.4249, -0.3017, 0.0059, 0.4176, -0.3017, 0.2881, -0.4403, -0.3017, 0.2881, 0.4176, -0.3017, 0.0059, 0.4176, -0.3017, 0.0059, -0.4403, -0.3017, 0.2881, -0.4403, -0.3017, 0.0059, -0.4403, -0.2534, 0.2881, -0.4403, -0.3017, 0.2881, -0.4403, -0.3017, 0.0059, -0.4403, -0.2534, 0.0059, -0.4403, -0.2534, 0.2881, -0.4403, -0.2534, 0.0059, -0.4403, -0.2534, 0.2881, 0.4176, -0.2534, 0.2881, -0.4403, -0.2534, 0.0059, -0.4403, -0.2534, 0.0059, 0.4176, -0.2534, 0.2881, 0.4176, -0.2534, 0.0059, 0.4176, -0.3017, 0.2881, 0.4176, -0.2534, 0.2881, 0.4176, -0.2534, 0.0059, 0.4176, -0.3017, 0.0059, 0.4176, -0.3017, 0.2881, 0.4176, -0.3017, 0.0059, -0.4403, -0.2534, 0.0059, 0.4176, -0.2534, 0.0059, -0.4403, -0.3017, 0.0059, -0.4403, -0.3017, 0.0059, 0.4176, -0.2534, 0.0059, 0.4176, -0.2534, 0.2881, -0.4403, -0.3017, 0.2881, 0.4176, -0.3017, 0.2881, -0.4403, -0.2534, 0.2881, -0.4403, -0.2534, 0.2881, 0.4176, -0.3017, 0.2881, 0.4176, 0.2236, 0.0077, 0.4522, -0.3037, 0.2913, 0.4582, 0.2243, 0.2899, 0.4522, 0.2236, 0.0077, 0.4522, -0.3044, 0.009, 0.4581, -0.3037, 0.2913, 0.4582, -0.3044, 0.009, 0.4581, -0.3037, 0.2913, 0.4099, -0.3037, 0.2913, 0.4582, -0.3044, 0.009, 0.4581, -0.3044, 0.009, 0.4098, -0.3037, 0.2913, 0.4099, -0.3044, 0.009, 0.4098, 0.2243, 0.2899, 0.4039, -0.3037, 0.2913, 0.4099, -0.3044, 0.009, 0.4098, 0.2236, 0.0077, 0.4039, 0.2243, 0.2899, 0.4039, 0.2236, 0.0077, 0.4039, 0.2243, 0.2899, 0.4522, 0.2243, 0.2899, 0.4039, 0.2236, 0.0077, 0.4039, 0.2236, 0.0077, 0.4522, 0.2243, 0.2899, 0.4522, -0.3044, 0.009, 0.4581, 0.2236, 0.0077, 0.4039, -0.3044, 0.009, 0.4098, -0.3044, 0.009, 0.4581, 0.2236, 0.0077, 0.4522, 0.2236, 0.0077, 0.4039, -0.3037, 0.2913, 0.4099, 0.2243, 0.2899, 0.4522, -0.3037, 0.2913, 0.4582, -0.3037, 0.2913, 0.4099, 0.2243, 0.2899, 0.4039, 0.2243, 0.2899, 0.4522, 0.2237, 0.0057, -0.4073, -0.3036, 0.2893, -0.4013, 0.2244, 0.288, -0.4072, 0.2237, 0.0057, -0.4073, -0.3043, 0.007, -0.4013, -0.3036, 0.2893, -0.4013, -0.3043, 0.007, -0.4013, -0.3036, 0.2893, -0.4496, -0.3036, 0.2893, -0.4013, -0.3043, 0.007, -0.4013, -0.3043, 0.0071, -0.4496, -0.3036, 0.2893, -0.4496, -0.3043, 0.0071, -0.4496, 0.2244, 0.288, -0.4555, -0.3036, 0.2893, -0.4496, -0.3043, 0.0071, -0.4496, 0.2237, 0.0057, -0.4556, 0.2244, 0.288, -0.4555, 0.2237, 0.0057, -0.4556, 0.2244, 0.288, -0.4072, 0.2244, 0.288, -0.4555, 0.2237, 0.0057, -0.4556, 0.2237, 0.0057, -0.4073, 0.2244, 0.288, -0.4072, -0.3043, 0.007, -0.4013, 0.2237, 0.0057, -0.4556, -0.3043, 0.0071, -0.4496, -0.3043, 0.007, -0.4013, 0.2237, 0.0057, -0.4073, 0.2237, 0.0057, -0.4556, -0.3036, 0.2893, -0.4496, 0.2244, 0.288, -0.4072, -0.3036, 0.2893, -0.4013, -0.3036, 0.2893, -0.4496, 0.2244, 0.288, -0.4555, 0.2244, 0.288, -0.4072, -0.311, -0.0488, 0.4703, -0.3099, 0.005, -0.4493, -0.311, 0.005, 0.4703, -0.311, -0.0488, 0.4703, -0.3099, -0.0488, -0.4493, -0.3099, 0.005, -0.4493, -0.3099, -0.0488, -0.4493, 0.2296, 0.005, -0.4493, -0.3099, 0.005, -0.4493, -0.3099, -0.0488, -0.4493, 0.2296, -0.0488, -0.4493, 0.2296, 0.005, -0.4493, 0.2296, -0.0488, -0.4493, 0.2296, 0.005, 0.4703, 0.2296, 0.005, -0.4493, 0.2296, -0.0488, -0.4493, 0.2296, -0.0488, 0.4703, 0.2296, 0.005, 0.4703, 0.2296, -0.0488, 0.4703, -0.311, 0.005, 0.4703, 0.2296, 0.005, 0.4703, 0.2296, -0.0488, 0.4703, -0.311, -0.0488, 0.4703, -0.311, 0.005, 0.4703, -0.3099, -0.0488, -0.4493, 0.2296, -0.0488, 0.4703, 0.2296, -0.0488, -0.4493, -0.3099, -0.0488, -0.4493, -0.311, -0.0488, 0.4703, 0.2296, -0.0488, 0.4703, 0.2296, 0.005, -0.4493, -0.311, 0.005, 0.4703, -0.3099, 0.005, -0.4493, 0.2296, 0.005, -0.4493, 0.2296, 0.005, 0.4703, -0.311, 0.005, 0.4703)
+
+[node name="bottle_box" groups=["Pickupable", "bottle_box"] instance=ExtResource("1_od5jx")]
+script = ExtResource("2_l2a0v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_non3l")
+
+[node name="content" type="Node3D" parent="Cylinder" index="1"]
+
+[node name="Beer" parent="Cylinder/content" index="0" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.356363)
+
+[node name="Beer2" parent="Cylinder/content" index="1" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.265445)
+
+[node name="Beer3" parent="Cylinder/content" index="2" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.168188)
+
+[node name="Beer4" parent="Cylinder/content" index="3" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.0688343)
+
+[node name="Beer5" parent="Cylinder/content" index="4" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.0261582)
+
+[node name="Beer6" parent="Cylinder/content" index="5" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.124544)
+
+[node name="Beer7" parent="Cylinder/content" index="6" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.22362)
+
+[node name="Beer8" parent="Cylinder/content" index="7" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.324255)
+
+[node name="Beer9" parent="Cylinder/content" index="8" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.356363)
+
+[node name="Beer10" parent="Cylinder/content" index="9" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.265445)
+
+[node name="Beer11" parent="Cylinder/content" index="10" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.168188)
+
+[node name="Beer12" parent="Cylinder/content" index="11" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.0688343)
+
+[node name="Beer13" parent="Cylinder/content" index="12" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.0261582)
+
+[node name="Beer14" parent="Cylinder/content" index="13" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.124544)
+
+[node name="Beer15" parent="Cylinder/content" index="14" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.22362)
+
+[node name="Beer16" parent="Cylinder/content" index="15" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.324255)
+
+[node name="Beer17" parent="Cylinder/content" index="16" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.356363)
+
+[node name="Beer18" parent="Cylinder/content" index="17" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.265445)
+
+[node name="Beer19" parent="Cylinder/content" index="18" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.168188)
+
+[node name="Beer20" parent="Cylinder/content" index="19" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.0688343)
+
+[node name="Beer21" parent="Cylinder/content" index="20" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.0261582)
+
+[node name="Beer22" parent="Cylinder/content" index="21" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.124544)
+
+[node name="Beer23" parent="Cylinder/content" index="22" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.22362)
+
+[node name="Beer24" parent="Cylinder/content" index="23" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.324255)
+
+[node name="Beer25" parent="Cylinder/content" index="24" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.356363)
+
+[node name="Beer26" parent="Cylinder/content" index="25" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.265445)
+
+[node name="Beer27" parent="Cylinder/content" index="26" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.168188)
+
+[node name="Beer28" parent="Cylinder/content" index="27" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.0688343)
+
+[node name="Beer29" parent="Cylinder/content" index="28" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.0261582)
+
+[node name="Beer30" parent="Cylinder/content" index="29" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.124544)
+
+[node name="Beer31" parent="Cylinder/content" index="30" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.22362)
+
+[node name="Beer32" parent="Cylinder/content" index="31" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.324255)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0684482, 0.965592, 0)
+light_energy = 3.568
+shadow_enabled = true
+spot_range = 1.385
+spot_angle = 40.0

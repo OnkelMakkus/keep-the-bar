@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://diphy5t2nd0ve"]
+
+[ext_resource type="PackedScene" uid="uid://cf1le3ksx0gc" path="res://Assets/models/glass_liquid.glb" id="1_v0lc1"]
+[ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="2_bo8hj"]
+
+[node name="glass_liquid" instance=ExtResource("1_v0lc1")]
+
+[node name="Cylinder_001" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_bo8hj")

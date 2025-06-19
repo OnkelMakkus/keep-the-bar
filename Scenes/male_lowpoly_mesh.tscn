@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvmyy0tibi6i1"]
+
+[ext_resource type="PackedScene" uid="uid://dl02wj1ffqkjx" path="res://Assets/models/Male Lowpoly Mesh.glb" id="1_vecm7"]
+[ext_resource type="Texture2D" uid="uid://dhgba00d56qqh" path="res://Assets/models/Imp.png" id="2_ke7vh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyge0"]
+albedo_texture = ExtResource("2_ke7vh")
+
+[node name="Male Lowpoly Mesh" instance=ExtResource("1_vecm7")]
+
+[node name="Mesh" parent="Rig2/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wyge0")

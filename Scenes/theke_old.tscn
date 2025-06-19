@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbulcn4x3m3su"]
+
+[ext_resource type="PackedScene" uid="uid://dsjwtgcu0kgj1" path="res://Assets/models/theke.glb" id="1_l0t3r"]
+[ext_resource type="Script" uid="uid://bse18x0l7imrr" path="res://Scripts/theke.gd" id="2_xuivi"]
+[ext_resource type="Material" uid="uid://bpmyesc0tqm4h" path="res://Assets/mats/bert_wood_01.tres" id="3_yueh4"]
+[ext_resource type="Script" uid="uid://hfdyd42ljib5" path="res://Scripts/theke_slot.gd" id="4_js1ru"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ibdkc"]
+size = Vector3(6.00412, 2.22607, 1.97931)
+
+[node name="theke" groups=["Theke"] instance=ExtResource("1_l0t3r")]
+script = ExtResource("2_xuivi")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("3_yueh4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0" groups=["Theke"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00553894, 0.112549, 0.00534058)
+shape = SubResource("BoxShape3D_ibdkc")
+
+[node name="BottleGrid" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07808, 0, 0)
+
+[node name="Slot_01" type="Marker3D" parent="BottleGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_02" type="Marker3D" parent="BottleGrid" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_03" type="Marker3D" parent="BottleGrid" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, 0)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_04" type="Marker3D" parent="BottleGrid" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0.5)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_05" type="Marker3D" parent="BottleGrid" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.5)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_06" type="Marker3D" parent="BottleGrid" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, 0.5)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_07" type="Marker3D" parent="BottleGrid" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.507181, 1.2, -0.5)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_08" type="Marker3D" parent="BottleGrid" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00718069, 1.2, -0.5)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_09" type="Marker3D" parent="BottleGrid" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.492819, 1.2, -0.5)
+script = ExtResource("4_js1ru")
+
+[node name="GlassGrid" type="Node3D" parent="." index="2" groups=["GlassGrid"]]
+
+[node name="Slot_01" type="Marker3D" parent="GlassGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_02" type="Marker3D" parent="GlassGrid" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("4_js1ru")
+
+[node name="Slot_03" type="Marker3D" parent="GlassGrid" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, 0)
+script = ExtResource("4_js1ru")
+
+[node name="Cube_001" parent="." index="3"]
+surface_material_override/0 = ExtResource("3_yueh4")
+
+[node name="Cube_002" parent="." index="4"]
+surface_material_override/0 = ExtResource("3_yueh4")
+
+[node name="Cube_003" parent="." index="5"]
+surface_material_override/0 = ExtResource("3_yueh4")
+
+[node name="ThekeMarker" type="Marker3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.19731)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37262, 3.32809, 0.964555)
+light_energy = 1.395
+light_indirect_energy = 1.593
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 3.904
+omni_attenuation = -0.429
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19882, 3.32809, 0.964555)
+light_energy = 1.395
+light_indirect_energy = 1.593
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 3.904
+omni_attenuation = -0.429

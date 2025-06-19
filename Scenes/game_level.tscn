@@ -1,0 +1,320 @@
+[gd_scene load_steps=21 format=3 uid="uid://ck2d1sxot25wn"]
+
+[ext_resource type="PackedScene" uid="uid://be733pexwdi76" path="res://Scenes/CustomerSpawner.tscn" id="1_g3g87"]
+[ext_resource type="PackedScene" uid="uid://fd8f2qfa1plr" path="res://Scenes/player.tscn" id="1_jcjmw"]
+[ext_resource type="Script" uid="uid://cisn2bvtej7ec" path="res://Scripts/game_level.gd" id="1_mxr21"]
+[ext_resource type="PackedScene" uid="uid://0qln2fo1hp0v" path="res://Scenes/tavern.tscn" id="2_jtjkd"]
+[ext_resource type="PackedScene" uid="uid://clkc6lptr5uxy" path="res://Scenes/glass.tscn" id="4_6mi8o"]
+[ext_resource type="PackedScene" uid="uid://oopr4nci54s6" path="res://Scenes/bottle_rum.tscn" id="5_mql7d"]
+[ext_resource type="Script" uid="uid://d4lsetfsf0lra" path="res://Scripts/gamemanager.gd" id="9_e38tf"]
+[ext_resource type="PackedScene" uid="uid://c0puj2eh3wgin" path="res://Scenes/bottle_whisky.tscn" id="10_fwnm2"]
+[ext_resource type="Script" uid="uid://ctg4gin5sl4l7" path="res://Scripts/signalmanager.gd" id="10_mxr21"]
+[ext_resource type="PackedScene" uid="uid://umgb2f5d4swt" path="res://Scenes/bottle_wodka.tscn" id="11_11ucq"]
+[ext_resource type="Script" uid="uid://22xwnysrx1g6" path="res://Scripts/ui.gd" id="12_fwnm2"]
+[ext_resource type="PackedScene" uid="uid://bft5pa8i1wixc" path="res://Scenes/bottle_box_rum.tscn" id="13_1m3u1"]
+[ext_resource type="PackedScene" uid="uid://dc2bg8axupp4p" path="res://Scenes/bottle_box_whiskey.tscn" id="14_oq34n"]
+[ext_resource type="PackedScene" uid="uid://8wt6yirka7m2" path="res://Scenes/bottle_box_wodka.tscn" id="15_nbrg5"]
+[ext_resource type="PackedScene" uid="uid://d1f6hqid14ae6" path="res://Scenes/bottle_box_glas.tscn" id="16_oq34n"]
+[ext_resource type="PackedScene" uid="uid://ddq5uc76gpwdy" path="res://Scenes/bottle_box_beer.tscn" id="17_nbrg5"]
+
+[sub_resource type="Environment" id="Environment_6mi8o"]
+ambient_light_color = Color(0.78626, 0.781996, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oq34n"]
+albedo_color = Color(1, 0.133333, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nbrg5"]
+material = SubResource("StandardMaterial3D_oq34n")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_acj1n"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Game_level" type="Node3D"]
+script = ExtResource("1_mxr21")
+
+[node name="Player" parent="." instance=ExtResource("1_jcjmw")]
+transform = Transform3D(-0.105813, 0, 0.994386, 0, 1, 0, -0.994386, 0, -0.105813, 4.70909, 1.42906, -2.35832)
+
+[node name="Spawner" type="Node3D" parent="."]
+
+[node name="CustomerSpawner" parent="Spawner" instance=ExtResource("1_g3g87")]
+
+[node name="Manager" type="Node3D" parent="."]
+
+[node name="Gamemanager" type="Node3D" parent="Manager"]
+script = ExtResource("9_e38tf")
+RECIPES = {
+"Rum": {
+"display_name": "Rum",
+"ingredients": [{
+"amount_ml": 40,
+"name": "Rum"
+}]
+},
+"Whisky": {
+"display_name": "Whisky",
+"ingredients": [{
+"amount_ml": 40,
+"name": "Whisky"
+}]
+},
+"Wodka": {
+"display_name": "Wodka",
+"ingredients": [{
+"amount_ml": 40,
+"name": "Wodka"
+}]
+}
+}
+
+[node name="Signalmanager" type="Node3D" parent="Manager"]
+script = ExtResource("10_mxr21")
+
+[node name="Tavern" parent="." instance=ExtResource("2_jtjkd")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6mi8o")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 2.5
+light_bake_mode = 1
+shadow_enabled = true
+directional_shadow_max_distance = 300.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2562, 1.7586, 0.903311)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35861, 3.28703, -5.60623)
+
+[node name="Glasses" type="Node3D" parent="."]
+
+[node name="glass" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -2.70563)
+
+[node name="glass6" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -3.08441)
+
+[node name="glass2" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -2.83806)
+
+[node name="glass3" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -2.96289)
+
+[node name="glass11" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -3.21392)
+
+[node name="glass12" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -3.34635)
+
+[node name="glass13" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.02643, -3.47118)
+
+[node name="glass14" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89267, 1.02643, -3.21392)
+
+[node name="glass15" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89267, 1.02643, -3.34635)
+
+[node name="glass16" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89267, 1.02643, -3.47118)
+
+[node name="glass20" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15203, 1.02643, -2.9562)
+
+[node name="glass21" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15203, 1.02643, -3.08103)
+
+[node name="glass17" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14591, 1.02643, -3.21392)
+
+[node name="glass18" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14591, 1.02643, -3.34635)
+
+[node name="glass19" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14591, 1.02643, -3.47118)
+
+[node name="glass7" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.02643, -2.70748)
+
+[node name="glass8" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.02643, -3.08626)
+
+[node name="glass9" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.02643, -2.83991)
+
+[node name="glass10" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.02643, -2.96474)
+
+[node name="glass4" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15894, 1.02643, -2.69917)
+
+[node name="glass5" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15144, 1.02643, -2.83201)
+
+[node name="glass22" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -2.70563)
+
+[node name="glass23" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -3.08441)
+
+[node name="glass24" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -2.83806)
+
+[node name="glass25" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -2.96289)
+
+[node name="glass26" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -3.21392)
+
+[node name="glass27" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -3.34635)
+
+[node name="glass28" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -3.47118)
+
+[node name="glass29" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88008, 0.586083, -3.21392)
+
+[node name="glass30" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88008, 0.586083, -3.34635)
+
+[node name="glass31" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88008, 0.586083, -3.47118)
+
+[node name="glass32" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13944, 0.586083, -2.9562)
+
+[node name="glass33" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13944, 0.586083, -3.08103)
+
+[node name="glass34" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13332, 0.586083, -3.21392)
+
+[node name="glass35" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13332, 0.586083, -3.34635)
+
+[node name="glass36" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13332, 0.586083, -3.47118)
+
+[node name="glass37" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88516, 0.586083, -2.70748)
+
+[node name="glass38" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88516, 0.586083, -3.08626)
+
+[node name="glass39" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88516, 0.586083, -2.83991)
+
+[node name="glass40" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88516, 0.586083, -2.96474)
+
+[node name="glass41" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14635, 0.586083, -2.69917)
+
+[node name="glass42" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13885, 0.586083, -2.83201)
+
+[node name="Bottles" type="Node3D" parent="."]
+
+[node name="bottle_whisky" parent="Bottles" instance=ExtResource("10_fwnm2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.96765, 1.02856, -1.88037)
+
+[node name="bottle_wodka" parent="Bottles" instance=ExtResource("11_11ucq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.91064, 1.02856, -1.40879)
+
+[node name="bottle1" parent="Bottles" instance=ExtResource("5_mql7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15255, 2.0268, -3.41241)
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("12_fwnm2")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -20.0
+offset_right = 21.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Weiter"
+
+[node name="QuitBtn" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Tüss"
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer2"]
+layout_mode = 2
+
+[node name="Kohle_lbl" type="Label" parent="UI/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Kohle: "
+
+[node name="time_lbl" type="Label" parent="UI/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="bottle_box" parent="." instance=ExtResource("17_nbrg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.073, 0.05, -10.857)
+
+[node name="bottle_box2" parent="." instance=ExtResource("16_oq34n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.988, 0.05, -12.899)
+
+[node name="bottle_box3" parent="." instance=ExtResource("13_1m3u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.099, 0.05, -14.586)
+
+[node name="bottle_box4" parent="." instance=ExtResource("14_oq34n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.063, 0.05, -16.288)
+
+[node name="bottle_box5" parent="." instance=ExtResource("15_nbrg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.115, 0.05, -17.88)
+
+[node name="serving_container" type="Node3D" parent="."]
+
+[node name="IsOpenTimer" type="Timer" parent="."]
+wait_time = 180.0
+ignore_time_scale = true
+
+[node name="Open_Schild" type="MeshInstance3D" parent="." groups=["Open_Schild"]]
+transform = Transform3D(0.0896635, 0, 0, 0, 1, 0, 0, 0, 1, 7.45616, 1.45001, 0)
+mesh = SubResource("BoxMesh_nbrg5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Open_Schild"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Open_Schild/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_acj1n")
+
+[node name="Label3D" type="Label3D" parent="Open_Schild"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.541252, 0, 0)
+text = "OPEN"
+
+[connection signal="button_down" from="UI/MarginContainer/VBoxContainer/ResumeBtn" to="UI" method="_on_resume_btn_button_down"]
+[connection signal="button_up" from="UI/MarginContainer/VBoxContainer/QuitBtn" to="UI" method="_on_quit_btn_button_up"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/QuitBtn" to="UI" method="_on_quit_btn_pressed"]
+[connection signal="timeout" from="IsOpenTimer" to="." method="_on_is_open_timer_timeout"]

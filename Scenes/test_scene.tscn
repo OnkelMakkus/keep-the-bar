@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c25fq5tmyxpwq"]
+
+[ext_resource type="PackedScene" uid="uid://dmrqa56srjl1x" path="res://Assets/models/theke2.glb" id="1_3dogw"]
+
+[node name="test_scene" type="Node3D"]
+
+[node name="theke2" parent="." instance=ExtResource("1_3dogw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22914, 0, -0.0248667)

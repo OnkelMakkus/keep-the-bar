@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://0qln2fo1hp0v"]
+
+[ext_resource type="PackedScene" uid="uid://bg52lr7pk4e6m" path="res://Scenes/theke.tscn" id="2_3n42s"]
+[ext_resource type="Script" uid="uid://ccyavunf04tks" path="res://Scripts/tavern.gd" id="2_www31"]
+[ext_resource type="PackedScene" uid="uid://coxdxsa5j4cm2" path="res://Scenes/regal.tscn" id="3_4hstr"]
+[ext_resource type="PackedScene" uid="uid://cigm3hdggjyii" path="res://Scenes/tavern_model.tscn" id="4_4hstr"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4hstr"]
+vertices = PackedVector3Array(-8.4881, 0.511905, -24.8742, 6.2619, 0.511905, -25.1242, 6.2619, 0.511905, -26.6242, -14.7381, 0.511905, -26.6242, -14.7381, 0.511905, 5.37576, -8.4881, 0.511905, 5.12576, 8.5119, 0.511905, -24.8742, 14.7619, 0.511905, -26.6242, 8.5119, 0.511905, 5.12576, 14.7619, 0.511905, 5.37576, -7.4881, 4.5119, -24.1242, -7.4881, 4.5119, 6.12576, 7.5119, 4.5119, 6.12576, 7.5119, 4.5119, -24.1242, -0.9881, 0.511905, -9.12424, 1.0119, 0.511905, -9.12424, 1.2619, 0.511905, -9.87424, -1.2381, 0.511905, -9.87424, 6.7619, 0.511905, -23.6242, -6.9881, 0.511905, -23.6242, 6.7619, 0.511905, -9.87424, -6.9881, 0.511905, -9.87424, 6.2619, 0.511905, -0.874237, 6.2619, 0.511905, -2.37424, 5.0119, 0.511905, -2.37424, 5.0119, 0.511905, -0.124237, 6.7619, 0.511905, 5.37576, 3.0119, 0.511905, 0.125763, 1.2619, 0.511905, 5.37576, 6.7619, 0.511905, -0.624237, 1.2619, 0.511905, -8.37424, -1.2381, 0.511905, -8.37424, 2.7619, 0.511905, -4.12424, -1.2381, 0.511905, 6.12576, 1.0119, 0.511905, 6.12576, -1.4881, 0.511905, 5.37576, 3.2619, 0.511905, -4.37424, 3.2619, 0.511905, -8.37424, -6.9881, 0.511905, -8.37424, -6.9881, 0.511905, 5.37576, 6.2619, 0.511905, -3.87424, 5.0119, 0.511905, -4.12424, 6.7619, 0.511905, -4.12424, 6.7619, 0.511905, -8.37424, -8.2381, 0.511905, 6.87576, -14.7381, 0.511905, 18.8758, -1.7381, 0.511905, 18.8758, -1.7381, 0.511905, 6.87576, 8.2619, 0.511905, 6.87576, 14.7619, 0.511905, 18.8758, 1.5119, 0.511905, 18.8758, 1.5119, 0.511905, 6.87576)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(1, 2, 6), PackedInt32Array(6, 2, 7), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 7), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(14, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(16, 17, 18), PackedInt32Array(18, 17, 19), PackedInt32Array(18, 20, 16), PackedInt32Array(17, 21, 19), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(27, 25, 28), PackedInt32Array(28, 25, 26), PackedInt32Array(22, 29, 25), PackedInt32Array(25, 29, 26), PackedInt32Array(14, 15, 30), PackedInt32Array(14, 30, 31), PackedInt32Array(31, 30, 32), PackedInt32Array(28, 34, 33), PackedInt32Array(33, 35, 28), PackedInt32Array(28, 35, 27), PackedInt32Array(36, 32, 37), PackedInt32Array(37, 32, 30), PackedInt32Array(32, 27, 31), PackedInt32Array(31, 27, 38), PackedInt32Array(38, 27, 35), PackedInt32Array(38, 35, 39), PackedInt32Array(23, 24, 40), PackedInt32Array(40, 24, 41), PackedInt32Array(41, 36, 42), PackedInt32Array(42, 36, 37), PackedInt32Array(42, 37, 43), PackedInt32Array(42, 40, 41), PackedInt32Array(5, 44, 4), PackedInt32Array(4, 44, 45), PackedInt32Array(47, 46, 44), PackedInt32Array(44, 46, 45), PackedInt32Array(8, 9, 48), PackedInt32Array(48, 9, 49), PackedInt32Array(51, 48, 50), PackedInt32Array(50, 48, 49), PackedInt32Array(34, 51, 33), PackedInt32Array(33, 51, 47), PackedInt32Array(47, 51, 50), PackedInt32Array(47, 50, 46)]
+agent_height = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_www31"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4hstr"]
+albedo_color = Color(0.898677, 0.835644, 0.604113, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4hstr"]
+points = PackedVector3Array(-15.2381, -0.738095, -15.2381, 15.2381, 0.690476, 15.2381, 15.2381, -0.738095, 15.2381, 15.2381, 0.690476, -15.2381, -15.2381, 0.690476, 15.2381, -15.2381, -0.738095, 15.2381, 15.2381, -0.738095, -15.2381, -15.2381, 0.690476, -15.2381)
+
+[node name="Tavern" type="NavigationRegion3D"]
+navigation_mesh = SubResource("NavigationMesh_4hstr")
+script = ExtResource("2_www31")
+
+[node name="tavern_scene" parent="." instance=ExtResource("4_4hstr")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00817108, 1.99651, -8.82032)
+
+[node name="Boden" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.52716, 0, -0.5, -3.85322)
+gi_mode = 0
+mesh = SubResource("BoxMesh_www31")
+surface_material_override/0 = SubResource("StandardMaterial3D_4hstr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Boden"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boden/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_4hstr")
+
+[node name="SpawnerMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 13)
+
+[node name="Customer_Exit" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.089, 0, 11.304)
+
+[node name="regal" parent="." instance=ExtResource("3_4hstr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.36004, 1.5, -3.084)
+
+[node name="regal2" parent="." instance=ExtResource("3_4hstr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.36004, 1.5, -1.68094)
+
+[node name="theke" parent="." instance=ExtResource("2_3n42s")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.86148, -0.00607896, -2.05304)
+
+[node name="ThekeMarker" parent="theke" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95645, 1.01208, -0.988669)
+
+[node name="look_at_marker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44582, 1.1646, -1.91126)
+
+[editable path="theke"]
