@@ -1,23 +1,30 @@
 #beer_bottle.gd
 extends Node3D
 
-@onready var label_3d: Label3D = $Label3D
+@export var staticBodies:Array[StaticBody3D]
+
+#@onready var label_3d: Label3D = $Label3D
 @export var beer_name := "Pils"
 @export var volume_ml := 500.0
 @export var full := true  # Für später, falls Kunde Flasche leert
+@export var ingredient_name := "Beer"
 
 var current_scale = scale
+var size
+
+var label_name := "Beer\n<E> to pick up"
 
 func _ready():
+	size = Gamemanager.get_mesh_sizes($"Círculo_004")
 	Gamemanager.attach_outlineGenerator(self)
-	label_3d.text = beer_name
-	label_3d.visible = false
 
 func show_label():
-	label_3d.visible = true
+	pass
+	#label_3d.visible = true
 
-func hide_label():
-	label_3d.visible = false
+func hide_label():	
+	pass
+	#label_3d.visible = false
 
 # Regal-Snap bleibt erhalten
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
@@ -26,3 +33,29 @@ func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 
 func set_obj_scale():
 	scale = current_scale
+
+
+func activate_coliders():
+	if staticBodies:
+		for body in staticBodies:
+			body.collision_layer = 1
+			body.collision_mask = 1
+			for child in body.get_children():
+				if child is CollisionShape3D:
+					child.disabled = false
+	
+
+func deactivate_coliders():
+	if staticBodies:
+		for body in staticBodies:
+			body.collision_layer = 0
+			body.collision_mask = 0
+			for child in body.get_children():
+				if child is CollisionShape3D:
+					child.disabled = true
+
+
+func let_it_fall(position):
+	await get_tree().physics_frame
+	global_position = position
+	activate_coliders()

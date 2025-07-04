@@ -6,153 +6,293 @@ extends CharacterBody3D
 @export var move_speed := 2.5
 @export var rotation_speed := 5.0  # Rotation in Grad/Sekunde
 
-@onready var label: Label3D = $Billboard
-@onready var agent := $NavigationAgent3D
-@onready var animation_player: AnimationPlayer = $AuxScene/AnimationPlayer
+@export var label: Label3D
+@export var agent : NavigationAgent3D
+@export var y_animation_player: AnimationPlayer
+@export var x_animation_player: AnimationPlayer
+@export var y_bot: Node3D
+@export var x_bot: Node3D
+@export var collider: CollisionShape3D
+@onready var raycast: RayCast3D = $RayCast3D
 
-var rotating_to_theke := false
+
+var animation_player: AnimationPlayer
+
 var target: Vector3
+var target_name: String
+var finished_rotation := false
 var reached_theke := false
-var target_angle: float = 0.0
-var finished_rotating := false
-var exiting := false
-var on_way_to_exit := false
-var sex := 0  #0 = Male / 1 = Female
-var arrived_and_stopped := false
+var reached_first_leaving_wp := false
+var going_to_table := false
+var at_table := false
+var leaving := false
+var on_exit := false
 
-func initialize(spawn: Vector3, target_from_spawner: Vector3):
+var queue_target_active := false   # kommt vom GameManager
+var queue_target : Vector3         # letzter Warteschlangen-Punkt
+
+var first_exit_marker
+var exit_marker
+
+var sex := 1
+
+var last_position := Vector3.ZERO
+var stuck_frames := 0
+var stuck_threshold := 0.01  # Maximale Bewegung pro Frame, um als "stuck" zu zählen
+var stuck_max_frames := 3    # Nach wie vielen Frames gilt Agent als blockiert?
+
+var label_name := "<E>\nGive Order\nSend away"
+
+
+func _ready() -> void:
 	add_to_group("Customer")
-	global_position = spawn
-	global_position.y = 0
-	target = target_from_spawner
-	target.y = 0
-	arrived_and_stopped = false
+
+
+func set_queue_target(pos: Vector3) -> void:
+	queue_target_active = true
+	queue_target        = pos
+	agent.target_position = pos
+	
+	
+func initialize(sex_xy : int, cust_name : String, drink : String, start: Vector3):	
+	global_position = start
+	target = Gamemanager.thekemarker.global_position
+	target_name = Gamemanager.thekemarker.name
+	#target.y = 0
 	agent.target_position = target
+	prints("Target:", agent.target_position, "Real Target:", Gamemanager.thekemarker.global_position)
+	
+	customer_name = cust_name
+	order_text = drink
+	sex = sex_xy
+	
+	if sex == 0:
+		animation_player = y_animation_player
+		y_bot.visible = true
+		x_bot.visible = false
+	elif sex == 1:
+		animation_player = x_animation_player
+		y_bot.visible = false
+		x_bot.visible = true
+		
 	if label:
 		label.text = "%s: %s" % [customer_name, order_text]
 		label.visible = false
-
+		
+	first_exit_marker = Gamemanager.first_exit
+	exit_marker = Gamemanager.customer_exit
+	
+	
 func _physics_process(delta: float) -> void:
-	var destination : Vector3
-	var direction : Vector3
-	# 1. Wenn er zum Exit läuft
-	if exiting:
-		animation_player.play("Walking")
+	rotation.x = 0
+	global_position.y = 0.55		
+	
+	if raycast.is_colliding():
+		var hit = raycast.get_collider()
+		if hit.is_in_group("Customer"):
+			if not going_to_table or not leaving:
+				velocity = Vector3.ZERO
+				return
+	
+	check_if_walking()
+	if going_to_table:
+		set_collider_enabled(false)
+		
+	if leaving:
+		set_collider_enabled(false)
+		general_agent_stuff(delta)
+		
 		if agent.is_navigation_finished():
-			print("Distanz zum Exit:", global_position.distance_to(agent.target_position))
-			print("Kunde-Pos:", global_position, "Exit-Pos:", agent.target_position)
-			despawn_after_exit()
-		else:
-			destination = agent.get_next_path_position()
-			direction = (destination - global_position).normalized()
-			velocity = direction * move_speed
-			look_in_movement_direction(direction, delta)
-			move_and_slide()
-		return
-
-	# 2. Normale Ziel-Ankunft
-	if agent.is_navigation_finished():
-		if not arrived_and_stopped:
-			arrived_and_stopped = true
-			velocity = Vector3.ZERO
-			animation_player.play("Idle")
-			if not reached_theke:
-				handle_theke_arrival()
+			if not reached_first_leaving_wp:
+				reached_first_leaving_wp = true
+				target = exit_marker.global_position
+				agent.target_position = target
+		
+			elif not on_exit:
+				on_exit = true
+				despawn_after_exit()
+				return
+			
 		move_and_slide()
-		# Rotation nach Ankunft (auch nach erster Arrival-Frame)
-		if rotating_to_theke and reached_theke and not finished_rotating:
-			rotate_towards_target(delta)
 		return
-
-	# 3. Auf dem Weg zum Ziel (Theke o.ä.)
-	animation_player.play("Walking")
-	destination = agent.get_next_path_position()
-	direction = (destination - global_position).normalized()
-	velocity = direction * move_speed
-	if (not rotating_to_theke and direction.length() > 0.1) or on_way_to_exit:
-		look_in_movement_direction(direction, delta)
+		
+	if agent.is_navigation_finished() and not leaving and not going_to_table:
+		if is_at_target():
+			set_collider_enabled(true)
+			look_at_theke(delta)
+			reached_theke = true
+			Gamemanager.theke_besetzt = true
+			show_label_if_theke()
+		move_and_slide()
+		return
+	
+	general_agent_stuff(delta)	
 	move_and_slide()
+	
 
-	# Drehen zur Theke, falls dran
-	if rotating_to_theke and reached_theke:
-		rotate_towards_target(delta)
-
-
-func is_at_target() -> bool:
-	return global_position.distance_to(target) <= .5  # oder 0.3, je nach Theke
+func is_at_target() -> bool:	
+	return global_position.distance_to(Gamemanager.thekemarker.global_position) <= 0.9  # oder 0.3, je nach Theke
 
 func look_in_movement_direction(direction: Vector3, delta: float):
 	direction.y = 0  # Nur horizontale Rotation
 	var desired_angle = atan2(direction.x, direction.z) + PI
 	var current_angle = rotation.y
 	var new_angle = lerp_angle(current_angle, desired_angle, rotation_speed * delta)
-	rotation.y = new_angle	
-
-func handle_theke_arrival():
-	print("✅ Kunde ist an der Theke.")
-	reached_theke = true
-	rotating_to_theke = false
-	label.visible = false
-	finished_rotating = false
-
-	if is_front_customer():
-		rotating_to_theke = true
-		finished_rotating = false
-		label.visible = true
-		var to_target = (Gamemanager.look_at_marker.global_position - global_position).normalized()
-		to_target.y = 0
-		target_angle = atan2(to_target.x, to_target.z) + PI
-
-
-func rotate_towards_target(delta):
-	if finished_rotating:
-		return
-
-	var current_angle = rotation.y
-	var new_angle = lerp_angle(current_angle, target_angle, rotation_speed * delta)
 	rotation.y = new_angle
 
-	if absf(target_angle - current_angle) < deg_to_rad(1):
-		finished_rotating = true
 
 func clicked_by_player():
 	if not reached_theke:
 		print("Kunde bewegt sich noch.")
 		return
 
-	if exiting:
+	if leaving:
 		print("Kunde verlässt schon.")
-		return
-
-	if not is_front_customer():
-		print("Kunde ist nicht vorne, darf nicht gehen!")
 		return
 
 	print("🚶‍♂️ Kunde verlässt die Theke...")
 
-	var drink_served = try_serve_drink()
-	update_customer_label(drink_served)
-	start_leaving_sequence()
+	var result = try_serve_drink()
+	print("Result:", result)
+
+	if not result.has("drink_obj") or not result.has("marker_pair") or not result["drink_obj"] or not result["marker_pair"]:
+		update_customer_label(false) # 😞
+		leaving_now()
+		return
+
+	# Getränk an Kunde
+	_serve_and_remove(result["drink_obj"], Gamemanager.RECIPES.get(order_text))
+	update_customer_label(true) # 😊
+
+	# Marker reservieren
+	var pair = result["marker_pair"]
+	pair["table"].marker_pairs[pair["index"]]["used"] = true
+
+	# Zum Marker schicken, dort verweilen und dann raus
+	go_to_marker_and_wait(pair)
 
 # --- Hilfsfunktionen ---
 
-func try_serve_drink() -> bool:
+func set_collider_enabled(enabled: bool):
+	# Wenn du mehrere CollisionShape3Ds hast, für jeden aufrufen!
+	collider.disabled = not enabled   
+	
+
+func general_agent_stuff(delta):
+	var next_pos = agent.get_next_path_position()
+	var direction = next_pos - global_transform.origin
+	direction.y = 0  # Nur XZ-Ebene
+
+	if direction.length() > 0.05:
+		direction = direction.normalized()
+		velocity = direction * move_speed
+		look_in_movement_direction(direction, delta)
+	else:
+		velocity = Vector3.ZERO
+		
+		
+func go_to_marker_and_wait(pair):
+	raycast.collision_mask = 5
+	Gamemanager.theke_besetzt = false
+	self.remove_from_group("Customer")
+	prints("Pair:",pair)
+	going_to_table = true
+	prints("Going to Table:", target)
+	target = pair["standing_marker"].global_position
+	agent.target_position = target
+
+	# Warten bis am Marker
+	while not agent.is_navigation_finished():
+		await get_tree().process_frame
+	
+	at_table = true
+	await get_tree().create_timer(10.0).timeout # z. B. 3 Sekunden Pause
+	
+	if not order_text == "Beer":
+		var glass_marker = pair["glass_marker"]
+		var glass = Gamemanager.GLASS_SCENE.instantiate()
+	
+		glass_marker.call_deferred("add_child", glass)
+		glass.call_deferred("place_on_table_by_customer", glass_marker.global_position, pair["table"], pair["index"])
+		glass._update_label()
+		# Marker noch nicht freigeben!
+		pair["table"].marker_pairs[pair["index"]]["used"] = true
+	else:
+		# Marker wieder freigeben!
+		pair["table"].marker_pairs[pair["index"]]["used"] = false
+	# Danach normal verlassen
+	leaving_now()
+	
+
+func leaving_now():
+	raycast.collision_mask = 5
+	print("Im Leaving")
+	self.remove_from_group("Customer")
+	leaving = true
+	if first_exit_marker:
+		target = first_exit_marker.global_position
+		agent.target_position = target
+		target.y = 0
+		prints("Kunde verlässt, Ziel:", first_exit_marker.global_position, "Target:", target)
+		await get_tree().create_timer(2.0).timeout # 2 Sek. Smiley zeigen
+		label.visible = false
+	else:
+		print("❌ Exit-Marker nicht gefunden!")
+	
+	
+func look_at_theke(delta):
+	var look_at_pos = Gamemanager.look_at_marker.global_position
+	var new_transform = transform.looking_at(look_at_pos)
+	transform  = transform.interpolate_with(new_transform, rotation_speed * delta)
+	velocity = Vector3.ZERO
+
+
+func check_if_walking():
+	var movement = global_transform.origin.distance_to(last_position)
+	if movement < stuck_threshold and not agent.is_navigation_finished():
+		stuck_frames += 1
+	else:
+		stuck_frames = 0
+		last_position = global_transform.origin
+
+	if (stuck_frames >= stuck_max_frames) or (agent.is_navigation_finished() and not leaving):
+		animation_player.play("old_fat_dude/Idle")
+		agent.path_desired_distance = 0.1
+	else:
+		animation_player.play("old_fat_dude/Walking")
+		agent.path_desired_distance = 0.2
+		
+		
+func show_besitzer():
+	return self
+	
+
+func try_serve_drink() -> Dictionary:
 	var serving_container = Gamemanager.serving_container
 	if not serving_container:
-		return false
+		return {}
 
 	var recipe = Gamemanager.RECIPES.get(order_text, null)
 	if not recipe:
-		return false
+		return {}
 
 	for obj in serving_container.get_children():
 		if order_text == "Beer" and obj.is_in_group("BeerBottle"):
 			if _beer_fits(obj, recipe):
-				return _serve_and_remove(obj, recipe)
+				var marker_pair = Gamemanager.get_free_marker_pair()
+				if marker_pair:
+					return {"drink_obj": obj, "marker_pair": marker_pair}
+				else:
+					return {}
 		elif obj.is_in_group("Glass"):
 			if _glass_fits(obj, recipe):
-				return _serve_and_remove(obj, recipe)
-	return false
+				var marker_pair = Gamemanager.get_free_marker_pair()
+				if marker_pair:
+					return {"drink_obj": obj, "marker_pair": marker_pair}
+				else:
+					return {}
+	return {}
+
 
 func _beer_fits(obj, recipe) -> bool:
 	for ingredient in recipe["ingredients"]:
@@ -174,6 +314,7 @@ func _serve_and_remove(obj, recipe) -> bool:
 	Signalmanager.update_money.emit(preis)
 	obj.queue_free()
 	return true
+		
 
 func update_customer_label(drink_served: bool):
 	if drink_served:
@@ -182,74 +323,15 @@ func update_customer_label(drink_served: bool):
 		print("❌ Kein passendes oder vollständiges Getränk für Kunden gefunden:", order_text)
 		label.text = "%s: %s" % [customer_name, "😞"]
 	label.visible = true
-
-func start_leaving_sequence():
-	exiting = true
-	arrived_and_stopped = false
-
-	var exit_marker = Gamemanager.customer_exit
-	if exit_marker:
-		print("Kunde verlässt, Ziel:", exit_marker.global_position)
-		remove_from_group("Customer")
-		agent.target_position = exit_marker.global_position
-		target = exit_marker.global_position
-		target.y = 0
-		arrived_and_stopped = false
-		rotating_to_theke = false
-		finished_rotating = false
-		await get_tree().create_timer(2.0).timeout # 2 Sek. Smiley zeigen
-		label.visible = false
-		Signalmanager.customer_leaves_front.emit()
-	else:
-		print("❌ Exit-Marker nicht gefunden!")
-
+	
 
 func despawn_after_exit():
 	print("👋 Kunde hat das Spielfeld verlassen.")
 	queue_free()
-
-func update_target(new_target: Vector3):
-	if exiting:
-		print("Update Target abgebrochen: Kunde verlässt gerade das Spielfeld.")
-		return
-	
-	new_target.y = 0
-	target = new_target
-	agent.target_position = target
-	rotating_to_theke = false
-	finished_rotating = false
-	reached_theke = false
-	label.visible = false
-	velocity = Vector3.ZERO
-	arrived_and_stopped = false
-
-	if is_front_customer():
-		rotating_to_theke = true
-		finished_rotating = false
-		label.visible = true
-		var to_target = (Gamemanager.look_at_marker.global_position - global_position).normalized()
-		to_target.y = 0
-		target_angle = atan2(to_target.x, to_target.z) + PI
-		
-	print("Update Target:", target, "Exiting:", exiting, "arrived_and_stopped:", arrived_and_stopped)
-	show_label_if_front()
-
-func is_front_customer() -> bool:
-	var customers = get_tree().get_nodes_in_group("Customer")
-	if customers.size() == 0:
-		return false
-	var closest = customers[0]
-	var closest_dist = global_position.distance_to(Gamemanager.thekemarker.global_position)
-	for c in customers:
-		var d = c.global_position.distance_to(Gamemanager.thekemarker.global_position)
-		if d < closest_dist:
-			closest = c
-			closest_dist = d
-	return closest == self
 	
 	
-func show_label_if_front():
-	if is_front_customer() and not exiting:
+func show_label_if_theke():
+	if reached_theke:
 		label.text = "%s: %s" % [customer_name, order_text]
 		label.visible = true
 	else:

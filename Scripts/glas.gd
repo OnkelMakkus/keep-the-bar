@@ -5,32 +5,66 @@ extends Node3D
 @onready var fill_bar := $FillUI/ProgressBar
 @onready var fill_ui: Control = $FillUI
 @onready var fill_background: ColorRect = $FillUI/ProgressBar2
-@onready var label_3d: Label3D = $Label3D
+#@onready var label_3d: Label3D = $Label3D
 
 @export var fill_ml := 0.0
 @export var max_fill_ml := 250.0
 @export var liquid_offset := 0.05
 
+@export var ingredient_name := "Glass"
+
+@export var staticBodies:Array[StaticBody3D]
+
 var glass_liquid_mesh: MeshInstance3D
 var contents := {}  # z.B. { "Rum": 40.0, "Wasser": 20.0 }
 
 var current_scale = scale
+var size
+var label_name := "Glass\n<E> to pick up"
+var current_table
+var current_index
+
+var dirty := false
+
+func throw(direction: Vector3, force := 10.0):
+	self.linear_velocity = direction.normalized() * force
+	self.angular_velocity = Vector3(
+		randf() * 10.0,
+		randf() * 10.0,
+		randf() * 10.0
+	)
 
 func set_obj_scale():
 	scale = current_scale
 
 func _ready():
+	size = Gamemanager.get_mesh_sizes($Cylinder)
 	Gamemanager.attach_outlineGenerator(self)
-	label_3d.text = ""
 	glass_liquid_mesh = glass_liquid.get_child(0)
 	_update_visuals()
 	
+	
+func place_on_table_by_customer(pos, table, index):	
+	dirty = true
+	_update_label()
+	global_position = pos
+	current_table = table
+	current_index = index
+	
+	
+func remove_from_table():
+	var table = self.get_parent().get_parent()
+	if current_table and current_index >= 0:
+		current_table.marker_pairs[current_index]["used"] = false
+	
+	
 func show_label():
 	_update_label()
-	label_3d.visible = true
+	
 
 func hide_label():
-	label_3d.visible = false
+	pass
+	
 
 func add_liquid(liquid_name: String, amount: float) -> float:
 	var total_ml = get_total_fill_ml()
@@ -43,6 +77,7 @@ func add_liquid(liquid_name: String, amount: float) -> float:
 	_update_visuals()
 	_update_label()
 	return actual_added
+	
 
 func remove_liquid(liquid_name: String, amount: float) -> float:
 	var in_glass = contents.get(liquid_name, 0.0)
@@ -53,7 +88,7 @@ func remove_liquid(liquid_name: String, amount: float) -> float:
 			contents.erase(liquid_name)
 	_update_visuals()
 	_update_label()
-	return actual_removed	
+	return actual_removed
 	
 
 func _set_liquid_material(liquid_name: String):
@@ -69,15 +104,24 @@ func get_total_fill_ml() -> float:
 	for v in contents.values():
 		sum += v
 	return sum
+	
 
-func _update_label():
+func _update_label():	
+	print ("Glas LAbel Updated")
 	if contents.size() == 0:
-		label_3d.text = ""
+		label_name = "Glass" + "\n<E> to pick up"
+		if dirty:
+			label_name = "Dirty " + label_name
 		return
+	
 	var text = ""
 	for k in contents.keys():
 		text += "%s (%d ml)\n" % [k, contents[k]]
-	label_3d.text = text.strip_edges()
+		
+	label_name = "Glass\n" + text.strip_edges() + "\n<E> to pick up"
+	if dirty:
+		label_name = "Dirty " + label_name
+	
 	
 
 func set_liquid(amount: float):
@@ -98,4 +142,44 @@ func _update_visuals():
 # Snap-to-regal bleibt erhalten:
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 	return Gamemanager.place_on_shelf(self, reference_point, shelf)
+	
+	
+#func activate_coliders():
+	#self.collision_layer = 1
+	#self.collision_mask = 1
+	#for child in self.get_children():
+		#if child is CollisionShape3D:
+			#child.disabled = false
+			#
+			#
+#func deactivate_coliders():
+	#self.collision_layer = 0
+	#self.collision_mask = 0
+	#for child in self.get_children():
+		#if child is CollisionShape3D:
+			#child.disabled = true
+func activate_coliders():
+	if staticBodies:
+		for body in staticBodies:
+			body.collision_layer = 1
+			body.collision_mask = 1
+			for child in body.get_children():
+				if child is CollisionShape3D:
+					child.disabled = false
+	
+
+func deactivate_coliders():
+	if staticBodies:
+		for body in staticBodies:
+			body.collision_layer = 0
+			body.collision_mask = 0
+			for child in body.get_children():
+				if child is CollisionShape3D:
+					child.disabled = true
+		
+		
+func let_it_fall(position):
+	await get_tree().physics_frame
+	global_position = position
+	activate_coliders()
 	

@@ -1,0 +1,106 @@
+[gd_scene load_steps=17 format=3 uid="uid://r8ph1bmqpfcp"]
+
+[ext_resource type="Script" path="res://addons/progress_bar_3d/progress_bar_3d_demo.gd" id="1_kpnq8"]
+[ext_resource type="Shader" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="1_qstib"]
+[ext_resource type="Script" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="2_rgh0h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_71102"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_gkdh2"]
+sky_material = SubResource("ProceduralSkyMaterial_71102")
+
+[sub_resource type="Environment" id="Environment_qtnjk"]
+background_mode = 2
+sky = SubResource("Sky_gkdh2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewy2r"]
+albedo_color = Color(0, 0.0313726, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_c4whl"]
+material = SubResource("StandardMaterial3D_ewy2r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jm7jn"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_qstib")
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/progress_color = Color(0, 1, 0, 1)
+shader_parameter/progress_value = 0.5
+shader_parameter/billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_7jytg"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_jm7jn")
+size = Vector2(1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_let8w"]
+albedo_color = Color(1, 0, 0.0219488, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4bkf8"]
+material = SubResource("StandardMaterial3D_let8w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n0y8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_qstib")
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/progress_color = Color(0.968627, 1, 0, 1)
+shader_parameter/progress_value = 0.5
+shader_parameter/billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_3sgrw"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_5n0y8")
+size = Vector2(1.5, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ef2o6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h10jp"]
+material = SubResource("StandardMaterial3D_ef2o6")
+size = Vector3(10, 0.2, 10)
+
+[node name="Demo" type="Node3D"]
+script = ExtResource("1_kpnq8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qtnjk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="BlueBall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78571, 0, 0)
+mesh = SubResource("SphereMesh_c4whl")
+
+[node name="ProgressBar3D" type="MeshInstance3D" parent="BlueBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.598131, 0)
+mesh = SubResource("QuadMesh_7jytg")
+script = ExtResource("2_rgh0h")
+
+[node name="RedBall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.703222, 0, 0)
+mesh = SubResource("SphereMesh_4bkf8")
+
+[node name="ProgressBar3D" type="MeshInstance3D" parent="RedBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.607232, 0)
+mesh = SubResource("QuadMesh_3sgrw")
+script = ExtResource("2_rgh0h")
+size = Vector2(1.5, 0.2)
+progress_color = Color(0.968627, 1, 0, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.969055, 0.246847, 0, -0.246847, 0.969055, 0, 0.458208, 1.28858)
+
+[node name="SunBlockingMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93177, 0)
+mesh = SubResource("BoxMesh_h10jp")
+
+[node name="UpdateProgressBarValuesTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="UpdateProgressBarValuesTimer" to="." method="_on_update_progress_bar_values_timer_timeout"]

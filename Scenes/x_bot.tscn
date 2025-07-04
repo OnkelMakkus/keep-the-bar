@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq46hpkda2x5t"]
+
+[ext_resource type="PackedScene" uid="uid://cbha3h41si00w" path="res://Assets/models/x-bot.glb" id="1_p8pgc"]
+
+[node name="x_bot" instance=ExtResource("1_p8pgc")]

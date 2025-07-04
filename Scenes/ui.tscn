@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://kktg22rwux2t"]
+
+[ext_resource type="Script" uid="uid://22xwnysrx1g6" path="res://Scripts/ui.gd" id="1_jxero"]
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menü_main", "quit_btn", "resume_btn", "option_btn", "kohle_lbl", "time_lbl", "crosshair", "info_label")]
+process_mode = 3
+script = ExtResource("1_jxero")
+"menü_main" = NodePath("Menü_main")
+quit_btn = NodePath("Menü_main/VBoxContainer/ResumeBtn")
+resume_btn = NodePath("Menü_main/VBoxContainer/QuitBtn")
+option_btn = NodePath("Menü_main/VBoxContainer/OptionBtn")
+kohle_lbl = NodePath("HUD_Info/VBoxContainer/Kohle_lbl")
+time_lbl = NodePath("HUD_Info/VBoxContainer/time_lbl")
+crosshair = NodePath("Crosshair_Container/Crosshair")
+info_label = NodePath("Info_Label_Container/Info_Label")
+
+[node name="Menü_main" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -20.0
+offset_right = 21.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menü_main"]
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="Menü_main/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="OptionBtn" type="Button" parent="Menü_main/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="QuitBtn" type="Button" parent="Menü_main/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+text = "Bye Bye Bye"
+
+[node name="HUD_Info" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD_Info"]
+layout_mode = 2
+
+[node name="Kohle_lbl" type="Label" parent="HUD_Info/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Kohle: "
+
+[node name="time_lbl" type="Label" parent="HUD_Info/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Crosshair_Container" type="AspectRatioContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -2.5
+offset_right = 2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="ColorRect" parent="Crosshair_Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Info_Label_Container" type="AspectRatioContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Info_Label" type="Label" parent="Info_Label_Container"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Template Text"
+horizontal_alignment = 1
+
+[connection signal="button_down" from="Menü_main/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_button_down"]
+[connection signal="button_up" from="Menü_main/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_button_up"]
+[connection signal="pressed" from="Menü_main/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]

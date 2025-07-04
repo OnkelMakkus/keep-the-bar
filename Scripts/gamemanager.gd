@@ -1,41 +1,152 @@
 #gamemanager.gd (global)
 extends Node3D
 
+
 var spawnmarker
 var thekemarker
+var wait_marker_01
+var wait_marker_02
 var look_at_marker
 var customer_exit
+var main_ui
 var serving_container
 var theke
+var first_exit
+
+var theke_besetzt := false
+var marker1_besetzt := false
+var marker2_besetzt := false
+
+var ordermarkers = []
+var wait_markers = []
+
+var customers = []
+
+var is_in_menu := false
 
 var is_open := false
 
+var replicator_open := false
+
+var option_open := false
+
 var original_materials := {}
 
-var og_scene = preload("res://Scenes/outline_generator.tscn")
+@onready var mouse_sensitivity := 0.002
+@export var FOV : int = 70
+
+var og_scene = load("res://Scenes/outline_generator.tscn")
+var ORDER_MENU = load("res://Scenes/order_menu.tscn")
+var OPTION_MENU = load("res://Scenes/options.tscn")
+var GLASS_SCENE = load("res://Scenes/glass.tscn")
+
+@onready var boxes = {
+	"beer_box":{
+		"group": "beer_bottle_box",
+		"res": load("res://Scenes/bottle_box_beer.tscn")
+	},
+	"rum_box":{
+		"group": "rum_bottle_box",
+		"res": load("res://Scenes/bottle_box_rum.tscn")
+	},
+	"whiskey_box":{
+		"group": "whiskey_bottle_box",
+		"res": load("res://Scenes/bottle_box_whiskey.tscn")
+	},
+	"wodka_box":{
+		"group": "wodka_bottle_box",
+		"res": load("res://Scenes/bottle_box_wodka.tscn")
+	},
+	"glass_box":{
+		"group": "glass_bottle_box",
+		"res": load("res://Scenes/bottle_box_glas.tscn")
+	},
+}
 
 @export var money := 0
 
-@export var INGREDIENTS = {
+@onready var REPLICATOR_RESSOURCES ={
+	"Sweet_Molecules": {
+		"display_name": "Sweet Molecules",
+		"buy_price": 2,
+		"buy_amount" : 100,
+		"current_amount" : 100,
+	},
+	"AlcoMol": {
+		"display_name": "AlcoMol",
+		"buy_price": 4,
+		"buy_amount" : 100,
+		"current_amount" : 100,
+	},
+	"MolOr": {
+		"display_name": "MolOr",
+		"buy_price": 1,
+		"buy_amount" : 100,
+		"current_amount" : 100,
+	},
+	"Matter": {
+		"display_name": "Matter",
+		"buy_price": 1,
+		"buy_amount" : 1000,
+		"current_amount" : 100,
+	}
+}
+
+@onready var INGREDIENTS = {
+	"Glass": {
+		"display_name": "Glass",
+		"print_mats" : {
+			"Sweet_Molecules" : 0,
+			"AlcoMol" : 0,
+			"MolOr" : 0,
+			"Matter": 2,
+		},
+		"material": "",
+		"res": load("res://Scenes/glass.tscn"),
+	},
 	"Rum": {
 		"display_name": "Rum",
-		"buy_price": 10,
-		"material": preload("res://Assets/mats/rum_whisky.tres"),
+		"print_mats" : {
+			"Sweet_Molecules" : 10,
+			"AlcoMol" : 25,
+			"MolOr" : 15,
+			"Matter": 5,
+		},
+		"material": load("res://Assets/mats/rum_whisky.tres"),
+		"res": load("res://Scenes/bottle_rum.tscn"),
 	},
 	"Whisky": {
 		"display_name": "Whisky",
-		"buy_price": 12,
-		"material": preload("res://Assets/mats/rum_whisky.tres"),
+		"print_mats" : {
+			"Sweet_Molecules" : 5,
+			"AlcoMol" : 25,
+			"MolOr" : 15,
+			"Matter": 5,
+		},
+		"material": load("res://Assets/mats/rum_whisky.tres"),
+		"res": load("res://Scenes/bottle_whisky.tscn"),
 	},
 	"Wodka": {
 		"display_name": "Wodka",
-		"buy_price": 8,
-		"material": preload("res://Assets/mats/wodka_water.tres"),
+		"print_mats" : {
+			"Sweet_Molecules" : 2,
+			"AlcoMol" : 25,
+			"MolOr" : 0,
+			"Matter": 5,
+		},
+		"material": load("res://Assets/mats/wodka_water.tres"),
+		"res": load("res://Scenes/bottle_wodka.tscn"),
 	},
 	"Beer": {
 		"display_name": "Beer",
-		"buy_price": 3,
-		"material": preload("res://Assets/mats/wodka_water.tres"),
+		"print_mats" : {
+			"Sweet_Molecules" : 5,
+			"AlcoMol" : 5,
+			"MolOr" : 2,
+			"Matter": 3,
+		},
+		"material": load("res://Assets/mats/wodka_water.tres"),
+		"res": load("res://Scenes/beer_bottle.tscn"),
 	},
 	# ... beliebig erweiterbar!
 }
@@ -76,25 +187,59 @@ var og_scene = preload("res://Scenes/outline_generator.tscn")
 }
 
 const CUSTOMER_MALE_NAMES = [
-	"Kalle", "Robin", "Kevin", "Murat", "Günther", "Sven", "Jens", "Tobias", "Enrico", "Dieter"
+	"Kalle", "Robin", "Kevin", "Murat", "Günther", "Sven", "Jens", "Tobias", "Enrico", "Dieter", "Johannes",
 	# usw.
 ]
 
 const CUSTOMER_FEMALE_NAMES = [
-	"Ute", "Fatima", "Chantal", "Saskia", "Brigitte",  "Vera",  "Franzi", "Yvonne", "Uschi"
+	"Ute", "Jaqueline", "Chantal", "Saskia", "Brigitte",  "Vera",  "Franzi", "Yvonne", "Uschi",
 	# usw.
 ]
 
 
 func _ready() -> void:
 	check_if_release()
-	Signalmanager.set_spawn_marker.connect(setSpawn)
+	Signalmanager.set_spawn_marker.connect(setSpawn)	
+	Signalmanager.set_waiting_marker_01.connect(setWaiting01)
+	Signalmanager.set_waiting_marker_02.connect(setWaiting02)
 	Signalmanager.set_theke_marker.connect(setTheke)
 	Signalmanager.set_look_at_marker.connect(setLookAt)
 	Signalmanager.set_customer_exit.connect(setCustomerExit)
+	Signalmanager.set_first_exit_marker.connect(setFirstExit)
+	Signalmanager.add_customer.connect(add_customer)
+	Signalmanager.remove_customer.connect(remove_customer)
 	
 	
-func check_if_release():	
+func _process(delta: float) -> void:
+	pass
+	
+
+func update_customers() -> void:
+	wait_markers = [wait_marker_01, wait_marker_02]
+	for i in customers.size():
+		var cust   : CharacterBody3D      = customers[i]
+
+		var target : Vector3
+		if i == 0:
+			target = thekemarker.global_position
+		elif i - 1 < wait_markers.size():
+			target = wait_markers[i - 1].global_position
+		else:
+			var steps = i - wait_markers.size() + 1
+			target = wait_markers.back().global_position - Vector3(0, 0, 2.0 * steps)
+
+		cust.set_queue_target(target)    # <-- einzige Stelle
+		
+	
+func add_customer(cust: CharacterBody3D):
+	customers.append(cust)
+	update_customers()
+	
+func remove_customer(cust: CharacterBody3D):
+	customers.erase(cust)
+	update_customers()
+	
+func check_if_release():
 	if Engine.is_editor_hint():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
@@ -110,7 +255,7 @@ func check_if_release():
 func highlight_object(obj: Node3D, state: bool):
 	var outline = obj.get_node_or_null("OutlineGenerator")
 	if outline and outline.has_method("set_highlight"):
-		outline.set_highlight(state)
+		outline.set_highlight(state)		
 
 
 func setSpawn(spawn: Marker3D):
@@ -121,7 +266,21 @@ func setSpawn(spawn: Marker3D):
 func setTheke(theke_obj: Marker3D):
 	print ("Theke_Marker: ", theke_obj.global_position)
 	thekemarker = theke_obj
+	ordermarkers.push_back(thekemarker)
 	theke = thekemarker.get_parent()
+	
+	
+func setWaiting01(wait_obj: Marker3D):
+	print ("Waiting Marker 01: ", wait_obj.global_position)
+	wait_marker_01 = wait_obj
+	ordermarkers.push_back(wait_marker_01)
+	
+	
+func setWaiting02(wait_obj: Marker3D):
+	print ("Waiting Marker 02: ", wait_obj.global_position)
+	wait_marker_02 = wait_obj
+	print (ordermarkers)
+	ordermarkers.push_back(wait_marker_02)
 	
 	
 func setLookAt(lookAt_obj: Marker3D):
@@ -132,6 +291,11 @@ func setLookAt(lookAt_obj: Marker3D):
 func setCustomerExit(exit: Marker3D):
 	print ("Customer Exit: ", exit.global_position)
 	customer_exit = exit
+	
+	
+func setFirstExit(first_exit_marker: Marker3D):
+	print ("Customer  First Exit: ", first_exit_marker.global_position)
+	first_exit = first_exit_marker
 	
 	
 func get_player():
@@ -202,3 +366,45 @@ func place_on_shelf(obj: Node3D, reference_point: Vector3, shelf: Node3D) -> boo
 	obj.rotation = Vector3.ZERO
 	closest.set_meta("belegt", true)
 	return true
+	
+	
+func get_mesh_sizes(mesh_instance):
+	var mesh = mesh_instance.mesh
+	if mesh:
+		var aabb = mesh.get_aabb()
+		var world_scale = mesh_instance.global_transform.basis.get_scale()
+		var size_x = aabb.size.x * world_scale.x
+		var size_y = aabb.size.y * world_scale.y
+		var size_z = aabb.size.z * world_scale.z
+		#print("Weltweite Größe:", size_x, size_y, size_z)
+		return Vector3(size_x, size_y, size_z)
+	return Vector3.ZERO
+	
+	
+func get_all_free_glass_markers() -> Array:
+	var all_free = []
+	var tables = get_tree().get_nodes_in_group("Table")
+	for table in tables:
+		# Prüfen, ob die Methode existiert (falls es mal andere Nodes gibt)
+		if table.has_method("get_free_glass_markers"):
+			all_free += table.get_free_glass_markers()
+	return all_free
+	
+	
+func get_all_free_standing_markers() -> Array:
+	var all_free = []
+	var tables = get_tree().get_nodes_in_group("Table")
+	for table in tables:
+		# Prüfen, ob die Methode existiert (falls es mal andere Nodes gibt)
+		if table.has_method("get_free_standing_markers"):
+			all_free += table.get_free_glass_markers()
+	return all_free
+	
+	
+func get_free_marker_pair():
+	var tables = get_tree().get_nodes_in_group("Table")
+	for table in tables:
+		var pair = table.get_free_marker_pair()
+		if pair:
+			return pair
+	return {}

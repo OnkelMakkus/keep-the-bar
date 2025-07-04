@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bh4mpxc8jh5o1" path="res://Assets/models/cerveza.glb" id="1_6xjuf"]
 [ext_resource type="Script" uid="uid://bk558l0vyemf2" path="res://Scripts/beer_bottle.gd" id="2_uhi74"]
-[ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Scripts/billboard_label.gd" id="3_khjmx"]
+[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Scripts/col_ref.gd" id="3_uhi74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n3nm"]
 albedo_color = Color(0.947339, 0.421682, 5.77569e-07, 1)
@@ -13,27 +13,21 @@ data = PackedVector3Array(-0.2673, 0.2916, -0.5877, -0.0238, 0.2916, -0.6362, -0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6bu0"]
 albedo_color = Color(1, 0.0941176, 0.180392, 1)
 
-[node name="Beer_bottle" groups=["BeerBottle", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_6xjuf")]
+[node name="Beer_bottle" node_paths=PackedStringArray("staticBodies") groups=["BeerBottle", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_6xjuf")]
 transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0, 0)
 script = ExtResource("2_uhi74")
+staticBodies = [NodePath("Círculo_004/StaticBody3D")]
 
 [node name="Círculo_004" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7n3nm")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Círculo_004" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Círculo_004" index="0" node_paths=PackedStringArray("besitzer")]
+collision_layer = 8
+script = ExtResource("3_uhi74")
+besitzer = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Círculo_004/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_6xjuf")
 
 [node name="Círculo_009" parent="." index="3"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d6bu0")
-
-[node name="Label3D" type="Label3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0406943)
-pixel_size = 0.001
-text = "bla"
-script = ExtResource("3_khjmx")
-offset_y = 0.125
-offset_dist = 0.004
-use_parent_rotation_compensation = false
-use_position_at_parent = false

@@ -6,4 +6,4 @@
 render_priority = 0
 shader = ExtResource("1_ym3po")
 shader_parameter/color = Color(0.988235, 1, 0.321569, 0.396078)
-shader_parameter/thickness = 0.05
+shader_parameter/thickness = 0.0

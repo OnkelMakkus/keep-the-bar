@@ -1,0 +1,235 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnpc5glm4ximw"]
+
+[ext_resource type="Script" uid="uid://7fdki3ttm4" path="res://Scripts/order_menu.gd" id="1_7c2vd"]
+
+[node name="Order_menu" type="Control" node_paths=PackedStringArray("order_menu", "color_rect", "aspect_ratio_container", "res_01_label", "res_02_label", "res_03_label", "res_04_label", "amount_01_label", "amount_02_label", "amount_03_label", "amount_04_label", "price_01_label", "price_02_label", "price_03_label", "price_04_label", "order_01_label", "order_02_label", "order_03_label", "order_04_label", "current_money_label", "estimated_money_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7c2vd")
+order_menu = NodePath(".")
+color_rect = NodePath("ColorRect")
+aspect_ratio_container = NodePath("AspectRatioContainer")
+res_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res01Label")
+res_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res02Label")
+res_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res03Label")
+res_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res04Label")
+amount_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount01Label")
+amount_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount02Label")
+amount_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount03Label")
+amount_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount04Label")
+price_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price01Label")
+price_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price02Label")
+price_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price03Label")
+price_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price04Label")
+order_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order01Label")
+order_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order02Label")
+order_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order03Label")
+order_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order04Label")
+current_money_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer/CurrentMoneyLabel")
+estimated_money_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer/EstimatedMoneyLabel")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ResNameContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="NameHeader" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer"]
+layout_mode = 2
+text = "Resource"
+
+[node name="Res01Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer"]
+layout_mode = 2
+text = "AlcoMol"
+
+[node name="Res02Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer"]
+layout_mode = 2
+text = "Sweet Molecules"
+
+[node name="Res03Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="Res04Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="ResAmountContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="AmountHeader" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer"]
+layout_mode = 2
+text = "Amount left"
+
+[node name="Amount01Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer"]
+layout_mode = 2
+text = "AlcoMol"
+
+[node name="Amount02Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer"]
+layout_mode = 2
+text = "Sweet Molecules"
+
+[node name="Amount03Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="Amount04Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="PriceContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="PriceHeader" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+text = "Price"
+
+[node name="Price01Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+text = "AlcoMol"
+
+[node name="Price02Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+text = "Sweet Molecules"
+
+[node name="Price03Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="Price04Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="DecreaseContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EmptyHeader" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
+layout_mode = 2
+text = "       "
+
+[node name="Decrease01Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
+layout_mode = 2
+text = "-"
+
+[node name="Decrease02Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
+layout_mode = 2
+text = "-"
+
+[node name="Decrease03Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
+layout_mode = 2
+text = "-"
+
+[node name="Decrease04Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
+layout_mode = 2
+text = "-"
+
+[node name="IncreaseContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EmptyHeader" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
+layout_mode = 2
+text = "       "
+
+[node name="Increase01Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="Increase02Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="Increase03Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="Increase04Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="OrderShowContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="OrderHeader" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer"]
+layout_mode = 2
+text = "Order"
+
+[node name="Order01Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer"]
+layout_mode = 2
+text = "AlcoMol"
+
+[node name="Order02Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer"]
+layout_mode = 2
+text = "Sweet Molecules"
+
+[node name="Order03Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="Order04Label" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer"]
+layout_mode = 2
+text = "MolOr"
+
+[node name="OverviewContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CurrentMoneyLabel" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer"]
+layout_mode = 2
+text = "current money"
+
+[node name="EstimatedMoneyLabel" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer"]
+layout_mode = 2
+text = "estimated money"
+
+[node name="btnContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CancelBtn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="SetOrderBtn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer"]
+layout_mode = 2
+text = "Set Order"
+
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease01Btn" to="." method="_on_decrease_01_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease02Btn" to="." method="_on_decrease_02_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease03Btn" to="." method="_on_decrease_03_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease04Btn" to="." method="_on_decrease_04_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase01Btn" to="." method="_on_increase_01_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase02Btn" to="." method="_on_increase_02_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase03Btn" to="." method="_on_increase_03_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase04Btn" to="." method="_on_increase_04_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer/SetOrderBtn" to="." method="_on_set_order_btn_pressed"]

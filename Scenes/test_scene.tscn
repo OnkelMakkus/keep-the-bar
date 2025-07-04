@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://c25fq5tmyxpwq"]
+[gd_scene load_steps=4 format=3 uid="uid://c25fq5tmyxpwq"]
 
-[ext_resource type="PackedScene" uid="uid://dmrqa56srjl1x" path="res://Assets/models/theke2.glb" id="1_3dogw"]
+[ext_resource type="PackedScene" uid="uid://co36ef5ir3ihh" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Meeting_Table.glb" id="1_50ct6"]
+[ext_resource type="PackedScene" uid="uid://b23g0m6l43crm" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Octo_Table.glb" id="2_hb2xm"]
+[ext_resource type="PackedScene" uid="uid://dn4po4oggjntx" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Cafeteria_Table_Inset_Red.glb" id="3_ak5v8"]
 
 [node name="test_scene" type="Node3D"]
 
-[node name="theke2" parent="." instance=ExtResource("1_3dogw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22914, 0, -0.0248667)
+[node name="SciFi Assets" parent="." instance=ExtResource("1_50ct6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.076057, 0, 1.72115)
+
+[node name="SciFi Assets2" parent="." instance=ExtResource("1_50ct6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65314, 0, -2.48852)
+
+[node name="SciFi Assets3" parent="." instance=ExtResource("1_50ct6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26748, 0, 5.59308)
+
+[node name="SciFi Assets4" parent="." instance=ExtResource("2_hb2xm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00332, 0, -4.04654)
+
+[node name="SciFi Assets5" parent="." instance=ExtResource("3_ak5v8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.10579, 0, 0.141966)

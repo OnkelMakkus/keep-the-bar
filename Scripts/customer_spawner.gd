@@ -23,22 +23,12 @@ func _ready():
 		
 
 func _init_markers():
-	Signalmanager.customer_leaves_front.connect(_on_customer_leaves_front)
 	spawn_marker = Gamemanager.spawnmarker
 	theke_marker = Gamemanager.thekemarker
 	forward = (spawn_marker.global_position - theke_marker.global_position).normalized()
 	timer.start()
-
-func _on_timer_timeout():
-	if not Gamemanager.is_open:
-		return
-		
-	var customers = get_tree().get_nodes_in_group("Customer")
-	if customers.size() < max_customers:
-		spawn_customer()
-	update_customer_positions()
 	
-
+	
 func spawn_customer():
 	if not Gamemanager.is_open:
 		return
@@ -57,35 +47,15 @@ func spawn_customer():
 	print("👥 Neuer Kunde in Warteschlange: ", cust_name, "Bestellt:", drink)
 
 	var cust = customer_scene.instantiate()
-	cust.customer_name = cust_name
-	cust.order_text = drink
-	cust.sex = sex
-	get_parent().add_child(cust)
-	cust.call_deferred("initialize", spawn_marker.global_position, get_customer_target_position())
-	cust.set_meta("on_customer_despawned", Callable(self, "_on_customer_despawned"))
-
-
-func update_customer_positions():
-	var customers = get_tree().get_nodes_in_group("Customer")
-	customers.sort_custom(func(a, b): 
-		return a.global_position.distance_to(theke_marker.global_position) < b.global_position.distance_to(theke_marker.global_position)
-	)
-	var slot_dist = 2.0
-	for i in range(customers.size()):
-		var target = theke_marker.global_position + forward * (slot_dist * i)
-		target.y = 0
-		customers[i].call_deferred("update_target", target)
-		customers[i].call_deferred("show_label_if_front")
-
-
-func get_customer_target_position() -> Vector3:
-	# Für neue Kunden: Ziel = ganz hinten anstellen
-	var customers = get_tree().get_nodes_in_group("Customer")
-	var slot_dist = 2.0
-	var pos = theke_marker.global_position + forward * (slot_dist * customers.size())
-	pos.y = 0
-	return pos
-		
+	get_parent().call_deferred("add_child", cust)
+	cust.call_deferred("initialize",sex, cust_name, drink, spawn_marker.global_position)
 	
-func _on_customer_leaves_front():
-	update_customer_positions()
+
+func _on_timer_timeout():
+	if not Gamemanager.is_open:
+		return
+		
+	var customers = get_tree().get_nodes_in_group("Customer")
+	if customers.size() < max_customers:
+		spawn_customer()
+	

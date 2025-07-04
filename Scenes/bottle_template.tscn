@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlbu5hbmen2tt"]
+[gd_scene load_steps=9 format=3 uid="uid://dlbu5hbmen2tt"]
 
 [ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_gwywe"]
 [ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Scripts/bottle.gd" id="2_xnrmv"]
 [ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Scripts/billboard_label.gd" id="3_v3wag"]
 [ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="4_6our1"]
+[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Scripts/col_ref.gd" id="4_xnrmv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w05o1"]
 transparency = 1
@@ -20,11 +21,13 @@ top_radius = 0.045
 bottom_radius = 0.045
 height = 0.265
 
-[node name="bottle1" groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
+[node name="bottle1" node_paths=PackedStringArray("staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
 script = ExtResource("2_xnrmv")
+staticBodies = [NodePath("Cylinder/StaticBody3D")]
 
 [node name="Label3D" type="Label3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.426, 0.0724356)
+visible = false
 pixel_size = 0.002
 text = "STuff"
 script = ExtResource("3_v3wag")
@@ -36,7 +39,10 @@ use_position_at_parent = false
 [node name="Cylinder" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_w05o1")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0" node_paths=PackedStringArray("besitzer")]
+collision_layer = 8
+script = ExtResource("4_xnrmv")
+besitzer = NodePath("../..")
 
 [node name="Col_Bottle" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_80a0o")

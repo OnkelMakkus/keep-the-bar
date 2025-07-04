@@ -1,42 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://umgb2f5d4swt"]
+[gd_scene load_steps=8 format=3 uid="uid://bs2iqwoux1bo"]
 
-[ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_7ffbl"]
-[ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Scripts/bottle.gd" id="2_p6eba"]
-[ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Scripts/billboard_label.gd" id="3_j86vy"]
-[ext_resource type="Material" uid="uid://c7f8mfo3xocv5" path="res://Assets/mats/wodka_water.tres" id="4_hhhj2"]
+[ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_gwywe"]
+[ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Scripts/bottle.gd" id="2_xnrmv"]
+[ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Scripts/billboard_label.gd" id="3_p6eba"]
+[ext_resource type="Material" uid="uid://c7f8mfo3xocv5" path="res://Assets/mats/wodka_water.tres" id="4_j86vy"]
+[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Scripts/col_ref.gd" id="4_xnrmv"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_80a0o"]
 points = PackedVector3Array(-0.05, 0, -9.79006e-06, -0.0490407, 0, -0.0097592, -0.0490407, 0, 0.00974941, -0.05, 0.263997, -9.79006e-06, -0.046202, 0, -0.0191367, -0.0490407, 0.263997, -0.0097592, -0.046202, 0, 0.0191269, -0.0490407, 0.263997, 0.00974941, -0.0254601, 0.397669, -9.79006e-06, -0.0415818, 0, -0.02778, -0.046202, 0.263997, -0.0191367, -0.0249706, 0.397669, -0.00497259, -0.0415818, 0, 0.0277702, -0.046202, 0.263997, 0.0191269, -0.0249706, 0.397669, 0.0049628, -0.0353563, 0, -0.0353563, -0.0415818, 0.263997, -0.02778, -0.0235219, 0.397669, -0.00974941, -0.0353563, 0, 0.0353465, -0.0415818, 0.263997, 0.0277702, -0.0235219, 0.397669, 0.00972983, -0.02778, 0, -0.0415818, -0.0353563, 0.263997, -0.0353563, -0.0211629, 0.397669, -0.0141445, -0.0180012, 0.397669, -0.0180012, -0.02778, 0, 0.041572, -0.0353563, 0.263997, 0.0353465, -0.0180012, 0.397669, 0.0179914, -0.0211629, 0.397669, 0.0141347, -0.0191367, 0, -0.046202, -0.02778, 0.263997, -0.0415818, -0.0141445, 0.397669, -0.0211629, -0.0191367, 0, 0.0461922, -0.02778, 0.263997, 0.041572, -0.0141445, 0.397669, 0.0211531, -0.0097592, 0, -0.0490407, -0.0191367, 0.263997, -0.046202, -0.00974941, 0.397669, -0.0235219, -0.0097592, 0, 0.0490309, -0.0191367, 0.263997, 0.0461922, -0.00974941, 0.397669, 0.0235121, -9.79006e-06, 0, -0.05, -0.0097592, 0.263997, -0.0490407, -0.00497259, 0.397669, -0.0249706, -9.79006e-06, 0, 0.05, -0.0097592, 0.263997, 0.0490309, -0.00497259, 0.397669, 0.0249608, 0.00974941, 0, -0.0490407, -9.79006e-06, 0.263997, -0.05, -9.79006e-06, 0.397669, -0.0254601, 0.00974941, 0, 0.0490309, -9.79006e-06, 0.263997, 0.05, -9.79006e-06, 0.397669, 0.0254405, 0.0191269, 0, -0.046202, 0.00974941, 0.263997, -0.0490407, 0.0049628, 0.397669, -0.0249706, 0.0191269, 0, 0.0461922, 0.00974941, 0.263997, 0.0490309, 0.0049628, 0.397669, 0.0249608, 0.0277702, 0, -0.0415818, 0.0191269, 0.263997, -0.046202, 0.00972983, 0.397669, -0.0235219, 0.0277702, 0, 0.041572, 0.0191269, 0.263997, 0.0461922, 0.00972983, 0.397669, 0.0235121, 0.0353465, 0, -0.0353563, 0.0277702, 0.263997, -0.0415818, 0.0141347, 0.397669, -0.0211629, 0.0353465, 0, 0.0353465, 0.0277702, 0.263997, 0.041572, 0.0141347, 0.397669, 0.0211531, 0.041572, 0, -0.02778, 0.0353465, 0.263997, -0.0353563, 0.0179914, 0.397669, -0.0180012, 0.041572, 0, 0.0277702, 0.0353465, 0.263997, 0.0353465, 0.0179914, 0.397669, 0.0179914, 0.0461922, 0, -0.0191367, 0.041572, 0.263997, -0.02778, 0.0211531, 0.397669, -0.0141445, 0.0461922, 0, 0.0191269, 0.041572, 0.263997, 0.0277702, 0.0211531, 0.397669, 0.0141347, 0.0490309, 0, -0.0097592, 0.0461922, 0.263997, -0.0191367, 0.0235121, 0.397669, -0.00974941, 0.0490309, 0, 0.00974941, 0.0461922, 0.263997, 0.0191269, 0.0235121, 0.397669, 0.00972983, 0.05, 0, -9.79006e-06, 0.0490309, 0.263997, -0.0097592, 0.0249608, 0.397669, -0.00497259, 0.0490309, 0.263997, 0.00974941, 0.0249608, 0.397669, 0.0049628, 0.05, 0.263997, -9.79006e-06, 0.0254405, 0.397669, -9.79006e-06)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_fiijl"]
-material = ExtResource("4_hhhj2")
+[sub_resource type="CylinderMesh" id="CylinderMesh_w05o1"]
+material = ExtResource("4_j86vy")
 top_radius = 0.045
 bottom_radius = 0.045
 height = 0.265
 
-[node name="bottle_wodka" groups=["Bottle", "Pickupable"] instance=ExtResource("1_7ffbl")]
-script = ExtResource("2_p6eba")
+[node name="bottle_wodka" node_paths=PackedStringArray("staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
+script = ExtResource("2_xnrmv")
+staticBodies = [NodePath("Cylinder/StaticBody3D")]
 ingredient_name = "Wodka"
 
 [node name="Label3D" type="Label3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.426, 0.0724356)
 pixel_size = 0.002
 text = "STuff"
-script = ExtResource("3_j86vy")
+script = ExtResource("3_p6eba")
 offset_y = 0.35
 offset_dist = 0.06
 use_parent_rotation_compensation = false
 use_position_at_parent = false
 
 [node name="Cylinder" parent="." index="1"]
-surface_material_override/0 = ExtResource("4_hhhj2")
+surface_material_override/0 = ExtResource("4_j86vy")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0" node_paths=PackedStringArray("besitzer")]
+collision_layer = 8
+script = ExtResource("4_xnrmv")
+besitzer = NodePath("../..")
 
 [node name="Col_Bottle" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_80a0o")
 
 [node name="fill_indicator" type="MeshInstance3D" parent="Cylinder" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137548, 0)
-mesh = SubResource("CylinderMesh_fiijl")
-skeleton = NodePath("../..")
+mesh = SubResource("CylinderMesh_w05o1")

@@ -2,7 +2,7 @@
 extends Node3D
 
 @export var outline_material: Material = preload("res://Assets/mats/outline.tres")
-@export var outline_thickness: float = 0.01
+@export var outline_thickness: float = 0.00
 
 var outline_meshes := []
 

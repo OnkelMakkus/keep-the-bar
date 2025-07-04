@@ -4,3 +4,4 @@
 
 [node name="OutlineGenerator" type="Node3D"]
 script = ExtResource("1_tan3e")
+outline_thickness = 0.01

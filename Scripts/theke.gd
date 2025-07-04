@@ -4,12 +4,19 @@ extends Node3D
 @onready var theke_marker: Marker3D = $ThekeMarker
 @onready var bottle_grid: Node3D = $BottleGrid
 @onready var glass_grid: Node3D = $GlassGrid
+@onready var waiting_slot_01: Marker3D = $WaitingSlot01
+@onready var waiting_slot_02: Marker3D = $WaitingSlot02
+
+var label_name = "Theke"
 
 
 func _ready() -> void:
 	theke_marker.global_position.y = 0.0
+	Signalmanager.set_waiting_marker_01.emit(waiting_slot_01)
+	await get_tree().process_frame
+	Signalmanager.set_waiting_marker_02.emit(waiting_slot_02)
+	await get_tree().process_frame
 	Signalmanager.set_theke_marker.emit(theke_marker)
-
 
 func free_slot_for_object(obj: Node3D):
 	var grids = [

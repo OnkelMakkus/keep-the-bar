@@ -1,24 +1,29 @@
-[gd_scene load_steps=21 format=3 uid="uid://ck2d1sxot25wn"]
+[gd_scene load_steps=22 format=3 uid="uid://ck2d1sxot25wn"]
 
 [ext_resource type="PackedScene" uid="uid://be733pexwdi76" path="res://Scenes/CustomerSpawner.tscn" id="1_g3g87"]
 [ext_resource type="PackedScene" uid="uid://fd8f2qfa1plr" path="res://Scenes/player.tscn" id="1_jcjmw"]
 [ext_resource type="Script" uid="uid://cisn2bvtej7ec" path="res://Scripts/game_level.gd" id="1_mxr21"]
 [ext_resource type="PackedScene" uid="uid://0qln2fo1hp0v" path="res://Scenes/tavern.tscn" id="2_jtjkd"]
 [ext_resource type="PackedScene" uid="uid://clkc6lptr5uxy" path="res://Scenes/glass.tscn" id="4_6mi8o"]
-[ext_resource type="PackedScene" uid="uid://oopr4nci54s6" path="res://Scenes/bottle_rum.tscn" id="5_mql7d"]
+[ext_resource type="Texture2D" uid="uid://yqccw45shchj" path="res://Assets/sprites/plain_starfield_1.png" id="7_rn1up"]
 [ext_resource type="Script" uid="uid://d4lsetfsf0lra" path="res://Scripts/gamemanager.gd" id="9_e38tf"]
-[ext_resource type="PackedScene" uid="uid://c0puj2eh3wgin" path="res://Scenes/bottle_whisky.tscn" id="10_fwnm2"]
 [ext_resource type="Script" uid="uid://ctg4gin5sl4l7" path="res://Scripts/signalmanager.gd" id="10_mxr21"]
-[ext_resource type="PackedScene" uid="uid://umgb2f5d4swt" path="res://Scenes/bottle_wodka.tscn" id="11_11ucq"]
+[ext_resource type="PackedScene" uid="uid://bcyxe8c44j5h3" path="res://Scenes/sign_template.tscn" id="11_mxr21"]
+[ext_resource type="Script" uid="uid://vpje32snh5dg" path="res://Scripts/order_schild.gd" id="12_11ucq"]
 [ext_resource type="Script" uid="uid://22xwnysrx1g6" path="res://Scripts/ui.gd" id="12_fwnm2"]
-[ext_resource type="PackedScene" uid="uid://bft5pa8i1wixc" path="res://Scenes/bottle_box_rum.tscn" id="13_1m3u1"]
-[ext_resource type="PackedScene" uid="uid://dc2bg8axupp4p" path="res://Scenes/bottle_box_whiskey.tscn" id="14_oq34n"]
-[ext_resource type="PackedScene" uid="uid://8wt6yirka7m2" path="res://Scenes/bottle_box_wodka.tscn" id="15_nbrg5"]
-[ext_resource type="PackedScene" uid="uid://d1f6hqid14ae6" path="res://Scenes/bottle_box_glas.tscn" id="16_oq34n"]
-[ext_resource type="PackedScene" uid="uid://ddq5uc76gpwdy" path="res://Scenes/bottle_box_beer.tscn" id="17_nbrg5"]
+[ext_resource type="Script" uid="uid://7vfvnb2kbueg" path="res://Scripts/open_schild.gd" id="13_1m3u1"]
+[ext_resource type="PackedScene" uid="uid://cg37adxsmpn8u" path="res://Scenes/recycler.tscn" id="13_11ucq"]
+[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Scripts/col_ref.gd" id="13_rn1up"]
 
-[sub_resource type="Environment" id="Environment_6mi8o"]
-ambient_light_color = Color(0.78626, 0.781996, 0, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1m3u1"]
+panorama = ExtResource("7_rn1up")
+
+[sub_resource type="Sky" id="Sky_oq34n"]
+sky_material = SubResource("PanoramaSkyMaterial_1m3u1")
+
+[sub_resource type="Environment" id="Environment_nbrg5"]
+background_mode = 2
+sky = SubResource("Sky_oq34n")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oq34n"]
 albedo_color = Color(1, 0.133333, 1, 1)
@@ -29,8 +34,20 @@ material = SubResource("StandardMaterial3D_oq34n")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_acj1n"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[node name="Game_level" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwnm2"]
+albedo_color = Color(0.701961, 1, 1, 1)
+
+[node name="Game_level" type="Node3D" node_paths=PackedStringArray("quit_btn", "resume_btn", "is_open_timer", "open_label", "crosshair", "info_label", "option_btn", "info_text_label", "serving_container")]
 script = ExtResource("1_mxr21")
+quit_btn = NodePath("UI/Menü_main/VBoxContainer/QuitBtn")
+resume_btn = NodePath("UI/Menü_main/VBoxContainer/ResumeBtn")
+is_open_timer = NodePath("IsOpenTimer")
+open_label = NodePath("Open_Schild/Label3D")
+crosshair = NodePath("UI/Crosshair_Container/Crosshair")
+info_label = NodePath("UI/Info_Label_Container/VBoxContainer/Info_Label")
+option_btn = NodePath("UI/Menü_main/VBoxContainer/OptionBtn")
+info_text_label = NodePath("UI/Info_Label_Container/VBoxContainer/Info_Text_Label")
+serving_container = NodePath("serving_container")
 
 [node name="Player" parent="." instance=ExtResource("1_jcjmw")]
 transform = Transform3D(-0.105813, 0, 0.994386, 0, 1, 0, -0.994386, 0, -0.105813, 4.70909, 1.42906, -2.35832)
@@ -73,22 +90,29 @@ script = ExtResource("10_mxr21")
 [node name="Tavern" parent="." instance=ExtResource("2_jtjkd")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6mi8o")
+environment = SubResource("Environment_nbrg5")
 
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 1.6693, 0)
 light_energy = 2.5
 light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_max_distance = 300.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2562, 1.7586, 0.903311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90063, 1.7586, 0.903311)
+shadow_enabled = true
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35861, 3.28703, -5.60623)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73639, 3.28703, -5.60623)
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.0883032, 0, -0.996094, 0, 1, 0, 0.996094, 0, -0.0883032, 3.41199, 2.0525, -7.67639)
+light_energy = 1.25
+spot_attenuation = -0.41
 
 [node name="Glasses" type="Node3D" parent="."]
 
@@ -155,6 +179,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15894, 1.02643, -2.69917)
 [node name="glass5" parent="Glasses" instance=ExtResource("4_6mi8o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15144, 1.02643, -2.83201)
 
+[node name="glass43" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -2.70563)
+
+[node name="glass44" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -3.08441)
+
+[node name="glass45" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -2.83806)
+
+[node name="glass46" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -2.96289)
+
+[node name="glass47" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -3.21392)
+
+[node name="glass48" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -3.34635)
+
+[node name="glass49" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03464, 1.52714, -3.47118)
+
+[node name="glass50" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89267, 1.52714, -3.21392)
+
+[node name="glass51" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89267, 1.52714, -3.34635)
+
+[node name="glass52" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89267, 1.52714, -3.47118)
+
+[node name="glass53" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15203, 1.52714, -2.9562)
+
+[node name="glass54" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15203, 1.52714, -3.08103)
+
+[node name="glass55" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14591, 1.52714, -3.21392)
+
+[node name="glass56" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14591, 1.52714, -3.34635)
+
+[node name="glass57" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14591, 1.52714, -3.47118)
+
+[node name="glass58" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.52714, -2.70748)
+
+[node name="glass59" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.52714, -3.08626)
+
+[node name="glass60" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.52714, -2.83991)
+
+[node name="glass61" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89774, 1.52714, -2.96474)
+
+[node name="glass62" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15894, 1.52714, -2.69917)
+
+[node name="glass63" parent="Glasses" instance=ExtResource("4_6mi8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15144, 1.52714, -2.83201)
+
 [node name="glass22" parent="Glasses" instance=ExtResource("4_6mi8o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02205, 0.586083, -2.70563)
 
@@ -220,20 +307,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13885, 0.586083, -2.83201)
 
 [node name="Bottles" type="Node3D" parent="."]
 
-[node name="bottle_whisky" parent="Bottles" instance=ExtResource("10_fwnm2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.96765, 1.02856, -1.88037)
-
-[node name="bottle_wodka" parent="Bottles" instance=ExtResource("11_11ucq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.91064, 1.02856, -1.40879)
-
-[node name="bottle1" parent="Bottles" instance=ExtResource("5_mql7d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15255, 2.0268, -3.41241)
-
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("menü_main", "quit_btn", "resume_btn", "option_btn", "kohle_lbl", "time_lbl", "alco_mol_lbl", "mol_or_lbl", "matter_lbl", "sweet_molecules_lbl", "delivery_lbl", "info_text_label", "crosshair", "info_label", "info_text_timer")]
 process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("12_fwnm2")
+"menü_main" = NodePath("Menü_main")
+quit_btn = NodePath("Menü_main/VBoxContainer/ResumeBtn")
+resume_btn = NodePath("Menü_main/VBoxContainer/QuitBtn")
+option_btn = NodePath("Menü_main/VBoxContainer/OptionBtn")
+kohle_lbl = NodePath("HUD_Info/VBoxContainer/Kohle_lbl")
+time_lbl = NodePath("HUD_Info/VBoxContainer/time_lbl")
+alco_mol_lbl = NodePath("HUD_Info/VBoxContainer/AlcoMol_lbl")
+mol_or_lbl = NodePath("HUD_Info/VBoxContainer/MolOr_lbl")
+matter_lbl = NodePath("HUD_Info/VBoxContainer/Matter_lbl")
+sweet_molecules_lbl = NodePath("HUD_Info/VBoxContainer/Sweet_Molecules_lbl")
+delivery_lbl = NodePath("HUD_Info/VBoxContainer/delivery_lbl")
+info_text_label = NodePath("Info_Label_Container/VBoxContainer/Info_Text_Label")
+crosshair = NodePath("Crosshair_Container/Crosshair")
+info_label = NodePath("Info_Label_Container/VBoxContainer/Info_Label")
+info_text_timer = NodePath("Info_Label_Container/VBoxContainer/Info_Text_Label/Info_Text_Timer")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI"]
+[node name="Menü_main" type="MarginContainer" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -246,19 +347,27 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menü_main"]
 layout_mode = 2
 
-[node name="ResumeBtn" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+[node name="ResumeBtn" type="Button" parent="UI/Menü_main/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Weiter"
+text = "Resume"
 
-[node name="QuitBtn" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+[node name="OptionBtn" type="Button" parent="UI/Menü_main/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="QuitBtn" type="Button" parent="UI/Menü_main/VBoxContainer"]
+unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
-text = "Tüss"
+text = "Bye Bye Bye"
 
-[node name="MarginContainer2" type="MarginContainer" parent="UI"]
+[node name="HUD_Info" type="MarginContainer" parent="UI"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -270,30 +379,86 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD_Info"]
 layout_mode = 2
 
-[node name="Kohle_lbl" type="Label" parent="UI/MarginContainer2/VBoxContainer"]
+[node name="Kohle_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Kohle: "
 
-[node name="time_lbl" type="Label" parent="UI/MarginContainer2/VBoxContainer"]
+[node name="time_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="bottle_box" parent="." instance=ExtResource("17_nbrg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.073, 0.05, -10.857)
+[node name="AlcoMol_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+layout_mode = 2
 
-[node name="bottle_box2" parent="." instance=ExtResource("16_oq34n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.988, 0.05, -12.899)
+[node name="MolOr_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+layout_mode = 2
 
-[node name="bottle_box3" parent="." instance=ExtResource("13_1m3u1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.099, 0.05, -14.586)
+[node name="Matter_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+layout_mode = 2
 
-[node name="bottle_box4" parent="." instance=ExtResource("14_oq34n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.063, 0.05, -16.288)
+[node name="Sweet_Molecules_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+layout_mode = 2
 
-[node name="bottle_box5" parent="." instance=ExtResource("15_nbrg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.115, 0.05, -17.88)
+[node name="delivery_lbl" type="Label" parent="UI/HUD_Info/VBoxContainer"]
+layout_mode = 2
+
+[node name="Crosshair_Container" type="AspectRatioContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -2.5
+offset_right = 2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="ColorRect" parent="UI/Crosshair_Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Info_Label_Container" type="AspectRatioContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Info_Label_Container"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Info_Label" type="Label" parent="UI/Info_Label_Container/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Template Text"
+horizontal_alignment = 1
+
+[node name="Info_Text_Label" type="Label" parent="UI/Info_Label_Container/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="Info_Text_Timer" type="Timer" parent="UI/Info_Label_Container/VBoxContainer/Info_Text_Label"]
+wait_time = 5.0
+one_shot = true
 
 [node name="serving_container" type="Node3D" parent="."]
 
@@ -301,11 +466,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.115, 0.05, -17.88)
 wait_time = 180.0
 ignore_time_scale = true
 
-[node name="Open_Schild" type="MeshInstance3D" parent="." groups=["Open_Schild"]]
+[node name="Open_Schild" type="MeshInstance3D" parent="." groups=["Interactable", "Open_Schild"]]
 transform = Transform3D(0.0896635, 0, 0, 0, 1, 0, 0, 0, 1, 7.45616, 1.45001, 0)
 mesh = SubResource("BoxMesh_nbrg5")
+script = ExtResource("13_1m3u1")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Open_Schild"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Open_Schild" node_paths=PackedStringArray("besitzer")]
+script = ExtResource("13_rn1up")
+besitzer = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Open_Schild/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_acj1n")
@@ -314,7 +482,27 @@ shape = SubResource("ConcavePolygonShape3D_acj1n")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.541252, 0, 0)
 text = "OPEN"
 
-[connection signal="button_down" from="UI/MarginContainer/VBoxContainer/ResumeBtn" to="UI" method="_on_resume_btn_button_down"]
-[connection signal="button_up" from="UI/MarginContainer/VBoxContainer/QuitBtn" to="UI" method="_on_quit_btn_button_up"]
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/QuitBtn" to="UI" method="_on_quit_btn_pressed"]
+[node name="Order_Schild" parent="." groups=["Interactable", "Order_Schild"] instance=ExtResource("11_mxr21")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.49115, 1.76079, -5.80775)
+script = ExtResource("12_11ucq")
+
+[node name="MeshInstance3D" parent="Order_Schild" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fwnm2")
+
+[node name="StaticBody3D" parent="Order_Schild/MeshInstance3D" index="0" node_paths=PackedStringArray("besitzer")]
+besitzer = NodePath("../..")
+
+[node name="Label3D" parent="Order_Schild" index="1"]
+text = "Orders"
+
+[node name="Recycler" parent="." instance=ExtResource("13_11ucq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.96728, 0.480035, -4.35801)
+
+[connection signal="button_down" from="UI/Menü_main/VBoxContainer/ResumeBtn" to="UI" method="_on_resume_btn_button_down"]
+[connection signal="pressed" from="UI/Menü_main/VBoxContainer/OptionBtn" to="." method="_on_option_btn_pressed"]
+[connection signal="button_up" from="UI/Menü_main/VBoxContainer/QuitBtn" to="UI" method="_on_quit_btn_button_up"]
+[connection signal="pressed" from="UI/Menü_main/VBoxContainer/QuitBtn" to="UI" method="_on_quit_btn_pressed"]
+[connection signal="timeout" from="UI/Info_Label_Container/VBoxContainer/Info_Text_Label/Info_Text_Timer" to="UI" method="_on_info_text_timer_timeout"]
 [connection signal="timeout" from="IsOpenTimer" to="." method="_on_is_open_timer_timeout"]
+
+[editable path="Order_Schild"]
