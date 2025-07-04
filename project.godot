@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Gamemanager="*res://Scripts/gamemanager.gd"
-Signalmanager="*res://Scripts/signalmanager.gd"
+Gamemanager="*res://Project/Managers/gamemanager.gd"
+Signalmanager="*res://Project/Managers/signalmanager.gd"
 
 [debug]
 

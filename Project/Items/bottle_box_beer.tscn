@@ -1,0 +1,150 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddq5uc76gpwdy"]
+
+[ext_resource type="PackedScene" uid="uid://b35kvtwxvd5lw" path="res://Assets/models/bottle_box.glb" id="1_od5jx"]
+[ext_resource type="Script" uid="uid://c0qurnj6i2trr" path="res://Project/Items/bottle_box.gd" id="2_l2a0v"]
+[ext_resource type="PackedScene" uid="uid://cnsoeipqhy0x6" path="res://Project/Items/beer_bottle.tscn" id="2_non3l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_non3l"]
+size = Vector3(0.050293, 0.326584, 0.907379)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l2a0v"]
+size = Vector3(0.525879, 0.345764, 0.0582275)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tkm8d"]
+size = Vector3(0.531311, 0.329468, 0.0462646)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1h777"]
+size = Vector3(0.0646973, 0.290802, 0.810303)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w57y0"]
+size = Vector3(0.528564, 0.0523071, 0.91333)
+
+[node name="bottle_box_beer" groups=["Pickupable", "bottle_box"] instance=ExtResource("1_od5jx")]
+script = ExtResource("2_l2a0v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.281494, 0.120399, 0.00102234)
+shape = SubResource("BoxShape3D_non3l")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0402832, 0.121918, 0.43634)
+shape = SubResource("BoxShape3D_l2a0v")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379944, 0.123352, -0.428894)
+shape = SubResource("BoxShape3D_tkm8d")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196899, 0.14769, 0.00134277)
+shape = SubResource("BoxShape3D_1h777")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0360107, -0.0220642, 0.00402832)
+shape = SubResource("BoxShape3D_w57y0")
+
+[node name="content" type="Node3D" parent="Cylinder" index="1"]
+
+[node name="Beer" parent="Cylinder/content" index="0" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.356363)
+
+[node name="Beer2" parent="Cylinder/content" index="1" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.265445)
+
+[node name="Beer3" parent="Cylinder/content" index="2" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.168188)
+
+[node name="Beer4" parent="Cylinder/content" index="3" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, -0.0688343)
+
+[node name="Beer5" parent="Cylinder/content" index="4" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.0261582)
+
+[node name="Beer6" parent="Cylinder/content" index="5" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.124544)
+
+[node name="Beer7" parent="Cylinder/content" index="6" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.22362)
+
+[node name="Beer8" parent="Cylinder/content" index="7" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.116151, 0, 0.324255)
+
+[node name="Beer9" parent="Cylinder/content" index="8" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.356363)
+
+[node name="Beer10" parent="Cylinder/content" index="9" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.265445)
+
+[node name="Beer11" parent="Cylinder/content" index="10" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.168188)
+
+[node name="Beer12" parent="Cylinder/content" index="11" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, -0.0688343)
+
+[node name="Beer13" parent="Cylinder/content" index="12" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.0261582)
+
+[node name="Beer14" parent="Cylinder/content" index="13" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.124544)
+
+[node name="Beer15" parent="Cylinder/content" index="14" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.22362)
+
+[node name="Beer16" parent="Cylinder/content" index="15" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0.0194984, 0, 0.324255)
+
+[node name="Beer17" parent="Cylinder/content" index="16" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.356363)
+
+[node name="Beer18" parent="Cylinder/content" index="17" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.265445)
+
+[node name="Beer19" parent="Cylinder/content" index="18" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.168188)
+
+[node name="Beer20" parent="Cylinder/content" index="19" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, -0.0688343)
+
+[node name="Beer21" parent="Cylinder/content" index="20" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.0261582)
+
+[node name="Beer22" parent="Cylinder/content" index="21" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.124544)
+
+[node name="Beer23" parent="Cylinder/content" index="22" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.22362)
+
+[node name="Beer24" parent="Cylinder/content" index="23" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.0788121, 0, 0.324255)
+
+[node name="Beer25" parent="Cylinder/content" index="24" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.356363)
+
+[node name="Beer26" parent="Cylinder/content" index="25" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.265445)
+
+[node name="Beer27" parent="Cylinder/content" index="26" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.168188)
+
+[node name="Beer28" parent="Cylinder/content" index="27" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, -0.0688343)
+
+[node name="Beer29" parent="Cylinder/content" index="28" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.0261582)
+
+[node name="Beer30" parent="Cylinder/content" index="29" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.124544)
+
+[node name="Beer31" parent="Cylinder/content" index="30" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.22362)
+
+[node name="Beer32" parent="Cylinder/content" index="31" instance=ExtResource("2_non3l")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -0.186898, 0, 0.324255)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0684482, 0.965592, 0)
+light_energy = 3.568
+shadow_enabled = true
+spot_range = 1.385
+spot_angle = 40.0

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0oxhx8y82rp0"]
+
+[ext_resource type="Script" uid="uid://jfj46dulqrd3" path="res://Project/Helper/OutlineGenerator.gd" id="1_tan3e"]
+
+[node name="OutlineGenerator" type="Node3D"]
+script = ExtResource("1_tan3e")
+outline_thickness = 0.01
