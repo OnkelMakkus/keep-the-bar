@@ -5,8 +5,8 @@ var label_name : String
 
 func _ready() -> void:
 	Signalmanager.update_ressource_label.connect(update_ressource_label)
-	label_name = "Sweet Molecules " + str(Gamemanager.REPLICATOR_RESSOURCES.get("Sweet_Molecules").get("current_amount")) +" von " + str(max_storage)
+	label_name = "Sweet Molecules " + str(Resourcemanager.REPLICATOR_RESSOURCES.get("Sweet_Molecules").get("current_amount")) +" von " + str(max_storage)
 
 
 func update_ressource_label():
-	label_name = "Sweet Molecules " + str(Gamemanager.REPLICATOR_RESSOURCES.get("Sweet_Molecules").get("current_amount")) +" von " + str(max_storage)
+	label_name = "Sweet Molecules " + str(Resourcemanager.REPLICATOR_RESSOURCES.get("Sweet_Molecules").get("current_amount")) +" von " + str(max_storage)

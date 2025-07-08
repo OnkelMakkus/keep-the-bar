@@ -10,8 +10,10 @@ extends CharacterBody3D
 @export var agent : NavigationAgent3D
 @export var y_animation_player: AnimationPlayer
 @export var x_animation_player: AnimationPlayer
+@export var test_animation_player: AnimationPlayer
 @export var y_bot: Node3D
 @export var x_bot: Node3D
+@export var test_model : Node3D
 @export var collider: CollisionShape3D
 
 @export var teleport: Node3D
@@ -51,7 +53,7 @@ var label_name := "<E>\nGive Order\nSend away"
 
 func _ready() -> void:
 	add_to_group("Customer")
-	
+	Signalmanager.close_store.connect(leaving_now)	
 
 
 func set_queue_target(pos: Vector3) -> void:
@@ -75,12 +77,22 @@ func initialize(sex_xy : int, cust_name : String, drink : String, start: Vector3
 		animation_player = y_animation_player
 		y_bot.visible = true
 		x_bot.visible = false
+		test_model.visible = false
 		teleport.start(y_bot, teleport.scale, self, false)
 	elif sex == 1:
 		animation_player = x_animation_player
 		y_bot.visible = false
 		x_bot.visible = true
+		test_model.visible = false
 		teleport.start(x_bot, teleport.scale, self, false)
+	
+	#Nur zu Testzwecken
+	elif sex == 2:
+		animation_player = test_animation_player
+		y_bot.visible = false
+		x_bot.visible = false
+		test_model.visible = true
+		teleport.start(test_model, teleport.scale, self, false)
 		
 	if label:
 		label.text = "%s: %s" % [customer_name, order_text]
@@ -88,9 +100,8 @@ func initialize(sex_xy : int, cust_name : String, drink : String, start: Vector3
 		
 	first_exit_marker = Gamemanager.first_exit
 	exit_marker = Gamemanager.customer_exit	
-	
 
-			
+
 func _physics_process(delta: float) -> void:
 	rotation.x = 0
 	global_position.y = 0.55		
@@ -176,7 +187,7 @@ func clicked_by_player():
 		return
 
 	# Getränk an Kunde
-	_serve_and_remove(result["drink_obj"], Gamemanager.RECIPES.get(order_text))
+	_serve_and_remove(result["drink_obj"], Resourcemanager.RECIPES.get(order_text))
 	update_customer_label(true) # 😊
 
 	# Marker reservieren
@@ -252,6 +263,8 @@ func leaving_now():
 	print("Im Leaving")
 	self.remove_from_group("Customer")
 	leaving = true
+	reached_theke = true
+	
 	if first_exit_marker:
 		target = first_exit_marker.global_position
 		agent.target_position = target
@@ -279,10 +292,16 @@ func check_if_walking():
 		last_position = global_transform.origin
 
 	if (stuck_frames >= stuck_max_frames) or (agent.is_navigation_finished() and not leaving):
-		animation_player.play("old_fat_dude/Idle")
+		if sex == 2:
+			animation_player.play("Untitled_Idle")
+		else:
+			animation_player.play("old_fat_dude/Idle")
 		agent.path_desired_distance = 0.1
 	else:
-		animation_player.play("old_fat_dude/Walking")
+		if sex == 2:
+			animation_player.play("Untitled_Walking")
+		else:
+			animation_player.play("old_fat_dude/Walking")
 		agent.path_desired_distance = 0.2
 		
 		
@@ -295,7 +314,7 @@ func try_serve_drink() -> Dictionary:
 	if not serving_container:
 		return {}
 
-	var recipe = Gamemanager.RECIPES.get(order_text, null)
+	var recipe = Resourcemanager.RECIPES.get(order_text, null)
 	if not recipe:
 		return {}
 

@@ -11,7 +11,10 @@ extends CharacterBody3D
 @export var fly_speed      := 0.8     # Bewegung in der Luft
 @export var air_damp       := 18.0     # Bremst sanft ab
 @export var max_fly_speed := 6.0  
+@export var fly_vertical     := 6.0   # hoch / runter separat
 @export var zero_g_fov_delta := 5.0       # +5° im Schwebe-Modus
+@export var roll_speed := 45.0   # °/s
+
 var _current_zero_g := false              # Merkt letzten Status
 var _fov_tween      : Tween = null
 
@@ -60,7 +63,7 @@ func place_handslot_z():
 		hand_slot.position.y = 0 - (held_object.size.y/2)
 	
 	
-func _input(event):	
+func _input(event):
 	if event is InputEventMouseMotion and mouse_captured and not Gamemanager.is_in_menu:
 		rotation.y -= (event.relative.x * Gamemanager.mouse_sensitivity) / 5
 		head.rotation.x -= (event.relative.y * Gamemanager.mouse_sensitivity) / 5
@@ -116,13 +119,13 @@ func _update_zero_g_state():
 		_tween_fov(zero_g) 
 
 func _physics_process(delta):
-	_update_zero_g_state() 	
+	_update_zero_g_state()
 
 	if zero_g:
 		_update_zero_g(delta)
 	else:
 		_update_grounded(delta)
-		
+		#_align_upright(delta)
 	show_bottle_label()
 
 	if is_pouring and held_object and held_object.is_in_group("Bottle"):
@@ -132,7 +135,7 @@ func _physics_process(delta):
 func _update_grounded(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif Input.is_action_just_pressed("jump") and not Gamemanager.is_in_menu:
+	elif Input.is_action_just_pressed("jump") and not zero_g and not Gamemanager.is_in_menu:
 		velocity.y = jump_velocity
 
 	var current_speed = sprint_speed if Input.is_action_pressed("sprint") else move_speed
@@ -144,6 +147,7 @@ func _update_grounded(delta):
 	
 	
 func _update_zero_g(delta):
+	var up_down := false
 	# 0) Gravitation abschalten
 	velocity.y = 0.0
 
@@ -151,18 +155,29 @@ func _update_zero_g(delta):
 	var dir = _get_move_direction()
 	
 	# Hoch / Runter mit zusätzlichem Input
-	if Input.is_action_pressed("move_up"):
-		dir += transform.basis.y * fly_speed
-	if Input.is_action_pressed("move_down"):
-		dir -= transform.basis.y * fly_speed
+	
+	
+	if Input.is_action_pressed("jump") and zero_g:
+		dir += transform.basis.y * fly_speed * 2
+		up_down = true
+	if Input.is_action_pressed("move_down") and zero_g:
+		dir -= transform.basis.y * fly_speed * 2
+		up_down = true
 
 	dir = dir.normalized()
-	velocity += dir * fly_speed
-	velocity =velocity.limit_length(max_fly_speed)
+	if up_down:
+		velocity += dir * fly_vertical
+	else:
+		velocity += dir * fly_speed
+		
+	velocity = velocity.limit_length(max_fly_speed)
 
 	# 2) Dämpfung, damit man nicht unendlich gleitet
-	velocity = velocity.move_toward(Vector3.ZERO, air_damp * delta)
-
+	if up_down:
+		velocity = velocity.move_toward(Vector3.ZERO, delta)
+	else:
+		velocity = velocity.move_toward(Vector3.ZERO, air_damp * delta)
+		
 	move_and_slide()
 	
 	
@@ -369,3 +384,27 @@ func _get_move_direction() -> Vector3:
 		if Input.is_action_pressed("move_right"):
 			d += r
 	return d
+
+
+func _get_camera_axes() -> Dictionary:
+	var b := head.global_transform.basis        # oder camera.global_transform.basis
+	return {
+		"forward": -b.z.normalized(),           # Blickrichtung
+		"right"  :  b.x.normalized(),
+		"up"     :  b.y.normalized()
+	}
+	
+
+func _align_upright(delta):
+	var up_basis = global_transform.basis
+	var up = up_basis.y.normalized()
+
+	# Zielrotation: Up = Welt Y
+	var target_up = Vector3.UP
+	var axis = up.cross(target_up)
+	var angle = up.angle_to(target_up)
+
+	if angle > 0.01:
+		# Interpoliert zurück zur Aufrichtung
+		var rot = Quaternion(axis.normalized(), angle * delta * 3.0)  # Dämpfungsgeschwindigkeit
+		global_transform = Transform3D(rot, global_transform.origin) * global_transform

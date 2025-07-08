@@ -21,9 +21,9 @@ func recycle():
 		if obj.ingredient_name:
 			var obj_name = obj.ingredient_name
 			print (obj_name)
-			print (Gamemanager.INGREDIENTS[obj_name]["print_mats"]["Matter"])
-			var res_mats = int(ceil(Gamemanager.INGREDIENTS[obj_name]["print_mats"]["Matter"] / 2.0))
-			Gamemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"] += res_mats
+			print (Resourcemanager.INGREDIENTS[obj_name]["print_mats"]["Matter"])
+			var res_mats = int(ceil(Resourcemanager.INGREDIENTS[obj_name]["print_mats"]["Matter"] / 2.0))
+			Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"] += res_mats
 		if obj.has_method("despawn"):
 			obj.despawn()
 		else:

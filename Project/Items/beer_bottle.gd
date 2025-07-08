@@ -26,13 +26,6 @@ func _ready():
 	teleport.start(mesh, teleport.scale, self, false)
 	Gamemanager.attach_outlineGenerator(self)
 	
-func show_label():
-	pass
-	#label_3d.visible = true
-
-func hide_label():	
-	pass
-	#label_3d.visible = false
 
 # Regal-Snap bleibt erhalten
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
@@ -63,9 +56,9 @@ func deactivate_coliders():
 					child.disabled = true
 
 
-func let_it_fall(position):
+func let_it_fall(fall_position):
 	await get_tree().physics_frame
-	global_position = position
+	global_position = fall_position
 	activate_coliders()
 	
 	

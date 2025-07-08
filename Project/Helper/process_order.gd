@@ -19,10 +19,10 @@ func start_order_process(alk, color, sweet, mats):
 
 
 func _on_shipment_timer_timeout() -> void:
-	Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"] += temp_AlcoMol
-	Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"] += temp_MolOr
-	Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"] += temp_Sweet_Molecules
-	Gamemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"] += temp_Matter	
+	Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"] += temp_AlcoMol
+	Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"] += temp_MolOr
+	Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"] += temp_Sweet_Molecules
+	Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"] += temp_Matter	
 	
 	Signalmanager.update_info_text_label.emit("Shipment arrived")
 	queue_free()
@@ -32,6 +32,7 @@ func _on_label_timer_timeout() -> void:
 	# Sekunden aufrunden, damit 4.7 s → 5 s wird.
 	var total_sec := int(ceil(shipment_timer.time_left))
 
+	@warning_ignore("integer_division")
 	var minutes := total_sec / 60        # ganzzahlige Division
 	var seconds := total_sec % 60        # Rest-Operator
 

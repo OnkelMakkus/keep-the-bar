@@ -1,5 +1,5 @@
 #signalmanager.gd (global)
-extends Node3D
+extends Node
 
 signal set_spawn_marker(spawner: Marker3D)
 signal set_theke_marker(theke: Marker3D)
@@ -8,6 +8,8 @@ signal set_waiting_marker_02(waiting02: Marker3D)
 signal set_look_at_marker(look_at: Marker3D)
 signal set_customer_exit(exit: Marker3D)
 signal set_first_exit_marker(first_exit: Marker3D)
+
+signal close_store()
 
 signal update_money(amount: int)
 signal update_res_display()

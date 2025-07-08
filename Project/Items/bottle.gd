@@ -32,7 +32,7 @@ func _ready() -> void:
 	teleport.start(mesh, teleport.scale, self, false)
 	
 	Gamemanager.attach_outlineGenerator(self)
-	var material = Gamemanager.INGREDIENTS[ingredient_name]["material"]
+	var material = Resourcemanager.INGREDIENTS[ingredient_name]["material"]
 	fill_indicator.material_override = material
 	fill_indicator.visible = true
 	label_3d.visible = false
@@ -103,9 +103,9 @@ func _update_visuals():
 	if max_content_ml > 0:
 		var fill_level = content_ml / max_content_ml
 		fill_indicator.scale.y = fill_level
-		var mesh = fill_indicator.mesh
-		if mesh:
-			var mesh_height = mesh.get_aabb().size.y
+		var vis_mesh = fill_indicator.mesh
+		if vis_mesh:
+			var mesh_height = vis_mesh.get_aabb().size.y
 			fill_indicator.position.y = liquid_offset - (1.0 - fill_level) * 0.5 * mesh_height
 			
 
@@ -140,9 +140,9 @@ func deactivate_coliders():
 			body.visible = false
 			
 			
-func let_it_fall(position):
+func let_it_fall(fall_position):
 	await get_tree().physics_frame
-	global_position = position
+	global_position = fall_position
 	activate_coliders()
 	
 	

@@ -5,7 +5,7 @@ var label_name : String
 
 func _ready() -> void:
 	Signalmanager.update_ressource_label.connect(update_ressource_label)
-	label_name = "MolOr " + str(Gamemanager.REPLICATOR_RESSOURCES.get("MolOr").get("current_amount")) +" von " + str(max_storage)
+	label_name = "MolOr " + str(Resourcemanager.REPLICATOR_RESSOURCES.get("MolOr").get("current_amount")) +" von " + str(max_storage)
 
 func update_ressource_label():
-	label_name = "MolOr " + str(Gamemanager.REPLICATOR_RESSOURCES.get("MolOr").get("current_amount")) +" von " + str(max_storage)
+	label_name = "MolOr " + str(Resourcemanager.REPLICATOR_RESSOURCES.get("MolOr").get("current_amount")) +" von " + str(max_storage)

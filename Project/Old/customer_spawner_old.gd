@@ -52,7 +52,7 @@ func spawn_customer():
 		cust_name = Gamemanager.CUSTOMER_FEMALE_NAMES.pick_random()
 		sex = 1
 
-	var recipe_names = Gamemanager.RECIPES.keys()
+	var recipe_names = Resourcemanager.RECIPES.keys()
 	var drink = recipe_names.pick_random()
 	print("👥 Neuer Kunde in Warteschlange: ", cust_name, "Bestellt:", drink)
 

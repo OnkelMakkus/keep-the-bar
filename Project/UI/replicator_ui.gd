@@ -33,7 +33,11 @@ func _on_glass_btn_pressed() -> void:
 	_on_drink_btn_pressed("Glass")
 	_on_back_btn_pressed()
 
-
+func _process(_delta: float) -> void:
+	if Input.is_action_pressed("ui_cancel") and Gamemanager.is_in_menu:
+		_on_back_btn_pressed()
+		
+		
 func _on_back_btn_pressed() -> void:
 	Gamemanager.is_in_menu = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -45,9 +49,9 @@ func _on_back_btn_pressed() -> void:
 	
 	
 func _can_afford(drink_name: String) -> bool:
-	var mats = Gamemanager.INGREDIENTS[drink_name]["print_mats"]
+	var mats = Resourcemanager.INGREDIENTS[drink_name]["print_mats"]
 	for mat_name in mats.keys():
-		if Gamemanager.REPLICATOR_RESSOURCES[mat_name]["current_amount"] < mats[mat_name]:
+		if Resourcemanager.REPLICATOR_RESSOURCES[mat_name]["current_amount"] < mats[mat_name]:
 			return false
 	return true
 	
@@ -58,11 +62,11 @@ func _on_drink_btn_pressed(drink_name: String) -> void:
 		print("Nicht genug Material für", drink_name)
 		return
 		
-	var mats = Gamemanager.INGREDIENTS[drink_name]["print_mats"]
+	var mats = Resourcemanager.INGREDIENTS[drink_name]["print_mats"]
 	for mat_name in mats.keys():
 		print ("Mat: ", mat_name, mats[mat_name])
-		Gamemanager.REPLICATOR_RESSOURCES[mat_name]["current_amount"] -= mats[mat_name]
-	var obj = Gamemanager.INGREDIENTS[drink_name]["res"].instantiate()
+		Resourcemanager.REPLICATOR_RESSOURCES[mat_name]["current_amount"] -= mats[mat_name]
+	var obj = Resourcemanager.INGREDIENTS[drink_name]["res"].instantiate()
 	replicator_marker.add_child(obj)
 	Signalmanager.update_ressource_label.emit()
 	_on_back_btn_pressed()

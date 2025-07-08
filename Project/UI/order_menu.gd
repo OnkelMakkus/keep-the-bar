@@ -41,7 +41,6 @@ var temp_Sweet_Molecules: int = 0
 var temp_matter: int = 0
 
 
-
 func _ready() -> void:
 	Gamemanager.is_in_menu = true
 	
@@ -49,30 +48,34 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	var screen := DisplayServer.window_get_current_screen()
-	var size = DisplayServer.window_get_size()
+	var screen_size = DisplayServer.window_get_size()
 	
-	order_menu.size = size
-	color_rect.size = size
-	aspect_ratio_container.size = size
+	order_menu.size = screen_size
+	color_rect.size = screen_size
+	aspect_ratio_container.size = screen_size
 	
 	res_01_label.text = "AlcoMol"
 	res_02_label.text = "MolOr"
 	res_03_label.text = "Sweet Molecules"
 	res_04_label.text = "Matter"
 	
-	amount_01_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"])
-	amount_02_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"])
-	amount_03_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"])
-	amount_04_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"])
+	amount_01_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"])
+	amount_02_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"])
+	amount_03_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"])
+	amount_04_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"])
 
-	price_01_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"])
-	price_02_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"])
-	price_03_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"])
-	price_04_label.text = str(Gamemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"])
+	price_01_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"])
+	price_02_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"])
+	price_03_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"])
+	price_04_label.text = str(Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"])
 	
 	update_labels()
 	
 	
+func _process(_delta: float) -> void:
+	if Input.is_action_pressed("ui_cancel") and Gamemanager.is_in_menu:
+		_on_cancel_btn_pressed()
+		
 func calc_temp_money():
 	temp_money = temp_money_AlcoMol + temp_money_MolOr + temp_money_Sweet_Molecules + temp_money_matter
 	update_labels()
@@ -116,52 +119,52 @@ func update_labels():
 
 
 func _on_decrease_01_btn_pressed() -> void:
-	if temp_money_AlcoMol >= Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"]:
-		temp_money_AlcoMol -= Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"]
-		temp_AlcoMol -= Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_amount"]
+	if temp_money_AlcoMol >= Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"]:
+		temp_money_AlcoMol -= Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"]
+		temp_AlcoMol -= Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_amount"]
 	calc_temp_money()
 
 
 func _on_decrease_02_btn_pressed() -> void:
-	if temp_money_MolOr >= Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"]:
-		temp_money_MolOr -= Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"]
-		temp_MolOr -= Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_amount"]
+	if temp_money_MolOr >= Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"]:
+		temp_money_MolOr -= Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"]
+		temp_MolOr -= Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_amount"]
 	calc_temp_money()
 
 
 func _on_decrease_03_btn_pressed() -> void:
-	if temp_money_Sweet_Molecules >= Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"]:
-		temp_money_Sweet_Molecules -= Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"]
-		temp_Sweet_Molecules -= Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_amount"]
+	if temp_money_Sweet_Molecules >= Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"]:
+		temp_money_Sweet_Molecules -= Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"]
+		temp_Sweet_Molecules -= Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_amount"]
 	calc_temp_money()
 	
 	
 func _on_decrease_04_btn_pressed() -> void:
-	if temp_money_matter >= Gamemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"]:
-		temp_money_matter -= Gamemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"]
-		temp_matter -= Gamemanager.REPLICATOR_RESSOURCES["Matter"]["buy_amount"]
+	if temp_money_matter >= Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"]:
+		temp_money_matter -= Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"]
+		temp_matter -= Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["buy_amount"]
 	calc_temp_money()
 
 
 func _on_increase_01_btn_pressed() -> void:
-	temp_money_AlcoMol += Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"]
-	temp_AlcoMol += Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_amount"]
+	temp_money_AlcoMol += Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_price"]
+	temp_AlcoMol += Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["buy_amount"]
 	calc_temp_money()	
 
 
 func _on_increase_02_btn_pressed() -> void:
-	temp_money_MolOr += Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"]
-	temp_MolOr += Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_amount"]
+	temp_money_MolOr += Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_price"]
+	temp_MolOr += Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["buy_amount"]
 	calc_temp_money()
 
 
 func _on_increase_03_btn_pressed() -> void:
-	temp_money_Sweet_Molecules += Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"]
-	temp_Sweet_Molecules += Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_amount"]
+	temp_money_Sweet_Molecules += Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_price"]
+	temp_Sweet_Molecules += Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["buy_amount"]
 	calc_temp_money()
 
 
 func _on_increase_04_btn_pressed() -> void:
-	temp_money_matter += Gamemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"]
-	temp_matter += Gamemanager.REPLICATOR_RESSOURCES["Matter"]["buy_amount"]
+	temp_money_matter += Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["buy_price"]
+	temp_matter += Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["buy_amount"]
 	calc_temp_money()

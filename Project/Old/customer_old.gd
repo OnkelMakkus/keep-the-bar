@@ -200,7 +200,7 @@ func try_serve_drink() -> bool:
 	if not serving_container:
 		return false
 
-	var recipe = Gamemanager.RECIPES.get(order_text, null)
+	var recipe = Resourcemanager.RECIPES.get(order_text, null)
 	if not recipe:
 		return false
 

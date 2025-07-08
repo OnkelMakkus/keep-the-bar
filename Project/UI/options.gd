@@ -24,13 +24,18 @@ func _ready() -> void:
 	mouse_sense_value_lbl.text = str(mouse_sense_slider.value)
 	
 	print (mouse_sense_slider.value)
+	
+	
+func _process(_delta: float) -> void:
+	if Input.is_action_pressed("ui_cancel") and Gamemanager.is_in_menu:
+		_on_back_btn_pressed()
+		
 
 func _on_back_btn_pressed() -> void:
 	Gamemanager.is_in_menu = false
 	Signalmanager.toggle_all_ui_for_replicator.emit(true)
 	Signalmanager.switch_menuBtn_visibility.emit(true)
 	Signalmanager.all_the_main_menu_stuff.emit()
-	print ("geht doch eigentlich")
 	self.queue_free()
 
 
@@ -47,10 +52,10 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, toggled_on)
 	var screen := DisplayServer.window_get_current_screen()
-	var size := DisplayServer.screen_get_size(screen)
-	DisplayServer.window_set_size(size)
+	var screen_size := DisplayServer.screen_get_size(screen)
+	DisplayServer.window_set_size(screen_size)
 	DisplayServer.window_set_position(DisplayServer.screen_get_position(screen))
-	_set_camera_fov(size)
+	_set_camera_fov(screen_size)
 
 func _set_camera_fov(screen_size: Vector2):
 	#const V_FOV := 75.0                       # dein Basiswert (vertikal)

@@ -1,5 +1,5 @@
 #gamemanager.gd (global)
-extends Node3D
+extends Node
 
 
 var spawnmarker
@@ -45,166 +45,172 @@ var original_materials := {}
 @onready var BEER_SCENE : PackedScene = load("res://Project/Items/beer_bottle.tscn")
 
 
-@onready var boxes = {
-	"beer_box":{
-		"group": "beer_bottle_box",
-		"res": load("res://Project/Items/bottle_box_beer.tscn")
-	},
-	"rum_box":{
-		"group": "rum_bottle_box",
-		"res": load("res://Project/Items/bottle_box_rum.tscn")
-	},
-	"whiskey_box":{
-		"group": "whiskey_bottle_box",
-		"res": load("res://Project/Items/bottle_box_whiskey.tscn")
-	},
-	"wodka_box":{
-		"group": "wodka_bottle_box",
-		"res": load("res://Project/Items/bottle_box_wodka.tscn")
-	},
-	"glass_box":{
-		"group": "glass_bottle_box",
-		"res": load("res://Project/Items/bottle_box_glas.tscn")
-	},
-}
+#@onready var boxes = {
+	#"beer_box":{
+		#"group": "beer_bottle_box",
+		#"res": load("res://Project/Items/bottle_box_beer.tscn")
+	#},
+	#"rum_box":{
+		#"group": "rum_bottle_box",
+		#"res": load("res://Project/Items/bottle_box_rum.tscn")
+	#},
+	#"whiskey_box":{
+		#"group": "whiskey_bottle_box",
+		#"res": load("res://Project/Items/bottle_box_whiskey.tscn")
+	#},
+	#"wodka_box":{
+		#"group": "wodka_bottle_box",
+		#"res": load("res://Project/Items/bottle_box_wodka.tscn")
+	#},
+	#"glass_box":{
+		#"group": "glass_bottle_box",
+		#"res": load("res://Project/Items/bottle_box_glas.tscn")
+	#},
+#}
 
 @export var money := 0
 
-@onready var REPLICATOR_RESSOURCES ={
-	"Sweet_Molecules": {
-		"display_name": "Sweet Molecules",
-		"buy_price": 2,
-		"buy_amount" : 100,
-		"current_amount" : 100,
-	},
-	"AlcoMol": {
-		"display_name": "AlcoMol",
-		"buy_price": 4,
-		"buy_amount" : 100,
-		"current_amount" : 100,
-	},
-	"MolOr": {
-		"display_name": "MolOr",
-		"buy_price": 1,
-		"buy_amount" : 100,
-		"current_amount" : 100,
-	},
-	"Matter": {
-		"display_name": "Matter",
-		"buy_price": 1,
-		"buy_amount" : 1000,
-		"current_amount" : 100,
-	}
-}
-
-@onready var INGREDIENTS = {
-	"Glass": {
-		"display_name": "Glass",
-		"print_mats" : {
-			"Sweet_Molecules" : 0,
-			"AlcoMol" : 0,
-			"MolOr" : 0,
-			"Matter": 2,
-		},
-		"material": "",
-		"res": load("res://Project/Items/glass.tscn"),
-	},
-	"Rum": {
-		"display_name": "Rum",
-		"print_mats" : {
-			"Sweet_Molecules" : 10,
-			"AlcoMol" : 25,
-			"MolOr" : 15,
-			"Matter": 5,
-		},
-		"material": load("res://Assets/mats/rum_whisky.tres"),
-		"res": load("res://Project/Items/bottle_rum.tscn"),
-	},
-	"Whisky": {
-		"display_name": "Whisky",
-		"print_mats" : {
-			"Sweet_Molecules" : 5,
-			"AlcoMol" : 25,
-			"MolOr" : 15,
-			"Matter": 5,
-		},
-		"material": load("res://Assets/mats/rum_whisky.tres"),
-		"res": load("res://Project/Items/bottle_whisky.tscn"),
-	},
-	"Wodka": {
-		"display_name": "Wodka",
-		"print_mats" : {
-			"Sweet_Molecules" : 2,
-			"AlcoMol" : 25,
-			"MolOr" : 0,
-			"Matter": 5,
-		},
-		"material": load("res://Assets/mats/wodka_water.tres"),
-		"res": load("res://Project/Items/bottle_wodka.tscn"),
-	},
-	"Beer": {
-		"display_name": "Beer",
-		"print_mats" : {
-			"Sweet_Molecules" : 5,
-			"AlcoMol" : 5,
-			"MolOr" : 2,
-			"Matter": 3,
-		},
-		"material": load("res://Assets/mats/wodka_water.tres"),
-		"res": load("res://Project/Items/beer_bottle.tscn"),
-	},
-	# ... beliebig erweiterbar!
-}
-
-@export var RECIPES = {
-	"Beer": {
-		"display_name": "Beer",
-		"sell_price": 3,
-		"average_price": 3,
-		"ingredients": [
-			{"name": "Beer", "amount_ml": 500}
-		]
-	},
-	"Rum": {
-		"display_name": "Rum",
-		"sell_price": 10,
-		"average_price": 10,
-		"ingredients": [
-			{"name": "Rum", "amount_ml": 40}
-		]
-	},
-	"Whisky": {
-		"display_name": "Whisky",
-		"sell_price": 12,
-		"average_price": 12,
-		"ingredients": [
-			{"name": "Whisky", "amount_ml": 40}
-		]
-	},
-	"Wodka": {
-		"display_name": "Wodka",
-		"sell_price": 8,
-		"average_price": 8,
-		"ingredients": [
-			{"name": "Wodka", "amount_ml": 40}
-		]
-	}
-}
+#@onready var REPLICATOR_RESSOURCES ={
+	#"Sweet_Molecules": {
+		#"display_name": "Sweet Molecules",
+		#"buy_price": 2,
+		#"buy_amount" : 100,
+		#"current_amount" : 100,
+	#},
+	#"AlcoMol": {
+		#"display_name": "AlcoMol",
+		#"buy_price": 4,
+		#"buy_amount" : 100,
+		#"current_amount" : 100,
+	#},
+	#"MolOr": {
+		#"display_name": "MolOr",
+		#"buy_price": 1,
+		#"buy_amount" : 100,
+		#"current_amount" : 100,
+	#},
+	#"Matter": {
+		#"display_name": "Matter",
+		#"buy_price": 1,
+		#"buy_amount" : 1000,
+		#"current_amount" : 100,
+	#}
+#}
+#
+#@onready var INGREDIENTS = {
+	#"Glass": {
+		#"display_name": "Glass",
+		#"print_mats" : {
+			#"Sweet_Molecules" : 0,
+			#"AlcoMol" : 0,
+			#"MolOr" : 0,
+			#"Matter": 2,
+		#},
+		#"material": "",
+		#"res": load("res://Project/Items/glass.tscn"),
+	#},
+	#"Rum": {
+		#"display_name": "Rum",
+		#"print_mats" : {
+			#"Sweet_Molecules" : 10,
+			#"AlcoMol" : 25,
+			#"MolOr" : 15,
+			#"Matter": 5,
+		#},
+		#"material": load("res://Assets/mats/rum_whisky.tres"),
+		#"res": load("res://Project/Items/bottle_rum.tscn"),
+	#},
+	#"Whisky": {
+		#"display_name": "Whisky",
+		#"print_mats" : {
+			#"Sweet_Molecules" : 5,
+			#"AlcoMol" : 25,
+			#"MolOr" : 15,
+			#"Matter": 5,
+		#},
+		#"material": load("res://Assets/mats/rum_whisky.tres"),
+		#"res": load("res://Project/Items/bottle_whisky.tscn"),
+	#},
+	#"Wodka": {
+		#"display_name": "Wodka",
+		#"print_mats" : {
+			#"Sweet_Molecules" : 2,
+			#"AlcoMol" : 25,
+			#"MolOr" : 0,
+			#"Matter": 5,
+		#},
+		#"material": load("res://Assets/mats/wodka_water.tres"),
+		#"res": load("res://Project/Items/bottle_wodka.tscn"),
+	#},
+	#"Beer": {
+		#"display_name": "Beer",
+		#"print_mats" : {
+			#"Sweet_Molecules" : 5,
+			#"AlcoMol" : 5,
+			#"MolOr" : 2,
+			#"Matter": 3,
+		#},
+		#"material": load("res://Assets/mats/wodka_water.tres"),
+		#"res": load("res://Project/Items/beer_bottle.tscn"),
+	#},
+	## ... beliebig erweiterbar!
+#}
+#
+#@export var RECIPES = {
+	#"Beer": {
+		#"display_name": "Beer",
+		#"sell_price": 3,
+		#"average_price": 3,
+		#"ingredients": [
+			#{"name": "Beer", "amount_ml": 500}
+		#]
+	#},
+	#"Rum": {
+		#"display_name": "Rum",
+		#"sell_price": 10,
+		#"average_price": 10,
+		#"ingredients": [
+			#{"name": "Rum", "amount_ml": 40}
+		#]
+	#},
+	#"Whisky": {
+		#"display_name": "Whisky",
+		#"sell_price": 12,
+		#"average_price": 12,
+		#"ingredients": [
+			#{"name": "Whisky", "amount_ml": 40}
+		#]
+	#},
+	#"Wodka": {
+		#"display_name": "Wodka",
+		#"sell_price": 8,
+		#"average_price": 8,
+		#"ingredients": [
+			#{"name": "Wodka", "amount_ml": 40}
+		#]
+	#}
+#}
 
 const CUSTOMER_MALE_NAMES = [
-	"Kalle", "Robin", "Kevin", "Murat", "Günther", "Sven", "Jens", "Tobias", "Enrico", "Dieter", "Johannes",
-	# usw.
+	"Kalle", "Robin", "Kevin", "Murat", "Sven",
+	"Dieter", "Ragnar", "Jax", "Tobias", "Enrico",
+	"Zarnak", "Threx", "Bo", "Gunther", "Levik",
+	"Orion", "Brax", "Jens", "Korben", "Malik",
+	"Rado", "Xel", "Yorr", "T'Var", "Vargo"
 ]
 
 const CUSTOMER_FEMALE_NAMES = [
-	"Ute", "Jaqueline", "Chantal", "Saskia", "Brigitte",  "Vera",  "Franzi", "Yvonne", "Uschi",
-	# usw.
+	"Ute", "Jaqueline", "Saskia", "Yvonne", "Uschi",
+	"Zara", "Mira", "Nayla", "Chantal", "Brigitte",
+	"Velia", "Kira", "Synn", "Eluna", "Trixi",
+	"Ayra", "Nova", "Leena", "Vexa", "Nora",
+	"T'Sari", "Myxa", "Rin", "Xanna", "Oona"
 ]
 
 
 func _ready() -> void:
 	check_if_release()
-	Signalmanager.set_spawn_marker.connect(setSpawn)	
+	Signalmanager.set_spawn_marker.connect(setSpawn)
 	Signalmanager.set_waiting_marker_01.connect(setWaiting01)
 	Signalmanager.set_waiting_marker_02.connect(setWaiting02)
 	Signalmanager.set_theke_marker.connect(setTheke)
@@ -213,71 +219,7 @@ func _ready() -> void:
 	Signalmanager.set_first_exit_marker.connect(setFirstExit)
 	Signalmanager.add_customer.connect(add_customer)
 	Signalmanager.remove_customer.connect(remove_customer)
-	
-	
-func _process(delta: float) -> void:
-	pass
-	
-	
-func gather_save_data():
-	var save = {
-		"money": money,
-		"alk": REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"],
-		"farbe": REPLICATOR_RESSOURCES["MolOr"]["current_amount"],
-		"sweet": REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"],
-		"matter": REPLICATOR_RESSOURCES["Matter"]["current_amount"],
-		"fullscreen": fullscreen,
-		"mousesens": mouse_sensitivity,
-	}
-	return save
-	
-	
-func rewrite_saved_data(save):
-	money = save.money
-	REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"] = save.alk
-	REPLICATOR_RESSOURCES["MolOr"]["current_amount"] = save.farbe
-	REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"] = save.sweet
-	REPLICATOR_RESSOURCES["Matter"]["current_amount"] = save.matter
-	fullscreen = save.fullscreen
-	mouse_sensitivity = save.mousesens
-		
-	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, fullscreen)
-	
-	Signalmanager.update_info_label.emit()
-	Signalmanager.update_money.emit(0)
-	Signalmanager.update_ressource_label.emit()
-	Signalmanager.update_res_display.emit()
-		
-	
-func savegame():
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	var save_data = gather_save_data()
-	var json_string = JSON.stringify(save_data)
-	save_file.store_line(json_string)
-	
-	
-func loadgame():
-	if not FileAccess.file_exists("user://savegame.save"):
-		print ("No Save Found")
-		return # Error! We don't have a save to load.
-		
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
-	while save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
 
-			# Creates the helper class to interact with JSON.
-		var json = JSON.new()
-			
-		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			continue
-
-			# Get the data from the JSON object.
-		var node_data = json.data
-		print (node_data)
-		rewrite_saved_data(node_data)
-		
 
 func update_customers() -> void:
 	wait_markers = [wait_marker_01, wait_marker_02]

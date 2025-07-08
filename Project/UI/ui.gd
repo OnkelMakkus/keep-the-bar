@@ -61,10 +61,10 @@ func update_info_text_label(info: String):
 	
 	
 func update_res_display():
-	alco_mol_lbl.text = "AlcoMol: " + str(Gamemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"])
-	mol_or_lbl.text = "MolOr: " + str(Gamemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"])
-	sweet_molecules_lbl.text = "Sweet Molecules: " + str(Gamemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"])
-	matter_lbl.text = "Matter: " + str(Gamemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"])
+	alco_mol_lbl.text = "AlcoMol: " + str(Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"])
+	mol_or_lbl.text = "MolOr: " + str(Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"])
+	sweet_molecules_lbl.text = "Sweet Molecules: " + str(Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"])
+	matter_lbl.text = "Matter: " + str(Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"])
 	
 
 func update_info_label(info: String):
@@ -135,11 +135,11 @@ func _on_info_text_timer_timeout() -> void:
 
 func _on_save_btn_pressed() -> void:
 	print ("saving")
-	Gamemanager.savegame()
+	Savemanager.savegame()
 	_on_resume_btn_button_down()
 
 
 func _on_load_btn_pressed() -> void:
 	print ("loading")
-	Gamemanager.loadgame()
+	Savemanager.loadgame()
 	_on_resume_btn_button_down()

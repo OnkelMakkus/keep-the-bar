@@ -73,6 +73,7 @@ func open_shop():
 		Gamemanager.is_open = false
 		open_label.text = "OPEN"
 		print("IsOpenTimer gestoppt")
+		Signalmanager.close_store.emit()
 
 
 func open_order():
@@ -84,6 +85,7 @@ func _on_is_open_timer_timeout() -> void:
 	is_open_timer.stop()
 	open_label.text = "OPEN"
 	Gamemanager.is_open = false
+	Signalmanager.close_store.emit()
 
 
 func _on_option_btn_pressed() -> void:

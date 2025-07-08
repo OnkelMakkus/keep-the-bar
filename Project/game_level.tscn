@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://ck2d1sxot25wn"]
+[gd_scene load_steps=19 format=3 uid="uid://ck2d1sxot25wn"]
 
 [ext_resource type="PackedScene" uid="uid://be733pexwdi76" path="res://Project/Customer/CustomerSpawner.tscn" id="1_g3g87"]
 [ext_resource type="PackedScene" uid="uid://fd8f2qfa1plr" path="res://Project/Player/player.tscn" id="1_jcjmw"]
 [ext_resource type="Script" uid="uid://cisn2bvtej7ec" path="res://Project/game_level.gd" id="1_mxr21"]
 [ext_resource type="PackedScene" uid="uid://0qln2fo1hp0v" path="res://Project/Environment/tavern.tscn" id="2_jtjkd"]
 [ext_resource type="PackedScene" uid="uid://clkc6lptr5uxy" path="res://Project/Items/glass.tscn" id="4_6mi8o"]
+[ext_resource type="Script" uid="uid://dwst8mcjbvjcs" path="res://Project/Managers/savemanager.gd" id="6_snrar"]
+[ext_resource type="Script" uid="uid://syu6f2yqdxbc" path="res://Project/Managers/resourcemanager.gd" id="7_n0mu5"]
 [ext_resource type="Texture2D" uid="uid://yqccw45shchj" path="res://Assets/sprites/plain_starfield_1.png" id="7_rn1up"]
 [ext_resource type="Script" uid="uid://d4lsetfsf0lra" path="res://Project/Managers/gamemanager.gd" id="9_e38tf"]
 [ext_resource type="Script" uid="uid://ctg4gin5sl4l7" path="res://Project/Managers/signalmanager.gd" id="10_mxr21"]
@@ -48,34 +50,17 @@ transform = Transform3D(-0.105813, 0, 0.994386, 0, 1, 0, -0.994386, 0, -0.105813
 
 [node name="Manager" type="Node3D" parent="."]
 
-[node name="Gamemanager" type="Node3D" parent="Manager"]
+[node name="Gamemanager" type="Node" parent="Manager"]
 script = ExtResource("9_e38tf")
-RECIPES = {
-"Rum": {
-"display_name": "Rum",
-"ingredients": [{
-"amount_ml": 40,
-"name": "Rum"
-}]
-},
-"Whisky": {
-"display_name": "Whisky",
-"ingredients": [{
-"amount_ml": 40,
-"name": "Whisky"
-}]
-},
-"Wodka": {
-"display_name": "Wodka",
-"ingredients": [{
-"amount_ml": 40,
-"name": "Wodka"
-}]
-}
-}
 
-[node name="Signalmanager" type="Node3D" parent="Manager"]
+[node name="Signalmanager" type="Node" parent="Manager"]
 script = ExtResource("10_mxr21")
+
+[node name="Savemanager" type="Node" parent="Manager"]
+script = ExtResource("6_snrar")
+
+[node name="Resourcemanager" type="Node" parent="Manager"]
+script = ExtResource("7_n0mu5")
 
 [node name="Tavern" parent="." instance=ExtResource("2_jtjkd")]
 

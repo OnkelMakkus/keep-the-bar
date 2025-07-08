@@ -95,7 +95,7 @@ func remove_liquid(liquid_name: String, amount: float) -> float:
 	
 
 func _set_liquid_material(liquid_name: String):
-	var ing = Gamemanager.INGREDIENTS.get(liquid_name)
+	var ing = Resourcemanager.INGREDIENTS.get(liquid_name)
 	if ing:
 		var mat = ing.get("material")
 		if mat and glass_liquid_mesh:
@@ -110,7 +110,6 @@ func get_total_fill_ml() -> float:
 	
 
 func _update_label():
-	print ("Glas Label Updated")
 	if contents.size() == 0:
 		label_name = "Glass" + "\n<E> to pick up"
 		if dirty:
@@ -137,9 +136,9 @@ func _update_visuals():
 	var fill_level = total_ml / max_fill_ml if max_fill_ml > 0 else 0.0
 	glass_liquid.scale.y = fill_level
 
-	var mesh = glass_liquid_mesh.mesh
-	if mesh:
-		var mesh_height = mesh.get_aabb().size.y
+	var vis_mesh = glass_liquid_mesh.mesh
+	if vis_mesh:
+		var mesh_height = vis_mesh.get_aabb().size.y
 		glass_liquid.position.y = liquid_offset - (1.0 - fill_level) * 0.5 * mesh_height
 	_update_label()
 
@@ -168,9 +167,9 @@ func deactivate_coliders():
 					child.disabled = true
 		
 		
-func let_it_fall(position):
+func let_it_fall(fall_position):
 	await get_tree().physics_frame
-	global_position = position
+	global_position = fall_position
 	activate_coliders()
 	
 	

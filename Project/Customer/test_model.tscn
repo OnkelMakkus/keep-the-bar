@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://k1cl6r3ctpk0"]
+
+[ext_resource type="PackedScene" uid="uid://bcp7ln3qxuy07" path="res://Assets/models/cac-1752006799742.glb" id="1_mx115"]
+
+[node name="test_model" instance=ExtResource("1_mx115")]
+
+[node name="Scene" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Scene/Armature" index="0"]
+bones/0/position = Vector3(2.32691, 241.961, -3.81865)
+bones/0/rotation = Quaternion(0.0764793, 0.996236, -0.0319249, 0.0254162)
+bones/1/rotation = Quaternion(0.0280841, -0.00651667, -0.0787786, 0.996475)
+bones/2/rotation = Quaternion(-0.0137505, -0.00101281, -0.0227928, 0.999645)
+bones/3/rotation = Quaternion(-0.0140521, -0.00287734, -0.0222863, 0.999649)
+bones/4/rotation = Quaternion(-0.0403312, -0.00118817, 0.0538537, 0.997733)
+bones/5/rotation = Quaternion(0.0881971, -0.0107198, -0.00473496, 0.996034)
+bones/7/rotation = Quaternion(0.541815, -0.42926, 0.607213, 0.391744)
+bones/8/rotation = Quaternion(0.476963, -0.00095655, -0.0749538, 0.875721)
+bones/9/rotation = Quaternion(-0.00151674, -0.04297, 0.183169, 0.982141)
+bones/11/rotation = Quaternion(-0.554808, -0.418236, 0.603455, -0.391291)
+bones/12/rotation = Quaternion(0.359833, -0.0751542, 0.0272025, 0.929587)
+bones/13/rotation = Quaternion(-0.00266081, 0.0550434, -0.234613, 0.970526)
+bones/15/rotation = Quaternion(0.0612563, -0.121353, 0.987182, 0.0836247)
+bones/16/rotation = Quaternion(0.380398, -0.0655419, -0.0345949, 0.921848)
+bones/17/rotation = Quaternion(0.0532379, -0.509957, 0.858414, 0.0153679)
+bones/18/rotation = Quaternion(-0.0157698, -0.000574899, 0.0289497, 0.999456)
+bones/20/rotation = Quaternion(-0.0656041, 0.0141045, 0.993582, 0.0910598)
+bones/21/rotation = Quaternion(0.126621, 0.0501473, 0.0148681, 0.990571)
+bones/22/rotation = Quaternion(-0.0476667, -0.621717, 0.779812, -0.0555854)
+bones/23/rotation = Quaternion(-0.00902464, 3.07394e-05, -0.0255932, 0.999632)
