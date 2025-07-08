@@ -1,13 +1,9 @@
-[gd_scene load_steps=43 format=4 uid="uid://0qln2fo1hp0v"]
+[gd_scene load_steps=45 format=4 uid="uid://0qln2fo1hp0v"]
 
 [ext_resource type="PackedScene" uid="uid://bg52lr7pk4e6m" path="res://Project/Environment/theke.tscn" id="2_3n42s"]
 [ext_resource type="Script" uid="uid://ccyavunf04tks" path="res://Project/Environment/tavern.gd" id="2_www31"]
 [ext_resource type="PackedScene" uid="uid://coxdxsa5j4cm2" path="res://Project/Environment/Interactable/regal.tscn" id="3_4hstr"]
-[ext_resource type="Texture2D" uid="uid://dy3lewqe887cx" path="res://Assets/mats/Plastic005_1K-JPG/Plastic005_1K-JPG_Color.jpg" id="5_0cks4"]
-[ext_resource type="Texture2D" uid="uid://dwxfyxbcgqyw4" path="res://Assets/mats/Plastic005_1K-JPG/Plastic005_1K-JPG_Displacement.jpg" id="6_00gu0"]
-[ext_resource type="Texture2D" uid="uid://c4d5nul2gmnll" path="res://Assets/mats/Plastic005_1K-JPG/Plastic005_1K-JPG_NormalGL.jpg" id="7_psls7"]
-[ext_resource type="Texture2D" uid="uid://dmxg5wvb1cps7" path="res://Assets/mats/Plastic005_1K-JPG/Plastic005_1K-JPG_Roughness.jpg" id="8_4kef1"]
-[ext_resource type="PackedScene" uid="uid://npyp6p8rchcm" path="res://Project/Environment/Interactable/replicator.tscn" id="9_00gu0"]
+[ext_resource type="PackedScene" uid="uid://ckon00bu8o4jw" path="res://Assets/models/thruster.glb" id="10_md2s3"]
 [ext_resource type="PackedScene" uid="uid://dgg27s4x2cac3" path="res://Project/Environment/table_01.tscn" id="10_psls7"]
 [ext_resource type="PackedScene" uid="uid://caekesawo2vrc" path="res://Project/Environment/Interactable/farb_storage.tscn" id="11_n3h7w"]
 [ext_resource type="PackedScene" uid="uid://cbjcymyjxd4ma" path="res://Project/Environment/Interactable/alk_storage.tscn" id="12_2v68k"]
@@ -20,31 +16,15 @@
 [ext_resource type="PackedScene" uid="uid://dvakuh6r2ob2j" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Wall_With_Door_Green.glb" id="17_ofo6u"]
 [ext_resource type="Texture2D" uid="uid://8q0hpvd13y11" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Ceiling_Tile_Grey_Metal_Gradient Texture Atlas by Imphenzia.png" id="19_3fnhm"]
 [ext_resource type="PackedScene" uid="uid://u1bbc4d651gy" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Floor_Tile_Metal.glb" id="21_7ho47"]
+[ext_resource type="PackedScene" uid="uid://cg37adxsmpn8u" path="res://Project/Environment/Interactable/recycler.tscn" id="21_iivnv"]
+[ext_resource type="PackedScene" uid="uid://dc1tmpdbs4e45" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Ceiling_Light.glb" id="22_14yrc"]
+[ext_resource type="PackedScene" uid="uid://b132lnslntbqi" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Wall_Light_Red.glb" id="23_qkg73"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_i30e2"]
-vertices = PackedVector3Array(-7.60829, 0.359535, -8.9538, 6.14171, 0.359535, -8.9538, 5.89171, 0.359535, -11.7038, -7.60829, 0.359535, -11.7038, -7.60829, 4.35954, -7.7038, -7.60829, 4.35954, 7.7962, 7.64171, 4.35954, 7.7962, 7.64171, 4.35954, -7.7038, -4.35829, 0.359535, -4.7038, -3.10829, 0.359535, -5.2038, -3.10829, 0.359535, -6.9538, -7.10829, 0.359535, -6.9538, -4.35829, 0.359535, 1.2962, -4.35829, 0.359535, -3.2038, -7.10829, 0.359535, 7.0462, -3.35829, 0.359535, 0.7962, -3.35829, 0.359535, -2.9538, -4.35829, 0.359535, 2.7962, -2.85829, 0.359535, 7.0462, -2.85829, 0.359535, 3.0462, 1.39171, 0.359535, -5.9538, 1.14171, 0.359535, -6.9538, 0.141706, 0.359535, -7.2038, -2.10829, 0.359535, -4.7038, -2.10829, 0.359535, -3.2038, 4.89171, 0.359535, -2.4538, 6.39171, 0.359535, -2.4538, 6.39171, 0.359535, -3.9538, 4.64171, 0.359535, -4.2038, 2.64171, 0.359535, -3.9538, -2.85829, 0.359535, 0.7962, -2.10829, 0.359535, 2.0462, 2.64171, 0.359535, 0.0461998, 7.14171, 0.359535, -4.2038, 7.14171, 0.359535, -5.9538, 3.14171, 0.359535, 0.2962, 6.39171, 0.359535, -0.9538, 4.89171, 0.359535, 0.0461998, 7.14171, 0.359535, 7.0462, 7.14171, 0.359535, -0.7038, -7.60829, 0.359535, 9.0462, -7.60829, 0.359535, 15.5462, 7.64171, 0.359535, 15.5462, 7.64171, 0.359535, 9.0462)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(13, 12, 11), PackedInt32Array(11, 12, 14), PackedInt32Array(16, 15, 13), PackedInt32Array(13, 15, 12), PackedInt32Array(12, 17, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(17, 18, 14), PackedInt32Array(8, 13, 11), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(23, 20, 24), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 28), PackedInt32Array(30, 24, 31), PackedInt32Array(31, 24, 32), PackedInt32Array(32, 24, 29), PackedInt32Array(29, 24, 20), PackedInt32Array(33, 27, 34), PackedInt32Array(34, 27, 28), PackedInt32Array(9, 10, 23), PackedInt32Array(23, 10, 22), PackedInt32Array(15, 16, 30), PackedInt32Array(30, 16, 24), PackedInt32Array(32, 35, 31), PackedInt32Array(29, 20, 28), PackedInt32Array(28, 20, 34), PackedInt32Array(26, 36, 25), PackedInt32Array(25, 36, 37), PackedInt32Array(19, 31, 18), PackedInt32Array(18, 31, 35), PackedInt32Array(18, 35, 37), PackedInt32Array(18, 37, 38), PackedInt32Array(36, 39, 37), PackedInt32Array(37, 39, 38), PackedInt32Array(43, 42, 40), PackedInt32Array(40, 42, 41)]
+vertices = PackedVector3Array(-7.76468, 4.37528, -23.6083, -7.76468, 4.37528, 7.89171, 7.73532, 4.37528, 7.89171, 7.73532, 4.37528, -23.6083, 5.98532, 0.375284, -13.1083, 6.98532, 0.375284, -13.3583, 7.23532, 0.375284, -15.8583, 6.98532, 0.375284, -23.1083, -7.01468, 0.375284, -23.1083, -7.26468, 0.375284, -20.1083, -7.01468, 0.375284, -8.85829, 6.23532, 0.375284, -8.85829, -4.01468, 0.375284, -7.10829, -4.01468, 0.375284, -5.60829, -3.26468, 0.375284, -5.60829, -3.76468, 0.375284, -3.35829, -3.51468, 0.375284, -1.35829, -2.51468, 0.375284, -1.35829, -2.76468, 0.375284, -3.85829, -2.76468, 0.375284, -4.85829, -2.01468, 0.375284, -0.358294, 2.73532, 0.375284, -0.608294, 2.98532, 0.375284, -4.35829, 5.23532, 0.375284, -5.60829, 4.73532, 0.375284, -7.10829, 4.73532, 0.375284, -4.35829, 4.98532, 0.375284, -2.35829, 6.48532, 0.375284, -2.35829, 6.98532, 0.375284, -5.60829, -5.01468, 0.375284, -5.35829, -7.01468, 0.375284, -7.10829, -3.51468, 0.375284, 2.89171, -3.51468, 0.375284, 0.891706, -4.26468, 0.375284, 0.641706, -5.01468, 0.375284, 3.39171, -3.76468, 0.375284, 7.14171, -3.76468, 0.375284, 5.14171, -4.76468, 0.375284, 4.89171, -4.26468, 0.375284, -0.858294, -5.01468, 0.375284, -3.60829, -7.26468, 0.375284, 4.14171, -7.01468, 0.375284, 7.14171, 6.48532, 0.375284, -0.858294, 4.73532, 0.375284, 0.141706, -2.51468, 0.375284, 0.891706, -2.76468, 0.375284, 3.14171, -2.76468, 0.375284, 4.89171, 2.98532, 0.375284, 0.141706, 6.98532, 0.375284, 7.14171, 7.23532, 0.375284, -0.108294, -7.51468, 0.375284, 8.89171, -7.51468, 0.375284, 15.6417, 7.73532, 0.375284, 15.6417, 7.73532, 0.375284, 8.89171)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(6, 5, 4), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 4, 9), PackedInt32Array(9, 4, 10), PackedInt32Array(4, 11, 10), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(18, 19, 17), PackedInt32Array(17, 19, 20), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 22), PackedInt32Array(14, 12, 19), PackedInt32Array(19, 12, 22), PackedInt32Array(22, 12, 25), PackedInt32Array(25, 12, 23), PackedInt32Array(23, 12, 24), PackedInt32Array(23, 28, 25), PackedInt32Array(25, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(13, 29, 12), PackedInt32Array(12, 29, 30), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 34), PackedInt32Array(37, 36, 35), PackedInt32Array(16, 38, 15), PackedInt32Array(15, 38, 39), PackedInt32Array(33, 34, 38), PackedInt32Array(38, 34, 40), PackedInt32Array(38, 40, 39), PackedInt32Array(39, 40, 30), PackedInt32Array(34, 37, 40), PackedInt32Array(30, 29, 39), PackedInt32Array(40, 37, 41), PackedInt32Array(41, 37, 35), PackedInt32Array(27, 42, 26), PackedInt32Array(26, 42, 43), PackedInt32Array(44, 20, 45), PackedInt32Array(45, 20, 46), PackedInt32Array(46, 20, 47), PackedInt32Array(47, 20, 21), PackedInt32Array(31, 32, 45), PackedInt32Array(45, 32, 44), PackedInt32Array(43, 48, 47), PackedInt32Array(47, 48, 46), PackedInt32Array(46, 48, 35), PackedInt32Array(35, 36, 46), PackedInt32Array(42, 49, 43), PackedInt32Array(43, 49, 48), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51)]
 geometry_parsed_geometry_type = 0
 vertices_per_polygon = 10.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s78a0"]
-albedo_texture = ExtResource("5_0cks4")
-roughness_texture = ExtResource("8_4kef1")
-normal_enabled = true
-normal_texture = ExtResource("7_psls7")
-heightmap_enabled = true
-heightmap_deep_parallax = true
-heightmap_min_layers = 8
-heightmap_max_layers = 32
-heightmap_texture = ExtResource("6_00gu0")
-
-[sub_resource type="BoxMesh" id="BoxMesh_ohuer"]
-lightmap_size_hint = Vector2i(24, 31)
-material = SubResource("StandardMaterial3D_s78a0")
-size = Vector3(3, 1, 1)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n3h7w"]
-points = PackedVector3Array(1.5, 0.5, 0.5, 1.5, 0.5, -0.5, -1.5, 0.5, 0.5, 1.5, -0.5, 0.5, 1.5, -0.5, -0.5, -1.5, 0.5, -0.5, -1.5, -0.5, 0.5, -1.5, -0.5, -0.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_smwj1"]
 points = PackedVector3Array(1.84586, 0.0095, 1.84586, -2.03175, -0.172227, -2.03175, -1.84586, 0.0095, -1.84586, -2.03175, -0.172227, 2.03175, 2.03175, -0.172227, -2.03175, 2.03175, -0.172227, 2.03175, 1.84586, 0.0095, -1.84586, -1.84586, 0.0095, 1.84586)
@@ -212,6 +192,47 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_onovd")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md2s3"]
+resource_name = "Atlas Metallic"
+cull_mode = 2
+albedo_texture = ExtResource("19_3fnhm")
+metallic = 0.653543
+roughness = 0.301969
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iivnv"]
+_surfaces = [{
+"aabb": AABB(-2, 3.85666, -2, 4, 0.151488, 4),
+"format": 34896613377,
+"index_count": 276,
+"index_data": PackedByteArray("HAABAAIAAgABAB0AHAACAB4AAgAdAB4AHAAfAAEAAQAGAB0AAQAfAAYAHgAdACAAIQAfABwAHAAeAAcAIQAcAAcAHgAgACIABwAeACIAHQAOACAAHQAGAA4AIgAgAAMAIAAjAAMAIAAOACMAIgADAAUABQADACMADAAiAAUABwAiAAwABQAjACQADAAFACQAJAAjACUADgAlACMACgAMACQADgAPACUAJAAlACYACgAkACYAJgAlAAsADwALACUAJgALAAkACQALACcADwAnAAsAKAAmAAkACQAnACgAKAAKACYACAAnAA8AKAAnACkACAApACcAKAApACoAKgAKACgAKgApAAQAKgANAAoAKwAEACkAKwApAAgAKgAEAAAAAAAEACsAAAANACoAAAArACEAAAAhAA0AIQArAB8AHwArAAgAIQAHAA0AHwAIAAYAFgANAAcAGAAKAA0AGAANABYACgAYABkACgAZAAwALAAYABYADAAXAAcADAAZABcAFgAHABcAGQAaABcALQAWABcALAAWAC0ALQAXABoAGAAsABsALQAbACwAGAAbABkALQAaABsAGQAbABoAEQAGAAgAEAAGABEAEAAOAAYAEQAIABIADwASAAgALgAQABEADgATAA8ADgAQABMADwATABIAEAAuABUAEAAVABMALgARAC8ALwARABIALwAVAC4AEwAUABIALwASABQAEwAVABQALwAUABUA"),
+"lods": [0.925784, PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUAAQAGAAMAAAACAAcAAQAEAAgAAQAIAAYACQAEAAAAAAAKAAkACgAFAAkACQALAAQABQALAAkABQADAAsADAACAAUACgAMAAUABwACAAwAAAANAAoAAAAHAA0AAwAOAAsAAwAGAA4ADwAEAAsADgAPAAsACAAEAA8AEAAOAAYAEQAGAAgAEAAGABEADwASAAgAEQAIABIADgATAA8ADgAQABMADwATABIAFAARABIAEAARABQAEwAUABIAFAAVABAAEAAVABMAEwAVABQAFgANAAcAFgAHABcADAAXAAcAGAANABYAGAAKAA0ACgAZAAwACgAYABkADAAZABcAGgAWABcAGAAWABoAGQAaABcAGgAbABgAGAAbABkAGQAbABoA")],
+"name": "Atlas Metallic",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAD/////AAAAAIMCAAAAAAAA//8AAAAA//+DAgAAAAAAAIMC//8AAP////8AAAAAWT0AAFk9AABZPf//WT0AAFk9AAClwgAA////////AAClwv//pcIAAP//gwL//wAApcL//1k9AABZPf//pcIAAKXCAABZPQAApcIAAKXCAADWv485KEAAAChAjzkoQAAAKECOOda/AADWv4451r8AAPhCAAAGvQAABr0AAAa9AAAoQHDG1r8AAChAcMYoQAAA1r9wxta/AADWv3DGKEAAAPhC///4QgAABr3///hCAAAAAP//VVUAAFVVgwIAAAAAVVX//wAAAAAAAIMCVVUAAKmqgwIAAAAAAAD//6mqAACpqv//AAAAAP//gwJVVQAA/////1VVAAD//4MCqaoAAP////+pqgAAqaqDAv//AACpqv////8AAFVVgwL//wAAVVX/////AAAAAIMCqaoAAAa9//8GvQAA+EL//wa9AAAGvQAA+EIAAPhCAAD4QgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_14yrc"]
+resource_name = "SciFi Assets_Plane_047"
+_surfaces = [{
+"aabb": AABB(-2, 3.85666, -2, 4, 0.151488, 4),
+"attribute_data": PackedByteArray("PZTnDT2U7A09lOwNPZTnDT6U5w0+lOwNPpTsDT6U5w09lOcNPZTnDT2U7A09lOwNQZTxDT2U8Q0+lPANPpTtDUCU8A09lOwNQJTtDUGU7A0+lOoNQZTqDUGU7A1BlOoNQZTsDUGU7A09lOcNPZTnDT2U7A09lOwNQZTqDUGU7A1BlOoNQZTqDT6U6g0+lOwNPpTsDT6U6g0+lOwNPpTqDT6U6g0+lOwNPpTqDT6U7A0+lOwNPpTqDT6U7A0+lOoNPpTqDT6U7A1BlOwNQJTtDT2U7A0+lO0NQJTwDT2U8Q1BlPENPpTwDT6U6g1BlOoNQZTsDUGU6g1BlOwNQZTsDUGU6g1BlOwNQZTqDUGU6g0+lOoNPpTsDT6U7A0+lOoNPpTsDT6U6g0+lOoNPpTsDT6U6g0+lOwNPpTsDT6U6g0+lOwNPpTqDT6U6g0+lOwNPZTqDT2U6g09lOkNPZTpDT2U6g09lOoNPZTpDT2U6Q09lOoNPZTqDT2U6Q09lOkNPpTqDT6U6g0+lOkNPpTpDUGU7g1AlOwNPpTsDUGU7w09lO4NQJTxDT2U7w0+lPENPpTsDUGU6g1BlOwNQZTsDUGU7A1BlOoNQZTqDUGU7A1BlOoNQZTsDUGU7g1AlOwNQJTtDT6U8Q09lO8NPpTwDUCU8Q0+lPANQJTwDT6U8Q09lO4NPZTvDUGU7w1BlO4NPpTsDUGU6g1BlOwNQJTtDT6U7A1AlOwNPpTtDT6U7Q0+lOwNPZTuDUGU7A1BlOwNQZTqDUGU6g1BlOwNQZTqDUGU7A1AlPANQZTvDUCU8Q0="),
+"format": 34896613399,
+"index_count": 276,
+"index_data": PackedByteArray("VAABAAIAVABVAAEAVgBVAFQAVgBXAFUAAABXAFYAAAADAFcAWAAKAAsAWABZAAoAWgBZAFgAWgBbAFkACABbAFoACAAJAFsAXAAcAB0AXABdABwAXgBdAFwAXgBfAF0AGgBfAF4AGgAbAF8AYAAFAAYAYABhAAUAYgBhAGAAYgBjAGEABABjAGIABAAHAGMAZABlABMAZAASAGUAEgBmAGUAZwASAGQAEgAPAGYAZwAQABIADwARAGYADAAQAGcADwBoABEADABpABAADgBoAA8AaQAOABAADgBqAGgAaQBrAA4AawBqAA4AawANAGoAbABtAG4AbAAUAG0AbwAgAB4AbwBwACAAIgAjACQAIgAlACMAJgAnACgAJgApACcAFgBxAHIAFgBzAHEAdAAfAHUAdAAhAB8AKgArACwAKgAtACsALgAvADAALgAxAC8AFwAYABkAFwAVABgAdgB3ADIAdgB4AHcAeQB6AHsAeQA3AHoAfAB9AH4AfAB/AH0AOQCAADUAOQCBAIAAggAzAIMAggA2ADMAhACFAIYAhAA6AIUAhwCIAIkAhwCKAIgAiwA0AIwAiwCNADQAjgBCAEAAjgCPAEIARABFAEYARABHAEUASABJAEoASABLAEkAPACQAJEAPACSAJAAkwBBAJQAkwBDAEEATABNAE4ATABPAE0AUABRAFIAUABTAFEAPQA+AD8APQA7AD4AOACVAJYAOACXAJUA"),
+"lods": [0.925784, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAAKAAsADAANAA4ADgANAA8ADAAOABAADwANABEADAAQABIAEgAPABEADAASABMAEgARABMAFAAVABYAFgAVABcAFwAVABgAFwAYABkAGgAbABwAGgAcAB0AHgAfACAAIQAfAB4AIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsALgAvADAALgAxAC8AMgAzADQAMwA1ADQAMgA2ADMANQA3ADQAOAA2ADIAOQA3ADUAOAA5ADYAOAA3ADkAOgA7ADwAPAA7AD0APQA7AD4APQA+AD8AQABBAEIAQwBBAEAARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEA")],
+"material": SubResource("StandardMaterial3D_md2s3"),
+"name": "Atlas Metallic",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 152,
+"vertex_data": PackedByteArray("AAD/////VNUAAIMCAABU1QAA//8AAFTVAACDAv//VNUAAP//AAD/////gwIAAP///////wAA//8AAIMCAAD///////////+///+DAv///78AAIMC////vwAA//////+/AAD/////VtUAAP//AABU1Vk9//9ZPVDVpcL//1k9VtVZPf//pcJW1f////8AAFbVpcL//6XCUNX///////9U1fhC///4Qv+/Br3///hCqObWv3DG1r/2w9a/cMYoQKfm+EL///hCkOYoQHDGKECQ5v////8AAFTV//+DAgAAVNX//4MC//9U1f///////1TV+EL///hC4MMoQHDG1r8SxyhAcMYoQOHD1r9wxta/2MYoQHDG1r9+7Fk9//9ZPdjtKEBwxihA4+1ZPf//pcJ67KXC//+lwpbE1r9wxihA+8Olwv//WT35w9a/cMbWv5vE1r9wxta/iuZZPf//pcLl5ShAcMbWv+DlpcL//6XCjOalwv//WT2+yChAcMYoQCHHWT3//1k9HMfWv3DGKEDLyP//gwIAAFTVpcIAAFk9XNX//4MC//9M1aXCAAClwk3VWT0AAFk9YNUAAIMC//9U1QAAgwIAAGDVWT0AAKXCSdX4QgAABr3/vwa9AAAGvQfJ1r+POShAm8TWv4451r8GyfhCAAAGvczIKECOOda/y8j4QgAABr2yxChAjzkoQODlKECOOda/ssTWv485KEDJ5ShAjzkoQNbtWT0AAKXCfewoQI451r9y7Fk9AABZPdvtpcIAAFk9+8PWv4451r+VxKXCAAClwpfE1r+POShA9sPWv485KEC8yFk9AABZPR/HKECPOShAEselwgAAWT3CyKXCAAClwormKECOOda/5uVZPQAApcLk5da/jjnWv5DmAAD//1VVVNUAAIMCVVVU1QAA//+pqlTVAACDAqmqVNVVVf//////v1VVgwL///+/qar//////7+pqoMC////v/////+pqlTV//+DAqmqVNX/////VVVU1f//gwJVVVTVqar//wAA//+pqoMCAAD//1VV//8AAP//VVWDAgAA//+pqv////9R1f////+pqlPV/////1VVVNVVVf////9W1amq//8AAFbVAAD//6mqVNVVVf//AABR1QAA//9VVVPV+EL//wa9/78Gvf//+EL/vwa9//8Gvf+/+EL//wa99sMoQHDG1r/2wwa9///4QuHD1r9wxihA4cMGvf//Br32wwa9//8GvdnG+EL//wa9FMepqoMCAABS1f//gwJVVVLVpcIAAFk9TdUAAIMCqapS1VVVgwL//1LVWT0AAKXCTdUAAIMCVVVe1Vk9AAClwl7VWT0AAFk9XtUAAIMCqape1amqgwL//0vVVVWDAv//RtVVVYMCAABf1amqgwIAAFnV+EIAAPhC/78GvQAABr3/vwa9AAD4Qv+/pcIAAFk9StX//4MCqapK1f//gwJVVUrVpcIAAKXCStWlwgAApcJM1f//gwKpqkrVqaqDAv//T9X4QgAA+EKbxChAjzkoQJvEBr0AAAa9ssTWv4451r+yxAa9AAD4QpvEBr0AAPhCyeX4QgAA+ELh5Vk9AABZPWDVVVWDAgAAYtUAAIMCVVVe1VRVqqpUVaqqVFWqqlRVqqr/P/+//z//v/8//7//P/+//3//f/9//3//f/9//3//f6eqq6qqqqqqrqqnqqeqq6qnqquqp6qrqq6qp6qqqqqq////f2ayE7TWy+9kaLIStJyy77Odsu+zqqpUVaqqVFWqqlRVqqpUVabkMbRKoHefqeQxtHSgap8mNyUSIzZFExs2ThMqNyES9+bkswLlJbT75Ca0Bufis6uy5rMmtOeyMrTfsqay6bMi4BkfguA/IITgQyAf4BAfVVVMVU1VT1VdVVBVXlVZVVJVTVVVVV1VUVVWVVlVW1UAAP9/GGESYPcYHEwXYRJg72AfYO9gH2DZM6+Yy0sgTdkzsZiWS0NNQ5PaSSOS10gaks9IRpPeSSY0/prlMwmZ5DMDmSg0DpvkYCNgvl+DYLVfh2DoYCJg5zNVzeky2cvlMtTL7zNgzVRVqqpUVaqqVFWqqlRVqqr/f/9//3//f/9//3//f/9/qqpUVaqqVFWqqlRVqqpUVf8//7//P/+//z//v/8//7+uqqeqq6qpqqqqqqqnqquqp6qrqqqqqqquqqeqq6qpqv///3////9/////f+/kKLTv5Ci0zcupZM3LqWTWy/Jkc6Bqn0igeJ9SVU1VUlVNVUxVUFVSVV9VUlVfVUxVYVVPVWBVT1VgVU9VYFVPVWBVW1VaVVVVXVVQVU5VSlVRVQAA/38AAP9/AAD/f1pVSVVaVUlVWlVJVVpVSVVdVVBVWlVSVV9VT1XiM/aY4jP3mLIYJUyxGCVM+RgcTJZLQ03NSx5NUVVWVVRVVVVPVVdV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_iivnv")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_i30e2"]
 size = Vector3(0.986755, 3.97601, 0.595947)
 
@@ -224,80 +245,35 @@ data = PackedVector3Array(-1.4945, 3.5699, -0.2279, 1.4644, 3.4983, -0.2508, 1.4
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pmyk3"]
 points = PackedVector3Array(1.84586, 0.0095, 1.84586, -2.03175, -0.172227, -2.03175, -1.84586, 0.0095, -1.84586, -2.03175, -0.172227, 2.03175, 2.03175, -0.172227, -2.03175, 2.03175, -0.172227, 2.03175, 1.84586, 0.0095, -1.84586, -1.84586, 0.0095, 1.84586)
 
-[node name="Tavern" type="NavigationRegion3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iivnv"]
+albedo_color = Color(0.513233, 0.513233, 0.513233, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_14yrc"]
+material = SubResource("StandardMaterial3D_iivnv")
+size = Vector3(16, 1, 40)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_md2s3"]
+data = PackedVector3Array(-8, 0.5, 20, 8, 0.5, 20, -8, -0.5, 20, 8, 0.5, 20, 8, -0.5, 20, -8, -0.5, 20, 8, 0.5, -20, -8, 0.5, -20, 8, -0.5, -20, -8, 0.5, -20, -8, -0.5, -20, 8, -0.5, -20, 8, 0.5, 20, 8, 0.5, -20, 8, -0.5, 20, 8, 0.5, -20, 8, -0.5, -20, 8, -0.5, 20, -8, 0.5, -20, -8, 0.5, 20, -8, -0.5, -20, -8, 0.5, 20, -8, -0.5, 20, -8, -0.5, -20, 8, 0.5, 20, -8, 0.5, 20, 8, 0.5, -20, -8, 0.5, 20, -8, 0.5, -20, 8, 0.5, -20, -8, -0.5, 20, 8, -0.5, 20, -8, -0.5, -20, 8, -0.5, 20, 8, -0.5, -20, -8, -0.5, -20)
+
+[node name="Tavern" type="NavigationRegion3D" node_paths=PackedStringArray("spawner_marker", "customer_exit", "look_at_marker", "first_exit_marker")]
 navigation_mesh = SubResource("NavigationMesh_i30e2")
 script = ExtResource("2_www31")
+spawner_marker = NodePath("Marker/SpawnerMarker")
+customer_exit = NodePath("Marker/Customer_Exit")
+look_at_marker = NodePath("Marker/look_at_marker")
+first_exit_marker = NodePath("Marker/first_exit_marker")
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1265, 0.866179, 10.012)
 start_position = Vector3(0.0381258, -0.52016, -3.25162)
 end_position = Vector3(0.0668561, -0.50687, -0.925835)
 
-[node name="SpawnerMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9705, 0.55, 12.0418)
-
-[node name="Customer_Exit" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.089, 0, 11.304)
-
-[node name="regal" parent="." instance=ExtResource("3_4hstr")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.53718, 1.5, -3.084)
-
-[node name="regal2" parent="." instance=ExtResource("3_4hstr")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.60653, 1.5, -1.68094)
-
-[node name="theke" parent="." instance=ExtResource("2_3n42s")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.86148, -0.0060789, -2.05304)
-
-[node name="ThekeMarker" parent="theke" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.956, 0.55, -0.989)
-
-[node name="WaitingSlot01" parent="theke" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.50263, 0.106945, 11.6011)
-
-[node name="WaitingSlot02" parent="theke" index="14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62067, 0.106318, 5.22926)
-
-[node name="look_at_marker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44582, 1.1646, -2.62025)
-
-[node name="simple_workstation-placeholder" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97063, 0.492241, -7.10717)
-mesh = SubResource("BoxMesh_ohuer")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="simple_workstation-placeholder"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="simple_workstation-placeholder/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_n3h7w")
-
-[node name="simple_workstation-placeholder2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19709, 0.492241, -7.10717)
-mesh = SubResource("BoxMesh_ohuer")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="simple_workstation-placeholder2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="simple_workstation-placeholder2/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_n3h7w")
-
-[node name="Replicator" parent="." instance=ExtResource("9_00gu0")]
-transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 6.9229, 0.997499, -7.27674)
-
-[node name="table_01" parent="." instance=ExtResource("10_psls7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31843, 0.0249114, 2)
-
-[node name="table_02" parent="." instance=ExtResource("10_psls7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22239, 0.0249114, -4)
-
-[node name="Farb_Storage" parent="." instance=ExtResource("11_n3h7w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -9.9252)
-
-[node name="Alk_Storage" parent="." instance=ExtResource("12_2v68k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -12.2038)
-
-[node name="Sweet_Storage" parent="." instance=ExtResource("13_b6vgq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -11.0601)
-
-[node name="first_exit_marker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140526, 0.215363, 3.69644)
+[node name="NavigationLink3D2" type="NavigationLink3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95819, 0.866179, -5.99298)
+start_position = Vector3(0.0381258, -0.52016, -3.25162)
+end_position = Vector3(0.0668561, -0.50687, -0.925835)
 
 [node name="Building" type="Node3D" parent="."]
 
@@ -527,6 +503,126 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green7/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ibfp0")
 
+[node name="Wall Green15" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -18)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green15"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green15/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green16" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -22)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green16"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green16/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green17" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -26)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green17"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green17/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green18" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -30)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green18"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green18/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green19" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, -18)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green19"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green19/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green20" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, -22)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green20"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green20/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green21" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, -26)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green21"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green21/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green22" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, -30)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green22"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green22/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green23" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0, -32)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green23"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green23/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green24" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8, 0, -32)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green24"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green24/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green25" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -32)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green25"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green25/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
+[node name="Wall Green26" type="MeshInstance3D" parent="Building/Walls"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -32)
+mesh = SubResource("ArrayMesh_hefls")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Walls/Wall Green26"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Walls/Wall Green26/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ibfp0")
+
 [node name="Wall Green8" type="MeshInstance3D" parent="Building/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -10)
 mesh = SubResource("ArrayMesh_hefls")
@@ -599,7 +695,6 @@ shape = SubResource("ConvexPolygonShape3D_ibfp0")
 
 [node name="Roof" parent="Building" instance=ExtResource("16_i30e2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
-visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal" index="0"]
 
@@ -756,11 +851,171 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal16/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ddleq")
 
+[node name="Ceiling Tile Grey Metal17" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+mesh = SubResource("ArrayMesh_14yrc")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal17"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal17/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal18" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -16)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal18"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal18/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal19" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal19"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal19/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal20" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -16)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal20"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal20/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal21" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal21"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal21/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal22" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal22"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal22/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal23" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -20)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal23"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal23/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal24" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -20)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal24"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal24/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal25" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal25"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal25/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal26" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -24)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal26"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal26/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal27" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -24)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal27"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal27/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal28" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -24)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal28"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal28/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal29" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal29"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal29/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal30" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -28)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal30"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal30/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal31" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -28)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal31"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal31/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
+[node name="Ceiling Tile Grey Metal32" type="MeshInstance3D" parent="Building/Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -28)
+mesh = SubResource("ArrayMesh_13nqd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Roof/Ceiling Tile Grey Metal32"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Roof/Ceiling Tile Grey Metal32/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ddleq")
+
 [node name="Door" parent="Building" instance=ExtResource("17_ofo6u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1248, 0, 10.3184)
 
 [node name="Wall With Door Green" parent="Building/Door" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0372, 0, -2.33134)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1309, 0, -2.33134)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Building/Door/Wall With Door Green" index="0"]
 visible = false
@@ -820,6 +1075,102 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
 [node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal4/Floor Tile Metal" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal4/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal13" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal13/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal13/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal14" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -13.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal14/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal14/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal15" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -13.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal15/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal15/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal16" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -13.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal16/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal16/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal17" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -17.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal17/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal17/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal18" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -17.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal18/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal18/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal19" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -17.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal19/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal19/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal20" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -17.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal20/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal20/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal21" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -21.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal21/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal21/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal22" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -21.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal22/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal22/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal23" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -21.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal23/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal23/Floor Tile Metal/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pmyk3")
+
+[node name="Floor_Metal24" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -21.8676)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/Floor_Metal24/Floor Tile Metal" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal24/Floor Tile Metal/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pmyk3")
 
 [node name="Floor_Metal5" parent="Building/Outdoor" instance=ExtResource("21_7ho47")]
@@ -886,11 +1237,142 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 14)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/Floor_Metal12/Floor Tile Metal/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pmyk3")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Building/Outdoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0329399, -0.624716, -3.97027)
+mesh = SubResource("BoxMesh_14yrc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Outdoor/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_md2s3")
+
+[node name="Sketchfab_Scene" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -8.4347, 0.974424, -14.0571)
+
+[node name="Sketchfab_Scene2" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -8.4347, 0.974424, -1.98475)
+
+[node name="Sketchfab_Scene3" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 8.41375, 0.974424, -1.98475)
+
+[node name="Sketchfab_Scene4" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 8.41375, 0.974424, -18.0537)
+
+[node name="Marker" type="Node3D" parent="."]
+
+[node name="SpawnerMarker" type="Marker3D" parent="Marker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9705, 0.55, 12.0418)
+
+[node name="Customer_Exit" type="Marker3D" parent="Marker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.089, 0, 11.304)
+
+[node name="look_at_marker" type="Marker3D" parent="Marker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44582, 1.1646, -2.62025)
+
+[node name="first_exit_marker" type="Marker3D" parent="Marker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140526, 0.215363, 3.69644)
+
+[node name="Moebel" type="Node3D" parent="."]
+
+[node name="regal" parent="Moebel" instance=ExtResource("3_4hstr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.53718, 1.5, -3.084)
+
+[node name="regal2" parent="Moebel" instance=ExtResource("3_4hstr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.60653, 1.5, -1.68094)
+
+[node name="theke" parent="Moebel" instance=ExtResource("2_3n42s")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.86148, -0.0060789, -2.05304)
+
+[node name="table_01" parent="Moebel" instance=ExtResource("10_psls7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.77906, 0.0249114, 3.98977)
+
+[node name="table_02" parent="Moebel" instance=ExtResource("10_psls7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99257, 0.0249114, -4.45303)
+
+[node name="table_03" parent="Moebel" instance=ExtResource("10_psls7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22239, 0.0249114, -0.175517)
+
+[node name="Storages" type="Node3D" parent="."]
+
+[node name="Farb_Storage" parent="Storages" instance=ExtResource("11_n3h7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -9.9252)
+
+[node name="Alk_Storage" parent="Storages" instance=ExtResource("12_2v68k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -12.2038)
+
+[node name="Sweet_Storage" parent="Storages" instance=ExtResource("13_b6vgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -11.0601)
+
+[node name="Recycler" parent="." instance=ExtResource("21_iivnv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.49484, -0.0267622, -7.12195)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="Ceiling Light" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86367, 3.75846, -6.03452)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
 omni_range = 10.0
 
-[editable path="theke"]
+[node name="Ceiling Light2" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86367, 3.75846, 5.93673)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
+omni_range = 10.0
+
+[node name="Ceiling Light3" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19239, 3.75846, 5.93673)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
+omni_range = 10.0
+
+[node name="Ceiling Light4" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19239, 3.75846, -6.02725)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
+omni_range = 10.0
+
+[node name="Ceiling Light5" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351462, 3.75846, -0.0616546)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
+omni_range = 10.0
+
+[node name="Ceiling Light6" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0239673, 3.75846, -18.1266)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
+omni_range = 10.0
+
+[node name="Ceiling Light7" parent="Lights" instance=ExtResource("22_14yrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0239673, 3.75846, -11.9238)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights/Ceiling Light7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0424037, -0.165727, 0.0943165)
+omni_range = 10.0
+
+[node name="Wall Light" parent="Lights" instance=ExtResource("23_qkg73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0525, 2.18727, 8.42182)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Wall Light"]
+transform = Transform3D(1, 0, 0, 0, 0.559193, -0.829038, 0, 0.829038, 0.559193, 0, 0.107913, 0)
+light_color = Color(1, 1, 0.556863, 1)
+spot_angle = 135.63
+
+[node name="Wall Light2" parent="Lights" instance=ExtResource("23_qkg73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00607574, 2.18727, 8.42182)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Wall Light2"]
+transform = Transform3D(1, 0, 0, 0, 0.559193, -0.829038, 0, 0.829038, 0.559193, 0, 0.107913, 0)
+light_color = Color(1, 1, 0.556863, 1)
+spot_angle = 135.63
+
 [editable path="Building/Floors"]
 [editable path="Building/Walls"]
 [editable path="Building/Roof"]
@@ -900,6 +1382,18 @@ omni_range = 10.0
 [editable path="Building/Outdoor/Floor_Metal2"]
 [editable path="Building/Outdoor/Floor_Metal3"]
 [editable path="Building/Outdoor/Floor_Metal4"]
+[editable path="Building/Outdoor/Floor_Metal13"]
+[editable path="Building/Outdoor/Floor_Metal14"]
+[editable path="Building/Outdoor/Floor_Metal15"]
+[editable path="Building/Outdoor/Floor_Metal16"]
+[editable path="Building/Outdoor/Floor_Metal17"]
+[editable path="Building/Outdoor/Floor_Metal18"]
+[editable path="Building/Outdoor/Floor_Metal19"]
+[editable path="Building/Outdoor/Floor_Metal20"]
+[editable path="Building/Outdoor/Floor_Metal21"]
+[editable path="Building/Outdoor/Floor_Metal22"]
+[editable path="Building/Outdoor/Floor_Metal23"]
+[editable path="Building/Outdoor/Floor_Metal24"]
 [editable path="Building/Outdoor/Floor_Metal5"]
 [editable path="Building/Outdoor/Floor_Metal6"]
 [editable path="Building/Outdoor/Floor_Metal7"]
@@ -908,3 +1402,11 @@ omni_range = 10.0
 [editable path="Building/Outdoor/Floor_Metal10"]
 [editable path="Building/Outdoor/Floor_Metal11"]
 [editable path="Building/Outdoor/Floor_Metal12"]
+[editable path="Moebel/theke"]
+[editable path="Lights/Ceiling Light"]
+[editable path="Lights/Ceiling Light2"]
+[editable path="Lights/Ceiling Light3"]
+[editable path="Lights/Ceiling Light4"]
+[editable path="Lights/Ceiling Light5"]
+[editable path="Lights/Ceiling Light6"]
+[editable path="Lights/Ceiling Light7"]

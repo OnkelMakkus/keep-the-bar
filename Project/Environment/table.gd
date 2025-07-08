@@ -18,6 +18,8 @@ var marker_pairs: Array = []
 @export var standing_marker03 : Marker3D
 @export var standing_marker04 : Marker3D
 
+@export var LookAt_Marker: Marker3D
+
 func _ready() -> void:
 	add_to_group("Table")
 

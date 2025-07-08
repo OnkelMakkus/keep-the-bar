@@ -1,12 +1,14 @@
 #ui.gd
 extends Control
 
-@export var menü_main: MarginContainer
-
+@export_category("Buttons")
 @export var quit_btn: Button 
 @export var resume_btn: Button 
 @export var option_btn: Button
+@export var save_btn: Button
+@export var load_btn: Button
 
+@export_category("label")
 @export var kohle_lbl: Label 
 @export var time_lbl: Label 
 @export var alco_mol_lbl: Label 
@@ -15,10 +17,11 @@ extends Control
 @export var sweet_molecules_lbl: Label
 @export var delivery_lbl: Label
 @export var info_text_label: Label
-
-@export var crosshair: ColorRect
 @export var info_label: Label 
 
+@export_category("Misc")
+@export var menü_main: MarginContainer
+@export var crosshair: ColorRect
 @export var info_text_timer: Timer
 
 
@@ -128,3 +131,15 @@ func _on_info_text_timer_timeout() -> void:
 	info_text_label.text = ""
 	delivery_lbl.text = ""
 	info_text_label.visible = false
+
+
+func _on_save_btn_pressed() -> void:
+	print ("saving")
+	Gamemanager.savegame()
+	_on_resume_btn_button_down()
+
+
+func _on_load_btn_pressed() -> void:
+	print ("loading")
+	Gamemanager.loadgame()
+	_on_resume_btn_button_down()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlbu5hbmen2tt"]
+[gd_scene load_steps=10 format=3 uid="uid://dlbu5hbmen2tt"]
 
 [ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_gwywe"]
 [ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Project/Items/bottle.gd" id="2_xnrmv"]
 [ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="3_v3wag"]
 [ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="4_6our1"]
 [ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="4_xnrmv"]
+[ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="6_khfl0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w05o1"]
 transparency = 1
@@ -21,8 +22,10 @@ top_radius = 0.045
 bottom_radius = 0.045
 height = 0.265
 
-[node name="bottle1" node_paths=PackedStringArray("staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
+[node name="bottle1" node_paths=PackedStringArray("mesh", "teleport", "staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
 script = ExtResource("2_xnrmv")
+mesh = NodePath("Cylinder")
+teleport = NodePath("Teleport")
 staticBodies = [NodePath("Cylinder/StaticBody3D")]
 
 [node name="Label3D" type="Label3D" parent="." index="0"]
@@ -50,3 +53,6 @@ shape = SubResource("ConvexPolygonShape3D_80a0o")
 [node name="fill_indicator" type="MeshInstance3D" parent="Cylinder" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137548, 0)
 mesh = SubResource("CylinderMesh_w05o1")
+
+[node name="Teleport" parent="." index="2" instance=ExtResource("6_khfl0")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

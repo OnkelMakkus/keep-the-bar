@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnsoeipqhy0x6"]
+[gd_scene load_steps=8 format=3 uid="uid://cnsoeipqhy0x6"]
 
 [ext_resource type="PackedScene" uid="uid://bh4mpxc8jh5o1" path="res://Assets/models/cerveza.glb" id="1_6xjuf"]
 [ext_resource type="Script" uid="uid://bk558l0vyemf2" path="res://Project/Items/beer_bottle.gd" id="2_uhi74"]
+[ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="3_6ykxm"]
 [ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="3_uhi74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n3nm"]
@@ -13,12 +14,19 @@ data = PackedVector3Array(-0.2673, 0.2916, -0.5877, -0.0238, 0.2916, -0.6362, -0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6bu0"]
 albedo_color = Color(1, 0.0941176, 0.180392, 1)
 
-[node name="Beer_bottle" node_paths=PackedStringArray("staticBodies") groups=["BeerBottle", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_6xjuf")]
+[node name="Beer_bottle" node_paths=PackedStringArray("staticBodies", "mesh", "liquid", "teleport") groups=["BeerBottle", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_6xjuf")]
 transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0, 0)
 script = ExtResource("2_uhi74")
 staticBodies = [NodePath("Círculo_004/StaticBody3D")]
+mesh = NodePath("Círculo_004")
+liquid = NodePath("Círculo_008")
+teleport = NodePath("Teleport")
 
-[node name="Círculo_004" parent="." index="0"]
+[node name="Teleport" parent="." index="0" instance=ExtResource("3_6ykxm")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0.603169)
+visible = false
+
+[node name="Círculo_004" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7n3nm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Círculo_004" index="0" node_paths=PackedStringArray("besitzer")]
@@ -29,5 +37,5 @@ besitzer = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Círculo_004/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_6xjuf")
 
-[node name="Círculo_009" parent="." index="3"]
+[node name="Círculo_009" parent="." index="4"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d6bu0")

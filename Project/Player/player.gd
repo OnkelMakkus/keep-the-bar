@@ -7,6 +7,14 @@ extends CharacterBody3D
 @export var jump_velocity := 4.5
 @export var gravity := 9.8
 
+@export_group("Zero-G")
+@export var fly_speed      := 0.8     # Bewegung in der Luft
+@export var air_damp       := 18.0     # Bremst sanft ab
+@export var max_fly_speed := 6.0  
+@export var zero_g_fov_delta := 5.0       # +5° im Schwebe-Modus
+var _current_zero_g := false              # Merkt letzten Status
+var _fov_tween      : Tween = null
+
 @export_group("Nodes")
 @export var head: Node3D
 @export var camera: Camera3D
@@ -20,8 +28,8 @@ var held_object: Node3D = null
 var pour_rate_ml := 40.0
 var last_label_owner: Node = null
 var quit_menu_open := false
-var highlighted_object: Node3D = null
 var prepare_for_recycling := false
+var zero_g := false
 
 var is_picking_up = false
 
@@ -54,8 +62,8 @@ func place_handslot_z():
 	
 func _input(event):	
 	if event is InputEventMouseMotion and mouse_captured and not Gamemanager.is_in_menu:
-		rotation.y -= event.relative.x * Gamemanager.mouse_sensitivity
-		head.rotation.x -= event.relative.y * Gamemanager.mouse_sensitivity
+		rotation.y -= (event.relative.x * Gamemanager.mouse_sensitivity) / 5
+		head.rotation.x -= (event.relative.y * Gamemanager.mouse_sensitivity) / 5
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !mouse_captured and !quit_menu_open:
@@ -74,52 +82,21 @@ func _input(event):
 				hand_slot.remove_child(held_object)
 				get_parent().add_child(held_object)
 				
-				held_object = null
-			
+				held_object = null			
 			
 	# Pickup/Drop
 	if event.is_action_pressed("interact") and not Gamemanager.is_in_menu:
 		if held_object:
 			if raycast.is_colliding():
-				var hit = raycast.get_collider()
-				if hit.has_method("show_besitzer") and hit.show_besitzer().is_in_group("Recycler"):
+				#var hit = raycast.get_collider()
+				if raycast.get_target().has_method("show_besitzer") and raycast.get_target().show_besitzer().is_in_group("Recycler"):
 					hand_slot.remove_child(held_object)
-					hit.show_besitzer().store_mats(held_object)
+					raycast.get_target().show_besitzer().store_mats(held_object)
 					prepare_for_recycling = true
 			drop_object()
 				
 		else:
-			if raycast.is_colliding():
-				var hit = raycast.get_collider()
-				
-				var recycler_owner = Gamemanager.find_owner_of_group(hit, "Recycler_Button")
-				if recycler_owner:
-					Signalmanager.recycle.emit()
-					return
-					
-				var open_schild_owner = Gamemanager.find_owner_of_group(hit, "Open_Schild")
-				if open_schild_owner:
-					Signalmanager.open_shop.emit()
-					return 
-					
-				var order_schild_owner = Gamemanager.find_owner_of_group(hit, "Order_Schild")
-				if order_schild_owner:
-					Signalmanager.open_order.emit()
-					return 
-					
-				var replicator_owner = Gamemanager.find_owner_of_group(hit, "Replicator")
-				if replicator_owner and not Gamemanager.replicator_open:
-					replicator_owner.open_ui()
-					return
-				
-				var customer = Gamemanager.find_owner_of_group(hit, "Customer")
-				if customer and customer.has_method("clicked_by_player") and not held_object:
-					
-					customer.clicked_by_player()
-					return
-				
-				try_pickup()
-		# Wenn kein Raycast-Hit, passiert einfach nichts
+			raycast.interact()
 		return
 
 
@@ -132,67 +109,74 @@ func _input(event):
 		return
 		
 
+func _update_zero_g_state():
+	zero_g = not down_raycast.is_colliding()
+	if zero_g != _current_zero_g:
+		_current_zero_g = zero_g
+		_tween_fov(zero_g) 
+
 func _physics_process(delta):
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	_update_zero_g_state() 	
+
+	if zero_g:
+		_update_zero_g(delta)
 	else:
-		if Input.is_action_just_pressed("jump") and not Gamemanager.is_in_menu:
-			velocity.y = jump_velocity
-
-	var current_speed = sprint_speed if Input.is_action_pressed("sprint") else move_speed
-	var direction = Vector3.ZERO
-	var forward = -transform.basis.z
-	var right = transform.basis.x
-
-	if not Gamemanager.is_in_menu:
-		if Input.is_action_pressed("move_forward"):
-			direction += forward
-		if Input.is_action_pressed("move_back"):
-			direction -= forward
-		if Input.is_action_pressed("move_left"):
-			direction -= right
-		if Input.is_action_pressed("move_right"):
-			direction += right
+		_update_grounded(delta)
 		
-		direction = direction.normalized()
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
-
-		move_and_slide()
-	update_highlight()
 	show_bottle_label()
-	check_which_object_it_is()
 
 	if is_pouring and held_object and held_object.is_in_group("Bottle"):
 		_process_pouring(delta)
 		
 		
-func check_which_object_it_is():
-	if !raycast.is_colliding():
-		Signalmanager.update_info_label.emit("")
-		return
+func _update_grounded(delta):
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	elif Input.is_action_just_pressed("jump") and not Gamemanager.is_in_menu:
+		velocity.y = jump_velocity
 
-	var hit = raycast.get_collider()
-	if hit == null:
-		Signalmanager.update_info_label.emit("")
-		return
+	var current_speed = sprint_speed if Input.is_action_pressed("sprint") else move_speed
+	var dir3 = _get_move_direction()
+	velocity.x = dir3.x * current_speed
+	velocity.z = dir3.z * current_speed
+
+	move_and_slide()
+	
+	
+func _update_zero_g(delta):
+	# 0) Gravitation abschalten
+	velocity.y = 0.0
+
+	# 1) Eingaben in alle Richtungen
+	var dir = _get_move_direction()
+	
+	# Hoch / Runter mit zusätzlichem Input
+	if Input.is_action_pressed("move_up"):
+		dir += transform.basis.y * fly_speed
+	if Input.is_action_pressed("move_down"):
+		dir -= transform.basis.y * fly_speed
+
+	dir = dir.normalized()
+	velocity += dir * fly_speed
+	velocity =velocity.limit_length(max_fly_speed)
+
+	# 2) Dämpfung, damit man nicht unendlich gleitet
+	velocity = velocity.move_toward(Vector3.ZERO, air_damp * delta)
+
+	move_and_slide()
+	
+	
+func _tween_fov(enable_zero_g: bool):
+	if _fov_tween: _fov_tween.kill()      # laufenden Tween abbrechen
+
+	var base_fov := Gamemanager.FOV                  # dein Standard-FOV
+	var target_fov := base_fov + (zero_g_fov_delta if enable_zero_g else 0.0)
+
+	_fov_tween = create_tween()
+	_fov_tween.tween_property(camera, "fov", target_fov, 0.4)\
+			  .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			
 		
-	if !hit.has_method("show_besitzer"):
-		Signalmanager.update_info_label.emit("")
-		return
-
-	var besitzer = hit.show_besitzer()
-		
-	if besitzer == null:
-		Signalmanager.update_info_label.emit("")
-		return
-		
-	if (besitzer.has_method("clicked_by_player") or not besitzer.has_method("clicked_by_player")):
-		Signalmanager.update_info_label.emit(besitzer.label_name)
-	else:
-		Signalmanager.update_info_label.emit("")
-
-
 func try_pickup():
 	if raycast.is_colliding():
 		var hit = raycast.get_collider()
@@ -217,8 +201,7 @@ func try_pickup():
 				
 			held_object.deactivate_coliders()
 			await get_tree().process_frame
-			if held_object.has_meta("on_theke") and held_object.get_meta("on_theke"):
-				Gamemanager.theke.free_slot_for_object(held_object)
+			if held_object.has_meta("on_theke") and held_object.get_meta("on_theke"):				
 				held_object.set_meta("on_theke", false)
 			held_object.get_parent().remove_child(held_object)
 			hand_slot.add_child(held_object)
@@ -251,7 +234,7 @@ func drop_object():
 	var placed := false
 
 	if raycast.is_colliding():
-		var hit = raycast.get_collider()
+		var hit = raycast.get_target()
 		var hit_parent = hit.get_parent()
 		print(hit.get_groups(), hit.name, held_object.name)
 		if held_object.is_in_group("Glass") or held_object.is_in_group("BeerBottle"):
@@ -347,25 +330,6 @@ func is_object_on_theke(obj: Node3D) -> bool:
 	return obj.has_meta("on_theke") and obj.get_meta("on_theke") == true
 	
 
-func update_highlight():
-	if raycast.is_colliding():
-		var hit = raycast.get_collider()
-		var obj = Gamemanager.find_owner_of_group(hit, "Pickupable")
-		if obj:
-			if highlighted_object and highlighted_object != obj:
-				Gamemanager.highlight_object(highlighted_object, false)
-			Gamemanager.highlight_object(obj, true)
-			highlighted_object = obj
-		else:
-			if highlighted_object:
-				Gamemanager.highlight_object(highlighted_object, false)
-				highlighted_object = null
-	else:
-		if highlighted_object:
-			Gamemanager.highlight_object(highlighted_object, false)
-			highlighted_object = null
-			
-
 func show_bottle_label():
 	if raycast.is_colliding():
 		var hit = raycast.get_collider()
@@ -389,3 +353,19 @@ func hide_label_helper():
 
 func change_fov():
 	camera.fov = Gamemanager.FOV
+	
+	
+func _get_move_direction() -> Vector3:
+	var d = Vector3.ZERO
+	var f = -transform.basis.z
+	var r =  transform.basis.x
+	if not Gamemanager.is_in_menu:
+		if Input.is_action_pressed("move_forward"):
+			d += f
+		if Input.is_action_pressed("move_back"):
+			d -= f
+		if Input.is_action_pressed("move_left"):
+			d -= r
+		if Input.is_action_pressed("move_right"):
+			d += r
+	return d

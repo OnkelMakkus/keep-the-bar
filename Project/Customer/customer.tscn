@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://sduvikmphqh7"]
+[gd_scene load_steps=8 format=3 uid="uid://sduvikmphqh7"]
 
 [ext_resource type="Script" uid="uid://bsd36bnen1ore" path="res://Project/Customer/customer.gd" id="1_fp685"]
 [ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="2_0v30w"]
 [ext_resource type="PackedScene" uid="uid://cq46hpkda2x5t" path="res://Project/Customer/x_bot.tscn" id="5_2o0mk"]
 [ext_resource type="AnimationLibrary" uid="uid://bowy6ht00bv80" path="res://Assets/models/old_fat_dude.res" id="5_fhub2"]
 [ext_resource type="PackedScene" uid="uid://72rj2iihb8e6" path="res://Project/Customer/y_bot.tscn" id="5_vkxjs"]
+[ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="7_n7wjh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0v30w"]
 
-[node name="Customer" type="CharacterBody3D" node_paths=PackedStringArray("label", "agent", "y_animation_player", "x_animation_player", "y_bot", "x_bot", "collider")]
+[node name="Customer" type="CharacterBody3D" node_paths=PackedStringArray("label", "agent", "y_animation_player", "x_animation_player", "y_bot", "x_bot", "collider", "teleport")]
 collision_layer = 2
 collision_mask = 3
 platform_floor_layers = 4294967055
@@ -20,6 +21,7 @@ x_animation_player = NodePath("x_bot/AnimationPlayer")
 y_bot = NodePath("y_bot")
 x_bot = NodePath("x_bot")
 collider = NodePath("CollisionShape3D")
+teleport = NodePath("Teleport")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.5
@@ -30,7 +32,6 @@ height = 2.0
 time_horizon_agents = 5.0
 avoidance_layers = 2
 avoidance_mask = 2
-debug_enabled = true
 
 [node name="Billboard" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.78083, 0)
@@ -42,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521562, 0)
 shape = SubResource("CapsuleShape3D_0v30w")
 
 [node name="y_bot" parent="." instance=ExtResource("5_vkxjs")]
-transform = Transform3D(-0.011, 0, -9.61651e-10, 0, 0.011, 0, 9.61651e-10, 0, -0.011, 0, 0.6, 0)
+transform = Transform3D(-0.011, 0, 9.61651e-10, 0, 0.011, 0, -9.61651e-10, 0, -0.011, 0, 0.6, 0)
 
 [node name="AnimationPlayer" parent="y_bot" index="1"]
 libraries = {
@@ -97,6 +98,9 @@ libraries = {
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -3.2151e-08, -1, 0, 0.735529, -4.37114e-08, 0, 0.962852, -0.133198)
 collision_mask = 2
+
+[node name="Teleport" parent="." instance=ExtResource("7_n7wjh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, -0.465882, 0.01)
 
 [editable path="y_bot"]
 [editable path="x_bot"]

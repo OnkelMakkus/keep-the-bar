@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://douwc4ev6eddm"]
+
+[ext_resource type="Script" uid="uid://cap8awib1ooti" path="res://Project/Helper/teleport.gd" id="1_f74dl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f74dl"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.2, 1, 1, 1)
+emission_enabled = true
+emission_energy_multiplier = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_moc3h"]
+material = SubResource("StandardMaterial3D_f74dl")
+radial_segments = 32
+
+[sub_resource type="Curve" id="Curve_tv78e"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -119.101), 0.0, 0.0, 0, 0, Vector2(1, 200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3r3rj"]
+curve = SubResource("Curve_tv78e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tofwx"]
+lifetime_randomness = 0.5
+particle_flag_damping_as_friction = true
+spread = 15.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 0.999984
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.428
+linear_accel_min = -0.910002
+linear_accel_max = 1.83
+radial_accel_min = -8.11
+radial_accel_max = 5.9
+radial_accel_curve = SubResource("CurveTexture_3r3rj")
+damping_max = 1.0
+scale_min = 0.1
+scale_max = 0.1
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_moc3h"]
+albedo_color = Color(0.247059, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ww2l5"]
+material = SubResource("StandardMaterial3D_moc3h")
+
+[node name="Teleport" type="Node3D" node_paths=PackedStringArray("mesh")]
+script = ExtResource("1_f74dl")
+mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_moc3h")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961855, 0)
+visible = false
+amount = 24
+lifetime = 0.2
+preprocess = 0.1
+explosiveness = 0.2
+randomness = 0.1
+process_material = SubResource("ParticleProcessMaterial_tofwx")
+draw_pass_1 = SubResource("SphereMesh_ww2l5")

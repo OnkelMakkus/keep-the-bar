@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://oopr4nci54s6"]
+[gd_scene load_steps=10 format=3 uid="uid://oopr4nci54s6"]
 
 [ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_8s1kb"]
 [ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Project/Items/bottle.gd" id="2_80a0o"]
 [ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="3_w05o1"]
 [ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="4_eglgq"]
 [ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="5_eglgq"]
+[ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="6_ks3yy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w05o1"]
 transparency = 1
@@ -21,8 +22,10 @@ top_radius = 0.045
 bottom_radius = 0.045
 height = 0.265
 
-[node name="bottle_rum" node_paths=PackedStringArray("staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_8s1kb")]
+[node name="bottle_rum" node_paths=PackedStringArray("mesh", "teleport", "staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_8s1kb")]
 script = ExtResource("2_80a0o")
+mesh = NodePath("Cylinder")
+teleport = NodePath("Teleport")
 staticBodies = [NodePath("Cylinder/StaticBody3D")]
 
 [node name="Cylinder" parent="." index="0"]
@@ -49,3 +52,6 @@ offset_y = 0.35
 offset_dist = 0.06
 use_parent_rotation_compensation = false
 use_position_at_parent = false
+
+[node name="Teleport" parent="." index="2" instance=ExtResource("6_ks3yy")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

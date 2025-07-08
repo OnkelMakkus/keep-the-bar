@@ -20,3 +20,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00332, 0, -4.04654)
 
 [node name="SciFi Assets5" parent="." instance=ExtResource("3_cjkyr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.10579, 0, 0.141966)
+
+[editable path="SciFi Assets4"]

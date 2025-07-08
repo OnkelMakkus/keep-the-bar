@@ -1,10 +1,10 @@
 #tavern.gd
 extends NavigationRegion3D
 
-@onready var spawner_marker: Marker3D = $SpawnerMarker
-@onready var customer_exit: Marker3D = $Customer_Exit
-@onready var look_at_marker: Marker3D = $look_at_marker
-@onready var first_exit_marker: Marker3D = $first_exit_marker
+@export var spawner_marker: Marker3D
+@export var customer_exit: Marker3D
+@export var look_at_marker: Marker3D
+@export var first_exit_marker: Marker3D
 
 
 func _ready() -> void:

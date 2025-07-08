@@ -1,11 +1,11 @@
 #theke.gd
 extends Node3D
 
-@onready var theke_marker: Marker3D = $ThekeMarker
-@onready var bottle_grid: Node3D = $BottleGrid
-@onready var glass_grid: Node3D = $GlassGrid
-@onready var waiting_slot_01: Marker3D = $WaitingSlot01
-@onready var waiting_slot_02: Marker3D = $WaitingSlot02
+@export var theke_marker: Marker3D 
+@export var bottle_grid: Node3D 
+@export var glass_grid: Node3D 
+@export var waiting_slot_01: Marker3D 
+@export var waiting_slot_02: Marker3D 
 
 var label_name = "Theke"
 

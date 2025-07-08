@@ -1,16 +1,16 @@
 extends Control
 
-@onready var mouse_sense_value_lbl: Label = $GridContainer/MouseSenseValueLbl
-@onready var mouse_sense_slider: HSlider = $GridContainer/MouseSenseSlider
-@onready var back_btn: Button = $GridContainer/MarginContainer2/BackBtn
+@export var mouse_sense_value_lbl: Label 
+@export var mouse_sense_slider: HSlider
+@export var back_btn: Button 
+@export var fullscreen_button: CheckButton
 
-@onready var fov_value_lbl: Label = $GridContainer/FOVValueLbl
-@onready var fov_slider: HSlider = $GridContainer/FOVSlider
 
 
 func _ready() -> void:
 	mouse_sense_value_lbl.process_mode = Node.PROCESS_MODE_ALWAYS
 	mouse_sense_slider.process_mode = Node.PROCESS_MODE_ALWAYS
+	fullscreen_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	back_btn.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	Gamemanager.is_in_menu = true
@@ -20,9 +20,9 @@ func _ready() -> void:
 	
 	back_btn.pressed.connect(_on_back_btn_pressed)
 	
-	mouse_sense_slider.value = Gamemanager.mouse_sensitivity
+	mouse_sense_slider.value = Gamemanager.mouse_sensitivity * 1000
 	mouse_sense_value_lbl.text = str(mouse_sense_slider.value)
-	fov_value_lbl.text = str(int(fov_slider.value))
+	
 	print (mouse_sense_slider.value)
 
 func _on_back_btn_pressed() -> void:
@@ -35,17 +35,34 @@ func _on_back_btn_pressed() -> void:
 
 
 func _on_mouse_sense_slider_drag_ended(_value_changed: bool) -> void:
-	Gamemanager.mouse_sensitivity = mouse_sense_slider.value
+	Gamemanager.mouse_sensitivity = mouse_sense_slider.value / 1000
+	print (mouse_sense_slider.value / 1000)
 
 
 func _on_mouse_sense_slider_value_changed(value: float) -> void:
 	mouse_sense_value_lbl.text = str(mouse_sense_slider.value)
 
+func _on_check_button_toggled(toggled_on: bool) -> void:
+	print ("toggled")
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, toggled_on)
+	var screen := DisplayServer.window_get_current_screen()
+	var size := DisplayServer.screen_get_size(screen)
+	DisplayServer.window_set_size(size)
+	DisplayServer.window_set_position(DisplayServer.screen_get_position(screen))
+	_set_camera_fov(size)
 
-func _on_fov_slider_drag_ended(_value_changed: bool) -> void:
-	Gamemanager.FOV = int(fov_slider.value)
-	#Signalmanager.change_fov.emit()
+func _set_camera_fov(screen_size: Vector2):
+	#const V_FOV := 75.0                       # dein Basiswert (vertikal)
+	
+	# Falls du lieber horizontal fixieren willst, nimm die beiden Zeilen darunter:
+	const H_FOV_DESIRED := 100.0
+	var V_FOV = rad_to_deg(2.0 * atan(tan(deg_to_rad(H_FOV_DESIRED) * 0.5) / (screen_size.x / screen_size.y)))
+	
+	var cam := get_node_or_null("Camera3D")
+	if cam:
+		cam.fov = V_FOV                       # vertikale FOV in Grad
 
 
-func _on_fov_slider_value_changed(value: float) -> void:
-	fov_value_lbl.text = str(int(fov_slider.value))
+func _on_check_button_mouse_entered() -> void:
+	print ("mouse entered")

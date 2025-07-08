@@ -17,6 +17,8 @@ var theke_besetzt := false
 var marker1_besetzt := false
 var marker2_besetzt := false
 
+var fullscreen := true
+
 var ordermarkers = []
 var wait_markers = []
 
@@ -32,7 +34,7 @@ var option_open := false
 
 var original_materials := {}
 
-@onready var mouse_sensitivity := 0.002
+@onready var mouse_sensitivity := 0.01
 @export var FOV : int = 70
 
 
@@ -40,6 +42,8 @@ var original_materials := {}
 @onready var ORDER_MENU : PackedScene = load("res://Project/UI/order_menu.tscn")
 @onready var OPTION_MENU : PackedScene = load("res://Project/UI/options.tscn")
 @onready var GLASS_SCENE : PackedScene = load("res://Project/Items/glass.tscn")
+@onready var BEER_SCENE : PackedScene = load("res://Project/Items/beer_bottle.tscn")
+
 
 @onready var boxes = {
 	"beer_box":{
@@ -214,6 +218,66 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
+	
+func gather_save_data():
+	var save = {
+		"money": money,
+		"alk": REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"],
+		"farbe": REPLICATOR_RESSOURCES["MolOr"]["current_amount"],
+		"sweet": REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"],
+		"matter": REPLICATOR_RESSOURCES["Matter"]["current_amount"],
+		"fullscreen": fullscreen,
+		"mousesens": mouse_sensitivity,
+	}
+	return save
+	
+	
+func rewrite_saved_data(save):
+	money = save.money
+	REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"] = save.alk
+	REPLICATOR_RESSOURCES["MolOr"]["current_amount"] = save.farbe
+	REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"] = save.sweet
+	REPLICATOR_RESSOURCES["Matter"]["current_amount"] = save.matter
+	fullscreen = save.fullscreen
+	mouse_sensitivity = save.mousesens
+		
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, fullscreen)
+	
+	Signalmanager.update_info_label.emit()
+	Signalmanager.update_money.emit(0)
+	Signalmanager.update_ressource_label.emit()
+	Signalmanager.update_res_display.emit()
+		
+	
+func savegame():
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var save_data = gather_save_data()
+	var json_string = JSON.stringify(save_data)
+	save_file.store_line(json_string)
+	
+	
+func loadgame():
+	if not FileAccess.file_exists("user://savegame.save"):
+		print ("No Save Found")
+		return # Error! We don't have a save to load.
+		
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+
+			# Creates the helper class to interact with JSON.
+		var json = JSON.new()
+			
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+			# Get the data from the JSON object.
+		var node_data = json.data
+		print (node_data)
+		rewrite_saved_data(node_data)
+		
 
 func update_customers() -> void:
 	wait_markers = [wait_marker_01, wait_marker_02]
@@ -251,7 +315,18 @@ func check_if_release():
 		var size := DisplayServer.screen_get_size(screen)
 		DisplayServer.window_set_size(size)
 		DisplayServer.window_set_position(DisplayServer.screen_get_position(screen))
+		_set_camera_fov(size)
 
+func _set_camera_fov(screen_size: Vector2):
+	#const V_FOV := 75.0                       # dein Basiswert (vertikal)
+	
+	# Falls du lieber horizontal fixieren willst, nimm die beiden Zeilen darunter:
+	const H_FOV_DESIRED := 100.0
+	var V_FOV = rad_to_deg(2.0 * atan(tan(deg_to_rad(H_FOV_DESIRED) * 0.5) / (screen_size.x / screen_size.y)))
+	
+	var cam := get_node_or_null("Camera3D")
+	if cam:
+		cam.fov = V_FOV                       # vertikale FOV in Grad
 
 func highlight_object(obj: Node3D, state: bool):
 	var outline = obj.get_node_or_null("OutlineGenerator")

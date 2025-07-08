@@ -74,15 +74,3 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_005/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, -1.00232, -0.290161)
 shape = SubResource("BoxShape3D_8gg2h")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.312203, -1.04204)
-light_energy = 0.5
-light_bake_mode = 1
-omni_range = 3.0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="." index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19478, -1.04204)
-light_energy = 0.5
-light_bake_mode = 1
-omni_range = 3.0

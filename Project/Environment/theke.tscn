@@ -56,11 +56,30 @@ points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a12ly"]
 points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
 
-[node name="theke" groups=["Theke"] instance=ExtResource("1_urr7a")]
+[node name="theke" node_paths=PackedStringArray("theke_marker", "bottle_grid", "glass_grid", "waiting_slot_01", "waiting_slot_02") groups=["Theke"] instance=ExtResource("1_urr7a")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_1s8hm")
+theke_marker = NodePath("Marker/ThekeMarker")
+bottle_grid = NodePath("BottleGrid")
+glass_grid = NodePath("GlassGrid")
+waiting_slot_01 = NodePath("Marker/WaitingSlot01")
+waiting_slot_02 = NodePath("Marker/WaitingSlot02")
 
-[node name="Theke" parent="." index="0"]
+[node name="Marker" type="Node3D" parent="." index="0"]
+
+[node name="ThekeMarker" type="Marker3D" parent="Marker" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95645, 0, -1.86908)
+script = ExtResource("5_0sx6q")
+
+[node name="WaitingSlot01" type="Marker3D" parent="Marker" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.50263, 0.600594, 11.6011)
+script = ExtResource("5_0sx6q")
+
+[node name="WaitingSlot02" type="Marker3D" parent="Marker" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62067, 0.518851, 5.22926)
+script = ExtResource("5_0sx6q")
+
+[node name="Theke" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_63l0h")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Theke" index="0" node_paths=PackedStringArray("besitzer")]
@@ -70,7 +89,7 @@ besitzer = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Theke/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_i67es")
 
-[node name="Verkleidung" parent="." index="1"]
+[node name="Verkleidung" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_07xhw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Verkleidung" index="0"]
@@ -78,7 +97,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_07xhw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Verkleidung/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_1s8hm")
 
-[node name="Verkleidung_001" parent="." index="2"]
+[node name="Verkleidung_001" parent="." index="3"]
 transform = Transform3D(-1.31134e-09, 0, 0.9, 0, 1, 0, -0.03, 0, -3.93403e-08, 0.000852227, 1.01537, -3.03079)
 surface_material_override/0 = SubResource("StandardMaterial3D_0sx6q")
 
@@ -87,7 +106,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0sx6q")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Verkleidung_001/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_pwrcg")
 
-[node name="Verkleidung_002" parent="." index="3"]
+[node name="Verkleidung_002" parent="." index="4"]
 transform = Transform3D(-1.31134e-09, 0, 0.9, 0, 1, 0, -0.03, 0, -3.93403e-08, 0.000852227, 1.01537, 3.04117)
 surface_material_override/0 = SubResource("StandardMaterial3D_vp83v")
 
@@ -96,7 +115,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vp83v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Verkleidung_002/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_3vdok")
 
-[node name="Pfosten" parent="." index="4"]
+[node name="Pfosten" parent="." index="5"]
 surface_material_override/0 = SubResource("StandardMaterial3D_403qd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pfosten" index="0"]
@@ -104,7 +123,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_403qd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pfosten/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_7qy0i")
 
-[node name="Pfosten_001" parent="." index="5"]
+[node name="Pfosten_001" parent="." index="6"]
 surface_material_override/0 = SubResource("StandardMaterial3D_a0sy8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pfosten_001" index="0"]
@@ -112,7 +131,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_a0sy8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pfosten_001/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_c8ogw")
 
-[node name="Pfosten_002" parent="." index="6"]
+[node name="Pfosten_002" parent="." index="7"]
 surface_material_override/0 = SubResource("StandardMaterial3D_bvt4n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pfosten_002" index="0"]
@@ -120,7 +139,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bvt4n")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pfosten_002/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_gxqyd")
 
-[node name="Pfosten_003" parent="." index="7"]
+[node name="Pfosten_003" parent="." index="8"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2t7oh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pfosten_003" index="0"]
@@ -128,7 +147,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2t7oh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pfosten_003/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_fqw4s")
 
-[node name="Pfosten_004" parent="." index="8"]
+[node name="Pfosten_004" parent="." index="9"]
 transform = Transform3D(0.1, 0, 0, 0, -1.31134e-07, -0.1, 0, 3, -4.37114e-09, 0.844317, 1.90239, 0.0164688)
 surface_material_override/0 = SubResource("StandardMaterial3D_4ypbw")
 
@@ -137,7 +156,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4ypbw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pfosten_004/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_ovev3")
 
-[node name="Pfosten_005" parent="." index="9"]
+[node name="Pfosten_005" parent="." index="10"]
 transform = Transform3D(0.1, 0, 0, 0, -1.31134e-07, -0.1, 0, 3, -4.37114e-09, -0.849224, 1.90239, 0.0164688)
 surface_material_override/0 = SubResource("StandardMaterial3D_ms8fo")
 
@@ -146,7 +165,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ms8fo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pfosten_005/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_a12ly")
 
-[node name="BottleGrid" type="Node3D" parent="." index="10"]
+[node name="BottleGrid" type="Node3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0185909, 0.894485, -2.20671)
 visible = false
 
@@ -186,7 +205,7 @@ script = ExtResource("3_pwrcg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.492819, 1.2, -0.5)
 script = ExtResource("3_pwrcg")
 
-[node name="GlassGrid" type="Node3D" parent="." index="11" groups=["GlassGrid"]]
+[node name="GlassGrid" type="Node3D" parent="." index="12" groups=["GlassGrid"]]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0299627, 0.879668, 0)
 visible = false
 
@@ -201,29 +220,3 @@ script = ExtResource("3_pwrcg")
 [node name="Slot_03" type="Marker3D" parent="GlassGrid" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, 0)
 script = ExtResource("3_pwrcg")
-
-[node name="ThekeMarker" type="Marker3D" parent="." index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95645, 0, -1.86908)
-script = ExtResource("5_0sx6q")
-
-[node name="WaitingSlot01" type="Marker3D" parent="." index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.50263, 0.600594, 11.6011)
-script = ExtResource("5_0sx6q")
-
-[node name="WaitingSlot02" type="Marker3D" parent="." index="14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62067, 0.518851, 5.22926)
-script = ExtResource("5_0sx6q")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.978187, 3.32809, -2.00288)
-light_energy = 0.5
-shadow_enabled = true
-omni_range = 3.904
-omni_attenuation = -0.429
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="." index="16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86129, 3.32809, 2.91283)
-light_energy = 0.5
-shadow_enabled = true
-omni_range = 3.904
-omni_attenuation = -0.429

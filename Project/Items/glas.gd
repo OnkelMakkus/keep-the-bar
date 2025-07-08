@@ -1,11 +1,10 @@
 #glas.gd
 extends Node3D
 
-@onready var glass_liquid: Node3D = $glass_liquid
-@onready var fill_bar := $FillUI/ProgressBar
-@onready var fill_ui: Control = $FillUI
-@onready var fill_background: ColorRect = $FillUI/ProgressBar2
-#@onready var label_3d: Label3D = $Label3D
+@export var glass_liquid: Node3D
+@export var teleport: Node3D 
+@export var mesh: MeshInstance3D
+
 
 @export var fill_ml := 0.0
 @export var max_fill_ml := 250.0
@@ -39,12 +38,16 @@ func set_obj_scale():
 
 func _ready():
 	size = Gamemanager.get_mesh_sizes($Cylinder)
-	Gamemanager.attach_outlineGenerator(self)
 	glass_liquid_mesh = glass_liquid.get_child(0)
+	teleport.scale =Vector3(0.5, 0.2, 0.5)
+	teleport.start(mesh, teleport.scale, self, false)
+	
 	_update_visuals()
 	
+	Gamemanager.attach_outlineGenerator(self)
 	
-func place_on_table_by_customer(pos, table, index):	
+	
+func place_on_table_by_customer(pos, table, index):
 	dirty = true
 	_update_label()
 	global_position = pos
@@ -106,15 +109,15 @@ func get_total_fill_ml() -> float:
 	return sum
 	
 
-func _update_label():	
-	print ("Glas LAbel Updated")
+func _update_label():
+	print ("Glas Label Updated")
 	if contents.size() == 0:
 		label_name = "Glass" + "\n<E> to pick up"
 		if dirty:
 			label_name = "Dirty " + label_name
 		return
 	
-	var text = ""
+	var text = ""	
 	for k in contents.keys():
 		text += "%s (%d ml)\n" % [k, contents[k]]
 		
@@ -138,26 +141,13 @@ func _update_visuals():
 	if mesh:
 		var mesh_height = mesh.get_aabb().size.y
 		glass_liquid.position.y = liquid_offset - (1.0 - fill_level) * 0.5 * mesh_height
+	_update_label()
 
 # Snap-to-regal bleibt erhalten:
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 	return Gamemanager.place_on_shelf(self, reference_point, shelf)
 	
-	
-#func activate_coliders():
-	#self.collision_layer = 1
-	#self.collision_mask = 1
-	#for child in self.get_children():
-		#if child is CollisionShape3D:
-			#child.disabled = false
-			#
-			#
-#func deactivate_coliders():
-	#self.collision_layer = 0
-	#self.collision_mask = 0
-	#for child in self.get_children():
-		#if child is CollisionShape3D:
-			#child.disabled = true
+
 func activate_coliders():
 	if staticBodies:
 		for body in staticBodies:
@@ -182,4 +172,8 @@ func let_it_fall(position):
 	await get_tree().physics_frame
 	global_position = position
 	activate_coliders()
+	
+	
+func despawn():
+	teleport.start(mesh, teleport.scale, self, true)
 	

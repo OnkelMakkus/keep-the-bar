@@ -27,6 +27,7 @@ signal update_ressource_label()
 signal update_storage(alk, color, sweet)
 
 signal give_player_stuff(stuff: PackedScene)
+signal try_pickup()
 
 signal theke_is_free()
 signal waitingslot01_is_free()
@@ -42,3 +43,5 @@ signal ship_order_display(time_left: String)
 
 signal add_customer(customer:CharacterBody3D)
 signal remove_customer(customer:CharacterBody3D)
+
+signal teleport_in()

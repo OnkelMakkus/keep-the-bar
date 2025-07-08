@@ -13,6 +13,10 @@ extends CharacterBody3D
 @export var y_bot: Node3D
 @export var x_bot: Node3D
 @export var collider: CollisionShape3D
+
+@export var teleport: Node3D
+
+
 @onready var raycast: RayCast3D = $RayCast3D
 
 
@@ -33,6 +37,7 @@ var queue_target : Vector3         # letzter Warteschlangen-Punkt
 
 var first_exit_marker
 var exit_marker
+var table_marker
 
 var sex := 1
 
@@ -46,6 +51,7 @@ var label_name := "<E>\nGive Order\nSend away"
 
 func _ready() -> void:
 	add_to_group("Customer")
+	
 
 
 func set_queue_target(pos: Vector3) -> void:
@@ -58,7 +64,6 @@ func initialize(sex_xy : int, cust_name : String, drink : String, start: Vector3
 	global_position = start
 	target = Gamemanager.thekemarker.global_position
 	target_name = Gamemanager.thekemarker.name
-	#target.y = 0
 	agent.target_position = target
 	prints("Target:", agent.target_position, "Real Target:", Gamemanager.thekemarker.global_position)
 	
@@ -70,19 +75,22 @@ func initialize(sex_xy : int, cust_name : String, drink : String, start: Vector3
 		animation_player = y_animation_player
 		y_bot.visible = true
 		x_bot.visible = false
+		teleport.start(y_bot, teleport.scale, self, false)
 	elif sex == 1:
 		animation_player = x_animation_player
 		y_bot.visible = false
 		x_bot.visible = true
+		teleport.start(x_bot, teleport.scale, self, false)
 		
 	if label:
 		label.text = "%s: %s" % [customer_name, order_text]
 		label.visible = false
 		
 	first_exit_marker = Gamemanager.first_exit
-	exit_marker = Gamemanager.customer_exit
+	exit_marker = Gamemanager.customer_exit	
 	
-	
+
+			
 func _physics_process(delta: float) -> void:
 	rotation.x = 0
 	global_position.y = 0.55		
@@ -92,9 +100,11 @@ func _physics_process(delta: float) -> void:
 		if hit.is_in_group("Customer"):
 			if not going_to_table or not leaving:
 				velocity = Vector3.ZERO
+				check_if_walking()
 				return
 	
 	check_if_walking()
+	
 	if going_to_table:
 		set_collider_enabled(false)
 		
@@ -125,6 +135,11 @@ func _physics_process(delta: float) -> void:
 			show_label_if_theke()
 		move_and_slide()
 		return
+		
+	if agent.is_navigation_finished() and at_table and not leaving:
+		look_at(table_marker.global_position)
+		rotation.x = 0.0
+		rotation.z = 0.0
 	
 	general_agent_stuff(delta)	
 	move_and_slide()
@@ -200,13 +215,16 @@ func go_to_marker_and_wait(pair):
 	prints("Going to Table:", target)
 	target = pair["standing_marker"].global_position
 	agent.target_position = target
+	table_marker =  pair["standing_marker"].get_parent().LookAt_Marker
 
 	# Warten bis am Marker
 	while not agent.is_navigation_finished():
 		await get_tree().process_frame
 	
 	at_table = true
-	await get_tree().create_timer(10.0).timeout # z. B. 3 Sekunden Pause
+	
+	var drinking_time = randf_range(3.0, 30.0)
+	await get_tree().create_timer(drinking_time).timeout
 	
 	if not order_text == "Beer":
 		var glass_marker = pair["glass_marker"]
@@ -218,8 +236,13 @@ func go_to_marker_and_wait(pair):
 		# Marker noch nicht freigeben!
 		pair["table"].marker_pairs[pair["index"]]["used"] = true
 	else:
-		# Marker wieder freigeben!
-		pair["table"].marker_pairs[pair["index"]]["used"] = false
+		var glass_marker = pair["glass_marker"]
+		var glass = Gamemanager.BEER_SCENE.instantiate()
+	
+		glass_marker.call_deferred("add_child", glass)
+		glass.call_deferred("place_on_table_by_customer", glass_marker.global_position, pair["table"], pair["index"])
+		# Marker noch nicht freigeben!
+		pair["table"].marker_pairs[pair["index"]]["used"] = true
 	# Danach normal verlassen
 	leaving_now()
 	
@@ -327,7 +350,11 @@ func update_customer_label(drink_served: bool):
 
 func despawn_after_exit():
 	print("👋 Kunde hat das Spielfeld verlassen.")
-	queue_free()
+	if sex == 1:
+		teleport.start(x_bot, teleport.scale, self, true)
+	elif sex == 0:
+		teleport.start(y_bot, teleport.scale, self, true)
+	#queue_free()
 	
 	
 func show_label_if_theke():

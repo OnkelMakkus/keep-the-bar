@@ -3,7 +3,7 @@ extends Node3D
 
 @export var customer_scene: PackedScene
 @export var spawn_interval := 4.0
-@export var max_customers := 3  # So viele stehen gleichzeitig an der Theke
+@export var max_customers := 5  # So viele stehen gleichzeitig an der Theke
 
 @onready var timer := $Timer
 
@@ -49,7 +49,6 @@ func spawn_customer():
 	var cust = customer_scene.instantiate()
 	get_parent().call_deferred("add_child", cust)
 	cust.call_deferred("initialize",sex, cust_name, drink, spawn_marker.global_position)
-	
 
 func _on_timer_timeout():
 	if not Gamemanager.is_open:

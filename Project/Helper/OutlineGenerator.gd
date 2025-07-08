@@ -1,12 +1,13 @@
 @tool
 extends Node3D
 
-@export var outline_material: Material = preload("res://Assets/mats/outline.tres")
+@export var outline_material: Material = preload("res://Assets/mats/outline_mat.tres")
 @export var outline_thickness: float = 0.00
 
 var outline_meshes := []
 
 func _ready():
+	pass
 	_generate_outlines()
 	set_highlight(false)
 
@@ -27,8 +28,8 @@ func _generate_outlines():
 			outline.mesh = child.mesh
 			outline.transform = child.transform
 			outline.material_override = outline_material.duplicate()
-			outline.material_override.set("shader_parameter/thickness", outline_thickness)
-			outline.material_override.set("shader_parameter/color", Color(1.0, 1.0, 0.2, 0.4))
+			#outline.material_override.set("shader_parameter/thickness", outline_thickness)
+			#outline.material_override.set("shader_parameter/color", Color(1.0, 1.0, 0.2, 0.4))
 			outline.visible = false
 			self.add_child(outline)  # <- jetzt ins eigene Node
 			outline_meshes.append(outline)
@@ -43,8 +44,8 @@ func _generate_outlines_recursive(node: Node, parent: Node):
 			outline.mesh = child.mesh
 			outline.transform = child.transform
 			outline.material_override = outline_material.duplicate()
-			outline.material_override.set("shader_parameter/thickness", outline_thickness)
-			outline.material_override.set("shader_parameter/color", Color(1.0, 1.0, 0.2, 0.4))
+			#outline.material_override.set("shader_parameter/thickness", outline_thickness)
+			#outline.material_override.set("shader_parameter/color", Color(1.0, 1.0, 0.2, 0.4))
 			outline.visible = false
 			parent.add_child(outline)
 			outline_meshes.append(outline)

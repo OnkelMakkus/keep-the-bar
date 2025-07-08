@@ -2,6 +2,11 @@ extends Node3D
 
 signal finished_pouring()
 
+@export var mesh: MeshInstance3D
+
+@export var teleport: Node3D
+
+
 @export var staticBodies:Array[StaticBody3D]
 
 @export var ingredient_name := "Rum"
@@ -22,6 +27,10 @@ var label_name := "Bottle"
 func _ready() -> void:
 	size = Gamemanager.get_mesh_sizes($Cylinder)
 	label_name = ingredient_name + "\n" + str(content_ml) +" ml" + "\n<E> to pick up" 
+	
+	teleport.scale =Vector3(0.75, 0.50, 0.75)
+	teleport.start(mesh, teleport.scale, self, false)
+	
 	Gamemanager.attach_outlineGenerator(self)
 	var material = Gamemanager.INGREDIENTS[ingredient_name]["material"]
 	fill_indicator.material_override = material
@@ -135,3 +144,7 @@ func let_it_fall(position):
 	await get_tree().physics_frame
 	global_position = position
 	activate_coliders()
+	
+	
+func despawn():
+	teleport.start(mesh, teleport.scale, self, true)

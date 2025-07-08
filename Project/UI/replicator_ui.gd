@@ -1,5 +1,6 @@
 extends Control
 
+var replicator_marker : Marker3D
 
 func _ready() -> void:
 	Gamemanager.is_in_menu = true
@@ -61,6 +62,11 @@ func _on_drink_btn_pressed(drink_name: String) -> void:
 	for mat_name in mats.keys():
 		print ("Mat: ", mat_name, mats[mat_name])
 		Gamemanager.REPLICATOR_RESSOURCES[mat_name]["current_amount"] -= mats[mat_name]
-	Signalmanager.give_player_stuff.emit(Gamemanager.INGREDIENTS[drink_name]["res"])
+	var obj = Gamemanager.INGREDIENTS[drink_name]["res"].instantiate()
+	replicator_marker.add_child(obj)
 	Signalmanager.update_ressource_label.emit()
 	_on_back_btn_pressed()
+	
+	
+func set_replicator_marker(marker: Marker3D):
+	replicator_marker = marker

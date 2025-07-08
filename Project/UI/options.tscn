@@ -2,15 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c8dix2dm36pt" path="res://Project/UI/options.gd" id="1_prnvy"]
 
-[node name="Options" type="Control"]
+[node name="Options" type="Control" node_paths=PackedStringArray("mouse_sense_value_lbl", "mouse_sense_slider", "back_btn", "fullscreen_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_prnvy")
+mouse_sense_value_lbl = NodePath("GridContainer/VBoxContainer/HBoxContainer/MarginContainer2/MouseSenseValueLbl")
+mouse_sense_slider = NodePath("GridContainer/VBoxContainer/HBoxContainer/MarginContainer3/MouseSenseSlider")
+back_btn = NodePath("GridContainer/MarginContainer2/BackBtn")
+fullscreen_button = NodePath("GridContainer/MarginContainer/CenterContainer/CheckButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -19,109 +23,84 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.223103, 0.223103, 0.223103, 1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 50
-columns = 3
-
-[node name="Label2" type="Label" parent="GridContainer"]
-layout_mode = 2
 
 [node name="Label3" type="Label" parent="GridContainer"]
 layout_mode = 2
 text = "Settings für Robin"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer"]
 layout_mode = 2
 
-[node name="Label9" type="Label" parent="GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="MouseSenseValueLbl" type="Label" parent="GridContainer"]
-layout_mode = 2
-horizontal_alignment = 1
-
-[node name="Label11" type="Label" parent="GridContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="GridContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 50
 
-[node name="Label" type="Label" parent="GridContainer/MarginContainer"]
+[node name="Label" type="Label" parent="GridContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mouse Sens: "
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="MouseSenseSlider" type="HSlider" parent="GridContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="MouseSenseValueLbl" type="Label" parent="GridContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="GridContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 100
+
+[node name="MouseSenseSlider" type="HSlider" parent="GridContainer/VBoxContainer/HBoxContainer/MarginContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 mouse_filter = 1
-min_value = 0.001
-max_value = 0.1
-step = 0.001
-value = 0.01
+min_value = 1.0
+value = 1.0
 
-[node name="Label5" type="Label" parent="GridContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 100
 
-[node name="Label6" type="Label" parent="GridContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="FOVValueLbl" type="Label" parent="GridContainer"]
-visible = false
+[node name="CheckButton" type="CheckButton" parent="GridContainer/MarginContainer/CenterContainer"]
+z_index = 2
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label8" type="Label" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label10" type="MarginContainer" parent="GridContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_right = 20
-
-[node name="Label" type="Label" parent="GridContainer/Label10"]
-layout_mode = 2
-text = "FOV:"
-horizontal_alignment = 2
-
-[node name="FOVSlider" type="HSlider" parent="GridContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
 mouse_filter = 1
-min_value = 70.0
-max_value = 120.0
-value = 70.0
-
-[node name="Label13" type="Label" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label14" type="Label" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+text = "Fullscreen:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="GridContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 250
 theme_override_constants/margin_right = 200
 
 [node name="BackBtn" type="Button" parent="GridContainer/MarginContainer2"]
@@ -129,7 +108,7 @@ layout_mode = 2
 mouse_filter = 1
 text = "Save and Back"
 
-[connection signal="drag_ended" from="GridContainer/MouseSenseSlider" to="." method="_on_mouse_sense_slider_drag_ended"]
-[connection signal="value_changed" from="GridContainer/MouseSenseSlider" to="." method="_on_mouse_sense_slider_value_changed"]
-[connection signal="drag_ended" from="GridContainer/FOVSlider" to="." method="_on_fov_slider_drag_ended"]
-[connection signal="value_changed" from="GridContainer/FOVSlider" to="." method="_on_fov_slider_value_changed"]
+[connection signal="drag_ended" from="GridContainer/VBoxContainer/HBoxContainer/MarginContainer3/MouseSenseSlider" to="." method="_on_mouse_sense_slider_drag_ended"]
+[connection signal="value_changed" from="GridContainer/VBoxContainer/HBoxContainer/MarginContainer3/MouseSenseSlider" to="." method="_on_mouse_sense_slider_value_changed"]
+[connection signal="mouse_entered" from="GridContainer/MarginContainer/CenterContainer/CheckButton" to="." method="_on_check_button_mouse_entered"]
+[connection signal="toggled" from="GridContainer/MarginContainer/CenterContainer/CheckButton" to="." method="_on_check_button_toggled"]
