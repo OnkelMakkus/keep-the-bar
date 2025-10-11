@@ -3,18 +3,18 @@ extends Node3D
 @onready var shipment_timer: Timer = $Shipment_Timer
 @onready var label_timer: Timer = $Label_Timer
 
-
 var temp_AlcoMol
 var temp_MolOr
 var temp_Sweet_Molecules
 var temp_Matter
 
-func start_order_process(alk, color, sweet, mats):
+func start_order_process(alk, color, sweet, mats, duration):
 	temp_AlcoMol = alk
 	temp_MolOr = color
 	temp_Sweet_Molecules = sweet
 	temp_Matter = mats
 	
+	label_timer.wait_time = duration
 	label_timer.start()
 
 

@@ -24,6 +24,8 @@ size = Vector3(0.907104, 0.045166, 0.489014)
 [node name="regal" instance=ExtResource("1_kyig6")]
 script = ExtResource("2_1h08e")
 
+[node name="Cube" parent="." index="0" groups=["unplaceable"]]
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0"]
 collision_mask = 0
 

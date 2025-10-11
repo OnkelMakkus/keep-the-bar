@@ -17,21 +17,15 @@ func _ready() -> void:
 	Signalmanager.set_waiting_marker_02.emit(waiting_slot_02)
 	await get_tree().process_frame
 	Signalmanager.set_theke_marker.emit(theke_marker)
-
-func free_slot_for_object(obj: Node3D):
-	var grids = [
-		"theke/BottleGrid",  # Falls du das mit /root/... brauchst, passe es unten an
-		"theke/GlassGrid"
-	]
-	for path in grids:
-		var grid = get_node_or_null(path)
-		if grid:
-			for slot in grid.get_children():
-				if slot is Marker3D and slot.global_position.distance_to(obj.global_position) < 0.01:
-					slot.belegt = false
 	
-	# Für Regal-Slots:
-	if obj.get_parent() and obj.get_parent().is_in_group("Regalbrett"):
-		for slot in obj.get_parent().get_children():
-			if slot is Marker3D and slot.global_position.distance_to(obj.global_position) < 0.01:
-				slot.set_meta("belegt", false)
+	for n in get_tree().get_nodes_in_group("abstell_marker"):
+		if n is Marker3D:
+			Gamemanager.abstell_marker.append(n)
+	
+	for n in get_tree().get_nodes_in_group("serving_marker"):
+		if n is Marker3D:
+			Gamemanager.serving_marker.append(n)
+			
+	for n in get_tree().get_nodes_in_group("bottle_marker"):
+		if n is Marker3D:
+			Gamemanager.bottle_marker.append(n)

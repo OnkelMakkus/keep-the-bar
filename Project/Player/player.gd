@@ -24,10 +24,13 @@ var _fov_tween      : Tween = null
 @export var hand_slot: Node3D
 @export var raycast: RayCast3D
 @export var down_raycast: RayCast3D
+@export var flashlight: SpotLight3D
+
 
 var mouse_captured := true
 var is_pouring := false
 var held_object: Node3D = null
+var hand_pos: Vector3 = Vector3.ZERO
 var pour_rate_ml := 40.0
 var last_label_owner: Node = null
 var quit_menu_open := false
@@ -37,6 +40,7 @@ var zero_g := false
 var is_picking_up = false
 
 func _ready():
+	flashlight.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Signalmanager.give_player_stuff.connect(give_player_stuff)
 	Signalmanager.change_fov.connect(change_fov)
@@ -48,7 +52,6 @@ func give_player_stuff(stuff: PackedScene):
 	var obj = stuff.instantiate()
 	hand_slot.add_child(obj)
 	held_object = obj
-	held_object.deactivate_coliders()
 	place_handslot_z()
 	
 	
@@ -75,6 +78,12 @@ func _input(event):
 		Signalmanager.switch_quitBtn_visibility.emit(false)
 		return
 			
+	if event.is_action_pressed("Flashlight") and not Gamemanager.is_in_menu:
+		if flashlight.visible:
+			flashlight.visible = false
+		elif not flashlight.visible:
+			flashlight.visible = true
+			
 	if event.is_action_pressed("drop") and not Gamemanager.is_in_menu:
 		if held_object:
 			if down_raycast.is_colliding():
@@ -91,13 +100,11 @@ func _input(event):
 	if event.is_action_pressed("interact") and not Gamemanager.is_in_menu:
 		if held_object:
 			if raycast.is_colliding():
-				#var hit = raycast.get_collider()
 				if raycast.get_target().has_method("show_besitzer") and raycast.get_target().show_besitzer().is_in_group("Recycler"):
 					hand_slot.remove_child(held_object)
 					raycast.get_target().show_besitzer().store_mats(held_object)
 					prepare_for_recycling = true
 			drop_object()
-				
 		else:
 			raycast.interact()
 		return
@@ -214,9 +221,9 @@ func try_pickup():
 								print ("swapped")
 								return
 				
-			held_object.deactivate_coliders()
+			#held_object.deactivate_coliders()
 			await get_tree().process_frame
-			if held_object.has_meta("on_theke") and held_object.get_meta("on_theke"):				
+			if held_object.has_meta("on_theke") and held_object.get_meta("on_theke"):
 				held_object.set_meta("on_theke", false)
 			held_object.get_parent().remove_child(held_object)
 			hand_slot.add_child(held_object)
@@ -264,7 +271,7 @@ func drop_object():
 				placed = true
 				print("✅ Objekt auf Theke frei platziert.", held_object, held_object.global_transform)
 				hit.clicked_by_player()
-				held_object.activate_coliders()
+				#held_object.activate_coliders()
 				held_object = null
 				prepare_for_recycling = false
 				return
@@ -296,7 +303,7 @@ func drop_object():
 			held_object.global_position = raycast.get_collision_point()
 			print("⚪ Freie Platzierung (irgendwo)")
 
-	held_object.activate_coliders()
+	#held_object.activate_coliders()
 	held_object = null
 	prepare_for_recycling = false
 
@@ -323,6 +330,7 @@ func _process_pouring(delta):
 
 func start_pour_animation():
 	camera.fov = Gamemanager.FOV
+	hand_pos = hand_slot.position
 	hand_slot.position.z -= 0.4
 	hand_slot.position.y += 0.2
 	hand_slot.position.x += 0.1
@@ -333,9 +341,7 @@ func start_pour_animation():
 
 func reset_pour_animation():
 	camera.fov = Gamemanager.FOV
-	hand_slot.position.z += 0.4
-	hand_slot.position.y -= 0.2
-	hand_slot.position.x -= 0.1
+	hand_slot.position = hand_pos
 	is_pouring = false
 	if held_object and held_object.has_method("stop_pouring"):
 		held_object.stop_pouring()

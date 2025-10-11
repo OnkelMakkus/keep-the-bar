@@ -11,6 +11,7 @@ one_shot = true
 autostart = true
 
 [node name="Label_Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="timeout" from="Shipment_Timer" to="." method="_on_shipment_timer_timeout"]
 [connection signal="timeout" from="Label_Timer" to="." method="_on_label_timer_timeout"]

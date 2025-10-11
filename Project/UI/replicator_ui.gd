@@ -1,12 +1,16 @@
 extends Control
 
-var replicator_marker : Marker3D
+var replicator_markers: Array[Marker3D] = []
 
 func _ready() -> void:
 	Gamemanager.is_in_menu = true
 	Gamemanager.main_ui.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Signalmanager.toggle_all_ui_for_replicator.emit(false)
+	for n in get_tree().get_nodes_in_group("replicator_slot"):
+		if n is Marker3D:
+			replicator_markers.append(n)
+	print("Replicator Slots: ", replicator_markers.size())
 	
 	
 func _on_rum_btn_pressed() -> void:
@@ -66,11 +70,23 @@ func _on_drink_btn_pressed(drink_name: String) -> void:
 	for mat_name in mats.keys():
 		print ("Mat: ", mat_name, mats[mat_name])
 		Resourcemanager.REPLICATOR_RESSOURCES[mat_name]["current_amount"] -= mats[mat_name]
-	var obj = Resourcemanager.INGREDIENTS[drink_name]["res"].instantiate()
-	replicator_marker.add_child(obj)
+	
+	var slot = Gamemanager.get_free_marker(replicator_markers)
+	if slot:    
+		var obj = Resourcemanager.INGREDIENTS[drink_name]["res"].instantiate()
+		slot.add_child(obj)
+		
+	#replicator_marker.add_child(obj)
 	Signalmanager.update_ressource_label.emit()
 	_on_back_btn_pressed()
+
 	
-	
-func set_replicator_marker(marker: Marker3D):
-	replicator_marker = marker
+#func set_replicator_marker(marker1: Marker3D,marker2: Marker3D,marker3: Marker3D,
+#marker4: Marker3D,marker5: Marker3D, marker6: Marker3D, marker7: Marker3D):
+	#replicator_marker1 = marker1
+	#replicator_marker2 = marker2
+	#replicator_marker3 = marker3
+	#replicator_marker4 = marker4
+	#replicator_marker5 = marker5
+	#replicator_marker6 = marker6
+	#replicator_marker7 = marker7

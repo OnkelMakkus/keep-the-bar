@@ -1,9 +1,8 @@
-[gd_scene load_steps=45 format=4 uid="uid://0qln2fo1hp0v"]
+[gd_scene load_steps=44 format=4 uid="uid://0qln2fo1hp0v"]
 
 [ext_resource type="PackedScene" uid="uid://bg52lr7pk4e6m" path="res://Project/Environment/theke.tscn" id="2_3n42s"]
 [ext_resource type="Script" uid="uid://ccyavunf04tks" path="res://Project/Environment/tavern.gd" id="2_www31"]
 [ext_resource type="PackedScene" uid="uid://coxdxsa5j4cm2" path="res://Project/Environment/Interactable/regal.tscn" id="3_4hstr"]
-[ext_resource type="PackedScene" uid="uid://ckon00bu8o4jw" path="res://Assets/models/thruster.glb" id="10_md2s3"]
 [ext_resource type="PackedScene" uid="uid://dgg27s4x2cac3" path="res://Project/Environment/table_01.tscn" id="10_psls7"]
 [ext_resource type="PackedScene" uid="uid://caekesawo2vrc" path="res://Project/Environment/Interactable/farb_storage.tscn" id="11_n3h7w"]
 [ext_resource type="PackedScene" uid="uid://cbjcymyjxd4ma" path="res://Project/Environment/Interactable/alk_storage.tscn" id="12_2v68k"]
@@ -454,7 +453,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_ibfp0")
 
 [node name="Wall Green3" type="MeshInstance3D" parent="Building/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0363, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.004855, 0, 0)
 mesh = SubResource("ArrayMesh_hefls")
 skeleton = NodePath("")
 
@@ -1245,18 +1244,6 @@ mesh = SubResource("BoxMesh_14yrc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Outdoor/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_md2s3")
-
-[node name="Sketchfab_Scene" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -8.4347, 0.974424, -14.0571)
-
-[node name="Sketchfab_Scene2" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -8.4347, 0.974424, -1.98475)
-
-[node name="Sketchfab_Scene3" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 8.41375, 0.974424, -1.98475)
-
-[node name="Sketchfab_Scene4" parent="Building/Outdoor" instance=ExtResource("10_md2s3")]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 8.41375, 0.974424, -18.0537)
 
 [node name="Marker" type="Node3D" parent="."]
 

@@ -1,3 +1,4 @@
+#savemanager.gd(global)
 extends Node
 
 func gather_save_data():

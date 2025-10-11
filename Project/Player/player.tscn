@@ -7,16 +7,18 @@
 radius = 0.35
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera", "hand_slot", "raycast", "down_raycast") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera", "hand_slot", "raycast", "down_raycast", "flashlight") groups=["Player"]]
 top_level = true
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_v0iea")
+move_speed = 3.5
 head = NodePath("Head")
 camera = NodePath("Head/Camera3D")
 hand_slot = NodePath("Head/HandSlot")
 raycast = NodePath("Head/RayCast3D_Front")
 down_raycast = NodePath("Head/HandSlot/RayCast3D_Down")
+flashlight = NodePath("Head/SpotLight3D")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -28,17 +30,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280513)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -1.6)
 
 [node name="RayCast3D_Down" type="RayCast3D" parent="Head/HandSlot"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.68451107)
 target_position = Vector3(0, 0, -4)
 collision_mask = 11
 
 [node name="RayCast3D_Front" type="RayCast3D" parent="Head" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00469762, -0.450144)
-target_position = Vector3(0, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.004697621, -0.73316514)
+target_position = Vector3(0, 0, -3)
 collision_mask = 11
 collide_with_areas = true
 script = ExtResource("2_2s7ou")
 player = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280513)
+light_color = Color(0.6147954, 0.9999998, 0.9992109, 1)
+light_energy = 20.0
+light_indirect_energy = 2.0
+light_size = 1.0
+light_specular = 0.0
+shadow_enabled = true
+spot_range = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_acmnh")

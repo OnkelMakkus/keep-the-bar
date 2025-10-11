@@ -1,3 +1,4 @@
+#ray_cast_3d_front.gd
 extends RayCast3D
 
 class_name TargetRay
@@ -86,7 +87,6 @@ func interact():
 			
 			var customer = Gamemanager.find_owner_of_group(hit, "Customer")
 			if customer and customer.has_method("clicked_by_player") and not player.held_object:
-				
 				customer.clicked_by_player()
 				return
 			

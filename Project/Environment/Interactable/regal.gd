@@ -14,8 +14,7 @@ func _ready():
 	for child in get_children():
 		if child.is_in_group("Regalbrett"):
 			bretter.append(child)
-
-	#print("Bretter in Gruppe 'Regalbrett':", bretter)
+	
 	for brett in bretter:
 		var mesh_instance := brett as MeshInstance3D
 		if mesh_instance:
@@ -40,4 +39,3 @@ func _ready():
 							slot.add_child(mesh)
 
 					brett.add_child(slot)
-					#print("Slot für", brett.name, "angelegt:", slot.name, slot.position)

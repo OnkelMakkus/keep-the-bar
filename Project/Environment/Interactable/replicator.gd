@@ -5,6 +5,6 @@ extends Node3D
 var label_name := "Replicator\n<E> to open Menu"
 
 func open_ui():
-	var rep_ui = REPLICATOR_UI.instantiate()	
+	var rep_ui = REPLICATOR_UI.instantiate()
 	add_child(rep_ui)
 	Gamemanager.replicator_open = true

@@ -1,5 +1,7 @@
 extends Control
 
+@export var timer_duration : float = 250
+
 @export var PROCESS_ORDER : PackedScene
 @export var order_menu: Control 
 @export var color_rect: ColorRect 
@@ -99,7 +101,7 @@ func _on_set_order_btn_pressed() -> void:
 		
 		var process_order = PROCESS_ORDER.instantiate()
 		Gamemanager.spawnmarker.call_deferred("add_child", process_order)
-		process_order.call_deferred("start_order_process", temp_AlcoMol, temp_MolOr, temp_Sweet_Molecules, temp_matter)
+		process_order.call_deferred("start_order_process", temp_AlcoMol, temp_MolOr, temp_Sweet_Molecules, temp_matter, timer_duration)
 		
 	else:
 		Signalmanager.update_info_text_label.emit("Not enough money")

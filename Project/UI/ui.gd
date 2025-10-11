@@ -23,6 +23,8 @@ extends Control
 @export var menü_main: MarginContainer
 @export var crosshair: ColorRect
 @export var info_text_timer: Timer
+@export var hud_info_timer: Timer
+@export var hud_info_background: TextureRect
 
 
 func _ready():
@@ -49,10 +51,15 @@ func _ready():
 	time_lbl.text = ""
 	info_label.text = ""
 
+func show_hud_info():
+	hud_info_timer.start()
+	set_opacity(hud_info_background, 1)
+	
 
 func update_money(amount: int):
 	Gamemanager.money += amount
 	kohle_lbl.text = "Kohle: " + str(Gamemanager.money)
+	show_hud_info()
 	
 	
 func update_info_text_label(info: String):
@@ -61,6 +68,7 @@ func update_info_text_label(info: String):
 	
 	
 func update_res_display():
+	show_hud_info()
 	alco_mol_lbl.text = "AlcoMol: " + str(Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"])
 	mol_or_lbl.text = "MolOr: " + str(Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"])
 	sweet_molecules_lbl.text = "Sweet Molecules: " + str(Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"])
@@ -97,6 +105,7 @@ func switch_menu_visibility(value: bool):
 	
 func update_delivery_time_label(delivery_time: String):
 	delivery_lbl.text = "Time to delivery: " + delivery_time
+	
 
 func update_time_lbl(time):
 	# time ist eine float-Zahl in Sekunden, z. B. 213.7
@@ -108,6 +117,18 @@ func update_time_lbl(time):
 	var min_str = str(minutes).pad_zeros(2)
 	var sec_str = str(seconds).pad_zeros(2)
 	time_lbl.text = "Time left: %s:%s" % [min_str, sec_str]
+	
+	
+func set_opacity(node: TextureRect, value: float, duration: float = 0.5):
+	if node == null:
+		return
+
+	var start_alpha = node.modulate.a
+	var end_alpha = clampf(value, 0.0, 1.0)
+
+	# Tween erstellen
+	var tween = node.get_tree().create_tween()
+	tween.tween_property(node, "modulate:a", end_alpha, duration).from(start_alpha)
 	
 
 func _on_quit_btn_pressed() -> void:
@@ -143,3 +164,7 @@ func _on_load_btn_pressed() -> void:
 	print ("loading")
 	Savemanager.loadgame()
 	_on_resume_btn_button_down()
+
+
+func _on_hud_info_timer_timeout() -> void:
+	set_opacity(hud_info_background, 0.5)

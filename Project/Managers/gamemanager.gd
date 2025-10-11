@@ -1,7 +1,6 @@
 #gamemanager.gd (global)
 extends Node
 
-
 var spawnmarker
 var thekemarker
 var wait_marker_01
@@ -34,6 +33,10 @@ var option_open := false
 
 var original_materials := {}
 
+var abstell_marker: Array[Marker3D] = []
+var serving_marker: Array[Marker3D] = []
+var bottle_marker: Array[Marker3D] = []
+
 @onready var mouse_sensitivity := 0.01
 @export var FOV : int = 70
 
@@ -44,152 +47,6 @@ var original_materials := {}
 @onready var GLASS_SCENE : PackedScene = load("res://Project/Items/glass.tscn")
 @onready var BEER_SCENE : PackedScene = load("res://Project/Items/beer_bottle.tscn")
 
-
-#@onready var boxes = {
-	#"beer_box":{
-		#"group": "beer_bottle_box",
-		#"res": load("res://Project/Items/bottle_box_beer.tscn")
-	#},
-	#"rum_box":{
-		#"group": "rum_bottle_box",
-		#"res": load("res://Project/Items/bottle_box_rum.tscn")
-	#},
-	#"whiskey_box":{
-		#"group": "whiskey_bottle_box",
-		#"res": load("res://Project/Items/bottle_box_whiskey.tscn")
-	#},
-	#"wodka_box":{
-		#"group": "wodka_bottle_box",
-		#"res": load("res://Project/Items/bottle_box_wodka.tscn")
-	#},
-	#"glass_box":{
-		#"group": "glass_bottle_box",
-		#"res": load("res://Project/Items/bottle_box_glas.tscn")
-	#},
-#}
-
-@export var money := 0
-
-#@onready var REPLICATOR_RESSOURCES ={
-	#"Sweet_Molecules": {
-		#"display_name": "Sweet Molecules",
-		#"buy_price": 2,
-		#"buy_amount" : 100,
-		#"current_amount" : 100,
-	#},
-	#"AlcoMol": {
-		#"display_name": "AlcoMol",
-		#"buy_price": 4,
-		#"buy_amount" : 100,
-		#"current_amount" : 100,
-	#},
-	#"MolOr": {
-		#"display_name": "MolOr",
-		#"buy_price": 1,
-		#"buy_amount" : 100,
-		#"current_amount" : 100,
-	#},
-	#"Matter": {
-		#"display_name": "Matter",
-		#"buy_price": 1,
-		#"buy_amount" : 1000,
-		#"current_amount" : 100,
-	#}
-#}
-#
-#@onready var INGREDIENTS = {
-	#"Glass": {
-		#"display_name": "Glass",
-		#"print_mats" : {
-			#"Sweet_Molecules" : 0,
-			#"AlcoMol" : 0,
-			#"MolOr" : 0,
-			#"Matter": 2,
-		#},
-		#"material": "",
-		#"res": load("res://Project/Items/glass.tscn"),
-	#},
-	#"Rum": {
-		#"display_name": "Rum",
-		#"print_mats" : {
-			#"Sweet_Molecules" : 10,
-			#"AlcoMol" : 25,
-			#"MolOr" : 15,
-			#"Matter": 5,
-		#},
-		#"material": load("res://Assets/mats/rum_whisky.tres"),
-		#"res": load("res://Project/Items/bottle_rum.tscn"),
-	#},
-	#"Whisky": {
-		#"display_name": "Whisky",
-		#"print_mats" : {
-			#"Sweet_Molecules" : 5,
-			#"AlcoMol" : 25,
-			#"MolOr" : 15,
-			#"Matter": 5,
-		#},
-		#"material": load("res://Assets/mats/rum_whisky.tres"),
-		#"res": load("res://Project/Items/bottle_whisky.tscn"),
-	#},
-	#"Wodka": {
-		#"display_name": "Wodka",
-		#"print_mats" : {
-			#"Sweet_Molecules" : 2,
-			#"AlcoMol" : 25,
-			#"MolOr" : 0,
-			#"Matter": 5,
-		#},
-		#"material": load("res://Assets/mats/wodka_water.tres"),
-		#"res": load("res://Project/Items/bottle_wodka.tscn"),
-	#},
-	#"Beer": {
-		#"display_name": "Beer",
-		#"print_mats" : {
-			#"Sweet_Molecules" : 5,
-			#"AlcoMol" : 5,
-			#"MolOr" : 2,
-			#"Matter": 3,
-		#},
-		#"material": load("res://Assets/mats/wodka_water.tres"),
-		#"res": load("res://Project/Items/beer_bottle.tscn"),
-	#},
-	## ... beliebig erweiterbar!
-#}
-#
-#@export var RECIPES = {
-	#"Beer": {
-		#"display_name": "Beer",
-		#"sell_price": 3,
-		#"average_price": 3,
-		#"ingredients": [
-			#{"name": "Beer", "amount_ml": 500}
-		#]
-	#},
-	#"Rum": {
-		#"display_name": "Rum",
-		#"sell_price": 10,
-		#"average_price": 10,
-		#"ingredients": [
-			#{"name": "Rum", "amount_ml": 40}
-		#]
-	#},
-	#"Whisky": {
-		#"display_name": "Whisky",
-		#"sell_price": 12,
-		#"average_price": 12,
-		#"ingredients": [
-			#{"name": "Whisky", "amount_ml": 40}
-		#]
-	#},
-	#"Wodka": {
-		#"display_name": "Wodka",
-		#"sell_price": 8,
-		#"average_price": 8,
-		#"ingredients": [
-			#{"name": "Wodka", "amount_ml": 40}
-		#]
-	#}
-#}
 
 const CUSTOMER_MALE_NAMES = [
 	"Kalle", "Robin", "Kevin", "Murat", "Sven",
@@ -409,20 +266,50 @@ func get_all_free_glass_markers() -> Array:
 	return all_free
 	
 	
-func get_all_free_standing_markers() -> Array:
-	var all_free = []
-	var tables = get_tree().get_nodes_in_group("Table")
-	for table in tables:
-		# Prüfen, ob die Methode existiert (falls es mal andere Nodes gibt)
-		if table.has_method("get_free_standing_markers"):
-			all_free += table.get_free_glass_markers()
-	return all_free
-	
-	
-func get_free_marker_pair():
-	var tables = get_tree().get_nodes_in_group("Table")
-	for table in tables:
-		var pair = table.get_free_marker_pair()
-		if pair:
-			return pair
-	return {}
+# Alle Standing-Marker unter allen Tables einsammeln
+func get_all_standing_markers() -> Array[Marker3D]:
+	var result: Array[Marker3D] = []
+	for table in get_tree().get_nodes_in_group("Table"):
+		_collect_markers_under(table, "standing_marker", result)
+	return result
+
+# Nur freie Marker (keine Children) zurückgeben
+func get_all_free_standing_markers() -> Array[Marker3D]:
+	var free_list: Array[Marker3D] = []
+	for m in get_all_standing_markers():
+		if is_instance_valid(m) and m.get_child_count() == 0:
+			free_list.append(m)
+	return free_list
+
+# Ersten freien Marker (oder null) holen
+func get_free_table_marker() -> Marker3D:
+	for m in get_all_standing_markers():
+		if is_instance_valid(m) and m.get_child_count() == 0:
+			return m
+	return null
+
+# Hilfsfunktionen (rekursiv)
+func get_nodes_in_group_under(parent: Node, group_name: String) -> Array:
+	var result: Array = []
+	_collect_nodes_in_group(parent, group_name, result)
+	return result
+
+func _collect_nodes_in_group(node: Node, group_name: String, result: Array) -> void:
+	for child in node.get_children():
+		if child.is_in_group(group_name):
+			result.append(child)
+		_collect_nodes_in_group(child, group_name, result)
+
+# Spezialisiert: nur Marker3D sammeln
+func _collect_markers_under(node: Node, group_name: String, out: Array[Marker3D]) -> void:
+	for child in node.get_children():
+		if child.is_in_group(group_name) and child is Marker3D:
+			out.append(child)
+		_collect_markers_under(child, group_name, out)
+		
+		
+func get_free_marker(markers) -> Marker3D: 
+	for marker in markers: 
+		if marker.get_child_count() == 0: 
+			return marker 
+	return null

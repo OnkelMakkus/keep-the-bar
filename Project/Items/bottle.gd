@@ -1,3 +1,4 @@
+#bottle.gd
 extends Node3D
 
 signal finished_pouring()
@@ -5,9 +6,6 @@ signal finished_pouring()
 @export var mesh: MeshInstance3D
 
 @export var teleport: Node3D
-
-
-@export var staticBodies:Array[StaticBody3D]
 
 @export var ingredient_name := "Rum"
 @export var content_ml := 700.0
@@ -21,8 +19,8 @@ var current_scale = scale
 var size
 var label_name := "Bottle"
 
-@onready var fill_indicator: MeshInstance3D = $Cylinder/fill_indicator
-@onready var label_3d: Label3D = $Label3D
+@export var fill_indicator: MeshInstance3D
+@export var label_3d: Label3D
 
 func _ready() -> void:
 	size = Gamemanager.get_mesh_sizes($Cylinder)
@@ -116,34 +114,6 @@ func _update_label():
 # Snap-to-Shelf helper (optional)
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 	return Gamemanager.place_on_shelf(self, reference_point, shelf)
-	
-	
-func activate_coliders():
-	if staticBodies:
-		for body in staticBodies:
-			body.collision_layer = 1
-			body.collision_mask = 1
-			for child in body.get_children():
-				if child is CollisionShape3D:
-					child.disabled = false
-			body.visible = true
-	
-
-func deactivate_coliders():
-	if staticBodies:
-		for body in staticBodies:
-			body.collision_layer = 0
-			body.collision_mask = 0
-			for child in body.get_children():
-				if child is CollisionShape3D:
-					child.disabled = true
-			body.visible = false
-			
-			
-func let_it_fall(fall_position):
-	await get_tree().physics_frame
-	global_position = fall_position
-	activate_coliders()
 	
 	
 func despawn():

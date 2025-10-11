@@ -26,7 +26,7 @@ func _process(_delta):
 		my_pos.y += offset_y
 
 		# Optionaler Distanz-Offset (z.B. für Flasche)
-		if offset_dist != 0.0:			
+		if offset_dist != 0.0:
 			if parent:
 				dir_to_cam = (cam_pos - parent.global_transform.origin).normalized()
 				my_pos = parent.global_transform.origin + dir_to_cam * offset_dist

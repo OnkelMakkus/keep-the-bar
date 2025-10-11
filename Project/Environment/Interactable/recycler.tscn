@@ -38,12 +38,11 @@ replicator_button = NodePath("Replicator_Button_Mesh")
 
 [node name="Storage" type="Node3D" parent="."]
 
-[node name="Replicator_Button_Mesh" type="MeshInstance3D" parent="." node_paths=PackedStringArray("replicator_marker") groups=["Replicator"]]
+[node name="Replicator_Button_Mesh" type="MeshInstance3D" parent="." groups=["Replicator"]]
 transform = Transform3D(0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 0, 0, 1, 0.610201, 0.714459, 0.413692)
 mesh = SubResource("BoxMesh_yh3ms")
 script = ExtResource("5_yh3ms")
 REPLICATOR_UI = ExtResource("6_xu6i7")
-replicator_marker = NodePath("../Replicator_Marker")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Replicator_Button_Mesh" node_paths=PackedStringArray("besitzer")]
 script = ExtResource("2_2r8yh")
@@ -75,7 +74,25 @@ besitzer = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SciFi Assets/Hydroponics Full/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ac5t0")
 
-[node name="Replicator_Marker" type="Marker3D" parent="."]
+[node name="Replicator_Marker1" type="Marker3D" parent="." groups=["replicator_slot"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, 0)
+
+[node name="Replicator_Marker2" type="Marker3D" parent="." groups=["replicator_slot"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, 0.21228838)
+
+[node name="Replicator_Marker3" type="Marker3D" parent="." groups=["replicator_slot"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, -0.21935621)
+
+[node name="Replicator_Marker4" type="Marker3D" parent="." groups=["replicator_slot"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, 0.40215588)
+
+[node name="Replicator_Marker5" type="Marker3D" parent="." groups=["replicator_slot"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, -0.40169144)
+
+[node name="Replicator_Marker6" type="Marker3D" parent="." groups=["replicator_slot"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, 0.59814286)
+
+[node name="Replicator_Marker7" type="Marker3D" parent="." groups=["replicator_slot"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301122, 0.818976, -0.60963917)
 
 [editable path="SciFi Assets"]

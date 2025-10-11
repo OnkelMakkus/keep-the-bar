@@ -7,6 +7,8 @@ extends CharacterBody3D
 @export var rotation_speed := 5.0  # Rotation in Grad/Sekunde
 
 @export var label: Label3D
+@export var label_background: Sprite3D
+
 @export var agent : NavigationAgent3D
 @export var y_animation_player: AnimationPlayer
 @export var x_animation_player: AnimationPlayer
@@ -53,7 +55,7 @@ var label_name := "<E>\nGive Order\nSend away"
 
 func _ready() -> void:
 	add_to_group("Customer")
-	Signalmanager.close_store.connect(leaving_now)	
+	Signalmanager.close_store.connect(despawn_after_exit)
 
 
 func set_queue_target(pos: Vector3) -> void:
@@ -95,7 +97,7 @@ func initialize(sex_xy : int, cust_name : String, drink : String, start: Vector3
 		teleport.start(test_model, teleport.scale, self, false)
 		
 	if label:
-		label.text = "%s: %s" % [customer_name, order_text]
+		label.text = "%s: %s" % [customer_name, order_text]	
 		label.visible = false
 		
 	first_exit_marker = Gamemanager.first_exit
@@ -108,7 +110,7 @@ func _physics_process(delta: float) -> void:
 	
 	if raycast.is_colliding():
 		var hit = raycast.get_collider()
-		if hit.is_in_group("Customer"):
+		if hit and hit.is_in_group("Customer"):
 			if not going_to_table or not leaving:
 				velocity = Vector3.ZERO
 				check_if_walking()
@@ -152,11 +154,11 @@ func _physics_process(delta: float) -> void:
 		rotation.x = 0.0
 		rotation.z = 0.0
 	
-	general_agent_stuff(delta)	
+	general_agent_stuff(delta)
 	move_and_slide()
 	
 
-func is_at_target() -> bool:	
+func is_at_target() -> bool:
 	return global_position.distance_to(Gamemanager.thekemarker.global_position) <= 0.9  # oder 0.3, je nach Theke
 
 func look_in_movement_direction(direction: Vector3, delta: float):
@@ -179,11 +181,15 @@ func clicked_by_player():
 	print("🚶‍♂️ Kunde verlässt die Theke...")
 
 	var result = try_serve_drink()
-	print("Result:", result)
-
+	print("Result:", result, result.size())	
+	
 	if not result.has("drink_obj") or not result.has("marker_pair") or not result["drink_obj"] or not result["marker_pair"]:
 		update_customer_label(false) # 😞
-		leaving_now()
+		#if result.size() == 0:
+			#if Gamemanager.serving_container.get_child_count() > 0:
+				#Gamemanager.serving_container.get_child(0).queue_free()
+		#leaving_now()
+		despawn_after_exit()
 		return
 
 	# Getränk an Kunde
@@ -255,25 +261,27 @@ func go_to_marker_and_wait(pair):
 		# Marker noch nicht freigeben!
 		pair["table"].marker_pairs[pair["index"]]["used"] = true
 	# Danach normal verlassen
-	leaving_now()
+	#leaving_now()
+	despawn_after_exit()
 	
 
-func leaving_now():
-	raycast.collision_mask = 5
-	print("Im Leaving")
-	self.remove_from_group("Customer")
-	leaving = true
-	reached_theke = true
-	
-	if first_exit_marker:
-		target = first_exit_marker.global_position
-		agent.target_position = target
-		target.y = 0
-		prints("Kunde verlässt, Ziel:", first_exit_marker.global_position, "Target:", target)
-		await get_tree().create_timer(2.0).timeout # 2 Sek. Smiley zeigen
-		label.visible = false
-	else:
-		print("❌ Exit-Marker nicht gefunden!")
+#Erstmal nicht benutzen
+#func leaving_now():
+	#raycast.collision_mask = 5
+	#print("Im Leaving")
+	#self.remove_from_group("Customer")
+	#leaving = true
+	#reached_theke = true
+	#
+	#if first_exit_marker:
+		#target = first_exit_marker.global_position
+		#agent.target_position = target
+		#target.y = 0
+		#prints("Kunde verlässt, Ziel:", first_exit_marker.global_position, "Target:", target)
+		#await get_tree().create_timer(2.0).timeout # 2 Sek. Smiley zeigen
+		#label.visible = false
+	#else:
+		#print("❌ Exit-Marker nicht gefunden!")
 	
 	
 func look_at_theke(delta):
@@ -335,10 +343,24 @@ func try_serve_drink() -> Dictionary:
 					return {}
 	return {}
 
+func set_thing_back(thing: Node3D) -> void:
+	var slot := Gamemanager.get_free_marker(Gamemanager.abstell_marker)
+	if slot == null:
+		return
+	var old_parent := thing.get_parent()
+	if old_parent:
+		old_parent.remove_child(thing)
+	slot.add_child(thing)
+	thing.scale = Vector3(1,1,1)
+	# am Marker ausrichten:
+	thing.transform = Transform3D.IDENTITY  # lokale Pose = Marker-Pose
+
 
 func _beer_fits(obj, recipe) -> bool:
 	for ingredient in recipe["ingredients"]:
 		if obj.volume_ml < ingredient["amount_ml"]:
+			print("Drin")
+			set_thing_back(obj)
 			return false
 	return true
 
@@ -347,6 +369,8 @@ func _glass_fits(obj, recipe) -> bool:
 		var ingr_name = ingredient["name"]
 		var amount = ingredient["amount_ml"]
 		if not obj.contents.has(ingr_name) or obj.contents[ingr_name] < amount:
+			print("Drin")
+			set_thing_back(obj)
 			return false
 	return true
 
@@ -369,6 +393,8 @@ func update_customer_label(drink_served: bool):
 
 func despawn_after_exit():
 	print("👋 Kunde hat das Spielfeld verlassen.")
+	if self.is_in_group("Customer"):
+		self.remove_from_group("Customer")
 	if sex == 1:
 		teleport.start(x_bot, teleport.scale, self, true)
 	elif sex == 0:

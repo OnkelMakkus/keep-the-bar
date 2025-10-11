@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Project/Items/bottle.gd" id="2_xnrmv"]
 [ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="3_st8p6"]
 [ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="4_6our1"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="4_xnrmv"]
 [ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="6_iix3x"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_80a0o"]
@@ -16,12 +15,17 @@ top_radius = 0.045
 bottom_radius = 0.045
 height = 0.265
 
-[node name="bottle_whisky" node_paths=PackedStringArray("mesh", "teleport", "staticBodies") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xpd3g"]
+height = 0.4136963
+radius = 0.13720703
+
+[node name="bottle_whisky" node_paths=PackedStringArray("mesh", "teleport", "fill_indicator", "label_3d") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
 script = ExtResource("2_xnrmv")
 mesh = NodePath("Cylinder")
 teleport = NodePath("Teleport")
-staticBodies = [NodePath("Cylinder/StaticBody3D")]
 ingredient_name = "Whisky"
+fill_indicator = NodePath("Cylinder/fill_indicator")
+label_3d = NodePath("Label3D")
 
 [node name="Label3D" type="Label3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.426, 0.0724356)
@@ -36,12 +40,9 @@ use_position_at_parent = false
 [node name="Cylinder" parent="." index="1"]
 surface_material_override/0 = ExtResource("4_6our1")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0" node_paths=PackedStringArray("besitzer")]
-collision_layer = 8
-script = ExtResource("4_xnrmv")
-besitzer = NodePath("../..")
+[node name="RigidBody3D" type="RigidBody3D" parent="Cylinder" index="0"]
 
-[node name="Col_Bottle" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
+[node name="Col_Bottle" type="CollisionShape3D" parent="Cylinder/RigidBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_80a0o")
 
 [node name="fill_indicator" type="MeshInstance3D" parent="Cylinder" index="1"]
@@ -50,3 +51,11 @@ mesh = SubResource("CylinderMesh_w05o1")
 
 [node name="Teleport" parent="." index="2" instance=ExtResource("6_iix3x")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="3"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00051379204, 0.20281982, 0)
+shape = SubResource("CylinderShape3D_xpd3g")

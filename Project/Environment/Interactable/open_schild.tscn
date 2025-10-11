@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://76hyay1wjbcu"]
+[gd_scene load_steps=7 format=3 uid="uid://76hyay1wjbcu"]
 
 [ext_resource type="Script" uid="uid://7vfvnb2kbueg" path="res://Project/Environment/Interactable/open_schild.gd" id="1_d6f7q"]
 [ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="2_i4g4t"]
+[ext_resource type="PackedScene" uid="uid://ba3c18owfu8hc" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Air_Con.glb" id="3_i4g4t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oq34n"]
-albedo_color = Color(1, 0.133333, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_nbrg5"]
 material = SubResource("StandardMaterial3D_oq34n")
+size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_acj1n"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
@@ -27,6 +28,11 @@ besitzer = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Open_Schild/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_acj1n")
 
-[node name="Label3D" type="Label3D" parent="Open_Schild"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.541252, 0, 0)
+[node name="Label3D" type="Label3D" parent="Open_Schild/StaticBody3D"]
+transform = Transform3D(-4.3711413e-08, 0, -0.9999999, 0, 0.99999976, 0, 0.99999976, 0, -4.3711385e-08, -0.55233765, -0.11711073, -1.1102226e-15)
 text = "OPEN"
+
+[node name="SciFi Assets" parent="." instance=ExtResource("3_i4g4t")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.489505, 1.3313711, 0)
+
+[editable path="SciFi Assets"]

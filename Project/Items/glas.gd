@@ -12,8 +12,6 @@ extends Node3D
 
 @export var ingredient_name := "Glass"
 
-@export var staticBodies:Array[StaticBody3D]
-
 var glass_liquid_mesh: MeshInstance3D
 var contents := {}  # z.B. { "Rum": 40.0, "Wasser": 20.0 }
 
@@ -145,32 +143,11 @@ func _update_visuals():
 # Snap-to-regal bleibt erhalten:
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 	return Gamemanager.place_on_shelf(self, reference_point, shelf)
-	
-
-func activate_coliders():
-	if staticBodies:
-		for body in staticBodies:
-			body.collision_layer = 1
-			body.collision_mask = 1
-			for child in body.get_children():
-				if child is CollisionShape3D:
-					child.disabled = false
-	
-
-func deactivate_coliders():
-	if staticBodies:
-		for body in staticBodies:
-			body.collision_layer = 0
-			body.collision_mask = 0
-			for child in body.get_children():
-				if child is CollisionShape3D:
-					child.disabled = true
 		
 		
 func let_it_fall(fall_position):
 	await get_tree().physics_frame
 	global_position = fall_position
-	activate_coliders()
 	
 	
 func despawn():

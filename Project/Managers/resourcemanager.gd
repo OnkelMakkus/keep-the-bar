@@ -1,3 +1,4 @@
+#resourcemanager.gd (global)
 extends Node
 
 @onready var REPLICATOR_RESSOURCES ={

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://biy5gybxm5rry"]
+[gd_scene load_steps=4 format=3 uid="uid://biy5gybxm5rry"]
 
 [ext_resource type="Script" uid="uid://c8dix2dm36pt" path="res://Project/UI/options.gd" id="1_prnvy"]
+[ext_resource type="Texture2D" uid="uid://u2e5a83idrqp" path="res://Assets/UI/Weraxxa/PNG/Slider02.png" id="2_vp6yt"]
+[ext_resource type="Texture2D" uid="uid://bq0s6yt8hc1r2" path="res://Assets/UI/Weraxxa/PNG/Button01.png" id="3_161so"]
 
 [node name="Options" type="Control" node_paths=PackedStringArray("mouse_sense_value_lbl", "mouse_sense_slider", "back_btn", "fullscreen_button")]
 layout_mode = 3
@@ -79,6 +81,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 mouse_filter = 1
+theme_override_icons/grabber = ExtResource("2_vp6yt")
+theme_override_icons/grabber_highlight = ExtResource("2_vp6yt")
+theme_override_icons/grabber_disabled = ExtResource("2_vp6yt")
 min_value = 1.0
 value = 1.0
 
@@ -88,9 +93,11 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_bottom = 100
 
 [node name="CenterContainer" type="CenterContainer" parent="GridContainer/MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="CheckButton" type="CheckButton" parent="GridContainer/MarginContainer/CenterContainer"]
+visible = false
 z_index = 2
 layout_mode = 2
 mouse_filter = 1
@@ -107,6 +114,9 @@ theme_override_constants/margin_right = 200
 layout_mode = 2
 mouse_filter = 1
 text = "Save and Back"
+icon = ExtResource("3_161so")
+flat = true
+icon_alignment = 1
 
 [connection signal="drag_ended" from="GridContainer/VBoxContainer/HBoxContainer/MarginContainer3/MouseSenseSlider" to="." method="_on_mouse_sense_slider_drag_ended"]
 [connection signal="value_changed" from="GridContainer/VBoxContainer/HBoxContainer/MarginContainer3/MouseSenseSlider" to="." method="_on_mouse_sense_slider_value_changed"]

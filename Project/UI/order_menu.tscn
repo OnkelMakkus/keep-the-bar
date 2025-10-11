@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnpc5glm4ximw"]
+[gd_scene load_steps=6 format=3 uid="uid://cnpc5glm4ximw"]
 
 [ext_resource type="Script" uid="uid://7fdki3ttm4" path="res://Project/UI/order_menu.gd" id="1_7c2vd"]
 [ext_resource type="PackedScene" uid="uid://bp04l7ce0us2n" path="res://Project/Helper/process_order.tscn" id="2_qp75k"]
+[ext_resource type="Texture2D" uid="uid://bo0tvxfchqscn" path="res://Assets/UI/Weraxxa/PNG/Button05.png" id="3_at5t6"]
+[ext_resource type="Texture2D" uid="uid://b5s6dnqbgjh7u" path="res://Assets/UI/Weraxxa/PNG/Button06.png" id="4_sxl23"]
+[ext_resource type="Texture2D" uid="uid://bq0s6yt8hc1r2" path="res://Assets/UI/Weraxxa/PNG/Button01.png" id="5_lpnug"]
 
 [node name="Order_menu" type="Control" node_paths=PackedStringArray("order_menu", "color_rect", "aspect_ratio_container", "res_01_label", "res_02_label", "res_03_label", "res_04_label", "amount_01_label", "amount_02_label", "amount_03_label", "amount_04_label", "price_01_label", "price_02_label", "price_03_label", "price_04_label", "order_01_label", "order_02_label", "order_03_label", "order_04_label", "current_money_label", "estimated_money_label")]
 layout_mode = 3
@@ -35,7 +38,7 @@ current_money_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContain
 estimated_money_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer/EstimatedMoneyLabel")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 2
+layout_mode = 0
 color = Color(0.151276, 0.151276, 0.151276, 1)
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
@@ -140,18 +143,34 @@ text = "       "
 [node name="Decrease01Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
 layout_mode = 2
 text = "-"
+icon = ExtResource("3_at5t6")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Decrease02Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
 layout_mode = 2
 text = "-"
+icon = ExtResource("3_at5t6")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Decrease03Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
 layout_mode = 2
 text = "-"
+icon = ExtResource("3_at5t6")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Decrease04Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer"]
 layout_mode = 2
 text = "-"
+icon = ExtResource("3_at5t6")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="IncreaseContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -164,18 +183,34 @@ text = "       "
 [node name="Increase01Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
 layout_mode = 2
 text = "+"
+icon = ExtResource("4_sxl23")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Increase02Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
 layout_mode = 2
 text = "+"
+icon = ExtResource("4_sxl23")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Increase03Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
 layout_mode = 2
 text = "+"
+icon = ExtResource("4_sxl23")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Increase04Btn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer"]
 layout_mode = 2
 text = "+"
+icon = ExtResource("4_sxl23")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="OrderShowContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -220,10 +255,16 @@ size_flags_horizontal = 4
 [node name="CancelBtn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer"]
 layout_mode = 2
 text = "Cancel"
+icon = ExtResource("5_lpnug")
+flat = true
+icon_alignment = 1
 
 [node name="SetOrderBtn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer"]
 layout_mode = 2
 text = "Set Order"
+icon = ExtResource("5_lpnug")
+flat = true
+icon_alignment = 1
 
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease01Btn" to="." method="_on_decrease_01_btn_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease02Btn" to="." method="_on_decrease_02_btn_pressed"]
