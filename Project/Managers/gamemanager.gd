@@ -37,6 +37,8 @@ var abstell_marker: Array[Marker3D] = []
 var serving_marker: Array[Marker3D] = []
 var bottle_marker: Array[Marker3D] = []
 
+var money: int = 100
+
 @onready var mouse_sensitivity := 0.01
 @export var FOV : int = 70
 
@@ -184,14 +186,37 @@ func get_object(group):
 func get_objects(group):
 	return get_tree().get_nodes_in_group(group)
 	
-	
-func find_owner_of_group(node: Node, group: String) -> Node:
-	var cur = node
-	while cur:
-		if cur.is_in_group(group):
-			return cur
-		cur = cur.get_parent()
+
+func find_owner_of_group(node_obj: Object, group_name: String, max_hops: int = 12) -> Node:
+	var n := node_obj as Node
+	var hops := 0
+	while n and hops < max_hops:
+		if n.is_in_group(group_name):
+			return n
+
+		# bevorzugt: über show_besitzer() direkt zum eigentlichen Owner
+		if n.has_method("show_besitzer"):
+			var b = n.show_besitzer()
+			if b and b is Node:
+				var owner_node := b as Node
+				if owner_node.is_in_group(group_name):
+					return owner_node
+				# von dort aus weiter prüfen
+				n = owner_node
+				hops += 1
+				continue
+
+		# sonst normal den Parent hoch
+		n = n.get_parent()
+		hops += 1
 	return null
+
+func find_owner_in_any_group(node_obj: Object, groups, max_hops: int = 12) -> Node:
+	for g in groups:
+		var r := find_owner_of_group(node_obj, String(g), max_hops)
+		if r: return r
+	return null
+
 	
 	
 func deactivate_collider(held_object):
@@ -272,6 +297,7 @@ func get_all_standing_markers() -> Array[Marker3D]:
 	for table in get_tree().get_nodes_in_group("Table"):
 		_collect_markers_under(table, "standing_marker", result)
 	return result
+	
 
 # Nur freie Marker (keine Children) zurückgeben
 func get_all_free_standing_markers() -> Array[Marker3D]:
@@ -313,3 +339,71 @@ func get_free_marker(markers) -> Marker3D:
 		if marker.get_child_count() == 0: 
 			return marker 
 	return null
+	
+	
+# ---------- RigidBody-Helpers ----------
+func _get_first_rigidbody(n: Node) -> RigidBody3D:
+	if n is RigidBody3D:
+		return n
+	for c in n.get_children():
+		var rb := _get_first_rigidbody(c)
+		if rb:
+			return rb
+	return null
+
+
+func freeze_for_pickup(obj: Node) -> void:
+	var rb := _get_first_rigidbody(obj)
+	if rb == null:
+		return
+	obj.set_meta("__rb_backup", {
+		"freeze": rb.freeze,
+		"gravity_scale": rb.gravity_scale,
+		"layer": rb.collision_layer,
+		"mask": rb.collision_mask
+	})
+	rb.linear_velocity = Vector3.ZERO
+	rb.angular_velocity = Vector3.ZERO
+	rb.gravity_scale = 0.0
+	rb.freeze = true
+	rb.collision_layer = 0
+	rb.collision_mask = 0
+
+
+func unfreeze_after_place(obj: Node) -> void:
+	var rb := _get_first_rigidbody(obj)
+	if rb == null:
+		return
+
+	var b = null
+	if obj.has_meta("__rb_backup"):
+		b = obj.get_meta("__rb_backup")
+
+	rb.linear_velocity = Vector3.ZERO
+	rb.angular_velocity = Vector3.ZERO
+	rb.freeze = false
+
+	if b != null and "gravity_scale" in b:
+		rb.gravity_scale = b["gravity_scale"]
+	else:
+		rb.gravity_scale = 1.0
+
+	if b != null and "layer" in b:
+		rb.collision_layer = b["layer"]
+	else:
+		rb.collision_layer = 1
+
+	if b != null and "mask" in b:
+		rb.collision_mask = b["mask"]
+	else:
+		rb.collision_mask = 1
+
+	if obj.has_meta("__rb_backup"):
+		obj.remove_meta("__rb_backup")
+		
+		
+func is_placeable_surface(node_obj: Object) -> bool:
+	return find_owner_of_group(node_obj, "placeable_surface") != null
+
+func get_placeable_surface_owner(node_obj: Object) -> Node:
+	return find_owner_of_group(node_obj, "placeable_surface")

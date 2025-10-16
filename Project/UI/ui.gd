@@ -1,5 +1,6 @@
 #ui.gd
 extends Control
+var player: Player
 
 @export_category("Buttons")
 @export var quit_btn: Button 
@@ -26,6 +27,10 @@ extends Control
 @export var hud_info_timer: Timer
 @export var hud_info_background: TextureRect
 
+const CROSSHAIR_IDLE  := Color(1, 1, 1, 0.9)   # weiß
+const CROSSHAIR_HOT   := Color(1, 0.9, 0.2, 1) # gelblich
+var _crosshair_tween: Tween
+
 
 func _ready():
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -33,9 +38,15 @@ func _ready():
 	resume_btn.process_mode = Node.PROCESS_MODE_ALWAYS
 	option_btn.process_mode = Node.PROCESS_MODE_ALWAYS
 	
+	player = Gamemanager.get_object("Player") as Player
+	
 	Gamemanager.main_ui = self
 	
 	switch_menu_visibility(false)
+	
+	player = Gamemanager.get_object("Player") as Player
+	if player:
+		player.target_changed.connect(_on_player_target_changed)
 	
 	Signalmanager.update_time_left.connect(update_time_lbl)
 	Signalmanager.update_money.connect(update_money)
@@ -139,13 +150,9 @@ func _on_resume_btn_button_down() -> void:
 	get_tree().paused = false
 	crosshair.visible = true
 	info_label.visible = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	Signalmanager.switch_menuBtn_visibility.emit(false)
-	# und ggf. deinen player anpassen:
-	var player = Gamemanager.get_object("Player")
 	if player:
-		player.mouse_captured = true
-		player.quit_menu_open = false
+		player.set_menu_open(false)  # Maus capturen + is_in_menu=false
+	Signalmanager.switch_menuBtn_visibility.emit(false)
 
 
 func _on_info_text_timer_timeout() -> void:
@@ -168,3 +175,29 @@ func _on_load_btn_pressed() -> void:
 
 func _on_hud_info_timer_timeout() -> void:
 	set_opacity(hud_info_background, 0.5)
+	
+
+func _on_player_target_changed(new_target: Object) -> void:
+	# Gruppen, die als „interaktiv“ gelten
+	var groups: Array[String] = [
+		"Pickupable", "Bottle", "Glass",
+		"Customer", "Recycler_Button", "Replicator",
+		"Open_Schild", "Order_Schild"
+	]
+
+	var hot := false
+	if new_target != null:
+		var cur_owner := Gamemanager.find_owner_in_any_group(new_target, groups)
+		hot = cur_owner != null
+
+	_set_crosshair_color(CROSSHAIR_HOT if hot else CROSSHAIR_IDLE)
+
+
+
+func _set_crosshair_color(target: Color, duration: float = 0.12) -> void:
+	if not is_instance_valid(crosshair):
+		return
+	if _crosshair_tween:
+		_crosshair_tween.kill()
+	_crosshair_tween = create_tween()
+	_crosshair_tween.tween_property(crosshair, "color", target, duration)

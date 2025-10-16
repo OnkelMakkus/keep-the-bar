@@ -2,7 +2,6 @@
 extends Node3D
 
 @export var mesh: MeshInstance3D 
-@export var liquid: MeshInstance3D 
 @export var teleport: Node3D
 
 @export var beer_name := "Pils"
@@ -20,8 +19,8 @@ var current_index
 var label_name := "Beer\n<E> to pick up"
 
 func _ready():
-	size = Gamemanager.get_mesh_sizes($"Círculo_004")
-	teleport.scale =Vector3(70.0, 10.0, 70.0)
+	size = Gamemanager.get_mesh_sizes($Sketchfab_Scene/Sketchfab_model/Root/BeerBottle/BeerBottle_0)
+	teleport.scale =Vector3(1.0, 1.0, 1.0)
 	teleport.start(mesh, teleport.scale, self, false)
 	Gamemanager.attach_outlineGenerator(self)	
 	

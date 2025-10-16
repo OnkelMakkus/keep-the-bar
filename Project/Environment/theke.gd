@@ -7,6 +7,8 @@ extends Node3D
 @export var waiting_slot_01: Marker3D 
 @export var waiting_slot_02: Marker3D 
 
+@export var position_marker: Marker3D
+
 var label_name = "Theke"
 
 

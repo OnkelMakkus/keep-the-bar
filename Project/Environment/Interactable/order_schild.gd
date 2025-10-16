@@ -1,3 +1,3 @@
 extends Node3D
 
-var label_name := " <E> to interact"
+var label_name := " <LMB> to interact"

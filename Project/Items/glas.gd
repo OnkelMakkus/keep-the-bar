@@ -17,7 +17,7 @@ var contents := {}  # z.B. { "Rum": 40.0, "Wasser": 20.0 }
 
 var current_scale = scale
 var size
-var label_name := "Glass\n<E> to pick up"
+var label_name := "Glass\n<LMB> to pick up"
 var current_table
 var current_index
 
@@ -109,7 +109,7 @@ func get_total_fill_ml() -> float:
 
 func _update_label():
 	if contents.size() == 0:
-		label_name = "Glass" + "\n<E> to pick up"
+		label_name = "Glass" + "\n<LMB> to pick up"
 		if dirty:
 			label_name = "Dirty " + label_name
 		return
@@ -118,7 +118,7 @@ func _update_label():
 	for k in contents.keys():
 		text += "%s (%d ml)\n" % [k, contents[k]]
 		
-	label_name = "Glass\n" + text.strip_edges() + "\n<E> to pick up"
+	label_name = "Glass\n" + text.strip_edges() + "\n<LMB> to pick up"
 	if dirty:
 		label_name = "Dirty " + label_name
 	

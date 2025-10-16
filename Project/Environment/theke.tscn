@@ -56,7 +56,7 @@ points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a12ly"]
 points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
 
-[node name="theke" node_paths=PackedStringArray("theke_marker", "bottle_grid", "glass_grid", "waiting_slot_01", "waiting_slot_02") groups=["Theke"] instance=ExtResource("1_urr7a")]
+[node name="theke" node_paths=PackedStringArray("theke_marker", "bottle_grid", "glass_grid", "waiting_slot_01", "waiting_slot_02", "position_marker") groups=["Theke", "placeable_surface"] instance=ExtResource("1_urr7a")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_1s8hm")
 theke_marker = NodePath("Marker/ThekeMarker")
@@ -64,6 +64,7 @@ bottle_grid = NodePath("BottleGrid")
 glass_grid = NodePath("GlassGrid")
 waiting_slot_01 = NodePath("Marker/WaitingSlot01")
 waiting_slot_02 = NodePath("Marker/WaitingSlot02")
+position_marker = NodePath("Marker/abstell_marker1")
 
 [node name="Marker" type="Node3D" parent="." index="0"]
 
@@ -137,6 +138,8 @@ script = ExtResource("5_0sx6q")
 surface_material_override/0 = SubResource("StandardMaterial3D_63l0h")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Theke" index="0" node_paths=PackedStringArray("besitzer")]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("3_ibdkc")
 besitzer = NodePath("../..")
 

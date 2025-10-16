@@ -1,24 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://fd8f2qfa1plr"]
+[gd_scene load_steps=6 format=3 uid="uid://fd8f2qfa1plr"]
 
 [ext_resource type="Script" uid="uid://c82twjxfwu1hj" path="res://Project/Player/player.gd" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://bf58njekuerl4" path="res://Project/Player/ray_cast_3d_front.gd" id="2_2s7ou"]
+[ext_resource type="Script" uid="uid://brsehd4lyumw2" path="res://Project/Player/PlayerMovement.gd" id="3_1tpvl"]
+[ext_resource type="Script" uid="uid://k3rhskj1ik2v" path="res://Project/Player/PlayerAim.gd" id="4_hruf4"]
+[ext_resource type="Script" uid="uid://dnfm8yk0h7wf0" path="res://Project/Player/PlayerInteraction.gd" id="5_bqdc2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_acmnh"]
 radius = 0.35
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera", "hand_slot", "raycast", "down_raycast", "flashlight") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("movement", "aim", "interaction", "head", "camera", "hand_slot") groups=["Player"]]
 top_level = true
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_v0iea")
-move_speed = 3.5
+movement = NodePath("Movement")
+aim = NodePath("Aim")
+interaction = NodePath("Interaction")
 head = NodePath("Head")
 camera = NodePath("Head/Camera3D")
 hand_slot = NodePath("Head/HandSlot")
-raycast = NodePath("Head/RayCast3D_Front")
-down_raycast = NodePath("Head/HandSlot/RayCast3D_Down")
-flashlight = NodePath("Head/SpotLight3D")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -34,13 +35,12 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 target_position = Vector3(0, 0, -4)
 collision_mask = 11
 
-[node name="RayCast3D_Front" type="RayCast3D" parent="Head" node_paths=PackedStringArray("player")]
+[node name="RayCast3D_Front" type="RayCast3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.004697621, -0.73316514)
 target_position = Vector3(0, 0, -3)
-collision_mask = 11
+collision_mask = 10
+hit_from_inside = true
 collide_with_areas = true
-script = ExtResource("2_2s7ou")
-player = NodePath("../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280513)
@@ -54,3 +54,23 @@ spot_range = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_acmnh")
+
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("player", "head", "camera", "raycast_down", "flashlight")]
+script = ExtResource("3_1tpvl")
+player = NodePath("..")
+head = NodePath("../Head")
+camera = NodePath("../Head/Camera3D")
+raycast_down = NodePath("../Head/HandSlot/RayCast3D_Down")
+flashlight = NodePath("../Head/SpotLight3D")
+
+[node name="Aim" type="Node" parent="." node_paths=PackedStringArray("ray_front")]
+script = ExtResource("4_hruf4")
+ray_front = NodePath("../Head/RayCast3D_Front")
+
+[node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("player", "head", "camera", "hand_slot", "aim")]
+script = ExtResource("5_bqdc2")
+player = NodePath("..")
+head = NodePath("../Head")
+camera = NodePath("../Head/Camera3D")
+hand_slot = NodePath("../Head/HandSlot")
+aim = NodePath("../Aim")

@@ -13,12 +13,12 @@ extends Node3D
 
 @export var serving_container: Node3D 
 
-var player: CharacterBody3D
+var player: Player
 
 var paused := false
 
 func _ready() -> void:
-	player = Gamemanager.get_object("Player")
+	player = Gamemanager.get_object("Player") as Player
 	Signalmanager.update_money.emit(0)
 	Gamemanager.serving_container = serving_container
 	
@@ -43,9 +43,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			# Spiel fortsetzen
 			if not Gamemanager.is_in_menu:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-				player.mouse_captured = true
-				player.quit_menu_open = false
+				player.set_menu_open(false)
 				get_tree().paused = false
 				Signalmanager.switch_menuBtn_visibility.emit(false)
 
@@ -55,9 +53,7 @@ func allTheMainMenuStuff():
 	info_label.visible = false
 	info_text_label.visible = false
 	
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	player.mouse_captured = false
-	player.quit_menu_open = true
+	player.set_menu_open(true)
 	get_tree().paused = true
 	Signalmanager.switch_menuBtn_visibility.emit(true)
 	

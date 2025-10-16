@@ -1,50 +1,42 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnsoeipqhy0x6"]
+[gd_scene load_steps=6 format=3 uid="uid://di3qu5wd0g3bh"]
 
-[ext_resource type="PackedScene" uid="uid://bh4mpxc8jh5o1" path="res://Assets/models/cerveza.glb" id="1_6xjuf"]
+[ext_resource type="PackedScene" uid="uid://ld86jw1wmpqh" path="res://Assets/models/scene.gltf" id="2_n3tab"]
 [ext_resource type="Script" uid="uid://bk558l0vyemf2" path="res://Project/Items/beer_bottle.gd" id="2_uhi74"]
 [ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="3_6ykxm"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n3nm"]
-albedo_color = Color(0.947339, 0.421682, 5.77569e-07, 1)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6ykxm"]
+points = PackedVector3Array(1.02402, -0.00020051003, -3.4187305, 0.94603574, -0.39192617, -3.4187305, 0.99996305, -0.00020051003, -3.6176846, 0.94603574, 0.39172578, -3.4187305, 0.99996305, -0.00020051003, -0.027891636, 0.7239108, -0.7241112, -3.4187305, 0.70707095, -0.70727146, -3.6176846, 0.92378306, -0.38270438, -3.6176846, 0.92378306, -0.38270438, -0.027891636, 0.70707095, -0.70727146, -0.027891636, 0.85121167, -0.35263336, -3.75056, 0.9211769, -0.00020051003, -3.75056, 0.85121167, 0.35243285, -3.75056, 0.92378306, 0.382504, -3.6176846, 0.70707095, 0.70707095, -3.6176846, 0.7239108, 0.7239108, -3.4187305, 0.70707095, 0.70707095, -0.027891636, 0.92378306, 0.382504, -0.027891636, 0.41858923, 0.17340982, 3.3500187, 0.45307076, -0.00020051003, 3.3500187, 0.41858923, -0.17361027, 3.3500187, 0.39172578, -0.94623613, -3.4187305, 0.382504, -0.9239836, -3.6176846, 0.35243285, -0.85141206, -3.75056, 0.6513393, -0.6515397, -3.75056, 0.32035708, -0.32055753, 3.3500187, 0.17340982, -0.41878968, 3.3500187, 0.382504, -0.9239836, -0.027891636, 0.6513393, 0.6513393, -3.75056, 0.35243285, 0.85121167, -3.75056, 0.382504, 0.92378306, -3.6176846, 0.39172578, 0.94603574, -3.4187305, 0.17340982, 0.41858923, 3.3500187, 0.32035708, 0.32035708, 3.3500187, 0.382504, 0.92378306, -0.027891636, 0.3829049, 0.15857482, 3.5870397, 0.41437924, -0.00020051003, 3.5870397, 0.3829049, -0.15877521, 3.5870397, -0.00020051003, -1.02402, -3.4187305, -0.00020051003, -1.0001636, -3.6176846, -0.00020051003, -1.0001636, -0.027891636, -0.00020051003, -0.9215779, -3.75056, 0.29289222, -0.29329312, 3.5870397, 0.15857482, -0.38310534, 3.5870397, -0.00020051003, -0.45327115, 3.3500187, -0.00020051003, 0.9211769, -3.75056, -0.00020051003, 0.99996305, -3.6176846, -0.00020051003, 0.99996305, -0.027891636, -0.00020051003, 1.02402, -3.4187305, -0.00020051003, 0.45307076, 3.3500187, 0.15857482, 0.3829049, 3.5870397, 0.29289222, 0.29289222, 3.5870397, -0.39192617, -0.94623613, -3.4187305, -0.38270438, -0.9239836, -3.6176846, -0.35263336, -0.85141206, -3.75056, -0.17361027, -0.41878968, 3.3500187, -0.38270438, -0.9239836, -0.027891636, -0.00020051003, -0.41457975, 3.5870397, -0.15877521, -0.38310534, 3.5870397, -0.35263336, 0.85121167, -3.75056, -0.38270438, 0.92378306, -3.6176846, -0.39192617, 0.94603574, -3.4187305, -0.38270438, 0.92378306, -0.027891636, -0.17361027, 0.41858923, 3.3500187, -0.15877521, 0.3829049, 3.5870397, -0.00020051003, 0.41437924, 3.5870397, -0.70727146, -0.70727146, -0.027891636, -0.7241112, -0.7241112, -3.4187305, -0.70727146, -0.70727146, -3.6176846, -0.6515397, -0.6515397, -3.75056, -0.29329312, -0.29329312, 3.5870397, -0.32055753, -0.32055753, 3.3500187, -0.6515397, 0.6513393, -3.75056, -0.70727146, 0.70707095, -3.6176846, -0.7241112, 0.7239108, -3.4187305, -0.70727146, 0.70707095, -0.027891636, -0.32055753, 0.32035708, 3.3500187, -0.29329312, 0.29289222, 3.5870397, -0.41878968, -0.17361027, 3.3500187, -0.9239836, -0.38270438, -0.027891636, -0.94623613, -0.39192617, -3.4187305, -0.9239836, -0.38270438, -3.6176846, -0.85141206, -0.35263336, -3.75056, -0.38310534, -0.15877521, 3.5870397, -0.85141206, 0.35243285, -3.75056, -0.9239836, 0.382504, -3.6176846, -0.94623613, 0.39172578, -3.4187305, -0.9239836, 0.382504, -0.027891636, -0.41878968, 0.17340982, 3.3500187, -0.38310534, 0.15857482, 3.5870397, -0.45327115, -0.00020051003, 3.3500187, -1.0001636, -0.00020051003, -0.027891636, -1.02402, -0.00020051003, -3.4187305, -1.0001636, -0.00020051003, -3.6176846, -0.9215779, -0.00020051003, -3.75056, -0.41457975, -0.00020051003, 3.5870397)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6ykxm"]
-height = 7.49805
-radius = 1.99658
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5xq7"]
+height = 0.34768677
+radius = 0.07080078
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6bu0"]
-albedo_color = Color(1, 0.0941176, 0.180392, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_n3tab"]
-height = 100.0
-radius = 33.833
-
-[node name="Beer_bottle" node_paths=PackedStringArray("mesh", "liquid", "teleport") groups=["GlassGrid", "Replicator"] instance=ExtResource("1_6xjuf")]
-transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0, 0)
+[node name="BeerBottle" type="Node3D" node_paths=PackedStringArray("mesh", "teleport") groups=["BeerBottle", "Interactable", "Pickupable"]]
 script = ExtResource("2_uhi74")
-mesh = NodePath("Círculo_004")
-liquid = NodePath("Círculo_008")
+mesh = NodePath("Sketchfab_Scene/Sketchfab_model/Root/BeerBottle/BeerBottle_0")
 teleport = NodePath("Teleport")
 
-[node name="Teleport" parent="." index="0" instance=ExtResource("3_6ykxm")]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0.603169)
-visible = false
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_n3tab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14730203, 0)
 
-[node name="Círculo_004" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_7n3nm")
+[node name="Sketchfab_model" parent="Sketchfab_Scene" index="0"]
+transform = Transform3D(0.04, 0, 0, 0, -1.7484555e-09, 0.04, 0, -0.04, -1.7484555e-09, 0, 0, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Círculo_004" index="0"]
+[node name="RigidBody3D" type="RigidBody3D" parent="Sketchfab_Scene/Sketchfab_model/Root/BeerBottle/BeerBottle_0" index="0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Círculo_004/RigidBody3D" index="0"]
-transform = Transform3D(1, -3.67304e-09, 0, 9.34142e-13, 1, 2.28942e-10, 1.93715e-07, 2.14644e-08, 1, 5.85506e-09, -3.47754, -6.79579e-09)
-shape = SubResource("CylinderShape3D_6ykxm")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_Scene/Sketchfab_model/Root/BeerBottle/BeerBottle_0/RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_6ykxm")
 
-[node name="Círculo_009" parent="." index="4"]
-surface_material_override/0 = SubResource("StandardMaterial3D_d6bu0")
+[node name="Teleport" parent="." instance=ExtResource("3_6ykxm")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="." index="5"]
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14975812, 0)
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.096066, 0)
-shape = SubResource("CylinderShape3D_n3tab")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0124053955, 0)
+shape = SubResource("CylinderShape3D_i5xq7")
+
+[editable path="Sketchfab_Scene"]

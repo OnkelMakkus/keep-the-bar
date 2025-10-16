@@ -22,6 +22,8 @@ skeleton = NodePath("../..")
 script = ExtResource("1_d6f7q")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Open_Schild" node_paths=PackedStringArray("besitzer")]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("2_i4g4t")
 besitzer = NodePath("..")
 

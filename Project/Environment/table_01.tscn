@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bxhdcck7k30f3" path="res://Project/Environment/table.gd" id="1_i5vl2"]
 [ext_resource type="PackedScene" uid="uid://clp7lxvtckaky" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/End_Table.glb" id="3_u7ef4"]
 
-[node name="table_01" type="Node3D" node_paths=PackedStringArray("glas_marker01", "glas_marker02", "glas_marker03", "glas_marker04", "standing_marker01", "standing_marker02", "standing_marker03", "standing_marker04", "LookAt_Marker")]
+[node name="table" type="Node3D" node_paths=PackedStringArray("glas_marker01", "glas_marker02", "glas_marker03", "glas_marker04", "standing_marker01", "standing_marker02", "standing_marker03", "standing_marker04", "LookAt_Marker") groups=["placeable_surface"]]
 script = ExtResource("1_i5vl2")
 glas_marker01 = NodePath("Glas_Marker01")
 glas_marker02 = NodePath("Glas_Marker02")

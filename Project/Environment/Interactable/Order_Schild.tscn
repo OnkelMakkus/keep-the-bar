@@ -12,17 +12,19 @@ size = Vector3(0.5, 0.25, 0.02)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ggycl"]
 points = PackedVector3Array(0.25, 0.125, 0.01, 0.25, 0.125, -0.01, -0.25, 0.125, 0.01, 0.25, -0.125, 0.01, 0.25, -0.125, -0.01, -0.25, 0.125, -0.01, -0.25, -0.125, 0.01, -0.25, -0.125, -0.01)
 
-[node name="Order_Schild" type="Node3D" groups=["Order_Schild"]]
+[node name="Order_Schild" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["Order_Schild"]]
+mesh = SubResource("BoxMesh_jimmp")
 script = ExtResource("1_md7n8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_jimmp")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-collision_mask = 0
+[node name="StaticBody3DOrder" type="StaticBody3D" parent="MeshInstance3D" node_paths=PackedStringArray("besitzer") groups=["Order_Schild"]]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_67i04")
+besitzer = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3DOrder"]
 shape = SubResource("ConvexPolygonShape3D_ggycl")
 
 [node name="Label3D" type="Label3D" parent="."]

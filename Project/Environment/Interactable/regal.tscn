@@ -32,7 +32,7 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_1h08e")
 
-[node name="Cube_001" parent="." index="1" groups=["Regalbrett"]]
+[node name="Cube_001" parent="." index="1" groups=["Regalbrett", "placeable_surface"]]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_001" index="0"]
 collision_mask = 0
@@ -41,7 +41,7 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 shape = SubResource("BoxShape3D_g2o3n")
 
-[node name="Cube_002" parent="." index="2" groups=["Regalbrett"]]
+[node name="Cube_002" parent="." index="2" groups=["Regalbrett", "placeable_surface"]]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_002" index="0"]
 collision_mask = 0
@@ -50,7 +50,7 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00671387, 0.499985, -0.288647)
 shape = SubResource("BoxShape3D_1h08e")
 
-[node name="Cube_003" parent="." index="3" groups=["Regalbrett"]]
+[node name="Cube_003" parent="." index="3" groups=["Regalbrett", "placeable_surface"]]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_003" index="0"]
 collision_mask = 0
@@ -59,7 +59,7 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00177002, 0.997902, -0.289856)
 shape = SubResource("BoxShape3D_34td3")
 
-[node name="Cube_004" parent="." index="4" groups=["Regalbrett"]]
+[node name="Cube_004" parent="." index="4" groups=["Regalbrett", "placeable_surface"]]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_004" index="0"]
 collision_mask = 0
@@ -68,7 +68,7 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00921631, -0.499634, -0.286377)
 shape = SubResource("BoxShape3D_tm8im")
 
-[node name="Cube_005" parent="." index="5" groups=["Regalbrett"]]
+[node name="Cube_005" parent="." index="5" groups=["Regalbrett", "placeable_surface"]]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_005" index="0"]
 collision_mask = 0

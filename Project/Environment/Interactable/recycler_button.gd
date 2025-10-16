@@ -1,3 +1,3 @@
 extends MeshInstance3D
 
-var label_name := "<E> to recycle"
+var label_name := "<LMB> to recycle"
