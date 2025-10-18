@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DrinkRecipe" load_steps=5 format=3 uid="uid://b5plh3ga2mtfl"]
+
+[ext_resource type="Script" uid="uid://cijbx8v0bwsro" path="res://Project/Data/Drinks/ingredient_amount.gd" id="1_5tiwo"]
+[ext_resource type="Resource" uid="uid://bq6rtkxuf2t3i" path="res://Project/Data/Liquids/whisky.tres" id="2_5tiwo"]
+[ext_resource type="Script" uid="uid://d2q8ntoiioyk7" path="res://Project/Data/Drinks/drink_recipe.gd" id="3_2s66p"]
+
+[sub_resource type="Resource" id="Resource_kxufk"]
+script = ExtResource("1_5tiwo")
+liquid = ExtResource("2_5tiwo")
+amount_ml = 40
+
+[resource]
+script = ExtResource("3_2s66p")
+id = "Whisky"
+display_name = "Whisky"
+sell_price = 12
+ingredients = Array[ExtResource("1_5tiwo")]([SubResource("Resource_kxufk")])

@@ -1,13 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://sduvikmphqh7"]
+[gd_scene load_steps=17 format=3 uid="uid://sduvikmphqh7"]
 
 [ext_resource type="Script" uid="uid://bsd36bnen1ore" path="res://Project/Customer/customer.gd" id="1_fp685"]
 [ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="2_0v30w"]
+[ext_resource type="Material" uid="uid://b1gs6anxli8d1" path="res://Project/Helper/telelporter_mat.tres" id="2_t6jkd"]
 [ext_resource type="Texture2D" uid="uid://duo4x0cuftbmy" path="res://Assets/UI/Weraxxa/PNG/Button11.png" id="3_mba04"]
 [ext_resource type="PackedScene" uid="uid://cq46hpkda2x5t" path="res://Project/Customer/x_bot.tscn" id="5_2o0mk"]
 [ext_resource type="AnimationLibrary" uid="uid://bowy6ht00bv80" path="res://Assets/models/old_fat_dude.res" id="5_fhub2"]
 [ext_resource type="PackedScene" uid="uid://72rj2iihb8e6" path="res://Project/Customer/y_bot.tscn" id="5_vkxjs"]
 [ext_resource type="PackedScene" uid="uid://k1cl6r3ctpk0" path="res://Project/Customer/test_model.tscn" id="7_mba04"]
 [ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="7_n7wjh"]
+[ext_resource type="AudioStream" uid="uid://cxw3610yvnm5l" path="res://Assets/Sounds/snd_warp_out.wav" id="10_0iqrn"]
+[ext_resource type="AudioStream" uid="uid://cd63k8jhnkgej" path="res://Assets/Sounds/snd_warp_in.wav" id="11_c5qlr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0v30w"]
 
@@ -473,7 +476,7 @@ _data = {
 &"Untitled_Walking": SubResource("Animation_0iqrn")
 }
 
-[node name="Customer" type="CharacterBody3D" node_paths=PackedStringArray("label", "label_background", "agent", "y_animation_player", "x_animation_player", "test_animation_player", "y_bot", "x_bot", "test_model", "collider", "teleport")]
+[node name="Customer" type="CharacterBody3D" node_paths=PackedStringArray("label", "label_background", "agent", "y_animation_player", "x_animation_player", "test_animation_player", "y_bot", "x_bot", "test_model", "collider", "warp_out", "warp_in")]
 collision_layer = 2
 collision_mask = 3
 platform_floor_layers = 4294967055
@@ -488,7 +491,9 @@ y_bot = NodePath("y_bot")
 x_bot = NodePath("x_bot")
 test_model = NodePath("test_model")
 collider = NodePath("CollisionShape3D")
-teleport = NodePath("Teleport")
+teleport_mat = ExtResource("2_t6jkd")
+warp_out = NodePath("Audio/warp_out")
+warp_in = NodePath("Audio/warp_in")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.5
@@ -582,6 +587,23 @@ collision_mask = 2
 
 [node name="Teleport" parent="." instance=ExtResource("7_n7wjh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, -0.465882, 0.01)
+visible = false
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="warp_out" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("10_0iqrn")
+volume_db = -20.0
+unit_size = 5.0
+max_db = 1.0
+pitch_scale = 1.5
+
+[node name="warp_in" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("11_c5qlr")
+volume_db = -20.0
+unit_size = 5.0
+max_db = 1.0
+pitch_scale = 1.5
 
 [editable path="y_bot"]
 [editable path="x_bot"]

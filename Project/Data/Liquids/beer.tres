@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Liquid" load_steps=2 format=3 uid="uid://peo1nl4lmwnh"]
+
+[ext_resource type="Script" uid="uid://b5cnj5jvvioi4" path="res://Project/Data/Liquids/liquid.gd" id="1_qnv4l"]
+
+[resource]
+script = ExtResource("1_qnv4l")
+id = "Beer"
+display_name = "Beer"

@@ -108,29 +108,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56372213, 2.0744371, -0.780
 [node name="serving_marker6" type="Marker3D" parent="Marker" index="12" groups=["serving_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56531477, 2.0744371, -0.3512473)
 
-[node name="bottle_marker1" type="Marker3D" parent="Marker" index="13" groups=["bottle_marker"]]
+[node name="serving_marker7" type="Marker3D" parent="Marker" index="13" groups=["serving_marker"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56531477, 2.0744371, 0.04036975)
+
+[node name="serving_marker8" type="Marker3D" parent="Marker" index="14" groups=["serving_marker"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56531477, 2.0744371, 0.43494105)
+
+[node name="serving_marker9" type="Marker3D" parent="Marker" index="15" groups=["serving_marker"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029099584, 2.0744371, 0.032734215)
+
+[node name="serving_marker10" type="Marker3D" parent="Marker" index="16" groups=["serving_marker"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02311325, 2.0744371, 0.43375206)
+
+[node name="bottle_marker1" type="Marker3D" parent="Marker" index="17" groups=["bottle_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56531477, 2.0744371, -2.8248081)
 
-[node name="bottle_marker2" type="Marker3D" parent="Marker" index="14" groups=["bottle_marker"]]
+[node name="bottle_marker2" type="Marker3D" parent="Marker" index="18" groups=["bottle_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56531477, 2.0744371, -2.4213104)
 
-[node name="bottle_marker3" type="Marker3D" parent="Marker" index="15" groups=["bottle_marker"]]
+[node name="bottle_marker3" type="Marker3D" parent="Marker" index="19" groups=["bottle_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56531477, 2.0744371, -2.0583544)
 
-[node name="bottle_marker4" type="Marker3D" parent="Marker" index="16" groups=["bottle_marker"]]
+[node name="bottle_marker4" type="Marker3D" parent="Marker" index="20" groups=["bottle_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018612862, 2.0744371, -2.8248081)
 
-[node name="bottle_marker5" type="Marker3D" parent="Marker" index="17" groups=["bottle_marker"]]
+[node name="bottle_marker5" type="Marker3D" parent="Marker" index="21" groups=["bottle_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0030405521, 2.0744371, -2.4014242)
 
-[node name="bottle_marker6" type="Marker3D" parent="Marker" index="18" groups=["bottle_marker"]]
+[node name="bottle_marker6" type="Marker3D" parent="Marker" index="22" groups=["bottle_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048425674, 2.0744371, -2.048965)
 
-[node name="WaitingSlot01" type="Marker3D" parent="Marker" index="19"]
+[node name="WaitingSlot01" type="Marker3D" parent="Marker" index="23"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.50263, 0.600594, 11.6011)
 script = ExtResource("5_0sx6q")
 
-[node name="WaitingSlot02" type="Marker3D" parent="Marker" index="20"]
+[node name="WaitingSlot02" type="Marker3D" parent="Marker" index="24"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62067, 0.518851, 5.22926)
 script = ExtResource("5_0sx6q")
 

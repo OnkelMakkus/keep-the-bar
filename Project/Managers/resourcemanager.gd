@@ -48,7 +48,7 @@ extends Node
 			"MolOr" : 15,
 			"Matter": 5,
 		},
-		"material": load("res://Assets/mats/rum_whisky.tres"),
+		"material": "",
 		"res": load("res://Project/Items/bottle_rum.tscn"),
 	},
 	"Whisky": {
@@ -59,7 +59,7 @@ extends Node
 			"MolOr" : 15,
 			"Matter": 5,
 		},
-		"material": load("res://Assets/mats/rum_whisky.tres"),
+		"material":"",
 		"res": load("res://Project/Items/bottle_whisky.tscn"),
 	},
 	"Wodka": {
@@ -70,7 +70,7 @@ extends Node
 			"MolOr" : 0,
 			"Matter": 5,
 		},
-		"material": load("res://Assets/mats/wodka_water.tres"),
+		"material": "",
 		"res": load("res://Project/Items/bottle_wodka.tscn"),
 	},
 	"Beer": {
@@ -81,7 +81,7 @@ extends Node
 			"MolOr" : 2,
 			"Matter": 3,
 		},
-		"material": load("res://Assets/mats/wodka_water.tres"),
+		"material": "",
 		"res": load("res://Project/Items/beer_bottle.tscn"),
 	},
 	# ... beliebig erweiterbar!

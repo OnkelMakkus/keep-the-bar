@@ -65,9 +65,8 @@ mesh = SubResource("ArrayMesh_eolgx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_0db2u")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" node_paths=PackedStringArray("besitzer")]
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder"]
 script = ExtResource("2_v0jdj")
-besitzer = NodePath("")
 
 [node name="Col_Glass" type="CollisionShape3D" parent="Cylinder/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_07wiv")

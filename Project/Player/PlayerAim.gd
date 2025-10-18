@@ -1,3 +1,4 @@
+#playerAim.gd
 extends Node
 class_name PlayerAim
 
@@ -79,12 +80,13 @@ func _update_highlight() -> void:
 		obj = grp_owner as Node3D
 
 	if obj:
-		if highlighted and highlighted != obj:
+		if highlighted and is_instance_valid(highlighted) and highlighted != obj:
 			Gamemanager.highlight_object(highlighted, false)
 		Gamemanager.highlight_object(obj, true)
 		highlighted = obj
 	elif highlighted:
-		Gamemanager.highlight_object(highlighted, false)
+		if is_instance_valid(highlighted):
+			Gamemanager.highlight_object(highlighted, false)
 		highlighted = null
 		
 		
@@ -95,10 +97,10 @@ func _update_hover_info() -> void:
 		Signalmanager.update_info_label.emit("")
 		return
 
-	var owner := _get_owner_for_hover()
+	var hover_owner := _get_owner_for_hover()
 
 	# 1) Objekttext bevorzugen (Detail)
-	var detail := _get_object_label(owner)
+	var detail := _get_object_label(hover_owner)
 	if detail != "":
 		Signalmanager.update_info_text_label.emit(detail)
 		# Prompt nur als Fallback → leer lassen
@@ -106,7 +108,7 @@ func _update_hover_info() -> void:
 		return
 
 	# 2) Kein Objekttext → Gruppen-Prompt als Fallback
-	var prompt := _first_prompt_for(owner)
+	var prompt := _first_prompt_for(hover_owner)
 	Signalmanager.update_info_text_label.emit("")   # kein Detail vorhanden
 	Signalmanager.update_info_label.emit(prompt)
 

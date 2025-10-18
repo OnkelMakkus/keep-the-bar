@@ -5,6 +5,6 @@
 [sub_resource type="Gradient" id="Gradient_vg7yg"]
 
 [resource]
-seamless = true
-color_ramp = SubResource("Gradient_vg7yg")
 noise = ExtResource("1_m1jyq")
+color_ramp = SubResource("Gradient_vg7yg")
+seamless = true

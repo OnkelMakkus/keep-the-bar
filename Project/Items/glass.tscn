@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://clkc6lptr5uxy"]
+[gd_scene load_steps=11 format=3 uid="uid://clkc6lptr5uxy"]
 
 [ext_resource type="PackedScene" uid="uid://bkua8rte7t7jv" path="res://Assets/models/glass.glb" id="1_pyhl2"]
 [ext_resource type="Script" uid="uid://uak8qajvrypc" path="res://Project/Items/glas.gd" id="2_a2nsn"]
+[ext_resource type="Material" uid="uid://ccpo5t520vg1d" path="res://Project/Helper/outline_mat.tres" id="3_cnhjm"]
 [ext_resource type="PackedScene" uid="uid://diphy5t2nd0ve" path="res://Project/Items/glass_liquid.tscn" id="3_fu540"]
-[ext_resource type="PackedScene" uid="uid://douwc4ev6eddm" path="res://Project/Helper/teleport.tscn" id="5_58n25"]
+[ext_resource type="Material" uid="uid://b1gs6anxli8d1" path="res://Project/Helper/telelporter_mat.tres" id="4_58n25"]
+[ext_resource type="AudioStream" uid="uid://cxw3610yvnm5l" path="res://Assets/Sounds/snd_warp_out.wav" id="6_k4d0w"]
+[ext_resource type="AudioStream" uid="uid://cd63k8jhnkgej" path="res://Assets/Sounds/snd_warp_in.wav" id="7_4trxr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyhl2"]
 transparency = 1
@@ -19,11 +22,14 @@ radius = 0.048828125
 height = 0.13275146
 radius = 0.07470703
 
-[node name="glass" node_paths=PackedStringArray("glass_liquid", "teleport", "mesh") groups=["Glass", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_pyhl2")]
+[node name="glass" node_paths=PackedStringArray("glass_liquid", "mesh", "warp_out", "warp_in") groups=["Glass", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_pyhl2")]
 script = ExtResource("2_a2nsn")
 glass_liquid = NodePath("glass_liquid")
-teleport = NodePath("Teleport")
 mesh = NodePath("Cylinder")
+warp_out = NodePath("Audio/warp_out")
+warp_in = NodePath("Audio/warp_in")
+outline_mat = ExtResource("3_cnhjm")
+teleport_mat = ExtResource("4_58n25")
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
@@ -37,13 +43,26 @@ shape = SubResource("CylinderShape3D_58n25")
 
 [node name="glass_liquid" parent="." index="1" instance=ExtResource("3_fu540")]
 
-[node name="Teleport" parent="." index="2" instance=ExtResource("5_58n25")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="Area3D" type="Area3D" parent="." index="3"]
+[node name="Area3D" type="Area3D" parent="." index="2"]
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00051379204, 0.062347412, 0)
 shape = SubResource("CylinderShape3D_cnhjm")
+
+[node name="Audio" type="Node3D" parent="." index="3"]
+
+[node name="warp_out" type="AudioStreamPlayer3D" parent="Audio" index="0"]
+stream = ExtResource("6_k4d0w")
+volume_db = -20.0
+unit_size = 5.0
+max_db = 1.0
+pitch_scale = 1.5
+
+[node name="warp_in" type="AudioStreamPlayer3D" parent="Audio" index="1"]
+stream = ExtResource("7_4trxr")
+volume_db = -20.0
+unit_size = 5.0
+max_db = 1.0
+pitch_scale = 1.5

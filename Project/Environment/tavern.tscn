@@ -1,12 +1,9 @@
-[gd_scene load_steps=44 format=4 uid="uid://0qln2fo1hp0v"]
+[gd_scene load_steps=41 format=4 uid="uid://0qln2fo1hp0v"]
 
 [ext_resource type="PackedScene" uid="uid://bg52lr7pk4e6m" path="res://Project/Environment/theke.tscn" id="2_3n42s"]
-[ext_resource type="Script" uid="uid://ccyavunf04tks" path="res://Project/Environment/tavern.gd" id="2_www31"]
+[ext_resource type="Script" uid="uid://3yu3tyr1kj5u" path="res://Project/Environment/tavern.gd" id="2_www31"]
 [ext_resource type="PackedScene" uid="uid://coxdxsa5j4cm2" path="res://Project/Environment/Interactable/regal.tscn" id="3_4hstr"]
 [ext_resource type="PackedScene" uid="uid://dgg27s4x2cac3" path="res://Project/Environment/table_01.tscn" id="10_psls7"]
-[ext_resource type="PackedScene" uid="uid://caekesawo2vrc" path="res://Project/Environment/Interactable/farb_storage.tscn" id="11_n3h7w"]
-[ext_resource type="PackedScene" uid="uid://cbjcymyjxd4ma" path="res://Project/Environment/Interactable/alk_storage.tscn" id="12_2v68k"]
-[ext_resource type="PackedScene" uid="uid://dh73aiiof1tst" path="res://Project/Environment/Interactable/sweet_storage.tscn" id="13_b6vgq"]
 [ext_resource type="PackedScene" uid="uid://cuir6fukss45c" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Floor_Tile_Carpet_Green.glb" id="14_2qe5q"]
 [ext_resource type="PackedScene" uid="uid://c40r1enpp4x46" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Wall_Green.glb" id="15_25usn"]
 [ext_resource type="Texture2D" uid="uid://bhclbmacr3i1k" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Floor_Tile_Carpet_Green_Gradient Texture Atlas by Imphenzia.png" id="15_ofo6u"]
@@ -1278,17 +1275,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99257, 0.0249114, -4.45303
 
 [node name="table_03" parent="Moebel" instance=ExtResource("10_psls7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22239, 0.0249114, -0.175517)
-
-[node name="Storages" type="Node3D" parent="."]
-
-[node name="Farb_Storage" parent="Storages" instance=ExtResource("11_n3h7w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -9.9252)
-
-[node name="Alk_Storage" parent="Storages" instance=ExtResource("12_2v68k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -12.2038)
-
-[node name="Sweet_Storage" parent="Storages" instance=ExtResource("13_b6vgq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.01075, 1.02635, -11.0601)
 
 [node name="Recycler" parent="." instance=ExtResource("21_iivnv")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.49484, -0.0267622, -7.12195)

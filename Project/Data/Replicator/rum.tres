@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="ReplicatorItem" load_steps=14 format=3 uid="uid://c6et4oh0qjwqk"]
+
+[ext_resource type="Script" uid="uid://c1yb4swtyht1r" path="res://Project/Data/Mats/rep_mat_amount.gd" id="1_2wkfe"]
+[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="2_rj27t"]
+[ext_resource type="Resource" uid="uid://62u2kvjn2316" path="res://Project/Data/Liquids/rum.tres" id="3_2wkfe"]
+[ext_resource type="PackedScene" uid="uid://oopr4nci54s6" path="res://Project/Items/bottle_rum.tscn" id="4_vcuq0"]
+[ext_resource type="Script" uid="uid://bbgo6ewj0l2q5" path="res://Project/Data/Replicator/replicator_item.gd" id="5_u82sm"]
+
+[sub_resource type="Resource" id="Resource_2wkfe"]
+script = ExtResource("2_rj27t")
+id = "Sweet_Molecules"
+display_name = "Sweet Molecules"
+buy_price = 2
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_rj27t"]
+script = ExtResource("1_2wkfe")
+mat = SubResource("Resource_2wkfe")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_ebemg"]
+script = ExtResource("2_rj27t")
+id = "AlcoMol"
+display_name = "AlcoMol"
+buy_price = 4
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_vcuq0"]
+script = ExtResource("1_2wkfe")
+mat = SubResource("Resource_ebemg")
+amount = 25
+
+[sub_resource type="Resource" id="Resource_u82sm"]
+script = ExtResource("2_rj27t")
+id = "MolOr"
+display_name = "MolOr"
+buy_price = 1
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_pa50f"]
+script = ExtResource("1_2wkfe")
+mat = SubResource("Resource_u82sm")
+amount = 15
+
+[sub_resource type="Resource" id="Resource_q4f51"]
+script = ExtResource("2_rj27t")
+id = "Matter"
+display_name = "Matter"
+buy_price = 1
+buy_amount = 1000
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_pe7q3"]
+script = ExtResource("1_2wkfe")
+mat = SubResource("Resource_q4f51")
+amount = 5
+
+[resource]
+script = ExtResource("5_u82sm")
+id = "Rum"
+display_name = "Rum"
+scene = ExtResource("4_vcuq0")
+cost = Array[ExtResource("1_2wkfe")]([SubResource("Resource_rj27t"), SubResource("Resource_vcuq0"), SubResource("Resource_pa50f"), SubResource("Resource_pe7q3")])
+default_liquid = ExtResource("3_2wkfe")
+default_ml = 700

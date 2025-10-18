@@ -48,7 +48,7 @@ func spawn_customer():
 
 	var recipe_names = Resourcemanager.RECIPES.keys()
 	var drink = recipe_names.pick_random()
-	print("👥 Neuer Kunde in Warteschlange: ", cust_name, "Bestellt:", drink)
+	print("👥 Neuer Kunde in Warteschlange => ", cust_name, " bestellt: ", drink)
 
 	var cust = customer_scene.instantiate()
 	get_parent().call_deferred("add_child", cust)

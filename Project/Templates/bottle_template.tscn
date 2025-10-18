@@ -25,10 +25,9 @@ height = 0.265
 height = 0.4136963
 radius = 0.13720703
 
-[node name="bottle1" node_paths=PackedStringArray("mesh", "teleport") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
+[node name="bottle1" node_paths=PackedStringArray("mesh") groups=["Bottle", "Pickupable"] instance=ExtResource("1_gwywe")]
 script = ExtResource("2_xnrmv")
 mesh = NodePath("Cylinder")
-teleport = NodePath("Teleport")
 
 [node name="Label3D" type="Label3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.426, 0.0724356)

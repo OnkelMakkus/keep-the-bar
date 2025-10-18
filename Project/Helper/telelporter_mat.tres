@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://b1gs6anxli8d1"]
+
+[ext_resource type="Shader" uid="uid://chqgbwymy0y4e" path="res://Project/Helper/teleport.gdshader" id="1_5k1ua"]
+
+[sub_resource type="Gradient" id="Gradient_5k1ua"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s0ahb"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s0ahb"]
+noise = SubResource("FastNoiseLite_s0ahb")
+color_ramp = SubResource("Gradient_5k1ua")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5k1ua")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_s0ahb")
+shader_parameter/teleport_t = 0.0
+shader_parameter/edge_width = 0.346000016435
+shader_parameter/edge_color = Color(0, 0.80795646, 0.8380384, 1)
+shader_parameter/uv_scale = 3.0
+shader_parameter/scroll_speed = 0.6

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ReplicatorItem" load_steps=8 format=3 uid="uid://b3xohi5sjidat"]
+
+[ext_resource type="Script" uid="uid://c1yb4swtyht1r" path="res://Project/Data/Mats/rep_mat_amount.gd" id="1_q4f51"]
+[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="2_7lnpj"]
+[ext_resource type="Resource" uid="uid://cddkxxnt5wd7o" path="res://Project/Data/Liquids/wodka.tres" id="3_7lnpj"]
+[ext_resource type="PackedScene" uid="uid://clkc6lptr5uxy" path="res://Project/Items/glass.tscn" id="3_j2qwu"]
+[ext_resource type="Script" uid="uid://bbgo6ewj0l2q5" path="res://Project/Data/Replicator/replicator_item.gd" id="4_ejmc3"]
+
+[sub_resource type="Resource" id="Resource_ja14k"]
+script = ExtResource("2_7lnpj")
+id = "Matter"
+display_name = "Matter"
+buy_price = 1
+buy_amount = 1000
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_7h11b"]
+script = ExtResource("1_q4f51")
+mat = SubResource("Resource_ja14k")
+amount = 2
+
+[resource]
+script = ExtResource("4_ejmc3")
+id = "Glass"
+display_name = "Glass"
+scene = ExtResource("3_j2qwu")
+cost = Array[ExtResource("1_q4f51")]([SubResource("Resource_7h11b")])
+default_liquid = ExtResource("3_7lnpj")

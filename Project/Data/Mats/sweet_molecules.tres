@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RepBaseMat" load_steps=2 format=3 uid="uid://dhiqdfxedale2"]
+
+[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="1_5jvwt"]
+
+[resource]
+script = ExtResource("1_5jvwt")
+id = "Sweet_Molecules"
+display_name = "Sweet Molecules"
+buy_price = 2
+buy_amount = 100
+current_amount = 100

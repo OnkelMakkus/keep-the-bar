@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="DrinkRecipe" load_steps=7 format=3 uid="uid://cte3moh0ep7q8"]
+
+[ext_resource type="Script" uid="uid://cijbx8v0bwsro" path="res://Project/Data/Drinks/ingredient_amount.gd" id="1_nkfx2"]
+[ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="2_7p22u"]
+[ext_resource type="Script" uid="uid://chkdu5gqiid6v" path="res://Project/Data/Liquids/liquid.gd" id="2_75nwq"]
+[ext_resource type="Script" uid="uid://d2q8ntoiioyk7" path="res://Project/Data/Drinks/drink_recipe.gd" id="3_7p22u"]
+
+[sub_resource type="Resource" id="Resource_nkfx2"]
+script = ExtResource("2_75nwq")
+id = "Rum"
+display_name = "Rum"
+material = ExtResource("2_7p22u")
+
+[sub_resource type="Resource" id="Resource_75nwq"]
+script = ExtResource("1_nkfx2")
+liquid = SubResource("Resource_nkfx2")
+amount_ml = 40
+
+[resource]
+script = ExtResource("3_7p22u")
+id = "Rum"
+display_name = "Rum"
+sell_price = 10
+ingredients = Array[ExtResource("1_nkfx2")]([SubResource("Resource_75nwq")])

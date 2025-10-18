@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DrinkRecipe" load_steps=5 format=3 uid="uid://dydq3bju0jk58"]
+
+[ext_resource type="Script" uid="uid://cijbx8v0bwsro" path="res://Project/Data/Drinks/ingredient_amount.gd" id="1_kgktt"]
+[ext_resource type="Resource" uid="uid://cddkxxnt5wd7o" path="res://Project/Data/Liquids/wodka.tres" id="2_kgktt"]
+[ext_resource type="Script" uid="uid://d2q8ntoiioyk7" path="res://Project/Data/Drinks/drink_recipe.gd" id="3_wlv2j"]
+
+[sub_resource type="Resource" id="Resource_4bypj"]
+script = ExtResource("1_kgktt")
+liquid = ExtResource("2_kgktt")
+amount_ml = 40
+
+[resource]
+script = ExtResource("3_wlv2j")
+id = "Wodka"
+display_name = "Wodka"
+sell_price = 8
+ingredients = Array[ExtResource("1_kgktt")]([SubResource("Resource_4bypj")])

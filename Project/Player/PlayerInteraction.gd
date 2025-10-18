@@ -20,7 +20,9 @@ func _ready() -> void:
 	Signalmanager.give_player_stuff.connect(_give_player_stuff)
 	Signalmanager.change_fov.connect(_apply_fov)
 	Signalmanager.change_fov.emit()
-
+	
+# 👇 Registriere dich global, damit andere dich (kontrolliert) aufrufen können
+	Gamemanager.player_interaction = self
 
 func _input(event: InputEvent) -> void:
 	if Gamemanager.is_in_menu:
@@ -54,12 +56,7 @@ func _physics_process(delta: float) -> void:
 
 # ---------- Public (für Player-Fassade) ----------
 func pick_up(item: Node3D) -> void:
-	held_object = item
-	_place_handslot_z()
-	Gamemanager.freeze_for_pickup(held_object) 
-	hand_slot.add_child(held_object)
-	held_object.transform = Transform3D.IDENTITY
-	held_object.rotation = Vector3.ZERO
+	take_into_hand(item)
 
 
 # ---------- Primär ----------
@@ -96,6 +93,47 @@ func _try_interact_or_pickup() -> void:
 	# …sonst Pickup versuchen
 	_try_pickup()
 
+# PlayerInteraction.gd
+
+func take_into_hand(obj: Node3D) -> void:
+	if obj == null or not is_instance_valid(obj):
+		return
+
+	# 👇 Swap: Wenn schon was in der Hand, leg das schnell weg
+	if held_object and is_instance_valid(held_object):
+		var kind := "abstell"
+		if held_object.is_in_group("Bottle") or held_object.is_in_group("BeerBottle"):
+			kind = "bottle"
+		elif held_object.is_in_group("Glass"):
+			kind = "serving"
+		# sicher ablegen – fallbacks sind in place_on_best_marker schon drin
+		Gamemanager.place_on_best_marker(held_object, kind, held_object.global_position)
+		Gamemanager.unfreeze_after_place(held_object)
+		held_object = null
+
+	# Jetzt das neue Objekt aufnehmen
+	held_object = obj
+	_place_handslot_z()
+
+	await get_tree().process_frame
+	if held_object.has_meta("on_theke") and held_object.get_meta("on_theke"):
+		held_object.set_meta("on_theke", false)
+
+	Gamemanager.freeze_for_pickup(held_object)
+
+	if held_object.get_parent():
+		held_object.get_parent().remove_child(held_object)
+	hand_slot.add_child(held_object)
+	held_object.transform = Transform3D.IDENTITY
+	held_object.rotation = Vector3.ZERO
+
+	if held_object.is_in_group("BeerBottle") and held_object.has_method("set_obj_scale"):
+		held_object.set_obj_scale()
+
+	if held_object.has_signal("finished_pouring"):
+		if held_object.is_connected("finished_pouring", Callable(self, "_reset_pour_animation")):
+			held_object.disconnect("finished_pouring", Callable(self, "_reset_pour_animation"))
+		held_object.connect("finished_pouring", Callable(self, "_reset_pour_animation"))
 
 
 func _try_pickup() -> void:
@@ -113,6 +151,13 @@ func _try_pickup() -> void:
 		
 	# Objekt aufnehmen
 	held_object = obj
+	if held_object.has_meta("__marker"):
+		var mm = held_object.get_meta("__marker")
+		if mm and mm is Node and mm.has_meta("occupied"):
+			mm.remove_meta("occupied")
+		held_object.remove_meta("__marker")
+	if held_object.has_meta("__from_player"): held_object.remove_meta("__from_player")
+	if held_object.has_meta("__drop_time"):   held_object.remove_meta("__drop_time")
 	_place_handslot_z()
 
 	await get_tree().process_frame
@@ -127,6 +172,9 @@ func _try_pickup() -> void:
 
 	if held_object.is_in_group("BeerBottle") and held_object.has_method("set_obj_scale"):
 		held_object.set_obj_scale()
+		
+	if held_object.has_method("stop_playing_teleport"):	
+		held_object.stop_playing_teleport()
 
 	if held_object.has_signal("finished_pouring"):
 		if held_object.is_connected("finished_pouring", Callable(self, "_reset_pour_animation")):
@@ -163,52 +211,71 @@ func _place_or_free() -> void:
 
 		# Kunde (Hand-Over auf Theke)
 		if hit.is_in_group("Customer"):
-			_move_to_serving_container()
-			held_object.global_position = aim.collision_point()
-			if held_object.is_in_group("BeerBottle") and held_object.has_method("set_obj_scale"):
-				held_object.set_obj_scale()
+			# Kandidat zwischenspeichern
+			var obj := held_object
+			# NICHT reparenten, NICHT Position setzen – direkt übergeben
 			if hit.has_method("clicked_by_player"):
-				hit.clicked_by_player()
-			Gamemanager.unfreeze_after_place(held_object)
-			_release_held()
-			return
+				hit.clicked_by_player(obj)  # Customer entscheidet Erfolg/Fail
 
+			# WICHTIG: hier NICHT automatisch unfreezen/ablegen.
+			#  - Bei Erfolg: Customer kümmert sich (Objekt wird entsorgt/”serviert”)
+			#  - Bei Fail: Customer legt es dir per take_into_hand wieder in die Hand
+			_release_held_soft()  # nur held_object = null, ohne Physik/Parenting
+			return
+		
 		# Generische, erlaubte Oberflächen: nur placeable_surface
 		var surface := Gamemanager.get_placeable_surface_owner(hit)
 		if surface:
-			# Nicht unter die Fläche parenten → in die Welt hängen
-			hand_slot.remove_child(held_object)
-			var world_parent: Node = get_tree().current_scene
-			world_parent.add_child(held_object)
+			var ref_pos := aim.collision_point()
 
-			# Kollisionspunkt + "Lift" auf die Unterkante des Objekts
-			var lift := 0.01
-			var base_mesh := held_object.get_node_or_null("Cylinder") as MeshInstance3D
-			if base_mesh and base_mesh.mesh:
-				var aabb := base_mesh.mesh.get_aabb()
-				var h := aabb.size.y * held_object.global_transform.basis.get_scale().y
-				lift = max(lift, h * 0.5 - 0.001)
+			# Markerwahl nach Typ:
+			var kind := "abstell"
+			if held_object.is_in_group("Glass") or held_object.is_in_group("BeerBottle"):
+				kind = "serving"
+			elif held_object.is_in_group("Bottle"):
+				kind = "bottle"  # alle anderen Flaschen
 
-			held_object.global_position = aim.collision_point() + Vector3.UP * lift
+			# Aus der Hand lösen, auf besten Marker setzen
+			if Gamemanager.place_on_best_marker(held_object, kind, ref_pos):
+				# Spezialfall: Theke-Höhe ausrichten (optional)
+				if surface.is_in_group("Theke") and surface.has_node("position_marker"):
+					var pm := surface.get_node("position_marker") as Node3D
+					if pm: held_object.global_position.y = pm.global_position.y
 
-			# Spezialfall Theke: Meta setzen
-			if surface.is_in_group("Theke"):
-				held_object.set_meta("on_theke", true)
-				held_object.global_position.y = surface.position_marker.global_position.y
-
-			Gamemanager.unfreeze_after_place(held_object)
-			_release_held()
+				_release_held()
+			else:
+				Signalmanager.update_info_text_label.emit("Kein freier Platz.")
 			return
 
-	# Kein erlaubter Untergrund → NICHT platzieren
-	Signalmanager.update_info_text_label.emit("Hier kannst du nichts abstellen.")
 
 
 func _move_to_serving_container() -> void:
+	held_object.set_meta("__from_player", true)
+	held_object.set_meta("__drop_time", Time.get_ticks_msec())
+
+	# von der Hand lösen
 	hand_slot.remove_child(held_object)
-	Gamemanager.serving_container.add_child(held_object)
+
+	var parent_ok: Node = Gamemanager.serving_container
+	if parent_ok == null:
+		parent_ok = get_tree().current_scene  # Fallback, damit es NICHT „verschwindet“
+	parent_ok.add_child(held_object)
+
+	# Auf Thekenhöhe parken (nicht am Raycast-Treffer)
 	held_object.set_meta("on_theke", true)
+	var pos := held_object.global_position
+	if Gamemanager.theke and Gamemanager.theke.has_node("position_marker"):
+		var pm := Gamemanager.theke.get_node("position_marker") as Node3D
+		if pm:
+			pos.y = pm.global_position.y
+	held_object.global_position = pos
+
 	Gamemanager.unfreeze_after_place(held_object)
+
+
+func _release_held_soft() -> void:
+	held_object = null
+	prepare_for_recycling = false
 
 
 func _release_held() -> void:

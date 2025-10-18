@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="ReplicatorItem" load_steps=14 format=3 uid="uid://b6styxld46s3c"]
+
+[ext_resource type="Script" uid="uid://c1yb4swtyht1r" path="res://Project/Data/Mats/rep_mat_amount.gd" id="1_j0e2n"]
+[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="2_4b3ok"]
+[ext_resource type="Resource" uid="uid://peo1nl4lmwnh" path="res://Project/Data/Liquids/beer.tres" id="3_j0e2n"]
+[ext_resource type="PackedScene" uid="uid://brxrirck3ftv1" path="res://Project/Items/beer_bottle.tscn" id="4_2l33x"]
+[ext_resource type="Script" uid="uid://bbgo6ewj0l2q5" path="res://Project/Data/Replicator/replicator_item.gd" id="5_u1usa"]
+
+[sub_resource type="Resource" id="Resource_pa50f"]
+script = ExtResource("2_4b3ok")
+id = "Sweet_Molecules"
+display_name = "Sweet Molecules"
+buy_price = 2
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_52i1k"]
+script = ExtResource("1_j0e2n")
+mat = SubResource("Resource_pa50f")
+amount = 5
+
+[sub_resource type="Resource" id="Resource_p6vnl"]
+script = ExtResource("2_4b3ok")
+id = "AlcoMol"
+display_name = "AlcoMol"
+buy_price = 4
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_lcf8t"]
+script = ExtResource("1_j0e2n")
+mat = SubResource("Resource_p6vnl")
+amount = 5
+
+[sub_resource type="Resource" id="Resource_n3uom"]
+script = ExtResource("2_4b3ok")
+id = "MolOr"
+display_name = "MolOr"
+buy_price = 1
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_rjs8k"]
+script = ExtResource("1_j0e2n")
+mat = SubResource("Resource_n3uom")
+amount = 2
+
+[sub_resource type="Resource" id="Resource_ja14k"]
+script = ExtResource("2_4b3ok")
+id = "Matter"
+display_name = "Matter"
+buy_price = 1
+buy_amount = 1000
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_r1gfc"]
+script = ExtResource("1_j0e2n")
+mat = SubResource("Resource_ja14k")
+amount = 3
+
+[resource]
+script = ExtResource("5_u1usa")
+id = "Beer"
+display_name = "Beer"
+scene = ExtResource("4_2l33x")
+cost = Array[ExtResource("1_j0e2n")]([SubResource("Resource_52i1k"), SubResource("Resource_lcf8t"), SubResource("Resource_rjs8k"), SubResource("Resource_r1gfc")])
+default_liquid = ExtResource("3_j0e2n")
+default_ml = 500

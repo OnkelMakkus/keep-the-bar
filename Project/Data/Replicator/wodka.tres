@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="ReplicatorItem" load_steps=14 format=3 uid="uid://ck8jo7txyamy0"]
+
+[ext_resource type="Script" uid="uid://c1yb4swtyht1r" path="res://Project/Data/Mats/rep_mat_amount.gd" id="1_nyaom"]
+[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="2_yagnl"]
+[ext_resource type="Resource" uid="uid://cddkxxnt5wd7o" path="res://Project/Data/Liquids/wodka.tres" id="3_nyaom"]
+[ext_resource type="PackedScene" uid="uid://bs2iqwoux1bo" path="res://Project/Items/bottle_wodka.tscn" id="4_pxnrl"]
+[ext_resource type="Script" uid="uid://bbgo6ewj0l2q5" path="res://Project/Data/Replicator/replicator_item.gd" id="5_pm0jb"]
+
+[sub_resource type="Resource" id="Resource_2wkfe"]
+script = ExtResource("2_yagnl")
+id = "Sweet_Molecules"
+display_name = "Sweet Molecules"
+buy_price = 2
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_nyaom"]
+script = ExtResource("1_nyaom")
+mat = SubResource("Resource_2wkfe")
+amount = 2
+
+[sub_resource type="Resource" id="Resource_ebemg"]
+script = ExtResource("2_yagnl")
+id = "AlcoMol"
+display_name = "AlcoMol"
+buy_price = 4
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_yagnl"]
+script = ExtResource("1_nyaom")
+mat = SubResource("Resource_ebemg")
+amount = 25
+
+[sub_resource type="Resource" id="Resource_u82sm"]
+script = ExtResource("2_yagnl")
+id = "MolOr"
+display_name = "MolOr"
+buy_price = 1
+buy_amount = 100
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_nkebg"]
+script = ExtResource("1_nyaom")
+mat = SubResource("Resource_u82sm")
+
+[sub_resource type="Resource" id="Resource_q4f51"]
+script = ExtResource("2_yagnl")
+id = "Matter"
+display_name = "Matter"
+buy_price = 1
+buy_amount = 1000
+current_amount = 100
+
+[sub_resource type="Resource" id="Resource_pxnrl"]
+script = ExtResource("1_nyaom")
+mat = SubResource("Resource_q4f51")
+amount = 5
+
+[resource]
+script = ExtResource("5_pm0jb")
+id = "Wodka"
+display_name = "Wodka"
+scene = ExtResource("4_pxnrl")
+cost = Array[ExtResource("1_nyaom")]([SubResource("Resource_nyaom"), SubResource("Resource_yagnl"), SubResource("Resource_nkebg"), SubResource("Resource_pxnrl")])
+default_liquid = ExtResource("3_nyaom")
+default_ml = 700

@@ -48,6 +48,7 @@ func _ready():
 	if player:
 		player.target_changed.connect(_on_player_target_changed)
 	
+	ReplicatorDB.mats_changed.connect(update_res_display)
 	Signalmanager.update_time_left.connect(update_time_lbl)
 	Signalmanager.update_money.connect(update_money)
 	Signalmanager.switch_menuBtn_visibility.connect(switch_menu_visibility)
@@ -58,6 +59,8 @@ func _ready():
 	Signalmanager.update_info_text_label.connect(update_info_text_label)
 	
 	Signalmanager.update_res_display.emit()
+	
+	update_res_display()
 	
 	time_lbl.text = ""
 	info_label.text = ""
@@ -78,12 +81,17 @@ func update_info_text_label(info: String):
 	info_text_timer.start()
 	
 	
+func _mat_amt(id: String) -> int:
+	var m := ReplicatorDB.get_mat(id)
+	return m.current_amount if m else 0
+	
+
 func update_res_display():
 	show_hud_info()
-	alco_mol_lbl.text = "AlcoMol: " + str(Resourcemanager.REPLICATOR_RESSOURCES["AlcoMol"]["current_amount"])
-	mol_or_lbl.text = "MolOr: " + str(Resourcemanager.REPLICATOR_RESSOURCES["MolOr"]["current_amount"])
-	sweet_molecules_lbl.text = "Sweet Molecules: " + str(Resourcemanager.REPLICATOR_RESSOURCES["Sweet_Molecules"]["current_amount"])
-	matter_lbl.text = "Matter: " + str(Resourcemanager.REPLICATOR_RESSOURCES["Matter"]["current_amount"])
+	alco_mol_lbl.text         = "AlcoMol: " + str(_mat_amt("AlcoMol"))
+	mol_or_lbl.text           = "MolOr: " + str(_mat_amt("MolOr"))
+	sweet_molecules_lbl.text  = "Sweet Molecules: " + str(_mat_amt("Sweet_Molecules"))
+	matter_lbl.text           = "Matter: " + str(_mat_amt("Matter"))
 	
 
 func update_info_label(info: String):

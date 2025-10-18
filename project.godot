@@ -8,6 +8,12 @@
 
 config_version=5
 
+[ambientcg]
+
+extract_path="res://AmbientCG/Downloads"
+material_file_directory="res://AmbientCG/Materials"
+environment_file_directory="res://AmbientCG/Environments"
+
 [application]
 
 config/name="Speakeasy In Space"
@@ -17,9 +23,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Signalmanager="*res://Project/Managers/signalmanager.gd"
-Gamemanager="*res://Project/Managers/gamemanager.gd"
+VFX="*res://Project/Managers/VFX.gd"
+DrinkDB="*res://Project/Managers/DrinkDB.gd"
+ReplicatorDB="*res://Project/Managers/ReplicatorDB.gd"
 Resourcemanager="*res://Project/Managers/resourcemanager.gd"
+Gamemanager="*res://Project/Managers/gamemanager.gd"
+Signalmanager="*res://Project/Managers/signalmanager.gd"
 Slotmanager="*res://Project/Managers/slotmanager.gd"
 Savemanager="*res://Project/Managers/savemanager.gd"
 

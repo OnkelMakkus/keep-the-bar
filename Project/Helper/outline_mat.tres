@@ -1,9 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ccpo5t520vg1d"]
 
-[ext_resource type="Shader" uid="uid://mh31ckb5x1y3" path="res://Project/Helper/outline.gdshader" id="1_kqiiv"]
+[ext_resource type="Shader" uid="uid://ry108txp2bwb" path="res://Project/Helper/outline2.gdshader" id="1_kqiiv"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_kqiiv")
-shader_parameter/thickness = 0.03
-shader_parameter/outline_color = Color(1, 0.9, 0.2, 1)
+shader_parameter/outline_color = Color(0.85754377, 0.8639773, 0.33282533, 1)
+shader_parameter/outline_width = 2.0
