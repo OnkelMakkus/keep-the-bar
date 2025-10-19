@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bkjl27wc64e0v"]
 
-[ext_resource type="Script" uid="uid://dc6nvcqhqblh4" path="res://addons/ambientcg/TmakerBG.gd" id="1_kikqt"]
+[ext_resource type="Script" uid="uid://cj33ppdqrivf0" path="res://addons/ambientcg/TmakerBG.gd" id="1_kikqt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f0yl3"]
 
@@ -34,10 +34,9 @@ anchor_bottom = 1.0
 offset_right = -0.00038147
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.315, 0.35999998, 0.435, 1.5)
+color = Color(0.35999998, 0.39, 0.42000002, 1.5)
 script = ExtResource("1_kikqt")
 multiplier = 1.5
-metadata/_custom_type_script = "uid://dc6nvcqhqblh4"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

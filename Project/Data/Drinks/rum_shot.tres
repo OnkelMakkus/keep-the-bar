@@ -22,3 +22,4 @@ id = "Rum"
 display_name = "Rum"
 sell_price = 10
 ingredients = Array[ExtResource("1_nkfx2")]([SubResource("Resource_75nwq")])
+spoil_time = 150.0

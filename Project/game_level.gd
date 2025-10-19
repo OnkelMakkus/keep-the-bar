@@ -27,12 +27,8 @@ func _ready() -> void:
 	Signalmanager.open_shop.connect(open_shop)
 	Signalmanager.open_order.connect(open_order)
 	Signalmanager.all_the_main_menu_stuff.connect(allTheMainMenuStuff)
+	Signalmanager.update_open_status.emit(Gamemanager.is_open)
 	
-	
-func _process(_delta: float) -> void:
-	if Gamemanager.is_open:
-		Signalmanager.update_time_left.emit(is_open_timer.time_left)
-		
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -59,29 +55,20 @@ func allTheMainMenuStuff():
 	
 	
 func open_shop():
-	if is_open_timer.is_stopped():
-		is_open_timer.start()
+	if not Gamemanager.is_open:
 		Gamemanager.is_open = true
 		open_label.text = "CLOSE"
-		print("IsOpenTimer gestartet")
+		Signalmanager.update_open_status.emit(Gamemanager.is_open)
 	else:
-		is_open_timer.stop()
 		Gamemanager.is_open = false
 		open_label.text = "OPEN"
-		print("IsOpenTimer gestoppt")
 		Signalmanager.close_store.emit()
+		Signalmanager.update_open_status.emit(Gamemanager.is_open)
 
 
 func open_order():
 	var ordermenu = Gamemanager.ORDER_MENU.instantiate()
 	add_child(ordermenu)
-	
-
-func _on_is_open_timer_timeout() -> void:
-	is_open_timer.stop()
-	open_label.text = "OPEN"
-	Gamemanager.is_open = false
-	Signalmanager.close_store.emit()
 
 
 func _on_option_btn_pressed() -> void:

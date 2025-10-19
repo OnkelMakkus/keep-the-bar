@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=3 uid="uid://cg37adxsmpn8u"]
 
-[ext_resource type="Script" uid="uid://df30x1cs0ouk6" path="res://Project/Environment/Interactable/recycler.gd" id="1_xlg6u"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="2_2r8yh"]
-[ext_resource type="Script" uid="uid://bsowemlh6qnrr" path="res://Project/Environment/Interactable/recycler_button.gd" id="3_2r8yh"]
+[ext_resource type="Script" uid="uid://dh8cuhr4da1pc" path="res://Project/Environment/Interactable/recycler.gd" id="1_xlg6u"]
+[ext_resource type="Script" uid="uid://hw0g1ogcys8n" path="res://Project/Environment/Interactable/col_ref.gd" id="2_2r8yh"]
+[ext_resource type="Script" uid="uid://ceuk6msjo57st" path="res://Project/Environment/Interactable/recycler_button.gd" id="3_2r8yh"]
 [ext_resource type="PackedScene" uid="uid://cf0d42eb3vpfw" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Hydroponics_Full.glb" id="4_lkxk8"]
-[ext_resource type="Script" uid="uid://caln8q8wqi0oh" path="res://Project/Environment/Interactable/replicator_button.gd" id="5_yh3ms"]
+[ext_resource type="Script" uid="uid://dwr1tlfvu8n2a" path="res://Project/Environment/Interactable/replicator_button.gd" id="5_yh3ms"]
 [ext_resource type="PackedScene" uid="uid://o1qxu1x2lv1i" path="res://Project/UI/replicator_ui.tscn" id="6_xu6i7"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xu6i7"]

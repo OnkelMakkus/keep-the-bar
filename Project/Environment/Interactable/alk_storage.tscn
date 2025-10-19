@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbjcymyjxd4ma"]
 
-[ext_resource type="Script" uid="uid://b8q1tgaw43hjw" path="res://Project/Environment/Interactable/alk_storage.gd" id="1_eagfq"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="2_wyfdm"]
+[ext_resource type="Script" uid="uid://c4k1k5y5gkgrt" path="res://Project/Environment/Interactable/alk_storage.gd" id="1_eagfq"]
+[ext_resource type="Script" uid="uid://hw0g1ogcys8n" path="res://Project/Environment/Interactable/col_ref.gd" id="2_wyfdm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6vkm"]
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=26 format=3 uid="uid://bg52lr7pk4e6m"]
 
 [ext_resource type="PackedScene" uid="uid://dmrqa56srjl1x" path="res://Assets/models/theke2.glb" id="1_urr7a"]
-[ext_resource type="Script" uid="uid://bse18x0l7imrr" path="res://Project/Environment/theke.gd" id="2_1s8hm"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="3_ibdkc"]
-[ext_resource type="Script" uid="uid://hfdyd42ljib5" path="res://Project/Environment/theke_slot.gd" id="3_pwrcg"]
-[ext_resource type="Script" uid="uid://c50rlht1843d2" path="res://Project/Helper/order_marker.gd" id="5_0sx6q"]
+[ext_resource type="Script" uid="uid://71vverwlqdpb" path="res://Project/Environment/theke.gd" id="2_1s8hm"]
+[ext_resource type="Script" uid="uid://hw0g1ogcys8n" path="res://Project/Environment/Interactable/col_ref.gd" id="3_ibdkc"]
+[ext_resource type="Script" uid="uid://bm6okqfftw4on" path="res://Project/Environment/theke_slot.gd" id="3_pwrcg"]
+[ext_resource type="Script" uid="uid://cqsripjft8mjq" path="res://Project/Helper/order_marker.gd" id="5_0sx6q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63l0h"]
 

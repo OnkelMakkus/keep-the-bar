@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ReplicatorItem" load_steps=8 format=3 uid="uid://b3xohi5sjidat"]
 
-[ext_resource type="Script" uid="uid://c1yb4swtyht1r" path="res://Project/Data/Mats/rep_mat_amount.gd" id="1_q4f51"]
-[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="2_7lnpj"]
+[ext_resource type="Script" uid="uid://j3rgkpoc4nm7" path="res://Project/Data/Mats/rep_mat_amount.gd" id="1_q4f51"]
+[ext_resource type="Script" uid="uid://djclyx6opdbrs" path="res://Project/Data/Mats/rep_base_mat.gd" id="2_7lnpj"]
 [ext_resource type="Resource" uid="uid://cddkxxnt5wd7o" path="res://Project/Data/Liquids/wodka.tres" id="3_7lnpj"]
 [ext_resource type="PackedScene" uid="uid://clkc6lptr5uxy" path="res://Project/Items/glass.tscn" id="3_j2qwu"]
-[ext_resource type="Script" uid="uid://bbgo6ewj0l2q5" path="res://Project/Data/Replicator/replicator_item.gd" id="4_ejmc3"]
+[ext_resource type="Script" uid="uid://d3k5wa0ch3rrv" path="res://Project/Data/Replicator/replicator_item.gd" id="4_ejmc3"]
 
 [sub_resource type="Resource" id="Resource_ja14k"]
 script = ExtResource("2_7lnpj")

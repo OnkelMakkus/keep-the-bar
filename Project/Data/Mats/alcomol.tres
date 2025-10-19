@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RepBaseMat" load_steps=2 format=3 uid="uid://c3op1mhjvkmty"]
 
-[ext_resource type="Script" uid="uid://cs7xo27ewn5rn" path="res://Project/Data/Mats/rep_base_mat.gd" id="1_03y37"]
+[ext_resource type="Script" uid="uid://djclyx6opdbrs" path="res://Project/Data/Mats/rep_base_mat.gd" id="1_03y37"]
 
 [resource]
 script = ExtResource("1_03y37")

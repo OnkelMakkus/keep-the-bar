@@ -22,7 +22,7 @@ signal on_resume()
 signal open_shop()
 signal open_order()
 
-signal update_time_left(time: float)
+signal update_open_status(status: bool)
 signal update_info_label(info: String)
 signal update_info_text_label(info: String)
 signal update_ressource_label()

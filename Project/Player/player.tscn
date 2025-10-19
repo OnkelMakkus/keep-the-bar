@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://fd8f2qfa1plr"]
 
-[ext_resource type="Script" uid="uid://c82twjxfwu1hj" path="res://Project/Player/player.gd" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://brsehd4lyumw2" path="res://Project/Player/PlayerMovement.gd" id="3_1tpvl"]
-[ext_resource type="Script" uid="uid://k3rhskj1ik2v" path="res://Project/Player/PlayerAim.gd" id="4_hruf4"]
-[ext_resource type="Script" uid="uid://dnfm8yk0h7wf0" path="res://Project/Player/PlayerInteraction.gd" id="5_bqdc2"]
+[ext_resource type="Script" uid="uid://tvqqvo8n7l5v" path="res://Project/Player/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://dmxishhfbrros" path="res://Project/Player/PlayerMovement.gd" id="3_1tpvl"]
+[ext_resource type="Script" uid="uid://bv8lvnneyftkv" path="res://Project/Player/PlayerAim.gd" id="4_hruf4"]
+[ext_resource type="Script" uid="uid://dr725lk6bjhq2" path="res://Project/Player/PlayerInteraction.gd" id="5_bqdc2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_acmnh"]
 radius = 0.35

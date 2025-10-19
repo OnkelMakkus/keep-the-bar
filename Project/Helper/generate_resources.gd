@@ -1,3 +1,4 @@
+#generate_resources.gd
 @tool
 extends EditorScript
 

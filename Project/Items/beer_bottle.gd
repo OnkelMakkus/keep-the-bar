@@ -5,7 +5,8 @@ extends Node3D
 #  SCENE REFS
 # -----------------------------
 @export_category("Scene")
-@export var mesh: MeshInstance3D
+@export var mesh: MeshInstance3D 
+@export var spoil_timer: Timer
 
 @export_category("VFX / Materials")
 @export var outline_mat: ShaderMaterial
@@ -20,13 +21,13 @@ extends Node3D
 @export var liquid: Liquid              # z.B. res://.../Liquids/beer.tres
 @export var volume_ml: int = 500        # „Serviergröße“ (Info/Label)
 @export var full: bool = true           # falls du später „geleert“ trackst
+@export var drink: DrinkRecipe
 
 # -----------------------------
 #  UI / LABEL
 # -----------------------------
 @export_category("UI")
 @export var custom_pickup_hint: String = "<LMB> to pick up"
-
 @export var replicator_item_id: String = ""   # wird vom Replicator gesetzt
 
 # -----------------------------
@@ -38,6 +39,7 @@ var _current_scale: Vector3
 var label_name := "Beer\n<LMB> to pick up"
 
 var dirty: bool = false
+var spoiled: bool = false
 var current_table: Node = null
 var current_index: int = -1
 
@@ -70,7 +72,15 @@ func _ready() -> void:
 		await VFX.teleport_in(mesh, teleport_mat, 2.0)
 
 	_update_label()
-
+	
+	var spoil := (drink.spoil_time if drink else 600.0)
+	if spoil_timer:
+		if not spoil_timer.timeout.is_connected(_on_spoil_timer_timeout):
+			spoil_timer.timeout.connect(_on_spoil_timer_timeout)
+		spoil_timer.one_shot = true
+		spoil_timer.start(max(0.1, spoil))
+		_dbg_spoil("timer started (" + str(round(spoil_timer.wait_time)) + "s)")
+	
 
 # ------------------------------------------------------------
 # Public API (kompatibel zu deinem Flow)
@@ -114,13 +124,10 @@ func set_highlight(state: bool) -> void:
 		VFX.set_highlight(mesh, _outlined_mat, state)
 
 func _update_label() -> void:
-	var beer_name := ""
-	if liquid != null:
-		beer_name = (liquid.display_name if "display_name" in liquid and liquid.display_name != "" else liquid.id)
-	else:
-		beer_name = "Beer"
+	var beer_name := (liquid.display_name if liquid and liquid.display_name != "" else (liquid.id if liquid else "Beer"))
 	var dirty_prefix := "Dirty " if dirty else ""
-	label_name = "%s%s\n%d ml\n%s" % [dirty_prefix, beer_name, int(volume_ml), custom_pickup_hint]
+	var spoiled_prefix := "Molecular Integrity failed " if spoiled else ""
+	label_name = "%s%s%s\n%d ml\n%s" % [spoiled_prefix, dirty_prefix, beer_name, int(volume_ml), custom_pickup_hint]
 
 
 # ------------------------------------------------------------
@@ -133,3 +140,14 @@ func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 
 func despawn() -> void:
 	queue_free()
+
+func _on_spoil_timer_timeout() -> void:
+	spoiled = true
+	_dbg_spoil("💀 SPOILED (bottle)")
+	_update_label()
+	
+	
+const DEBUG_SPOIL := true
+func _dbg_spoil(msg: String) -> void:
+	if DEBUG_SPOIL:
+		print("[SPOIL][BeerBottle]", Time.get_datetime_string_from_system(), " — ", msg)

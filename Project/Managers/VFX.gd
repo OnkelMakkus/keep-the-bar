@@ -1,4 +1,4 @@
-# VFX.gd
+# VFX.gd (Global)
 extends Node
 
 func teleport_in(mesh: MeshInstance3D, teleport_mat: ShaderMaterial, duration: float = 2.0) -> void:

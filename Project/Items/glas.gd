@@ -22,6 +22,9 @@ var _glass_liquid_mesh: MeshInstance3D
 # WICHTIG: Keys jetzt String-IDs, nicht Liquid-Instanzen!
 var contents: Dictionary = {}  # { String(liquid_id) : float ml }
 var dirty := false
+@export var default_spoil_time: float = 600.0  # 10 min als Fallback
+@export var spoil_timer: Timer                 # füge in der Szene einen Timer hinzu
+var spoiled: bool = false
 
 # --- UI/Label / Misc ---
 var label_name := "Glass\n<LMB> to pick up"
@@ -54,6 +57,10 @@ func _ready() -> void:
 	if VFX and teleport_mat:
 		await VFX.teleport_in(mesh, teleport_mat, 2.0)
 	
+	if spoil_timer:
+		spoil_timer.one_shot = true
+		if not spoil_timer.timeout.is_connected(_on_spoil_timer_timeout):
+			spoil_timer.timeout.connect(_on_spoil_timer_timeout)
 	_update_visuals()
 
 # ---------- Public API ----------
@@ -72,7 +79,7 @@ func place_on_table_by_customer(pos: Vector3, table: Node, index: int) -> void:
 	current_table = table
 	current_index = index
 	global_position = pos
-	_update_label()
+	_after_contents_changed()
 
 func remove_from_table() -> void:
 	current_table = null
@@ -90,7 +97,7 @@ func add_liquid(liq: Liquid, amount: float) -> float:
 	var lid := liq.id
 	contents[lid] = float(contents.get(lid, 0.0)) + add
 	_set_liquid_material(liq)
-	_update_visuals(); _update_label()
+	_after_contents_changed()
 	return add
 
 func add_liquid_by_id(liquid_id: String, amount: float) -> float:
@@ -109,7 +116,7 @@ func remove_liquid(liq: Liquid, amount: float) -> float:
 		contents[lid] = in_glass - rem
 		if contents[lid] <= 0.0:
 			contents.erase(lid)
-	_update_visuals(); _update_label()
+	_after_contents_changed()
 	return rem
 	
 
@@ -154,15 +161,26 @@ func _update_visuals() -> void:
 	_update_label()
 
 func _update_label() -> void:
+	# Header-Linie (Spoiled/Dirty)
+	var header := ""
+	if spoiled:
+		header = "Molecular Integrity failed\n"
+	else:
+		header = ("%sGlass\n" % ("Dirty " if dirty else ""))
+
+	# Leer?
 	if contents.size() == 0:
-		label_name = ("%sGlass\n<LMB> to pick up" % ("Dirty " if dirty else ""))
+		label_name = header + "<LMB> to pick up"
 		return
+
+	# Inhaltszeilen
 	var lines: Array[String] = []
 	for lid in contents.keys():
 		var liq: Liquid = DrinkDB.get_liquid(String(lid))
 		var lbl_name := (liq.display_name if liq and liq.display_name != "" else (liq.id if liq else String(lid)))
 		lines.append("%s (%d ml)" % [lbl_name, int(contents[lid])])
-	label_name = ("%sGlass\n" % ("Dirty " if dirty else "")) + "\n".join(lines) + "\n<LMB> to pick up"
+
+	label_name = header + "\n".join(lines) + "\n<LMB> to pick up"
 
 # ---------- Interop / VFX ----------
 func stop_playing_teleport():
@@ -184,3 +202,94 @@ func let_it_fall(fall_position: Vector3) -> void:
 
 func place_on_shelf(reference_point: Vector3, shelf: MeshInstance3D) -> bool:
 	return Gamemanager.place_on_shelf(self, reference_point, shelf)
+
+func _after_contents_changed() -> void:
+	_update_visuals()
+	_update_label()
+	_recalc_spoil_timer()
+	
+
+func _recalc_spoil_timer() -> void:
+	if not spoil_timer:
+		return
+
+	var total := get_total_fill_ml()
+	if total <= 0.0:
+		spoil_timer.stop()
+		if spoiled:
+			_dbg_spoil("contents empty → reset spoiled=false")
+		spoiled = false
+		return
+
+	var spoil := _match_recipe_spoil_time()
+	if spoil <= 0.0:
+		spoil = default_spoil_time
+		_dbg_spoil("no recipe match → using default_spoil_time=" + str(spoil) + "s")
+	else:
+		_dbg_spoil("recipe match → spoil_time=" + str(spoil) + "s")
+
+	spoil_timer.stop()
+	spoil_timer.wait_time = max(0.1, spoil)
+	spoil_timer.start()
+	_dbg_spoil("timer started (" + str(round(spoil_timer.wait_time)) + "s)")
+
+	
+	
+func _match_recipe_spoil_time() -> float:
+	# Suche die "beste" passende Recipe: GLASS/ANY, alle Zutaten vorhanden, Mengen >= (amount - tol)
+	var best_time := -1.0
+	for r_id in DrinkDB.DRINKS.keys():
+		var r: DrinkRecipe = DrinkDB.DRINKS[r_id]
+		if r == null:
+			continue
+		if not (r.container == DrinkRecipe.RecipeContainer.GLASS or r.container == DrinkRecipe.RecipeContainer.ANY):
+			continue
+
+		var ok := true
+		for ia in r.ingredients:
+			if ia == null or ia.liquid == null:
+				ok = false; break
+			var need := int(ia.amount_ml - r.ml_tolerance)
+			var have := get_ml_by_id(ia.liquid.id)
+			if have < need:
+				ok = false; break
+		if not ok:
+			continue
+
+		# Fremdstoffe verhindern, wenn nicht erlaubt
+		if not r.allow_extras:
+			for lid in contents.keys():
+				var allowed := false
+				for ia in r.ingredients:
+					if ia.liquid and ia.liquid.id == String(lid):
+						allowed = true; break
+				if not allowed:
+					ok = false; break
+		if not ok:
+			continue
+
+		# passt → nimm spoil_time, wähle die "engste" (z.B. minimal) oder die erste
+		if best_time < 0.0 or r.spoil_time < best_time:
+			best_time = r.spoil_time
+	return best_time
+
+
+func _on_spoil_timer_timeout() -> void:
+	if get_total_fill_ml() <= 0.0:
+		spoiled = false
+		_dbg_spoil("timeout with empty glass → spoiled=false")
+	else:
+		spoiled = true
+		_dbg_spoil("💀 SPOILED (glass)")
+	_update_label()
+	
+	
+const DEBUG_SPOIL := true
+
+func _dbg_spoil(msg: String) -> void:
+	if not DEBUG_SPOIL:
+		return
+	var ts := Time.get_datetime_string_from_system()
+	print("[SPOIL][Glass]", ts, " — ", msg)
+	# Optional kurz ins HUD pushen:
+	# Signalmanager.update_info_text_label.emit(msg)

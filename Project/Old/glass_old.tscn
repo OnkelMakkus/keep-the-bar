@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cspi2phbgygcn"]
 
 [ext_resource type="PackedScene" uid="uid://bkua8rte7t7jv" path="res://Assets/models/glass.glb" id="1_egith"]
-[ext_resource type="Script" uid="uid://uak8qajvrypc" path="res://Project/Items/glas.gd" id="2_h7awq"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="3_ww5t1"]
+[ext_resource type="Script" uid="uid://75tjksjisnb0" path="res://Project/Items/glas.gd" id="2_h7awq"]
+[ext_resource type="Script" uid="uid://hw0g1ogcys8n" path="res://Project/Environment/Interactable/col_ref.gd" id="3_ww5t1"]
 [ext_resource type="PackedScene" uid="uid://diphy5t2nd0ve" path="res://Project/Items/glass_liquid.tscn" id="4_758x1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyhl2"]

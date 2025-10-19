@@ -1,4 +1,4 @@
-#DrinkDB.gd
+#DrinkDB.gd (Autoload)
 extends Node
 
 @export_dir var liquids_dir := "res://Project/Data/Liquids"

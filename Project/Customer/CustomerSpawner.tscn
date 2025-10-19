@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://be733pexwdi76"]
 
-[ext_resource type="Script" uid="uid://ihmp7mjv6h0h" path="res://Project/Customer/customer_spawner.gd" id="1_juhr0"]
+[ext_resource type="Script" uid="uid://btftw6da85s3" path="res://Project/Customer/customer_spawner.gd" id="1_juhr0"]
 [ext_resource type="PackedScene" uid="uid://sduvikmphqh7" path="res://Project/Customer/customer.tscn" id="2_gltj1"]
 
 [node name="CustomerSpawner" type="Node3D"]

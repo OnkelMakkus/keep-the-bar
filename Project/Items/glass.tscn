@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://clkc6lptr5uxy"]
 
 [ext_resource type="PackedScene" uid="uid://bkua8rte7t7jv" path="res://Assets/models/glass.glb" id="1_pyhl2"]
-[ext_resource type="Script" uid="uid://uak8qajvrypc" path="res://Project/Items/glas.gd" id="2_a2nsn"]
+[ext_resource type="Script" uid="uid://75tjksjisnb0" path="res://Project/Items/glas.gd" id="2_a2nsn"]
 [ext_resource type="Material" uid="uid://ccpo5t520vg1d" path="res://Project/Helper/outline_mat.tres" id="3_cnhjm"]
 [ext_resource type="PackedScene" uid="uid://diphy5t2nd0ve" path="res://Project/Items/glass_liquid.tscn" id="3_fu540"]
 [ext_resource type="Material" uid="uid://b1gs6anxli8d1" path="res://Project/Helper/telelporter_mat.tres" id="4_58n25"]
@@ -22,7 +22,7 @@ radius = 0.048828125
 height = 0.13275146
 radius = 0.07470703
 
-[node name="glass" node_paths=PackedStringArray("glass_liquid", "mesh", "warp_out", "warp_in") groups=["Glass", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_pyhl2")]
+[node name="glass" node_paths=PackedStringArray("glass_liquid", "mesh", "warp_out", "warp_in", "spoil_timer") groups=["Glass", "GlassPlaceable", "Pickupable"] instance=ExtResource("1_pyhl2")]
 script = ExtResource("2_a2nsn")
 glass_liquid = NodePath("glass_liquid")
 mesh = NodePath("Cylinder")
@@ -30,6 +30,7 @@ warp_out = NodePath("Audio/warp_out")
 warp_in = NodePath("Audio/warp_in")
 outline_mat = ExtResource("3_cnhjm")
 teleport_mat = ExtResource("4_58n25")
+spoil_timer = NodePath("SpoilTimer")
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
@@ -66,3 +67,7 @@ volume_db = -20.0
 unit_size = 5.0
 max_db = 1.0
 pitch_scale = 1.5
+
+[node name="SpoilTimer" type="Timer" parent="." index="4"]
+
+[connection signal="timeout" from="SpoilTimer" to="." method="_on_spoil_timer_timeout"]

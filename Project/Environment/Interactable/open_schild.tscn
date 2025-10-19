@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://76hyay1wjbcu"]
 
-[ext_resource type="Script" uid="uid://7vfvnb2kbueg" path="res://Project/Environment/Interactable/open_schild.gd" id="1_d6f7q"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="2_i4g4t"]
+[ext_resource type="Script" uid="uid://01vcwupbuu5u" path="res://Project/Environment/Interactable/open_schild.gd" id="1_d6f7q"]
+[ext_resource type="Script" uid="uid://hw0g1ogcys8n" path="res://Project/Environment/Interactable/col_ref.gd" id="2_i4g4t"]
 [ext_resource type="PackedScene" uid="uid://ba3c18owfu8hc" path="res://Assets/models/Molten Maps SciFi Asset Pack/Assets/gtlf/Air_Con.glb" id="3_i4g4t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oq34n"]

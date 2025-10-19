@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfrcr8snmmxal"]
 
 [ext_resource type="Texture2D" uid="uid://1ggod5q3aa21" path="res://icon.svg" id="1_k5w7h"]
-[ext_resource type="Script" uid="uid://dhs7ioi37elkg" path="res://addons/ambientcg/download_panel.gd" id="1_n6dyb"]
-[ext_resource type="Script" uid="uid://cn4gehailmkwg" path="res://addons/ambientcg/download_window.gd" id="1_yby7p"]
-[ext_resource type="Script" uid="uid://dc6nvcqhqblh4" path="res://addons/ambientcg/TmakerBG.gd" id="3_my73g"]
+[ext_resource type="Script" uid="uid://c8dfrroegrydo" path="res://addons/ambientcg/download_panel.gd" id="1_n6dyb"]
+[ext_resource type="Script" uid="uid://chld2negeh7ey" path="res://addons/ambientcg/download_window.gd" id="1_yby7p"]
+[ext_resource type="Script" uid="uid://cj33ppdqrivf0" path="res://addons/ambientcg/TmakerBG.gd" id="3_my73g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2yn7l"]
 bg_color = Color(0.509804, 0.435294, 1, 1)
@@ -152,10 +152,9 @@ offset_right = -0.000366211
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.315, 0.35999998, 0.435, 1.5)
+color = Color(0.35999998, 0.39, 0.42000002, 1.5)
 script = ExtResource("3_my73g")
 multiplier = 1.5
-metadata/_custom_type_script = "uid://dc6nvcqhqblh4"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DownloadWidget/DownloadVisualizer"]
 layout_mode = 1

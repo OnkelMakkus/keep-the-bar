@@ -1,47 +1,128 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnpc5glm4ximw"]
 
-[ext_resource type="Script" uid="uid://7fdki3ttm4" path="res://Project/UI/order_menu.gd" id="1_7c2vd"]
+[ext_resource type="Script" uid="uid://g4adwjnskgld" path="res://Project/UI/order_menu.gd" id="1_7c2vd"]
 [ext_resource type="PackedScene" uid="uid://bp04l7ce0us2n" path="res://Project/Helper/process_order.tscn" id="2_qp75k"]
 [ext_resource type="Texture2D" uid="uid://bo0tvxfchqscn" path="res://Assets/UI/Weraxxa/PNG/Button05.png" id="3_at5t6"]
 [ext_resource type="Texture2D" uid="uid://b5s6dnqbgjh7u" path="res://Assets/UI/Weraxxa/PNG/Button06.png" id="4_sxl23"]
 [ext_resource type="Texture2D" uid="uid://bq0s6yt8hc1r2" path="res://Assets/UI/Weraxxa/PNG/Button01.png" id="5_lpnug"]
 
-[node name="Order_menu" type="Control" node_paths=PackedStringArray("order_menu", "color_rect", "aspect_ratio_container", "res_01_label", "res_02_label", "res_03_label", "res_04_label", "amount_01_label", "amount_02_label", "amount_03_label", "amount_04_label", "price_01_label", "price_02_label", "price_03_label", "price_04_label", "order_01_label", "order_02_label", "order_03_label", "order_04_label", "current_money_label", "estimated_money_label")]
+[node name="Order_menu" type="Control" node_paths=PackedStringArray("color_rect", "title_label", "header_container", "rows_scroll", "rows_container", "current_money_label", "estimated_money_label", "cancel_btn", "set_order_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_7c2vd")
 PROCESS_ORDER = ExtResource("2_qp75k")
-order_menu = NodePath(".")
 color_rect = NodePath("ColorRect")
-aspect_ratio_container = NodePath("AspectRatioContainer")
-res_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res01Label")
-res_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res02Label")
-res_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res03Label")
-res_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResNameContainer/Res04Label")
-amount_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount01Label")
-amount_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount02Label")
-amount_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount03Label")
-amount_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/ResAmountContainer/Amount04Label")
-price_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price01Label")
-price_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price02Label")
-price_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price03Label")
-price_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/PriceContainer/Price04Label")
-order_01_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order01Label")
-order_02_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order02Label")
-order_03_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order03Label")
-order_04_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/OrderShowContainer/Order04Label")
-current_money_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer/CurrentMoneyLabel")
-estimated_money_label = NodePath("AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer/EstimatedMoneyLabel")
+title_label = NodePath("VBoxContainer/TitleLabel")
+header_container = NodePath("VBoxContainer/Header")
+rows_scroll = NodePath("VBoxContainer/RowsScroll")
+rows_container = NodePath("VBoxContainer/RowsScroll/Center/RowsGrid")
+current_money_label = NodePath("VBoxContainer/Totals/CurrentMoneyLabel")
+estimated_money_label = NodePath("VBoxContainer/Totals/EstimatedMoneyLabel")
+cancel_btn = NodePath("VBoxContainer/Buttons/CancelBtn")
+set_order_btn = NodePath("VBoxContainer/Buttons/SetOrderBtn")
+timer_duration = 30.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.151276, 0.151276, 0.151276, 1)
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+horizontal_alignment = 1
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="H_Resource" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="H_Stock" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="H_Price" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="H_Minus" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="H_Plus" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="H_Order" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="RowsScroll" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Center" type="CenterContainer" parent="VBoxContainer/RowsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RowsGrid" type="GridContainer" parent="VBoxContainer/RowsScroll/Center"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+columns = 6
+
+[node name="Totals" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CurrentMoneyLabel" type="Label" parent="VBoxContainer/Totals"]
+layout_mode = 2
+text = "current money"
+
+[node name="EstimatedMoneyLabel" type="Label" parent="VBoxContainer/Totals"]
+layout_mode = 2
+text = "estimated money"
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CancelBtn" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Cancel"
+icon = ExtResource("5_lpnug")
+flat = true
+icon_alignment = 1
+
+[node name="SetOrderBtn" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Set Order"
+icon = ExtResource("5_lpnug")
+flat = true
+icon_alignment = 1
+
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,17 +131,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="AspectRatioContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="ResNameContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 18
 
@@ -85,6 +170,7 @@ layout_mode = 2
 text = "MolOr"
 
 [node name="ResAmountContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 18
 
@@ -109,6 +195,7 @@ layout_mode = 2
 text = "MolOr"
 
 [node name="PriceContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 18
 
@@ -133,6 +220,7 @@ layout_mode = 2
 text = "MolOr"
 
 [node name="DecreaseContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -173,6 +261,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="IncreaseContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -213,6 +302,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="OrderShowContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 18
 
@@ -240,32 +330,12 @@ text = "MolOr"
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="CurrentMoneyLabel" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer"]
-layout_mode = 2
-text = "current money"
-
-[node name="EstimatedMoneyLabel" type="Label" parent="AspectRatioContainer/CenterContainer/VBoxContainer/OverviewContainer"]
-layout_mode = 2
-text = "estimated money"
-
 [node name="btnContainer" type="VBoxContainer" parent="AspectRatioContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CancelBtn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer"]
-layout_mode = 2
-text = "Cancel"
-icon = ExtResource("5_lpnug")
-flat = true
-icon_alignment = 1
-
-[node name="SetOrderBtn" type="Button" parent="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer"]
-layout_mode = 2
-text = "Set Order"
-icon = ExtResource("5_lpnug")
-flat = true
-icon_alignment = 1
-
+[connection signal="pressed" from="VBoxContainer/Buttons/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/Buttons/SetOrderBtn" to="." method="_on_set_order_btn_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease01Btn" to="." method="_on_decrease_01_btn_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease02Btn" to="." method="_on_decrease_02_btn_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/DecreaseContainer/Decrease03Btn" to="." method="_on_decrease_03_btn_pressed"]
@@ -274,5 +344,3 @@ icon_alignment = 1
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase02Btn" to="." method="_on_increase_02_btn_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase03Btn" to="." method="_on_increase_03_btn_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/HBoxContainer/IncreaseContainer/Increase04Btn" to="." method="_on_increase_04_btn_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/CenterContainer/VBoxContainer/btnContainer/SetOrderBtn" to="." method="_on_set_order_btn_pressed"]

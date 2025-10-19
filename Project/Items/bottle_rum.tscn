@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://oopr4nci54s6"]
 
 [ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_8s1kb"]
-[ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Project/Items/bottle.gd" id="2_80a0o"]
+[ext_resource type="Script" uid="uid://ceo8otmkou74y" path="res://Project/Items/bottle.gd" id="2_80a0o"]
 [ext_resource type="Material" uid="uid://ccpo5t520vg1d" path="res://Project/Helper/outline_mat.tres" id="3_knpim"]
 [ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="3_w05o1"]
 [ext_resource type="Material" uid="uid://b1gs6anxli8d1" path="res://Project/Helper/telelporter_mat.tres" id="4_ks3yy"]
-[ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="5_eglgq"]
+[ext_resource type="Script" uid="uid://dhh7pyldw5weh" path="res://Project/Environment/Interactable/billboard_label.gd" id="5_eglgq"]
 [ext_resource type="PackedScene" uid="uid://6mji6afhh64p" path="res://Assets/models/bottle_rum.glb" id="7_tcqj1"]
 [ext_resource type="AudioStream" uid="uid://cxw3610yvnm5l" path="res://Assets/Sounds/snd_warp_out.wav" id="8_83sgb"]
 [ext_resource type="AudioStream" uid="uid://cd63k8jhnkgej" path="res://Assets/Sounds/snd_warp_in.wav" id="9_xd7if"]

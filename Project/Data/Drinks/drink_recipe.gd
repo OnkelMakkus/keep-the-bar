@@ -11,3 +11,4 @@ enum RecipeContainer { ANY, GLASS, BOTTLE }   # wichtig: NICHT "Container" nenne
 @export var ml_tolerance: int = 5
 @export var allow_extras: bool = false
 @export var ingredients: Array[IngredientAmount] = []
+@export var spoil_time: float

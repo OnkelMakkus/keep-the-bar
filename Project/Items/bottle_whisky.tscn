@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bnv1bb76hlxak"]
 
 [ext_resource type="PackedScene" uid="uid://djy2s300mxioo" path="res://Assets/models/bottle1.glb" id="1_gwywe"]
-[ext_resource type="Script" uid="uid://im13vwluqfpe" path="res://Project/Items/bottle.gd" id="2_xnrmv"]
-[ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="3_st8p6"]
+[ext_resource type="Script" uid="uid://ceo8otmkou74y" path="res://Project/Items/bottle.gd" id="2_xnrmv"]
+[ext_resource type="Script" uid="uid://dhh7pyldw5weh" path="res://Project/Environment/Interactable/billboard_label.gd" id="3_st8p6"]
 [ext_resource type="Material" uid="uid://ccpo5t520vg1d" path="res://Project/Helper/outline_mat.tres" id="3_xpd3g"]
 [ext_resource type="Material" uid="uid://c7a725a1ut3tb" path="res://Assets/mats/rum_whisky.tres" id="4_6our1"]
 [ext_resource type="Material" uid="uid://b1gs6anxli8d1" path="res://Project/Helper/telelporter_mat.tres" id="4_iix3x"]

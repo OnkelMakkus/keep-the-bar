@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://sduvikmphqh7"]
 
-[ext_resource type="Script" uid="uid://bsd36bnen1ore" path="res://Project/Customer/customer.gd" id="1_fp685"]
-[ext_resource type="Script" uid="uid://khxvm27goj8a" path="res://Project/Environment/Interactable/billboard_label.gd" id="2_0v30w"]
+[ext_resource type="Script" uid="uid://dsxt7w7r2uhpm" path="res://Project/Customer/customer.gd" id="1_fp685"]
+[ext_resource type="Script" uid="uid://dhh7pyldw5weh" path="res://Project/Environment/Interactable/billboard_label.gd" id="2_0v30w"]
 [ext_resource type="Material" uid="uid://b1gs6anxli8d1" path="res://Project/Helper/telelporter_mat.tres" id="2_t6jkd"]
 [ext_resource type="Texture2D" uid="uid://duo4x0cuftbmy" path="res://Assets/UI/Weraxxa/PNG/Button11.png" id="3_mba04"]
 [ext_resource type="PackedScene" uid="uid://cq46hpkda2x5t" path="res://Project/Customer/x_bot.tscn" id="5_2o0mk"]

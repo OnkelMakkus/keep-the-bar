@@ -23,3 +23,4 @@ display_name = "Beer"
 sell_price = 3
 container = 2
 ingredients = Array[ExtResource("1_hw0q0")]([SubResource("Resource_bndb5")])
+spoil_time = 120.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://xkfv4a3chdfy"]
 
-[ext_resource type="Script" uid="uid://28aukqk27i52" path="res://addons/ambientcg/acg_ui.gd" id="1_qff10"]
-[ext_resource type="Script" uid="uid://dc6nvcqhqblh4" path="res://addons/ambientcg/TmakerBG.gd" id="2_24p0g"]
+[ext_resource type="Script" uid="uid://cigbp8oda48pb" path="res://addons/ambientcg/acg_ui.gd" id="1_qff10"]
+[ext_resource type="Script" uid="uid://cj33ppdqrivf0" path="res://addons/ambientcg/TmakerBG.gd" id="2_24p0g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24p0g"]
 content_margin_left = 4.0
@@ -39,9 +39,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.21, 0.24, 0.29, 1)
+color = Color(0.24, 0.26, 0.28, 1)
 script = ExtResource("2_24p0g")
-metadata/_custom_type_script = "uid://dc6nvcqhqblh4"
 
 [node name="Search" type="LineEdit" parent="."]
 unique_name_in_owner = true

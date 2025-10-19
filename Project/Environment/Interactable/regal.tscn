@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://coxdxsa5j4cm2"]
 
 [ext_resource type="PackedScene" uid="uid://31p8eqalhjs8" path="res://Assets/models/regal.glb" id="1_kyig6"]
-[ext_resource type="Script" uid="uid://cngiivaxuog4p" path="res://Project/Environment/Interactable/regal.gd" id="2_1h08e"]
+[ext_resource type="Script" uid="uid://qns0p8w01eh4" path="res://Project/Environment/Interactable/regal.gd" id="2_1h08e"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1h08e"]
 points = PackedVector3Array(-0.5, -1.5, -0.05, -0.5, -1.5, 0.05, -0.5, 1.5, -0.05, 0.5, -1.5, -0.05, 0.5, -1.5, 0.05, -0.5, 1.5, 0.05, 0.5, 1.5, -0.05, 0.5, 1.5, 0.05)

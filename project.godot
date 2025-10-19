@@ -41,7 +41,7 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
-window/size/initial_position_type=3
+window/size/initial_position_type=4
 
 [global_group]
 
@@ -149,4 +149,8 @@ use_context={
 
 [rendering]
 
+anti_aliasing/quality/msaa_2d=3
+anti_aliasing/quality/msaa_3d=3
+anti_aliasing/quality/screen_space_aa=1
+anti_aliasing/quality/use_taa=true
 occlusion_culling/use_occlusion_culling=true

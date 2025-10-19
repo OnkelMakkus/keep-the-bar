@@ -180,45 +180,54 @@ func clicked_by_player(item: Node = null) -> void:
 	if not reached_theke: return
 	if leaving: return
 
-	# direkt übergebenes Item bevorzugen; sonst wie bisher den neuesten vom Serving-Container nehmen
+	# Direkt übergebenes Item bevorzugen; sonst das jüngste vom Serving-Container
 	var candidate: Node = item
 	if candidate == null:
 		candidate = Gamemanager._latest_serving_item_from_player()
 
-	var result := try_serve_drink_with(candidate)
-	if result.is_empty() or not result.has("marker_pair") or not result["marker_pair"]:
+	var result := try_serve_drink_with(candidate)  # { ok, marker_pair, price, reason }
+
+	if not result.get("ok", false):
 		update_customer_label(false)
 
-		# Item robust zurückgeben/ablegen, wenn vorhanden
+		# Optionales Feedback je nach Grund
+		var reason := String(result.get("reason", ""))
+		if reason == "spoiled":
+			Signalmanager.update_info_text_label.emit("Molecular Integrity failed")
+		elif reason == "mismatch":
+			Signalmanager.update_info_text_label.emit("Order mismatch")
+
+		# Item robust zurückgeben/ablegen (nur im Fail-Fall)
 		if candidate and is_instance_valid(candidate):
 			var pi := Gamemanager.player_interaction
 			var player_holds := (pi != null and pi.held_object != null)
 
+			# Meta entfernen (falls vom Serving-Container)
+			if candidate.has_meta("__from_player"): candidate.remove_meta("__from_player")
+			if candidate.has_meta("__drop_time"):   candidate.remove_meta("__drop_time")
+
 			if not player_holds and pi and pi.has_method("take_into_hand"):
-				candidate.remove_meta("__from_player")
-				candidate.remove_meta("__drop_time")
 				pi.take_into_hand(candidate)
 			else:
-				candidate.remove_meta("__from_player")
-				candidate.remove_meta("__drop_time")
 				if not Gamemanager.place_on_best_marker(candidate, "abstell", candidate.global_position):
+					# Falls kein Marker, wenigstens auf Thekenhöhe parken
 					candidate.set_meta("on_theke", true)
 					if Gamemanager.theke and Gamemanager.theke.has_node("position_marker"):
 						var pm := Gamemanager.theke.get_node("position_marker") as Node3D
-						if pm:
-							candidate.global_position.y = pm.global_position.y
+						if pm: candidate.global_position.y = pm.global_position.y
 
+		# Fehlversuch -> Kunde geht
 		despawn_after_exit()
 		return
 
 	# Erfolg
 	update_customer_label(true)
-	var pair = result["marker_pair"]
-	if candidate and is_instance_valid(candidate):
-		if candidate.has_meta("__from_player"): candidate.remove_meta("__from_player")
-		if candidate.has_meta("__drop_time"):   candidate.remove_meta("__drop_time")
-	go_to_marker_and_wait(pair)
-
+	var marker_pair = result.get("marker_pair", {})
+	if marker_pair and typeof(marker_pair) == TYPE_DICTIONARY and not marker_pair.is_empty():
+		go_to_marker_and_wait(marker_pair)
+	else:
+		# Falls aus irgendeinem Grund kein Platz gefunden wurde, trotzdem gehen lassen
+		despawn_after_exit()
 
 
 # --- Hilfsfunktionen ---
@@ -316,19 +325,29 @@ func show_besitzer():
 # ---------- NEU: zentrales Serve (Resources via Gamemanager) ----------
 func try_serve_drink(giving_obj: Node3D = null) -> Dictionary:
 	if giving_obj and is_instance_valid(giving_obj):
-		var r := Gamemanager.attempt_serve(self, giving_obj)
-		if r.ok:
-			return {"marker_pair": r.place, "price": r.price}
-	return {}
+		var res := Gamemanager.attempt_serve(self, giving_obj)  # Dictionary
+		return {
+			"ok": res.get("ok", false),
+			"marker_pair": res.get("place", {}),
+			"price": res.get("price", 0),
+			"reason": res.get("reason", "")
+		}
+	# kein Objekt übergeben
+	return {"ok": false, "marker_pair": {}, "price": 0, "reason": "no_object"}
+
 
 func try_serve_drink_with(obj: Node) -> Dictionary:
-	# wenn kein direktes Objekt mitkommt, verhalte dich wie bisher
-	if obj == null:
-		return try_serve_drink()
-	var res := Gamemanager.attempt_serve(self, obj)
-	if res.ok:
-		return {"marker_pair": res.place, "price": res.price}
-	return {}
+	if obj == null or not is_instance_valid(obj):
+		# Fallback auf die andere Funktion (erspart Copy&Paste)
+		return try_serve_drink(null)
+
+	var res := Gamemanager.attempt_serve(self, obj)  # Dictionary
+	return {
+		"ok": res.get("ok", false),
+		"marker_pair": res.get("place", {}),
+		"price": res.get("price", 0),
+		"reason": res.get("reason", "")
+	}
 
 
 func update_customer_label(drink_served: bool):

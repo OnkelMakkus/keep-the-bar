@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://o1qxu1x2lv1i"]
 
-[ext_resource type="Script" uid="uid://m8v3kbehbqox" path="res://Project/UI/replicator_ui.gd" id="1_l5p4j"]
+[ext_resource type="Script" uid="uid://f2d4yqgcefuh" path="res://Project/UI/replicator_ui.gd" id="1_l5p4j"]
 
 [node name="Replicator_UI" type="Control"]
 z_index = 10

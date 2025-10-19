@@ -329,26 +329,37 @@ func attempt_serve(customer: Node, obj: Node) -> Dictionary:
 	print("[serve] order=", customer and customer.order_text, " obj=", obj, " groups=", obj and obj.get_groups())
 
 	if customer == null or obj == null:
-		result.reason = "invalid_args"; return result
+		result.reason = "invalid_args"
+		return result
 
 	var order_id := ""
 	if "order_text" in customer:
 		order_id = str(customer.order_text)
+
 	var recipe: DrinkRecipe = DrinkDB.get_recipe_by_id(order_id)
 	if recipe == null:
-		result.reason = "unknown_order:" + order_id; return result
+		result.reason = "unknown_order:" + order_id
+		return result
 
 	var is_glass := obj.is_in_group("Glass")
 	var is_bottle := obj.is_in_group("Bottle") or obj.is_in_group("BeerBottle")
 
-	# Container-Anforderung
+	# Container-Anforderung prüfen
 	if recipe.container == DrinkRecipe.RecipeContainer.GLASS and not is_glass:
-		result.reason = "needs_glass"; return result
+		result.reason = "needs_glass"
+		return result
 	if recipe.container == DrinkRecipe.RecipeContainer.BOTTLE and not is_bottle:
-		result.reason = "needs_bottle"; return result
+		result.reason = "needs_bottle"
+		return result
 	
 	print("[serve] container ok. bottle=", is_bottle, " glass=", is_glass)
 
+	# --- jetzt Spoiled prüfen ---
+	if (is_bottle or is_glass) and _is_spoiled(obj):
+		result.reason = "spoiled"
+		return result
+
+	# --- dann Rezept-Inhalt prüfen ---
 	var ok := false
 	if is_bottle:
 		ok = _fits_bottle(obj, recipe)
@@ -357,25 +368,22 @@ func attempt_serve(customer: Node, obj: Node) -> Dictionary:
 		ok = _fits_glass(obj, recipe)
 		print("[serve] fits_glass=", ok)
 	else:
-		result.reason = "unsupported_container"; return result
+		result.reason = "unsupported_container"
+		return result
 
 	if not ok:
 		print("[serve] mismatch reason; recipe=", recipe.id)
-		result.reason = "mismatch"; return result
+		result.reason = "mismatch"
+		return result
 
-	#Erfolg
+	# Erfolg
 	result.ok = true
 	result.price = int(recipe.sell_price)
 	Signalmanager.update_money.emit(result.price)
 
-	# 🔒 Das tatsächlich servierte Objekt sofort entsorgen,
-	# damit keine Interaktion/„Doppelhaltung“ mehr möglich ist.
 	if is_instance_valid(obj):
-		# optional: Parent lösen (nicht zwingend)
-		# if obj.get_parent(): obj.get_parent().remove_child(obj)
 		obj.queue_free()
 
-	# Tischplatz reservieren (gleichindexig, tischübergreifend)
 	result.place = find_free_indexed_place()
 	return result
 	
@@ -406,12 +414,13 @@ func _fits_bottle(bottle: Node, recipe: DrinkRecipe) -> bool:
 
 	# WICHTIG: per ID vergleichen
 	if b_liq.id != ing.liquid.id: return false
-
+	if bottle.spoiled == true: return false
 	return b_vol >= float(ing.amount_ml - recipe.ml_tolerance)
 
 
 # --- Glass ↔ Recipe ---
-func _fits_glass(glass: Node, recipe: DrinkRecipe) -> bool:
+func _fits_glass(glass: Node, recipe: DrinkRecipe) -> bool:	
+	if glass.spoiled == true: return false
 	# Jede Zutat prüfen
 	for ing: IngredientAmount in recipe.ingredients:
 		if ing == null or ing.liquid == null: return false
@@ -441,7 +450,7 @@ func _fits_glass(glass: Node, recipe: DrinkRecipe) -> bool:
 		var cont = glass.get("contents") if glass else {}
 		for lid in cont.keys():
 			if not allowed.has(String(lid)):
-				return false
+				return false		
 
 	return true
 
@@ -493,3 +502,19 @@ func clear_place_reservation(pair: Dictionary) -> void:
 	for k in ["standing_marker", "glass_marker", "glas_marker"]:
 		if pair.has(k) and pair[k] and pair[k].has_meta("reserved"):
 			pair[k].remove_meta("reserved")
+			
+			
+# ==========================================================
+# Helper
+# ==========================================================
+
+func _is_spoiled(obj: Object) -> bool:
+	if obj == null:
+		return false
+	# bevorzugt API, falls du sie mal einführst
+	if obj.has_method("is_spoiled"):
+		return bool(obj.is_spoiled())
+	# Property-Fall (BeerBottle/Glass haben 'spoiled')
+	if "spoiled" in obj:
+		return bool(obj.get("spoiled"))
+	return false

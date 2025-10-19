@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://drx4de00kex8p"]
 
-[ext_resource type="Script" uid="uid://uak8qajvrypc" path="res://Project/Items/glas.gd" id="1_101tu"]
-[ext_resource type="Script" uid="uid://dnl6x88m30rhi" path="res://Project/Environment/Interactable/col_ref.gd" id="2_v0jdj"]
+[ext_resource type="Script" uid="uid://75tjksjisnb0" path="res://Project/Items/glas.gd" id="1_101tu"]
+[ext_resource type="Script" uid="uid://hw0g1ogcys8n" path="res://Project/Environment/Interactable/col_ref.gd" id="2_v0jdj"]
 [ext_resource type="PackedScene" uid="uid://diphy5t2nd0ve" path="res://Project/Items/glass_liquid.tscn" id="3_aj38o"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_juoee"]
