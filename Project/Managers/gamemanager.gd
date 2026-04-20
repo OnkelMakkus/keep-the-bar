@@ -504,6 +504,20 @@ func clear_place_reservation(pair: Dictionary) -> void:
 			pair[k].remove_meta("reserved")
 			
 			
+# Gamemanager.gd – Beispiel
+func start_new_game() -> void:
+	# Geld, Uhrzeit, Flags, etc.
+	money = 0
+	# Basis-Mats setzen (hier mit Beispiel-Starterpaket)
+	# Wenn du keine Overrides brauchst: {} übergeben
+	ReplicatorDB.reset_for_new_game({})
+	# Freischaltungen zurücksetzen (Basis freigeben)
+	if Engine.has_singleton("Unlocks") or "Unlocks" in get_tree().root:
+		Unlocks.reset_for_new_game()
+	# UI updaten (falls nötig – mats_changed feuert bereits)
+	Signalmanager.update_res_display.emit()
+	
+			
 # ==========================================================
 # Helper
 # ==========================================================
@@ -518,3 +532,5 @@ func _is_spoiled(obj: Object) -> bool:
 	if "spoiled" in obj:
 		return bool(obj.get("spoiled"))
 	return false
+	
+	

@@ -1,23 +1,33 @@
-#game_level.gd
+# game_level.gd (grouped exports)
 extends Node3D
 
-@export var quit_btn: Button 
-@export var resume_btn: Button 
-@export var is_open_timer: Timer 
-@export var open_label: Label3D 
-@export var crosshair: ColorRect
-@export var info_label: Label
+# ── UI Elements ────────────────────────────────────────────────────────────────
+@export_category("UI Elements")
+@export_subgroup("Buttons")
+@export var quit_btn: Button
+@export var resume_btn: Button
 @export var option_btn: Button
+
+@export_subgroup("Labels")
+@export var info_label: Label
 @export var info_text_label: Label
+@export var open_label: Label3D
 
+@export_subgroup("Crosshair")
+@export var crosshair: ColorRect
+@export_group("") # end UI Elements
 
-@export var serving_container: Node3D 
+# ── Gameplay / Scene References ────────────────────────────────────────────────
+@export_category("Gameplay")
+@export var serving_container: Node3D
 
+# ── Runtime ────────────────────────────────────────────────────────────────────
 var player: Player
-
 var paused := false
 
+
 func _ready() -> void:
+	Gamemanager.start_new_game()
 	player = Gamemanager.get_object("Player") as Player
 	Signalmanager.update_money.emit(0)
 	Gamemanager.serving_container = serving_container

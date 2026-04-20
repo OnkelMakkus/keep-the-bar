@@ -1,35 +1,58 @@
-#ui.gd
+# ui.gd (grouped exports)
 extends Control
+
 var player: Player
 
+# ── Buttons ────────────────────────────────────────────────────────────────────
 @export_category("Buttons")
-@export var quit_btn: Button 
-@export var resume_btn: Button 
+@export_subgroup("Main Menu")
+@export var quit_btn: Button
+@export var resume_btn: Button
 @export var option_btn: Button
+@export_subgroup("Save / Load")
 @export var save_btn: Button
 @export var load_btn: Button
+@export_group("") # end Buttons groups
 
-@export_category("label")
-@export var kohle_lbl: Label 
-@export var time_lbl: Label 
-@export var alco_mol_lbl: Label 
+# ── Labels ─────────────────────────────────────────────────────────────────────
+@export_category("Labels")
+@export_subgroup("HUD Counters")
+@export var kohle_lbl: Label
+@export var time_lbl: Label
+
+@export_subgroup("Resources")
+@export var alco_mol_lbl: Label
 @export var mol_or_lbl: Label
 @export var matter_lbl: Label
 @export var sweet_molecules_lbl: Label
+
+@export_subgroup("Status / Info")
 @export var delivery_lbl: Label
 @export var info_text_label: Label
-@export var info_label: Label 
+@export var info_label: Label
+@export_group("") # end Labels groups
 
-@export_category("Misc")
+# ── UI Elements ────────────────────────────────────────────────────────────────
+@export_category("UI Elements")
+@export_subgroup("Containers")
 @export var menü_main: MarginContainer
+
+@export_subgroup("Crosshair")
 @export var crosshair: ColorRect
+
+@export_subgroup("Timers")
 @export var info_text_timer: Timer
 @export var hud_info_timer: Timer
-@export var hud_info_background: TextureRect
 
+@export_subgroup("Decor")
+@export var hud_info_background: TextureRect
+@export_group("") # end UI Elements groups
+
+# ── Constants / Runtime ────────────────────────────────────────────────────────
 const CROSSHAIR_IDLE  := Color(1, 1, 1, 0.9)   # weiß
 const CROSSHAIR_HOT   := Color(1, 0.9, 0.2, 1) # gelblich
 var _crosshair_tween: Tween
+
 
 
 func _ready():
@@ -82,8 +105,14 @@ func update_info_text_label(info: String):
 	
 	
 func _mat_amt(id: String) -> int:
-	var m := ReplicatorDB.get_mat(id)
-	return m.current_amount if m else 0
+	# Bevorzugt: ReplicatorDB.get_amount(id)
+	if ReplicatorDB and ReplicatorDB.has_method("get_amount"):
+		return int(ReplicatorDB.get_amount(id))
+	# Fallback: falls du (noch) einen Gamemanager-Store hast
+	if Gamemanager and Gamemanager.has_method("get_mat_amount"):
+		return int(Gamemanager.get_mat_amount(id))
+	# Letzte Rettung: 0
+	return 0
 	
 
 func update_res_display():

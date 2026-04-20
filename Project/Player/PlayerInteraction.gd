@@ -1,18 +1,37 @@
-# PlayerInteraction.gd
+# PlayerInteraction.gd (Godot 4.5 valid)
 extends Node
+class_name PlayerInteraction
 
+# ── Scene References ──────────────────────────────────────────────────────────
+@export_category("Player References")
+
+@export_subgroup("Core Nodes")
 @export var player: CharacterBody3D
 @export var head: Node3D
 @export var camera: Camera3D
 @export var hand_slot: Node3D
-@export var aim: PlayerAim
 
+@export_subgroup("Aim")
+@export var aim: PlayerAim
+@export_group("") # end Player References
+
+# ── Interaction Settings ──────────────────────────────────────────────────────
+@export_category("Interaction Settings")
+
+@export_subgroup("Pouring")
+@export_range(0.0, 1000.0, 1.0, "suffix: ml/s")
+var pour_rate_ml: float = 40.0
+
+@export_subgroup("Flags")
+@export var prepare_for_recycling: bool = false
+@export_group("") # end Interaction Settings
+
+# ── Runtime (non-export) ──────────────────────────────────────────────────────
 var held_object: Node3D = null
 var is_pouring: bool = false
 var hand_pos: Vector3 = Vector3.ZERO
-var pour_rate_ml: float = 40.0
-var prepare_for_recycling: bool = false
 var last_label_owner: Node = null
+
 
 
 func _ready() -> void:

@@ -1,22 +1,29 @@
-# bottle.gd (neu)
+# bottle.gd
 extends Node3D
 
 signal finished_pouring()
 
-# --- Scene Refs ---
+
+# --- Scene References ---
+@export_group("Scene References")
 @export var mesh: MeshInstance3D
 @export var warp_out: AudioStreamPlayer3D
 @export var warp_in: AudioStreamPlayer3D
 @export var fill_indicator: MeshInstance3D
 @export var label_3d: Label3D
 
-# --- VFX/Materials ---
+
+# --- VFX / Materials ---
+@export_group("VFX / Materials")
 @export var outline_mat: ShaderMaterial
 @export var teleport_mat: ShaderMaterial
+
 var _base_mat: Material
 var _outlined_mat: Material
 
-# --- Inhalt (Resource) ---
+
+# --- Content (Liquid Resource) ---
+@export_group("Content")
 @export var liquid: Liquid
 @export var volume_ml: float = 700.0
 @export var max_volume_ml: float = 700.0
@@ -24,11 +31,14 @@ var _outlined_mat: Material
 @export var is_beer_bottle: bool = false
 @export var replicator_item_id: String = ""
 
+
 # --- State ---
+@export_group("State")
 var is_pouring := false
 var pour_tween: Tween
 var _current_scale := Vector3.ONE
 var label_name := "Bottle"
+
 
 func _ready() -> void:
 	add_to_group("Bottle")

@@ -1,13 +1,22 @@
-#playerAim.gd
+# PlayerAim.gd (grouped exports)
 extends Node
 class_name PlayerAim
 
+# ── Signals ───────────────────────────────────────────────────────────────────
 signal target_changed(new_target: Object)
 
+# ── Raycast / Detection ───────────────────────────────────────────────────────
+@export_category("Detection")
+@export_subgroup("Core Raycast")
 @export var ray_front: RayCast3D        # $Head/RayCast3D_Front
-@export var highlight_group := "Pickupable"
 @export var debug_hits := false
+@export_group("") # end Detection
 
+# ── Interaction Settings ──────────────────────────────────────────────────────
+@export_category("Interaction Settings")
+@export_subgroup("Target Groups")
+@export var highlight_group := "Pickupable"
+@export_subgroup("Prompt Mapping")
 @export var prompt_by_group := {
 	"Pickupable": "<LMB> Pickup",
 	"Bottle": "<LMB> Pickup • <RMB> pour",
@@ -20,11 +29,15 @@ signal target_changed(new_target: Object)
 	"Theke": "Bar"
 }
 
+@export_subgroup("Behavior Flags")
 @export var prefer_group_prompt: bool = true
 @export var allow_object_override: bool = false
+@export_group("") # end Interaction Settings
 
+# ── Runtime ───────────────────────────────────────────────────────────────────
 var current_target: Object = null
 var highlighted: Node3D = null
+
 
 func _ready() -> void:
 	if ray_front:

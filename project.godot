@@ -28,6 +28,7 @@ DrinkDB="*res://Project/Managers/DrinkDB.gd"
 ReplicatorDB="*res://Project/Managers/ReplicatorDB.gd"
 Resourcemanager="*res://Project/Managers/resourcemanager.gd"
 Gamemanager="*res://Project/Managers/gamemanager.gd"
+Unlocks="*res://Project/Managers/unlocks.gd"
 Signalmanager="*res://Project/Managers/signalmanager.gd"
 Slotmanager="*res://Project/Managers/slotmanager.gd"
 Savemanager="*res://Project/Managers/savemanager.gd"
@@ -42,6 +43,10 @@ gdscript/warnings/unused_signal=0
 window/size/viewport_width=1600
 window/size/viewport_height=900
 window/size/initial_position_type=4
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/bar_resource_editor/plugin.cfg")
 
 [global_group]
 

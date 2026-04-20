@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RepBaseMat" load_steps=2 format=3 uid="uid://cxhfee4nivk2o"]
+
+[ext_resource type="Script" uid="uid://djclyx6opdbrs" path="res://Project/Data/Mats/rep_base_mat.gd" id="1_wov4q"]
+
+[resource]
+script = ExtResource("1_wov4q")
+id = "blue"
+display_name = "Blue"
+buy_price = 1
+buy_amount = 10
+current_amount = 10

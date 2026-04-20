@@ -1,29 +1,44 @@
 # order_menu.gd
 extends Control
 
-@export var PROCESS_ORDER: PackedScene
+# --- Exports im Inspector gruppiert ---
+@export_group("Scene References")
+
+@export_subgroup("Header")
 @export var color_rect: ColorRect
 @export var title_label: Label
 @export var header_container: HBoxContainer
+
+@export_subgroup("Rows")
 @export var rows_scroll: ScrollContainer
 @export var rows_container: GridContainer
+
+@export_subgroup("Labels")
 @export var current_money_label: Label
 @export var estimated_money_label: Label
+
+@export_subgroup("Buttons")
 @export var cancel_btn: Button
 @export var set_order_btn: Button
+
+@export_subgroup("Scenes & Config")
+@export var PROCESS_ORDER: PackedScene
 @export var timer_duration: float = 250.0
 
-# State
+
+# --- State ---
 var temp_amount_by_id: Dictionary = {}   # id -> Units (bestellt, in "Units"/buy_amount-Schritten)
 var temp_cost_by_id: Dictionary   = {}   # id -> Coins
 var row_widgets_by_id: Dictionary = {}   # id -> {stock, price, order}
 var temp_money: int = 0
 
-# Layout-Konstanten (passen zur Headerbreite)
-const COL_W_NAME  := 240
-const COL_W_NUM   := 90
-const BTN_W       := 32
-const BTN_H       := 28
+
+# --- Layout-Konstanten (passen zur Headerbreite) ---
+const COL_W_NAME := 240
+const COL_W_NUM  := 90
+const BTN_W      := 32
+const BTN_H      := 28
+
 
 func _ready() -> void:
 	Gamemanager.is_in_menu = true

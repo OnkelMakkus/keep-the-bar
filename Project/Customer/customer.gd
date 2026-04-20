@@ -1,29 +1,58 @@
-# customer.gd (neu)
+# customer.gd (grouped exports)
 extends CharacterBody3D
 
+# ── Identity ───────────────────────────────────────────────────────────────────
+@export_category("Identity")
 @export var customer_name := "NPC"
 @export var order_text := ""
-@export var move_speed := 2.5
-@export var rotation_speed := 5.0
+@export_enum("Male", "Female", "Other") var sex := 1
 
+# ── Movement ───────────────────────────────────────────────────────────────────
+@export_category("Movement")
+@export_range(0.1, 20.0, 0.1, "or_greater") var move_speed := 2.5
+@export_range(0.1, 30.0, 0.1, "or_greater") var rotation_speed := 5.0
+
+@export_group("Anti-Stuck")
+@export_range(0.0, 0.2, 0.001) var stuck_threshold := 0.01
+@export_range(1, 120, 1) var stuck_max_frames := 3
+@export_group("") # end Anti-Stuck
+
+# ── UI / Label ─────────────────────────────────────────────────────────────────
+@export_category("UI / Label")
 @export var label: Label3D
 @export var label_background: Sprite3D
+@export var label_name := "<LMB>\nGive Order\nSend away"
 
-@export var agent : NavigationAgent3D
+# ── Navigation / Pathfinding ───────────────────────────────────────────────────
+@export_category("Navigation / Pathfinding")
+@export var agent: NavigationAgent3D
+@export var raycast: RayCast3D
+
+# ── Model / Animation ──────────────────────────────────────────────────────────
+@export_category("Model / Animation")
+@export_subgroup("AnimationPlayers")
 @export var y_animation_player: AnimationPlayer
 @export var x_animation_player: AnimationPlayer
 @export var test_animation_player: AnimationPlayer
+
+@export_subgroup("Model Nodes")
 @export var y_bot: Node3D
 @export var x_bot: Node3D
-@export var test_model : Node3D
+@export var test_model: Node3D
 @export var collider: CollisionShape3D
 
+# ── VFX / Audio ────────────────────────────────────────────────────────────────
+@export_category("VFX / Audio")
 @export var teleport_mat: ShaderMaterial
-@onready var raycast: RayCast3D = $RayCast3D
-
+@export_subgroup("Warp SFX")
 @export var warp_out: AudioStreamPlayer3D
 @export var warp_in: AudioStreamPlayer3D
 
+# ── Timers ─────────────────────────────────────────────────────────────────────
+@export_category("Timers")
+@export var wait_for_drink_timer: Timer
+
+# ── Runtime State (not exported) ───────────────────────────────────────────────
 var animation_player: AnimationPlayer
 
 var target: Vector3
@@ -38,20 +67,14 @@ var on_exit := false
 var _serve_lock := false
 
 var queue_target_active := false
-var queue_target : Vector3
+var queue_target: Vector3
 
 var first_exit_marker
 var exit_marker
 var table_marker
 
-var sex := 1
-
 var last_position := Vector3.ZERO
 var stuck_frames := 0
-var stuck_threshold := 0.01
-var stuck_max_frames := 3
-
-var label_name := "<LMB>\nGive Order\nSend away"
 
 
 func _ready() -> void:

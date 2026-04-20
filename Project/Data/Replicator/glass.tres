@@ -12,7 +12,6 @@ id = "Matter"
 display_name = "Matter"
 buy_price = 1
 buy_amount = 1000
-current_amount = 100
 
 [sub_resource type="Resource" id="Resource_7h11b"]
 script = ExtResource("1_q4f51")

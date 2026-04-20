@@ -1,0 +1,558 @@
+[gd_scene load_steps=2 format=3 uid="uid://b45g65ulbgbpe"]
+
+[ext_resource type="Script" uid="uid://dsds142lkis68" path="res://addons/bar_resource_editor/bar_resource_panel.gd" id="1_b48x3"]
+
+[node name="BarResourcePanel" type="VBoxContainer" node_paths=PackedStringArray("mat_id_input", "mat_name_input", "mat_unit_input", "mat_price_input", "mat_amount_input", "mat_save_btn", "mat_open_btn", "mat_clear_btn", "mat_tier_input", "mat_unlock_cost_input", "mat_unlocked_input", "mat_prereq_input", "mat_tags_input", "liquid_id_input", "liquid_name_input", "liquid_mat_picker_btn", "liquid_mat_path", "liquid_save_btn", "liquid_open_btn", "liquid_clear_btn", "liquid_tier_input", "liquid_unlock_cost_input", "liquid_unlocked_input", "liquid_prereq_input", "liquid_tags_input", "item_id_input", "item_name_input", "item_scene_path", "item_scene_pick", "item_liquid_input", "item_ml_input", "item_save_btn", "item_open_btn", "item_clear_btn", "item_tier_input", "item_unlock_cost_input", "item_unlocked_input", "item_prereq_input", "item_tags_input", "drink_id_input", "drink_name_input", "drink_price_input", "drink_container_input", "drink_spoil_input", "drink_save_btn", "ingredient_liquid_select", "ingredient_amount_input", "ingredient_add_btn", "ingredient_list", "drink_open_btn", "drink_clear_btn", "drink_tier_input", "drink_unlock_cost_input", "drink_unlocked_input", "drink_prereq_input", "drink_tags_input")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b48x3")
+mat_id_input = NodePath("TabContainer/MatsTab/HBoxContainer/mat_id_input")
+mat_name_input = NodePath("TabContainer/MatsTab/HBoxContainer2/mat_name_input")
+mat_unit_input = NodePath("TabContainer/MatsTab/HBoxContainer3/mat_unit_input")
+mat_price_input = NodePath("TabContainer/MatsTab/HBoxContainer4/mat_price_input")
+mat_amount_input = NodePath("TabContainer/MatsTab/HBoxContainer5/mat_amount_input")
+mat_save_btn = NodePath("TabContainer/MatsTab/mat_save_btn")
+mat_open_btn = NodePath("TabContainer/MatsTab/HBoxContainer6/drink_open_btn")
+mat_clear_btn = NodePath("TabContainer/MatsTab/HBoxContainer6/clear_btn")
+mat_tier_input = NodePath("TabContainer/MatsTab/HBoxContainer7/tier_input")
+mat_unlock_cost_input = NodePath("TabContainer/MatsTab/HBoxContainer7/unlock_cost_input")
+mat_unlocked_input = NodePath("TabContainer/MatsTab/HBoxContainer8/unlocked")
+mat_prereq_input = NodePath("TabContainer/MatsTab/HBoxContainer8/prereq_input")
+mat_tags_input = NodePath("TabContainer/MatsTab/HBoxContainer8/tag_input")
+liquid_id_input = NodePath("TabContainer/LiquidsTab/HBoxContainer/liquid_id_input")
+liquid_name_input = NodePath("TabContainer/LiquidsTab/HBoxContainer2/liquid_name_input")
+liquid_mat_picker_btn = NodePath("TabContainer/LiquidsTab/HBoxContainer3/liquid_mat_picker")
+liquid_mat_path = NodePath("TabContainer/LiquidsTab/HBoxContainer3/LineEdit")
+liquid_save_btn = NodePath("TabContainer/LiquidsTab/liquid_save_btn")
+liquid_open_btn = NodePath("TabContainer/LiquidsTab/HBoxContainer6/drink_open_btn")
+liquid_clear_btn = NodePath("TabContainer/LiquidsTab/HBoxContainer6/clear_btn")
+liquid_tier_input = NodePath("TabContainer/LiquidsTab/HBoxContainer7/tier_input")
+liquid_unlock_cost_input = NodePath("TabContainer/LiquidsTab/HBoxContainer7/unlock_cost_input")
+liquid_unlocked_input = NodePath("TabContainer/LiquidsTab/HBoxContainer8/unlocked")
+liquid_prereq_input = NodePath("TabContainer/LiquidsTab/HBoxContainer8/prereq_input")
+liquid_tags_input = NodePath("TabContainer/LiquidsTab/HBoxContainer8/tag_input")
+item_id_input = NodePath("TabContainer/ItemsTab/HBoxContainer/item_id_input")
+item_name_input = NodePath("TabContainer/ItemsTab/HBoxContainer2/item_name_input")
+item_scene_path = NodePath("TabContainer/ItemsTab/HBoxContainer3/item_scene_picker")
+item_scene_pick = NodePath("TabContainer/ItemsTab/HBoxContainer3/item_scene_pick")
+item_liquid_input = NodePath("TabContainer/ItemsTab/HBoxContainer4/item_liquid_input")
+item_ml_input = NodePath("TabContainer/ItemsTab/HBoxContainer5/item_ml_input")
+item_save_btn = NodePath("TabContainer/ItemsTab/item_save_btn")
+item_open_btn = NodePath("TabContainer/ItemsTab/HBoxContainer6/drink_open_btn")
+item_clear_btn = NodePath("TabContainer/ItemsTab/HBoxContainer6/clear_btn")
+item_tier_input = NodePath("TabContainer/ItemsTab/HBoxContainer7/tier_input")
+item_unlock_cost_input = NodePath("TabContainer/ItemsTab/HBoxContainer7/unlock_cost_input")
+item_unlocked_input = NodePath("TabContainer/ItemsTab/HBoxContainer8/unlocked")
+item_prereq_input = NodePath("TabContainer/ItemsTab/HBoxContainer8/prereq_input")
+item_tags_input = NodePath("TabContainer/ItemsTab/HBoxContainer8/tag_input")
+drink_id_input = NodePath("TabContainer/DrinksTab/HBoxContainer/drink_id_input")
+drink_name_input = NodePath("TabContainer/DrinksTab/HBoxContainer2/drink_name_input")
+drink_price_input = NodePath("TabContainer/DrinksTab/HBoxContainer3/drink_price_input")
+drink_container_input = NodePath("TabContainer/DrinksTab/HBoxContainer4/drink_container_input")
+drink_spoil_input = NodePath("TabContainer/DrinksTab/HBoxContainer5/drink_spoil_input")
+drink_save_btn = NodePath("TabContainer/DrinksTab/drink_save_btn")
+ingredient_liquid_select = NodePath("TabContainer/DrinksTab/ingredient_row/ingredient_liquid_select")
+ingredient_amount_input = NodePath("TabContainer/DrinksTab/ingredient_row/ingredient_amount_input")
+ingredient_add_btn = NodePath("TabContainer/DrinksTab/ingredient_row/ingredient_add_btn")
+ingredient_list = NodePath("TabContainer/DrinksTab/ingredient_list")
+drink_open_btn = NodePath("TabContainer/DrinksTab/HBoxContainer6/drink_open_btn")
+drink_clear_btn = NodePath("TabContainer/DrinksTab/HBoxContainer6/clear_btn")
+drink_tier_input = NodePath("TabContainer/DrinksTab/HBoxContainer7/tier_input")
+drink_unlock_cost_input = NodePath("TabContainer/DrinksTab/HBoxContainer7/unlock_cost_input")
+drink_unlocked_input = NodePath("TabContainer/DrinksTab/HBoxContainer8/unlocked")
+drink_prereq_input = NodePath("TabContainer/DrinksTab/HBoxContainer8/prereq_input")
+drink_tags_input = NodePath("TabContainer/DrinksTab/HBoxContainer8/tag_input")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 3
+
+[node name="MatsTab" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="drink_open_btn" type="Button" parent="TabContainer/MatsTab/HBoxContainer6"]
+layout_mode = 2
+text = "Open"
+
+[node name="clear_btn" type="Button" parent="TabContainer/MatsTab/HBoxContainer6"]
+layout_mode = 2
+text = "Clear"
+
+[node name="Create Base Material" type="Label" parent="TabContainer/MatsTab"]
+layout_mode = 2
+text = "Create Base Material"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="TabContainer/MatsTab/HBoxContainer"]
+layout_mode = 2
+text = "ID"
+
+[node name="mat_id_input" type="LineEdit" parent="TabContainer/MatsTab/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="Display Name" type="Label" parent="TabContainer/MatsTab/HBoxContainer2"]
+layout_mode = 2
+text = "Display Name"
+
+[node name="mat_name_input" type="LineEdit" parent="TabContainer/MatsTab/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="Unit" type="Label" parent="TabContainer/MatsTab/HBoxContainer3"]
+layout_mode = 2
+text = "Unit"
+
+[node name="mat_unit_input" type="LineEdit" parent="TabContainer/MatsTab/HBoxContainer3"]
+layout_mode = 2
+text = "units"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="Buy Price" type="Label" parent="TabContainer/MatsTab/HBoxContainer4"]
+layout_mode = 2
+text = "Buy Price"
+
+[node name="mat_price_input" type="SpinBox" parent="TabContainer/MatsTab/HBoxContainer4"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="Buy Amount" type="Label" parent="TabContainer/MatsTab/HBoxContainer5"]
+layout_mode = 2
+text = "Buy Amount"
+
+[node name="mat_amount_input" type="SpinBox" parent="TabContainer/MatsTab/HBoxContainer5"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="Tier" type="Label" parent="TabContainer/MatsTab/HBoxContainer7"]
+layout_mode = 2
+text = "Tier"
+
+[node name="tier_input" type="SpinBox" parent="TabContainer/MatsTab/HBoxContainer7"]
+layout_mode = 2
+
+[node name="unlock_costs" type="Label" parent="TabContainer/MatsTab/HBoxContainer7"]
+layout_mode = 2
+text = "Unlock Costs"
+
+[node name="unlock_cost_input" type="SpinBox" parent="TabContainer/MatsTab/HBoxContainer7"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="TabContainer/MatsTab"]
+layout_mode = 2
+
+[node name="unlocked" type="CheckBox" parent="TabContainer/MatsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Unlocked"
+
+[node name="prereq" type="Label" parent="TabContainer/MatsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Prerequirements"
+
+[node name="prereq_input" type="LineEdit" parent="TabContainer/MatsTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="Tags" type="Label" parent="TabContainer/MatsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Tags"
+
+[node name="tag_input" type="LineEdit" parent="TabContainer/MatsTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="mat_save_btn" type="Button" parent="TabContainer/MatsTab"]
+layout_mode = 2
+text = "Save Material"
+
+[node name="LiquidsTab" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="drink_open_btn" type="Button" parent="TabContainer/LiquidsTab/HBoxContainer6"]
+layout_mode = 2
+text = "Open"
+
+[node name="clear_btn" type="Button" parent="TabContainer/LiquidsTab/HBoxContainer6"]
+layout_mode = 2
+text = "Clear"
+
+[node name="Create Liquid" type="Label" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer"]
+layout_mode = 2
+text = "ID"
+
+[node name="liquid_id_input" type="LineEdit" parent="TabContainer/LiquidsTab/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="Display Name" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer2"]
+layout_mode = 2
+text = "Display Name"
+
+[node name="liquid_name_input" type="LineEdit" parent="TabContainer/LiquidsTab/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="Material" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer3"]
+layout_mode = 2
+text = "Material"
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/LiquidsTab/HBoxContainer3"]
+layout_mode = 2
+
+[node name="liquid_mat_picker" type="Button" parent="TabContainer/LiquidsTab/HBoxContainer3"]
+layout_mode = 2
+text = "Select Material File"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="Tier" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer7"]
+layout_mode = 2
+text = "Tier"
+
+[node name="tier_input" type="SpinBox" parent="TabContainer/LiquidsTab/HBoxContainer7"]
+layout_mode = 2
+
+[node name="unlock_costs" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer7"]
+layout_mode = 2
+text = "Unlock Costs"
+
+[node name="unlock_cost_input" type="SpinBox" parent="TabContainer/LiquidsTab/HBoxContainer7"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+
+[node name="unlocked" type="CheckBox" parent="TabContainer/LiquidsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Unlocked"
+
+[node name="prereq" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Prerequirements"
+
+[node name="prereq_input" type="LineEdit" parent="TabContainer/LiquidsTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="Tags" type="Label" parent="TabContainer/LiquidsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Tags"
+
+[node name="tag_input" type="LineEdit" parent="TabContainer/LiquidsTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="liquid_save_btn" type="Button" parent="TabContainer/LiquidsTab"]
+layout_mode = 2
+text = "Save Liquid"
+
+[node name="ItemsTab" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="drink_open_btn" type="Button" parent="TabContainer/ItemsTab/HBoxContainer6"]
+layout_mode = 2
+text = "Open"
+
+[node name="clear_btn" type="Button" parent="TabContainer/ItemsTab/HBoxContainer6"]
+layout_mode = 2
+text = "Clear"
+
+[node name="Create Replicator Item" type="Label" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+text = "Create Replicator Item"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="TabContainer/ItemsTab/HBoxContainer"]
+layout_mode = 2
+text = "ID"
+
+[node name="item_id_input" type="LineEdit" parent="TabContainer/ItemsTab/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="Display Name" type="Label" parent="TabContainer/ItemsTab/HBoxContainer2"]
+layout_mode = 2
+text = "Display Name"
+
+[node name="item_name_input" type="LineEdit" parent="TabContainer/ItemsTab/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="Scene Path" type="Label" parent="TabContainer/ItemsTab/HBoxContainer3"]
+layout_mode = 2
+text = "Scene Path"
+
+[node name="item_scene_picker" type="LineEdit" parent="TabContainer/ItemsTab/HBoxContainer3"]
+layout_mode = 2
+
+[node name="item_scene_pick" type="Button" parent="TabContainer/ItemsTab/HBoxContainer3"]
+layout_mode = 2
+text = "Pick Scene"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="Default Liquid ID" type="Label" parent="TabContainer/ItemsTab/HBoxContainer4"]
+layout_mode = 2
+text = "Default Liquid ID"
+
+[node name="item_liquid_input" type="LineEdit" parent="TabContainer/ItemsTab/HBoxContainer4"]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="Default ml" type="Label" parent="TabContainer/ItemsTab/HBoxContainer5"]
+layout_mode = 2
+text = "Default ml"
+
+[node name="item_ml_input" type="SpinBox" parent="TabContainer/ItemsTab/HBoxContainer5"]
+layout_mode = 2
+max_value = 1000.0
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="Tier" type="Label" parent="TabContainer/ItemsTab/HBoxContainer7"]
+layout_mode = 2
+text = "Tier"
+
+[node name="tier_input" type="SpinBox" parent="TabContainer/ItemsTab/HBoxContainer7"]
+layout_mode = 2
+
+[node name="unlock_costs" type="Label" parent="TabContainer/ItemsTab/HBoxContainer7"]
+layout_mode = 2
+text = "Unlock Costs"
+
+[node name="unlock_cost_input" type="SpinBox" parent="TabContainer/ItemsTab/HBoxContainer7"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+
+[node name="unlocked" type="CheckBox" parent="TabContainer/ItemsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Unlocked"
+
+[node name="prereq" type="Label" parent="TabContainer/ItemsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Prerequirements"
+
+[node name="prereq_input" type="LineEdit" parent="TabContainer/ItemsTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="Tags" type="Label" parent="TabContainer/ItemsTab/HBoxContainer8"]
+layout_mode = 2
+text = "Tags"
+
+[node name="tag_input" type="LineEdit" parent="TabContainer/ItemsTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="item_save_btn" type="Button" parent="TabContainer/ItemsTab"]
+layout_mode = 2
+text = "Save Item"
+
+[node name="DrinksTab" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="drink_open_btn" type="Button" parent="TabContainer/DrinksTab/HBoxContainer6"]
+layout_mode = 2
+text = "Open"
+
+[node name="clear_btn" type="Button" parent="TabContainer/DrinksTab/HBoxContainer6"]
+layout_mode = 2
+text = "Clear"
+
+[node name="Create Drink Recipe" type="Label" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+text = "Create Drink Recipe"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="TabContainer/DrinksTab/HBoxContainer"]
+layout_mode = 2
+text = "ID"
+
+[node name="drink_id_input" type="LineEdit" parent="TabContainer/DrinksTab/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="Display Name" type="Label" parent="TabContainer/DrinksTab/HBoxContainer2"]
+layout_mode = 2
+text = "Display Name"
+
+[node name="drink_name_input" type="LineEdit" parent="TabContainer/DrinksTab/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="Sell Price" type="Label" parent="TabContainer/DrinksTab/HBoxContainer3"]
+layout_mode = 2
+text = "Sell Price"
+
+[node name="drink_price_input" type="SpinBox" parent="TabContainer/DrinksTab/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="Container Type" type="Label" parent="TabContainer/DrinksTab/HBoxContainer4"]
+layout_mode = 2
+text = "Container Type"
+
+[node name="drink_container_input" type="OptionButton" parent="TabContainer/DrinksTab/HBoxContainer4"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "ANY"
+popup/item_0/id = 0
+popup/item_1/text = "GLASS"
+popup/item_1/id = 1
+popup/item_2/text = "BOTTLE"
+popup/item_2/id = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="Spoil Time (s)" type="Label" parent="TabContainer/DrinksTab/HBoxContainer5"]
+layout_mode = 2
+text = "Spoil Time (s)"
+
+[node name="drink_spoil_input" type="SpinBox" parent="TabContainer/DrinksTab/HBoxContainer5"]
+layout_mode = 2
+max_value = 3600.0
+
+[node name="Ingredients" type="Label" parent="TabContainer/DrinksTab"]
+visible = false
+layout_mode = 2
+text = "Ingredients"
+
+[node name="ingredient_row" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="ingredient_liquid_select" type="OptionButton" parent="TabContainer/DrinksTab/ingredient_row"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "Beer"
+popup/item_0/id = 0
+popup/item_1/text = "Rum"
+popup/item_1/id = 1
+popup/item_2/text = "Whisky"
+popup/item_2/id = 2
+popup/item_3/text = "Wodka"
+popup/item_3/id = 3
+
+[node name="ingredient_amount_input" type="SpinBox" parent="TabContainer/DrinksTab/ingredient_row"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 2000.0
+step = 5.0
+
+[node name="ingredient_add_btn" type="Button" parent="TabContainer/DrinksTab/ingredient_row"]
+layout_mode = 2
+text = "+ Add"
+
+[node name="ingredient_list" type="VBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="Tier" type="Label" parent="TabContainer/DrinksTab/HBoxContainer7"]
+layout_mode = 2
+text = "Tier"
+
+[node name="tier_input" type="SpinBox" parent="TabContainer/DrinksTab/HBoxContainer7"]
+layout_mode = 2
+
+[node name="unlock_costs" type="Label" parent="TabContainer/DrinksTab/HBoxContainer7"]
+layout_mode = 2
+text = "Unlock Costs"
+
+[node name="unlock_cost_input" type="SpinBox" parent="TabContainer/DrinksTab/HBoxContainer7"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+
+[node name="unlocked" type="CheckBox" parent="TabContainer/DrinksTab/HBoxContainer8"]
+layout_mode = 2
+text = "Unlocked"
+
+[node name="prereq" type="Label" parent="TabContainer/DrinksTab/HBoxContainer8"]
+layout_mode = 2
+text = "Prerequirements"
+
+[node name="prereq_input" type="LineEdit" parent="TabContainer/DrinksTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="Tags" type="Label" parent="TabContainer/DrinksTab/HBoxContainer8"]
+layout_mode = 2
+text = "Tags"
+
+[node name="tag_input" type="LineEdit" parent="TabContainer/DrinksTab/HBoxContainer8"]
+layout_mode = 2
+
+[node name="drink_save_btn" type="Button" parent="TabContainer/DrinksTab"]
+layout_mode = 2
+text = "Save Drink"

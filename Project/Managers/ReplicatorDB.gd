@@ -5,13 +5,16 @@ signal mats_changed()
 @export_dir var mats_dir  := "res://Project/Data/Mats"
 @export_dir var items_dir := "res://Project/Data/Replicator"
 
-var MATS:  Dictionary = {}   # id -> RepBaseMat
-var ITEMS: Dictionary = {}   # id -> ReplicatorItem
+var MATS:  Dictionary = {}        # id -> RepBaseMat (Resource)
+var ITEMS: Dictionary = {}        # id -> ReplicatorItem (Resource)
 
+# NEU: Laufzeit-Bestände (werden NICHT in .tres gespeichert)
+var MAT_AMOUNTS: Dictionary = {}  # id -> int
 
 func _ready() -> void:
 	MATS.clear()
 	ITEMS.clear()
+	MAT_AMOUNTS.clear()
 
 	# Laden
 	_load_all(mats_dir, func(r):
@@ -28,14 +31,21 @@ func _ready() -> void:
 			ITEMS[r.id] = r
 	)
 
-	# Kurzes Debug
+	# Startmengen initialisieren (nur wenn noch nicht aus Save geladen)
+	for id in MATS.keys():
+		if not MAT_AMOUNTS.has(id):
+			var mat: RepBaseMat = MATS[id]
+			MAT_AMOUNTS[id] = int(mat.start_amount)
+
 	print("[ReplicatorDB] Loaded: MATS=%d  ITEMS=%d" % [MATS.size(), ITEMS.size()])
 	for k in ITEMS.keys():
 		var it: ReplicatorItem = ITEMS[k]
 		print("  - item:", it.id, " scene_ok=", it.scene != null, " recycle_yield=", it.recycle_yield_factor)
 
+	emit_signal("mats_changed")
 
-# ============== Loader (export-sicher) ==============
+
+# ================= Loader (export-sicher) =================
 
 func _load_all(root: String, on_res: Callable) -> void:
 	var da := DirAccess.open(root)
@@ -63,7 +73,6 @@ func _load_all(root: String, on_res: Callable) -> void:
 		on_res.call(res)
 	da.list_dir_end()
 
-
 # .tres/.res (auch .remap) erlauben; alles andere ignorieren
 func _normalize_res_path(p: String) -> String:
 	if p.ends_with(".tres.remap") or p.ends_with(".res.remap"):
@@ -73,7 +82,7 @@ func _normalize_res_path(p: String) -> String:
 	return ""
 
 
-# ============== Zugriff ==============
+# ================= Zugriff =================
 
 func get_item(id: String) -> ReplicatorItem:
 	return ITEMS.get(id, null)
@@ -87,8 +96,18 @@ func all_items() -> Array:
 func all_mats() -> Array:
 	return MATS.values()
 
+func get_amount(id: String) -> int:
+	return int(MAT_AMOUNTS.get(id, 0))
 
-# ============== Logik ==============
+func set_amount(id: String, value: int) -> void:
+	MAT_AMOUNTS[id] = max(0, int(value))
+	emit_signal("mats_changed")
+
+func add_amount(id: String, delta: int) -> void:
+	set_amount(id, get_amount(id) + int(delta))
+
+
+# ================= Logik =================
 
 func can_afford(item_id: String) -> bool:
 	var it := get_item(item_id)
@@ -97,13 +116,12 @@ func can_afford(item_id: String) -> bool:
 	for ma: RepMatAmount in it.cost:
 		if ma == null or ma.mat == null:
 			return false
-		var base := get_mat(String(ma.mat.id))
-		if base == null:
+		var mat_id := String(ma.mat.id)
+		if get_mat(mat_id) == null:
 			return false
-		if base.current_amount < ma.amount:
+		if get_amount(mat_id) < int(ma.amount):
 			return false
 	return true
-
 
 func item_cost_coins(item_id: String) -> int:
 	var it := get_item(item_id)
@@ -112,9 +130,8 @@ func item_cost_coins(item_id: String) -> int:
 	var sum := 0
 	for ma: RepMatAmount in it.cost:
 		if ma and ma.mat:
-			sum += ma.amount * max(0, ma.mat.buy_price)
+			sum += int(ma.amount) * max(0, int(ma.mat.buy_price))
 	return sum
-
 
 func consume_cost(item_id: String) -> void:
 	var it := get_item(item_id)
@@ -123,11 +140,9 @@ func consume_cost(item_id: String) -> void:
 	for ma: RepMatAmount in it.cost:
 		if ma == null or ma.mat == null:
 			continue
-		var base := get_mat(String(ma.mat.id))
-		if base:
-			base.current_amount = max(0, base.current_amount - ma.amount)
-	emit_signal("mats_changed")
-
+		var mat_id := String(ma.mat.id)
+		add_amount(mat_id, -int(ma.amount))
+	# add_amount emittet bereits mats_changed
 
 func credit_recycle(item_id: String) -> void:
 	var it := get_item(item_id)
@@ -136,20 +151,38 @@ func credit_recycle(item_id: String) -> void:
 	for ma: RepMatAmount in it.cost:
 		if ma == null or ma.mat == null:
 			continue
-		var base := get_mat(String(ma.mat.id))
-		if base:
-			var back := int(round(ma.amount * it.recycle_yield_factor))
-			base.current_amount += back
+		var back := int(round(ma.amount * it.recycle_yield_factor))
+		add_amount(String(ma.mat.id), back)
+	# add_amount emittet bereits mats_changed
+	
+	
+func reset_for_new_game(starter_overrides: Dictionary = {}) -> void:
+	MAT_AMOUNTS.clear()
+
+	for id in MATS.keys():
+		var mat: RepBaseMat = MATS[id]
+		var amount := 0
+
+		# Tier-basierte Startwerte
+		if mat.tier == 0:
+			amount = 100
+		else:
+			amount = int(mat.start_amount)  # oder 0, falls du sie leer haben willst
+
+		MAT_AMOUNTS[id] = amount
+
+	# Optional: gezielte Overrides anwenden
+	for id in starter_overrides.keys():
+		if MATS.has(id):
+			MAT_AMOUNTS[id] = max(0, int(starter_overrides[id]))
+
+	print("[ReplicatorDB] New game reset — Tier-0 Mats set to 100 units.")
 	emit_signal("mats_changed")
 
 
-# Optional kleine Helfer fürs HUD/Debug
-
+# ======= Kompatibilitäts-Wrapper (falls alte Aufrufe existieren) =======
 func set_mat_amount(id: String, amount: int) -> void:
-	var m := get_mat(id)
-	if m:
-		m.current_amount = max(0, amount)
-		emit_signal("mats_changed")
+	set_amount(id, amount)
 
 func add_mat_amount(id: String, delta: int) -> void:
-	set_mat_amount(id, (get_mat(id).current_amount if get_mat(id) else 0) + delta)
+	add_amount(id, delta)

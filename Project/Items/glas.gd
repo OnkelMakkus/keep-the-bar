@@ -1,38 +1,48 @@
-# glass.gd (neu)
+# glass.gd
 extends Node3D
 
+
 # --- Scene References ---
+@export_group("Scene References")
 @export var glass_liquid: Node3D
 @export var mesh: MeshInstance3D
 @export var warp_out: AudioStreamPlayer3D
 @export var warp_in: AudioStreamPlayer3D
 
+
 # --- Materials / VFX ---
+@export_group("Materials / VFX")
 @export var outline_mat: ShaderMaterial
 @export var teleport_mat: ShaderMaterial
+
 var _base_mat: Material
 var _outlined_mat: Material
 var _glass_liquid_mesh: MeshInstance3D
 
+
 # --- Fill / Contents ---
+@export_group("Fill / Contents")
 @export var max_fill_ml: float = 250.0
 @export var liquid_offset: float = 0.05
 @export var replicator_item_id: String = ""
+@export var default_spoil_time: float = 600.0    # 10 min als Fallback
+@export var spoil_timer: Timer                   # füge in der Szene einen Timer hinzu
 
-# WICHTIG: Keys jetzt String-IDs, nicht Liquid-Instanzen!
-var contents: Dictionary = {}  # { String(liquid_id) : float ml }
+# Inhalte & Zustand
+var contents: Dictionary = {}                    # { String(liquid_id) : float ml }
 var dirty := false
-@export var default_spoil_time: float = 600.0  # 10 min als Fallback
-@export var spoil_timer: Timer                 # füge in der Szene einen Timer hinzu
 var spoiled: bool = false
 
-# --- UI/Label / Misc ---
+
+# --- UI / Label / Misc ---
+@export_group("UI / Label / Misc")
 var label_name := "Glass\n<LMB> to pick up"
 var _current_scale := Vector3.ONE
 var _size := Vector3.ZERO
 
 var current_table: Node = null
 var current_index: int = -1
+
 
 func _ready() -> void:
 	add_to_group("Glass")

@@ -1,15 +1,24 @@
-#Player.gd
+# Player.gd (grouped exports)
 class_name Player
 extends CharacterBody3D
 
-@export var movement: Node        # PlayerMovement.gd
-@export var aim: Node             # PlayerAim.gd
-@export var interaction: Node     # PlayerInteraction.gd
-@export var head: Node3D 
-@export var camera: Camera3D 
+# ── Components ────────────────────────────────────────────────────────────────
+@export_category("Components")
+@export_subgroup("Core Systems")
+@export var movement: Node        # Script: PlayerMovement.gd
+@export var aim: Node             # Script: PlayerAim.gd
+@export var interaction: Node     # Script: PlayerInteraction.gd
+@export_group("") # end Core Systems
+
+# ── View / Camera ─────────────────────────────────────────────────────────────
+@export_category("View / Camera")
+@export var head: Node3D
+@export var camera: Camera3D
 @export var hand_slot: Node3D
 
+# ── Signals ───────────────────────────────────────────────────────────────────
 signal target_changed(new_target)
+
 
 func _ready() -> void:
 	# Aim-Events an Player weiterreichen (UI kann nur Player kennen)

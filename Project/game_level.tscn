@@ -128,16 +128,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_buemo")
 
-[node name="Game_level" type="Node3D" node_paths=PackedStringArray("quit_btn", "resume_btn", "is_open_timer", "open_label", "crosshair", "info_label", "option_btn", "info_text_label", "serving_container")]
+[node name="Game_level" type="Node3D" node_paths=PackedStringArray("quit_btn", "resume_btn", "option_btn", "info_label", "info_text_label", "open_label", "crosshair", "serving_container")]
 script = ExtResource("1_mxr21")
 quit_btn = NodePath("UI/Menü_main/VBoxContainer/QuitBtn")
 resume_btn = NodePath("UI/Menü_main/VBoxContainer/ResumeBtn")
-is_open_timer = NodePath("")
+option_btn = NodePath("UI/Menü_main/VBoxContainer/OptionBtn")
+info_label = NodePath("UI/Info_Label_Container/VBoxContainer/Info_Label")
+info_text_label = NodePath("UI/Info_Label_Container/VBoxContainer/Info_Text_Label")
 open_label = NodePath("OpenSchild/Open_Schild/StaticBody3D/Label3D")
 crosshair = NodePath("UI/Crosshair_Container/Crosshair")
-info_label = NodePath("UI/Info_Label_Container/VBoxContainer/Info_Label")
-option_btn = NodePath("UI/Menü_main/VBoxContainer/OptionBtn")
-info_text_label = NodePath("UI/Info_Label_Container/VBoxContainer/Info_Text_Label")
 serving_container = NodePath("serving_container")
 
 [node name="Player" parent="." instance=ExtResource("1_jcjmw")]
@@ -151,6 +150,7 @@ transform = Transform3D(-0.105813, 0, 0.994386, 0, 1, 0, -0.994386, 0, -0.105813
 
 [node name="Gamemanager" type="Node" parent="Manager"]
 script = ExtResource("9_e38tf")
+FOV = null
 
 [node name="Signalmanager" type="Node" parent="Manager"]
 script = ExtResource("10_mxr21")
